@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">AnimeUniverse</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_list">La mia lista</string>
+    <string name="title_notifications">Notifiche</string>
+    <string name="title_search">Cerca</string>
+    <string name="title_account">Account</string>
 </resources>
