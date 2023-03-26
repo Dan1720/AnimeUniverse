@@ -6,4 +6,5 @@
     <string name="title_notifications">Notifiche</string>
     <string name="title_search">Cerca</string>
     <string name="title_account">Account</string>
+    <string name="btn_accedi">Accedi</string>
 </resources>

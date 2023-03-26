@@ -3,28 +3,21 @@ package com.progetto.animeuniverse;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
-import android.content.Intent;
-import android.os.Bundle;
-
-import java.util.Objects;
-
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.view.View;
-import android.widget.Button;
+import android.os.Bundle;
 import android.widget.VideoView;
 
-
 public class MainActivity extends AppCompatActivity {
+
     private VideoView videoBG;
     MediaPlayer mMediaPlayer;
     int mCurrentVideoPosition;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         videoBG = (VideoView) findViewById(R.id.videoView);
         Uri uri = Uri.parse("android.resource://"
@@ -46,17 +39,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        //QUESTO PEZZO E' SOLO PER LA FASE DI TEST
-        Button btn = (Button)findViewById(R.id.button);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, WelcomeActivity.class));
-            }
-        });
-
     }
 
     @Override
