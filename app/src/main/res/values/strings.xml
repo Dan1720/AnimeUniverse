@@ -7,4 +7,9 @@
     <string name="title_search">Cerca</string>
     <string name="title_account">Account</string>
     <string name="btn_accedi">Accedi</string>
+    <string name="login">Login</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="forgotpassword">Forgot password?</string>
+    <string name="txt_or">OR</string>
 </resources>

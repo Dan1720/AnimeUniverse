@@ -3,9 +3,15 @@ package com.progetto.animeuniverse;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.os.Bundle;
+
+import java.util.Objects;
+
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +43,16 @@ public class MainActivity extends AppCompatActivity {
                     mMediaPlayer.seekTo(mCurrentVideoPosition);
                     mMediaPlayer.start();
                 }
+            }
+        });
+
+        //QUESTO PEZZO E' SOLO PER LA FASE DI TEST
+        Button btn = (Button)findViewById(R.id.accedi);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, WelcomeActivity.class));
             }
         });
     }
