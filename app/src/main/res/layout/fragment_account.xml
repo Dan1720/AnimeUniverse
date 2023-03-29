@@ -1,14 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AccountFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Account" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/immagineprofilo"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_account"
+        app:layout_constraintBottom_toTopOf="@+id/nomeutente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nomeutente"
+        android:layout_width="259dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="40dp"
+        android:text="Nome Cognome"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/immagineprofilo" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="40dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="353dp" />
+
+    <Button
+        android:id="@+id/orevisione"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Button"
+        android:textColor="@color/secondaryColor"
+        android:textSize="20sp"
+        app:backgroundTint="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="@id/guideline3"
+        app:layout_constraintStart_toEndOf="@id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/nomeutente"
+        app:strokeColor="@color/secondaryColor"
+        app:strokeWidth="2dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
