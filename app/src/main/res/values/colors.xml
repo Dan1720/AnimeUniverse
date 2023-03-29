@@ -10,4 +10,6 @@
     <color name="primaryColor">#2D1350</color>
     <color name="secondaryColor">#CB94A9</color>
     <color name="thirdColor">#661ED1</color>
+    <color name="google_login_button">#eceff1</color>
+    <color name="google_login_text">#616161</color>
 </resources>

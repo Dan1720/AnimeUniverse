@@ -54,12 +54,12 @@
         app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:startIconDrawable="@drawable/baseline_alternate_email_24"
-        app:startIconTint="@color/secondaryColor">
+        app:startIconTint="@color/secondaryColor"
+        app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="hint"
             android:inputType="textEmailAddress"
             android:textColor="@color/secondaryColor" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -80,12 +80,11 @@
         app:passwordToggleEnabled="true"
         app:passwordToggleTint="@color/secondaryColor"
         app:startIconDrawable="@drawable/baseline_lock_24"
-        app:startIconTint="@color/secondaryColor">
-
+        app:startIconTint="@color/secondaryColor"
+        app:endIconMode="clear_text">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="hint"
             android:inputType="textPassword"
             android:textColor="@color/secondaryColor" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -157,5 +156,25 @@
 
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/google_login"
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/google_login"
+        android:textColor="@color/google_login_text"
+        android:textSize="14sp"
+        app:backgroundTint="@color/google_login_button"
+        app:icon="@drawable/googleg_standard_color_18"
+        app:iconGravity="textStart"
+        app:iconTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relative_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

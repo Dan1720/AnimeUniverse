@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import java.util.Objects;
-
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.view.View;
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, LoginFragment.class));
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
     }

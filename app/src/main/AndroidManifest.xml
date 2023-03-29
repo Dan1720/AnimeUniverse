@@ -16,7 +16,7 @@
             android:exported="false"
             />
         <activity
-            android:name=".LoginFragment"
+            android:name=".LoginActivity"
             android:exported="false"
             />
         <activity

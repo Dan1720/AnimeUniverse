@@ -12,4 +12,6 @@
     <string name="password">Password</string>
     <string name="forgotpassword">Forgot password?</string>
     <string name="txt_or">OR</string>
+    <string name="google_login">Login with Google</string>
+    <string name="login_not_ok">login is not ok</string>
 </resources>
