@@ -16,4 +16,8 @@
     <string name="login_not_ok">login is not ok</string>
     <string name="error_email">E-mail is not valid. Please check your e-mail</string>
     <string name="error_password">Password is not correct.</string>
+    <string name="nessun_account">Non hai un account?</string>
+    <string name="registrati_button">Registrati</string>
+    <string name="crea_account">Crea un account</string>
+    <string name="txt_there_is_account">Hai già un account?</string>
 </resources>

@@ -68,6 +68,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        Button btnReg = (Button)findViewById(R.id.registrati);
+
+        btnReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegistrationFragment.class));
+            }
+        });
+
 
     }
     private boolean isEmailOk(String email) {

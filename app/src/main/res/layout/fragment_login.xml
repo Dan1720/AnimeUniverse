@@ -20,9 +20,9 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/image_logo"
                 android:layout_width="300dp"
-                android:layout_height="200dp"
+                android:layout_height="180dp"
                 android:layout_marginTop="4dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/logo"
@@ -32,7 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/txt_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/login"
@@ -42,7 +42,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintTop_toBottomOf="@+id/image_logo" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"
@@ -64,7 +64,7 @@
                 app:hintTextColor="@color/secondaryColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/txt_login"
                 app:startIconDrawable="@drawable/baseline_alternate_email_24"
                 app:startIconTint="@color/secondaryColor">
 
@@ -84,7 +84,7 @@
                 android:hint="@string/password"
                 android:textColorHint="@color/secondaryColor"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:endIconMode="clear_text"
+                app:endIconMode="none"
                 app:hintAnimationEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
@@ -115,6 +115,36 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/passwordinput" />
 
+            <TextView
+                android:id="@+id/txt_no_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/nessun_account"
+                android:textColor="@color/secondaryColor"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/registrati"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/google_login" />
+
+            <Button
+                android:id="@+id/registrati"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="@string/registrati_button"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textColorHint="@color/secondaryColor"
+                android:textSize="16dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/txt_no_account"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/txt_no_account" />
+
             <Button
                 android:id="@+id/provaaccesso"
                 android:layout_width="0dp"
@@ -123,7 +153,7 @@
                 android:layout_marginEnd="22dp"
                 android:text="@string/btn_accedi"
                 android:textColor="@color/secondaryColor"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/forgotpassword"

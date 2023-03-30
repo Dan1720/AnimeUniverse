@@ -20,6 +20,10 @@
             android:exported="false"
             />
         <activity
+            android:name=".RegistrationFragment"
+            android:exported="false"
+            />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
