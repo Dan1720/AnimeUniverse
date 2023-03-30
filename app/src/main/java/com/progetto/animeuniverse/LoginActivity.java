@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputPassword;
-    private DataEncryptionUtil dataEncryptionUtil;
+
     public LoginActivity(){}
 
 
@@ -41,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
         final Button provaAccesso = findViewById(R.id.provaaccesso);
         final Button buttonGoogleLogin = findViewById(R.id.google_login);
 
-        dataEncryptionUtil = new DataEncryptionUtil(this);
 
 
         provaAccesso.setOnClickListener(v -> {
