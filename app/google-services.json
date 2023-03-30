@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "256661180747",
+    "project_id": "animeuniverse-f9823",
+    "storage_bucket": "animeuniverse-f9823.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256661180747:android:d1616a465190483f7b58ce",
+        "android_client_info": {
+          "package_name": "com.progetto.animeuniverse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256661180747-ievuldoc12cnrnks3er0kviknlhaugcl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA15bfOMqfzD1yM6jfiwKqN8AP_Dae6zAg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256661180747-ievuldoc12cnrnks3er0kviknlhaugcl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

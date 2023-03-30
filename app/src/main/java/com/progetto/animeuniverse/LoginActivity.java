@@ -1,8 +1,6 @@
 package com.progetto.animeuniverse;
 
 import static com.progetto.animeuniverse.Constants.EMAIL_ADDRESS;
-import static com.progetto.animeuniverse.Constants.ENCRYPTED_DATA_FILE_NAME;
-import static com.progetto.animeuniverse.Constants.ENCRYPTED_SHARED_PREFERENCES_FILE_NAME;
 import static com.progetto.animeuniverse.Constants.PASSWORD;
 
 import android.content.Intent;
@@ -17,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+
+import org.apache.commons.validator.routines.EmailValidator;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -39,21 +39,10 @@ public class LoginActivity extends AppCompatActivity {
         textInputEmail = findViewById(R.id.emailInput);
         textInputPassword = findViewById(R.id.passwordinput);
         final Button provaAccesso = findViewById(R.id.provaaccesso);
+        final Button buttonGoogleLogin = findViewById(R.id.google_login);
 
         dataEncryptionUtil = new DataEncryptionUtil(this);
 
-        try {
-            Log.d(TAG, "Email address from encrypted SharedPref: " + dataEncryptionUtil.
-                    readSecretDataWithEncryptedSharedPreferences(
-                            ENCRYPTED_SHARED_PREFERENCES_FILE_NAME, EMAIL_ADDRESS));
-            Log.d(TAG, "Password from encrypted SharedPref: " + dataEncryptionUtil.
-                    readSecretDataWithEncryptedSharedPreferences(
-                            ENCRYPTED_SHARED_PREFERENCES_FILE_NAME, PASSWORD));
-            Log.d(TAG, "Login data from encrypted file: " + dataEncryptionUtil.
-                    readSecretDataOnFile(ENCRYPTED_DATA_FILE_NAME));
-        } catch (GeneralSecurityException | IOException e) {
-            e.printStackTrace();
-        }
 
         provaAccesso.setOnClickListener(v -> {
             String email = textInputEmail.getEditText().getText().toString();
@@ -71,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //QUESTO PEZZO E' SOLO PER LA FASE DI TEST
-        Button btn = (Button)findViewById(R.id.provaaccesso);
+        Button btn = (Button)findViewById(R.id.google_login);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,13 +72,27 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     private boolean isEmailOk(String email) {
-        return false;
+        if(!EmailValidator.getInstance().isValid((email))){
+            textInputEmail.setError(getString(R.string.error_email));
+            return false;
+        }else {
+            textInputEmail.setError(null);
+            return true;
+        }
     }
     private boolean isPasswordOk(String password) {
-        return false;
+        if(password.isEmpty()){
+            textInputPassword.setError(getString(R.string.error_password));
+            return false;
+        }else{
+            textInputPassword.setError(null);
+            return true;
+        }
     }
 
-    private void saveLoginData(String email, String password) {}
+    private void saveLoginData(String email, String password) {
+
+    }
 
 
 
