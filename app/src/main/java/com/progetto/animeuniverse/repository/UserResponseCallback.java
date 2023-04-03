@@ -7,5 +7,5 @@ public interface UserResponseCallback {
     void onFailureFromAuthentication(String message);
     void onSuccessFromRemoteDatabase(User user);
     void onFailureFromRemoteDatabase(String message);
-    void onSuccessLogut();
+    void onSuccessLogout();
 }

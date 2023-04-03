@@ -9,12 +9,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.IntentSenderRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.gms.auth.api.identity.BeginSignInRequest;
+import com.google.android.gms.auth.api.identity.SignInClient;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.progetto.animeuniverse.repository.IUserRepository;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
@@ -24,10 +31,17 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
     private static final boolean NAV_COMPONENT = true;
-
+    private UserViewModel userViewModel;
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputPassword;
 
+    private ActivityResultLauncher<IntentSenderRequest> activityResultLauncher;
+    private ActivityResultContracts.StartIntentSenderForResult startIntentSenderForResult;
+
+    private SignInClient oneTapClient;
+    private BeginSignInRequest signInRequest;
+
+    private DataEncryptionUtil dataEncryptionUtil;
     public LoginActivity(){}
 
 
@@ -36,12 +50,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_login);
 
+        IUserRepository userRepository = ServiceLocator.getInstance().getUserRepository(getApplication());
+
+        dataEncryptionUtil = new DataEncryptionUtil(getApplication());
+
         textInputEmail = findViewById(R.id.emailInput);
         textInputPassword = findViewById(R.id.passwordinput);
         final Button provaAccesso = findViewById(R.id.provaaccesso);
         final Button buttonGoogleLogin = findViewById(R.id.google_login);
-
-
 
         provaAccesso.setOnClickListener(v -> {
             String email = textInputEmail.getEditText().getText().toString();
@@ -73,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, RegistrationFragment.class));
+                startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
             }
         });
 

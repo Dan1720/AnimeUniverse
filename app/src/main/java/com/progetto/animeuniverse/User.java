@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-
+import com.google.firebase.database.Exclude;
 
 
 public class User implements Parcelable {
@@ -13,7 +13,7 @@ public class User implements Parcelable {
     private String email;
     private String idToken;
 
-    public User(String nomeUtente, String email, String password, String idToken) {
+    public User(String nomeUtente, String email, String idToken) {
         this.nomeUtente = nomeUtente;
         this.email = email;
         this.idToken = idToken;
@@ -35,7 +35,7 @@ public class User implements Parcelable {
         this.email = email;
     }
 
-
+    @Exclude
     public String getIdToken() {
         return idToken;
     }
