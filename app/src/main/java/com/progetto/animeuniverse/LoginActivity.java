@@ -21,7 +21,7 @@ import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.SignInClient;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
-import com.progetto.animeuniverse.repository.IUserRepository;
+
 
 import org.apache.commons.validator.routines.EmailValidator;
 
@@ -31,15 +31,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
     private static final boolean NAV_COMPONENT = true;
-    private UserViewModel userViewModel;
+
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputPassword;
-
-    private ActivityResultLauncher<IntentSenderRequest> activityResultLauncher;
-    private ActivityResultContracts.StartIntentSenderForResult startIntentSenderForResult;
-
-    private SignInClient oneTapClient;
-    private BeginSignInRequest signInRequest;
+    
 
     private DataEncryptionUtil dataEncryptionUtil;
     public LoginActivity(){}
@@ -50,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_login);
 
-        IUserRepository userRepository = ServiceLocator.getInstance().getUserRepository(getApplication());
+        //IUserRepository userRepository = ServiceLocator.getInstance().getUserRepository(getApplication());
 
         dataEncryptionUtil = new DataEncryptionUtil(getApplication());
 

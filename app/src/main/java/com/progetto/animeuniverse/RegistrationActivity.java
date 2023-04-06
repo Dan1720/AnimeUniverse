@@ -9,7 +9,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private static final String TAG = RegistrationActivity.class.getSimpleName();
 
-    private UserViewModel userViewModel;
+  
     private DataEncryptionUtil dataEncryptionUtil;
 
     public RegistrationActivity(){}

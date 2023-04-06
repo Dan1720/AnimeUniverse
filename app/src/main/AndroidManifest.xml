@@ -20,7 +20,7 @@
             android:exported="false"
             />
         <activity
-            android:name=".RegistrationFragment"
+            android:name=".RegistrationActivity"
             android:exported="false"
             />
         <activity
