@@ -1,5 +1,6 @@
 package com.progetto.animeuniverse;
 
+import static com.progetto.animeuniverse.Constants.APP_DATA_FILE;
 import static com.progetto.animeuniverse.Constants.EMAIL_ADDRESS;
 import static com.progetto.animeuniverse.Constants.PASSWORD;
 
@@ -16,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.security.crypto.EncryptedFile;
+import androidx.security.crypto.MasterKey;
 
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.identity.SignInClient;
@@ -25,17 +28,20 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
     private static final boolean NAV_COMPONENT = true;
-
     private TextInputLayout textInputEmail;
     private TextInputLayout textInputPassword;
-    
-
     private DataEncryptionUtil dataEncryptionUtil;
     public LoginActivity(){}
 
@@ -44,8 +50,6 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_login);
-
-        //IUserRepository userRepository = ServiceLocator.getInstance().getUserRepository(getApplication());
 
         dataEncryptionUtil = new DataEncryptionUtil(getApplication());
 
@@ -60,7 +64,12 @@ public class LoginActivity extends AppCompatActivity {
 
             if (isEmailOk(email) & isPasswordOk(password)){
                 Log.d(TAG, "Email and password are ok");
-                saveLoginData(email, password);
+                try{
+                    saveLoginData(textInputPassword.getEditText().getText().toString());
+                }catch (GeneralSecurityException | IOException e){
+                    e.printStackTrace();
+                }
+
             }else{
                 Snackbar.make(findViewById(android.R.id.content),
                         R.string.login_not_ok, Snackbar.LENGTH_SHORT).show();
@@ -109,8 +118,47 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void saveLoginData(String email, String password) {
+    private String readLoginData() throws GeneralSecurityException, IOException{
+        MasterKey mainKey = new MasterKey.Builder(this)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build();
 
+        EncryptedFile encryptedFile = new EncryptedFile.Builder(this,
+                new File(getFilesDir(),APP_DATA_FILE),
+                mainKey,
+                EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB).build();
+
+        InputStream inputStream = encryptedFile.openFileInput();
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        int nextByte = inputStream.read();
+        while (nextByte != -1){
+            byteArrayOutputStream.write(nextByte);
+            nextByte = inputStream.read();
+        }
+
+        byte[] plaintext = byteArrayOutputStream.toByteArray();
+        return new String(plaintext, StandardCharsets.UTF_8);
+    }
+    private void saveLoginData(String credentials) throws GeneralSecurityException, IOException{
+        MasterKey mainKey = new MasterKey.Builder(this)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build();
+
+        File fileToWrite = new File(getFilesDir(), APP_DATA_FILE);
+        EncryptedFile encryptedFile = new EncryptedFile.Builder(this,
+                new File(getFilesDir(),APP_DATA_FILE),
+                mainKey,
+                EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB).build();
+
+        if(fileToWrite.exists()){
+            fileToWrite.delete();
+        }
+
+        byte[] fileContent = credentials.getBytes(StandardCharsets.UTF_8);
+        OutputStream outputStream = encryptedFile.openFileOutput();
+        outputStream.write(fileContent);
+        outputStream.flush();
+        outputStream.close();
     }
 
 
