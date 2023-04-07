@@ -3,11 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/sfondo">
 
     <fragment
+        android:id="@+id/sfondo"
+        android:name="com.progetto.animeuniverse.Sfondo"
+        android:label="Sfondo" >
+        <action
+            android:id="@+id/action_sfondo_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/loginFragment"
-        android:name="com.progetto.animeuniverse.LoginActivity"
+        android:name="com.progetto.animeuniverse.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_welcomeActivity"
+            app:destination="@id/welcomeActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.progetto.animeuniverse.RegistrationFragment"
+        android:label="RegistrationFragment" >
+        <action
+            android:id="@+id/action_registrationFragment_to_welcomeActivity"
+            app:destination="@id/welcomeActivity" />
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/welcomeActivity"
+        android:name="com.progetto.animeuniverse.WelcomeActivity"
+        android:label="activity_welcome"
+        tools:layout="@layout/activity_welcome" />
+
 </navigation>

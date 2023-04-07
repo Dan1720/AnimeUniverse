@@ -1,12 +1,12 @@
 package com.progetto.animeuniverse;
 
 public class Constants {
-    public static final String ENCRYPTED_SHARED_PREFERENCES_FILE_NAME = "";
-    public static final String EMAIL_ADDRESS = "email_address";
+    public static final String ENCRYPTED_SHARED_PREFERENCES_FILE_NAME = "com.progetto.animeuniverse.encrypted_preferences";
+    public static final String EMAIL_ADDRESS = "email";
     public static final String PASSWORD = "password";
     public static final String ID_TOKEN = "google_token";
     public static final String APP_DATA_FILE = "app_data.txt";
-    public static final String ENCRYPTED_DATA_FILE_NAME = "";
+    public static final String ENCRYPTED_DATA_FILE_NAME = "com.progetto.animeuniverse.encrypted_file.txt";
     public static final String ANIMEUNIVERSE_DATABASE_NAME = "animeuniverse_db";
 
     public static final int DATABASE_VERSION = 1;
