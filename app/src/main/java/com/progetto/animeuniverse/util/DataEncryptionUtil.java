@@ -1,4 +1,4 @@
-package com.progetto.animeuniverse;
+package com.progetto.animeuniverse.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

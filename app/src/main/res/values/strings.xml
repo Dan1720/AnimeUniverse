@@ -20,4 +20,10 @@
     <string name="registrati_button">Registrati</string>
     <string name="crea_account">Crea un account</string>
     <string name="txt_there_is_account">Hai già un account?</string>
+    <string name="error_user_collision_message">The email address is already in use by another account</string>
+    <string name="unexpected_error">Unexpected error</string>
+    <string name="check_login_data_message">Check the data you inserted</string>
+    <string name="error_login_password_message">The password is invalid</string>
+    <string name="error_login_user_message">There is no user record corresponding</string>
+    <string name="error_no_google_account_found_message">No Google accounts have been found</string>
 </resources>

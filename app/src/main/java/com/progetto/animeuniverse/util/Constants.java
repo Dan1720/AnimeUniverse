@@ -1,4 +1,4 @@
-package com.progetto.animeuniverse;
+package com.progetto.animeuniverse.util;
 
 public class Constants {
     public static final String ENCRYPTED_SHARED_PREFERENCES_FILE_NAME = "com.progetto.animeuniverse.encrypted_preferences";

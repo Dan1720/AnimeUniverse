@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "256661180747",
+    "firebase_url": "https://animeuniverse-f9823-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "animeuniverse-f9823",
+    "storage_bucket": "animeuniverse-f9823.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256661180747:android:d1616a465190483f7b58ce",
+        "android_client_info": {
+          "package_name": "com.progetto.animeuniverse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256661180747-co27ishpdmgs8kuqmuhrtv10t9qed9sp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.progetto.animeuniverse",
+            "certificate_hash": "017f62afc586a4862e2e33dda3ea948694ceec36"
+          }
+        },
+        {
+          "client_id": "256661180747-e42qiq6nto398f5tli1e4hic6s6p0khm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA15bfOMqfzD1yM6jfiwKqN8AP_Dae6zAg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256661180747-e42qiq6nto398f5tli1e4hic6s6p0khm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
