@@ -26,4 +26,5 @@
     <string name="error_login_password_message">The password is invalid</string>
     <string name="error_login_user_message">There is no user record corresponding</string>
     <string name="error_no_google_account_found_message">No Google accounts have been found</string>
+    <string name="logout">Logout</string>
 </resources>
