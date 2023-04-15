@@ -33,7 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txt_login"
+                android:id="@+id/txt_forgot_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/login"
@@ -53,7 +53,7 @@
                 app:layout_constraintGuide_begin="26dp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/emailInput"
+                android:id="@+id/emailInput_forgotPassword"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -65,7 +65,7 @@
                 app:hintTextColor="@color/secondaryColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/txt_login"
+                app:layout_constraintTop_toBottomOf="@+id/txt_forgot_password"
                 app:startIconDrawable="@drawable/baseline_alternate_email_24"
                 app:startIconTint="@color/secondaryColor">
 
@@ -89,7 +89,7 @@
                 app:hintAnimationEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/emailInput"
+                app:layout_constraintTop_toBottomOf="@+id/emailInput_forgotPassword"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/secondaryColor"
                 app:startIconDrawable="@drawable/baseline_lock_24"
@@ -147,7 +147,7 @@
                 app:layout_constraintStart_toEndOf="@+id/txt_no_account" />
 
             <Button
-                android:id="@+id/provaaccesso"
+                android:id="@+id/btn_reimposta_password"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -170,7 +170,7 @@
                 android:layout_marginEnd="22dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/provaaccesso">
+                app:layout_constraintTop_toBottomOf="@+id/btn_reimposta_password">
 
                 <View
                     android:layout_width="wrap_content"
@@ -227,7 +227,7 @@
                 android:layout_height="wrap_content"
                 android:indeterminateDrawable="@drawable/rotating_icon"
                 android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/provaaccesso"
+                app:layout_constraintBottom_toTopOf="@+id/btn_reimposta_password"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/passwordinput" />

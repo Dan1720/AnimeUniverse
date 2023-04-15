@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ import java.io.IOException;
 
 
 public class AccountFragment extends Fragment {
-
+    private static final String TAG = AccountFragment.class.getSimpleName();
     private FragmentAccountBinding fragmentAccountBinding;
     private UserViewModel userViewModel;
 
@@ -49,7 +50,7 @@ public class AccountFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.d(TAG, "ArrivaOnCreate");
         IUserRepository userRepository = ServiceLocator.getInstance().getUserRepository(requireActivity().getApplication());
         userViewModel = new ViewModelProvider(requireActivity(), new UserViewModelFactory(userRepository)).get(UserViewModel.class);
     }
@@ -67,18 +68,19 @@ public class AccountFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         fragmentAccountBinding.btnLogout.setOnClickListener(v -> {
-           userViewModel.logout().observe(getViewLifecycleOwner(), result ->{
-               if(result.isSuccess()){
-                   Navigation.findNavController(view).navigate(
-                           R.id.action_accountFragment_return_loginFragment);
-
-               }else{
-                   Snackbar.make(view, requireActivity().getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
-               }
-           });
+            userViewModel.logout().observe(getViewLifecycleOwner(), result -> {
+                if (result.isSuccess()) {
+                    Navigation.findNavController(view).navigate(
+                            R.id.action_accountFragment_to_loginFragment);
+                } else {
+                    Snackbar.make(view,
+                            requireActivity().getString(R.string.unexpected_error),
+                            Snackbar.LENGTH_SHORT).show();
+                }
+            });
         });
 
-        iVPreviewImage = view.findViewById(R.id.immagineprofilo);
+        iVPreviewImage = view.findViewById(R.id.immagine_profilo);
         iVPreviewImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

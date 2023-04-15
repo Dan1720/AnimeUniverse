@@ -24,13 +24,5 @@
         android:id="@+id/accountFragment"
         android:name="com.progetto.animeuniverse.AccountFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_account" >
-        <action
-            android:id="@+id/action_accountFragment_return_loginFragment"
-            app:destination="@id/loginFragment2" />
-    </fragment>
-    <fragment
-        android:id="@+id/loginFragment2"
-        android:name="com.progetto.animeuniverse.LoginFragment"
-        android:label="LoginFragment" />
+        tools:layout="@layout/fragment_account" />
 </navigation>

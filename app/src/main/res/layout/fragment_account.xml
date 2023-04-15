@@ -10,14 +10,14 @@
     <!-- TODO: Update blank fragment layout -->
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/nome_cognome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="50dp" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/immagineprofilo"
+        android:id="@+id/immagine_profilo"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginStart="22dp"
@@ -42,7 +42,7 @@
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/immagineprofilo" />
+        app:layout_constraintTop_toBottomOf="@+id/immagine_profilo" />
 
     <Button
         android:id="@+id/btn_logout"

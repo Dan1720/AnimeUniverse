@@ -28,4 +28,7 @@ public class Constants {
     public static final String FIREBASE_USERS_COLLECTION = "users";
 
     public static final int SELECT_PICTURE = 200;
+
+    public static final String EMAIL_SEND_FORGOT_PASSWORD = "Check your email to reset your password";
+    public static final String SOMETHING_WRONG = "Try again! Something wrong happened!";
 }

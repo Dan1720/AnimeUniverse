@@ -36,7 +36,6 @@ import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.progetto.animeuniverse.repository.IUserRepository;
@@ -148,12 +147,13 @@ public class LoginFragment extends Fragment {
 
         dataEncryptionUtil = new DataEncryptionUtil(requireContext());
 
-        textInputEmail = view.findViewById(R.id.emailInput);
+        textInputEmail = view.findViewById(R.id.emailInput_forgotPassword);
         textInputPassword = view.findViewById(R.id.passwordinput);
 
-        final Button provaAccesso = view.findViewById(R.id.provaaccesso);
+        final Button provaAccesso = view.findViewById(R.id.btn_reimposta_password);
         final Button buttonGoogleLogin = view.findViewById(R.id.google_login);
         final Button btnReg = (Button)view.findViewById(R.id.registrati);
+        final Button btnForgotPassword = (Button)view.findViewById(R.id.forgotpassword);
         progressBar = view.findViewById(R.id.progress_bar_login);
 
         if(userViewModel.getLoggedUser() != null){
@@ -231,6 +231,12 @@ public class LoginFragment extends Fragment {
         btnReg.setOnClickListener(v-> {
             Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_registrationFragment);
         });
+
+        btnForgotPassword.setOnClickListener(v ->{
+            Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_forgotPasswordFragment);
+        });
+
+
     }
     private boolean isEmailOk(String email) {
         if(!EmailValidator.getInstance().isValid((email))){
