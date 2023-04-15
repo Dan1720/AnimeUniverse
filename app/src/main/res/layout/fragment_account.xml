@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bt"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/thirdColor"
@@ -21,11 +22,12 @@
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="22dp"
         android:src="@drawable/baseline_account_circle_24"
         app:layout_constraintBottom_toTopOf="@+id/nomeutente"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +36,7 @@
         android:layout_width="259dp"
         android:layout_height="32dp"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="22dp"
         android:text="Nome Cognome"
         android:textAlignment="center"
@@ -49,16 +51,165 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="22dp"
         android:text="@string/logout"
+        android:textColor="@color/secondaryColor"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:backgroundTint="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_account_impostazioni"
+        app:strokeColor="@color/secondaryColor"
+        app:strokeWidth="2dp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="346dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/primaryColor"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nomeutente">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_tempo_visione"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginTop="5dp"
+                android:text="@string/tempo_visione"
+                android:textColor="@color/secondaryColor"
+                android:textSize="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/giorni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/secondaryColor"
+                android:foregroundGravity="center_vertical|center_horizontal"
+                android:text="00"
+                android:textSize="32dp"
+                app:layout_constraintStart_toEndOf="@+id/mesi"
+                app:layout_constraintTop_toBottomOf="@+id/txt_tempo_visione" />
+
+            <TextView
+                android:id="@+id/ore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_horizontal|center_vertical"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/secondaryColor"
+                android:foregroundGravity="center_vertical|center_horizontal"
+                android:text="00"
+                android:textSize="32dp"
+                app:layout_constraintStart_toEndOf="@+id/giorni"
+                app:layout_constraintTop_toBottomOf="@+id/txt_tempo_visione" />
+
+            <TextView
+                android:id="@+id/mesi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginStart="88dp"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/secondaryColor"
+                android:text="00"
+                android:textSize="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_tempo_visione" />
+
+            <TextView
+                android:id="@+id/txt_mesi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|left|center_vertical"
+                android:layout_marginStart="88dp"
+                android:text="@string/mesi"
+                android:textColor="@color/secondaryColor"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mesi"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/txt_ore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="90dp"
+                android:text="@string/ore"
+                android:textColor="@color/secondaryColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_giorni"
+                app:layout_constraintTop_toBottomOf="@+id/ore" />
+
+            <TextView
+                android:id="@+id/txt_giorni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:text="@string/giorni"
+                android:textColor="@color/secondaryColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_mesi"
+                app:layout_constraintTop_toBottomOf="@+id/giorni" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btn_impostazioni"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="22dp"
+        android:text="@string/Impostazioni"
         android:textColor="@color/secondaryColor"
         android:textSize="20sp"
         android:textStyle="bold"
         app:backgroundTint="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nomeutente"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:strokeColor="@color/secondaryColor"
+        app:strokeWidth="2dp" />
+
+    <Button
+        android:id="@+id/btn_account_impostazioni"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="22dp"
+        android:text="@string/account_impostazioni"
+        android:textColor="@color/secondaryColor"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:backgroundTint="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_impostazioni"
         app:strokeColor="@color/secondaryColor"
         app:strokeWidth="2dp" />
 
