@@ -80,6 +80,10 @@ public class AccountFragment extends Fragment {
             });
         });
 
+        fragmentAccountBinding.btnImpostazioni.setOnClickListener(v ->{
+            Navigation.findNavController(view).navigate(R.id.action_accountFragment_to_settingsFragment);
+        });
+
         iVPreviewImage = view.findViewById(R.id.immagine_profilo);
         iVPreviewImage.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -34,6 +34,14 @@
     <string name="giorni">Giorni</string>
     <string name="mesi">Mesi</string>
     <string name="ore">Ore</string>
+    <string name="consenti_notifiche">Consenti notifiche</string>
+    <string name="under_consenti_notifiche">Personalizza in Impostazioni --> Notifiche</string>
+    <string name="privacy">Privacy</string>
+    <string name="preferenze_cookie">Preferenze per i cookie</string>
+    <string name="condizioni_utilizzo">Condizioni di utilizzo</string>
+    <string name="info_legali">Informazioni legali</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
@@ -48,4 +56,5 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
 </resources>

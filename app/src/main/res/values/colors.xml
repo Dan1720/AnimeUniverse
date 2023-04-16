@@ -12,4 +12,5 @@
     <color name="thirdColor">#340F6B</color>
     <color name="google_login_button">#eceff1</color>
     <color name="google_login_text">#616161</color>
+    <color name="grey">#C0C0C0</color>
 </resources>

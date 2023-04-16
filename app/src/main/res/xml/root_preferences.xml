@@ -1,0 +1,30 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:background="@color/primaryColor" >
+    <PreferenceCategory
+        app:icon="@drawable/baseline_notifications_24"
+        app:title="@string/title_notifications">
+
+        <SwitchPreferenceCompat
+            app:key="notifiche"
+            app:summary="@string/under_consenti_notifiche"
+            app:title="@string/consenti_notifiche" />
+
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:icon="@drawable/baseline_account_balance_24"
+        app:title="@string/info_legali">
+        <Preference
+            app:key="privacy"
+            app:title="@string/privacy" />
+        <Preference
+            app:key="preferenze_cookie"
+            app:title="@string/preferenze_cookie" />
+        <Preference
+            app:key="condizioni_utilizzo"
+            app:title="@string/condizioni_utilizzo" />
+    </PreferenceCategory>
+
+
+
+</PreferenceScreen>
