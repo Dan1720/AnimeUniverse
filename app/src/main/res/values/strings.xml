@@ -56,5 +56,9 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="cambio_nome_utente">Cambia nome utente</string>
+    <string name="cambio_email">Cambia email</string>
+    <string name="cambio_password">Cambia password</string>
+    <string name="impostazioni_account">Impostazioni account</string>
 
 </resources>

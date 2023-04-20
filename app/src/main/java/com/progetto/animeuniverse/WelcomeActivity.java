@@ -41,4 +41,10 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

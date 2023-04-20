@@ -28,9 +28,50 @@
         <action
             android:id="@+id/action_accountFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_settingsAccountFragment"
+            app:destination="@id/settingsAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.progetto.animeuniverse.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_privacyFragment"
+            app:destination="@id/privacyFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_cookiePreferenceFragment"
+            app:destination="@id/cookiePreferenceFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_condizioniUtilizzoFragment"
+            app:destination="@id/condizioniUtilizzoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsAccountFragment"
+        android:name="com.progetto.animeuniverse.SettingsAccountFragment"
+        android:label="SettingsAccountFragment" >
+        <action
+            android:id="@+id/action_settingsAccountFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.progetto.animeuniverse.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
+    <fragment
+        android:id="@+id/privacyFragment"
+        android:name="com.progetto.animeuniverse.PrivacyFragment"
+        android:label="fragment_privacy"
+        tools:layout="@layout/fragment_privacy" />
+    <fragment
+        android:id="@+id/cookiePreferenceFragment"
+        android:name="com.progetto.animeuniverse.CookiePreferenceFragment"
+        android:label="fragment_cookie_preference"
+        tools:layout="@layout/fragment_cookie_preference" />
+    <fragment
+        android:id="@+id/condizioniUtilizzoFragment"
+        android:name="com.progetto.animeuniverse.CondizioniUtilizzoFragment"
+        android:label="fragment_condizioni_utilizzo"
+        tools:layout="@layout/fragment_condizioni_utilizzo" />
 </navigation>

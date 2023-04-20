@@ -1,5 +1,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:background="@color/primaryColor" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primaryColor">
     <PreferenceCategory
         app:icon="@drawable/baseline_notifications_24"
         app:title="@string/title_notifications">
@@ -24,7 +25,6 @@
             app:key="condizioni_utilizzo"
             app:title="@string/condizioni_utilizzo" />
     </PreferenceCategory>
-
 
 
 </PreferenceScreen>

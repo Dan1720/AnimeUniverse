@@ -31,4 +31,11 @@ public class Constants {
 
     public static final String EMAIL_SEND_FORGOT_PASSWORD = "Check your email to reset your password";
     public static final String SOMETHING_WRONG = "Try again! Something wrong happened!";
+
+    public static final String KEY_CAMBIO_PW = "cambio_password";
+    public static final String KEY_PRIVACY = "privacy";
+    public static final String KEY_PREFERENZE_COOKIE = "preferenze_cookie";
+    public static final String KEY_CONDIZIONI_UTILIZZO = "condizioni_utilizzo";
+    public static final String KEY_PREF_COOKIE = "preferenze_cookie";
+    public static final String KEY_COND_UTILIZZO = "condizioni_utilizzo";
 }
