@@ -39,6 +39,7 @@ public class UserAuthenticationRemoteDataSource extends BaseUserAuthenticationRe
         }
     }
 
+
     @Override
     public void logout() {
         FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {

@@ -12,6 +12,7 @@ public class User implements Parcelable {
     private String nomeUtente;
     private String email;
     private String idToken;
+    private String urlImage;
 
 
     public User(String nomeUtente, String email, String idToken) {
@@ -44,7 +45,13 @@ public class User implements Parcelable {
     public void setIdToken(String idToken) {
         this.idToken = idToken;
     }
+    public String getUrlImage() {
+        return urlImage;
+    }
 
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
     @Override
     public String toString() {
         return "User{" +
@@ -58,6 +65,7 @@ public class User implements Parcelable {
         this.nomeUtente = in.readString();
         this.email = in.readString();
         this.idToken = in.readString();
+        this.urlImage = in.readString();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -82,11 +90,13 @@ public class User implements Parcelable {
         dest.writeString(this.nomeUtente);
         dest.writeString(this.email);
         dest.writeString(this.idToken);
+        dest.writeString(this.urlImage);
     }
 
     public void readFromParcel(Parcel source){
         this.nomeUtente = source.readString();
         this.email = source.readString();
         this.idToken = source.readString();
+        this.urlImage = source.readString();
     }
 }
