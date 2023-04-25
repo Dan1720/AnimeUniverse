@@ -150,7 +150,7 @@ public class LoginFragment extends Fragment {
         textInputEmail = view.findViewById(R.id.emailInput_forgotPassword);
         textInputPassword = view.findViewById(R.id.passwordinput);
 
-        final Button provaAccesso = view.findViewById(R.id.btn_reimposta_password);
+        final Button provaAccesso = view.findViewById(R.id.btn_accedi);
         final Button buttonGoogleLogin = view.findViewById(R.id.google_login);
         final Button btnReg = (Button)view.findViewById(R.id.registrati);
         final Button btnForgotPassword = (Button)view.findViewById(R.id.forgotpassword);

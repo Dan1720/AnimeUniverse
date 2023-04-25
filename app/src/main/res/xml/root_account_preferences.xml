@@ -9,9 +9,6 @@
             app:key="cambio_nomeutente"
             app:title="@string/cambio_nome_utente" />
         <Preference
-            app:key="cambio_email"
-            app:title="@string/cambio_email" />
-        <Preference
             app:key="cambio_password"
             app:title="@string/cambio_password" />
 

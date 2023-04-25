@@ -13,6 +13,7 @@ public class User implements Parcelable {
     private String email;
     private String idToken;
 
+
     public User(String nomeUtente, String email, String idToken) {
         this.nomeUtente = nomeUtente;
         this.email = email;
