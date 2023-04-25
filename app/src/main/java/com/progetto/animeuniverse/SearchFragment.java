@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,7 +15,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,12 +89,25 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        Anime[] animeArray = new Anime[100];
-        for(int i = 0; i < animeArray.length; i++){
-            animeArray[i] = new Anime("Author" + i, "Title" + i, null);
+       
+        RecyclerView recyclerViewSearch = view.findViewById(R.id.recyclerView_search_anime); //ha bisogno di un layout manager
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
+        recyclerViewSearch.setLayoutManager(linearLayoutManager);
+        List<Anime> animeList = new ArrayList<>();
+        for(int i = 0; i < 100; i++){
+            animeList.add(new Anime("Title" + i, "Author" + i, null));
         }
 
-        ListView listViewSearchAnime = view.findViewById(R.id.listview_search_anime);
+        SearchListAdapter adapter = new SearchListAdapter(animeList, new SearchListAdapter.OnItemClickListener() {
+            @Override
+            public void onAnimeClick(Anime anime) {
+                Snackbar.make(view, anime.getTitle(), Snackbar.LENGTH_SHORT).show();
+            }
+        });
+        recyclerViewSearch.setAdapter(adapter);
+
+
+
     }
 
 
