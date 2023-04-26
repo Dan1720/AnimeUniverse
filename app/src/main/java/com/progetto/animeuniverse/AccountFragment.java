@@ -115,6 +115,21 @@ public class AccountFragment extends Fragment {
 
         iVPreviewImage = view.findViewById(R.id.immagine_profilo);
 
+        DatabaseReference yImage = FirebaseDatabase.getInstance().getReference().child("users").child(code).child("photoUrl");
+
+        yImage.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String urlImage = snapshot.getValue(String.class);
+                System.out.println("immagine url: "+ urlImage);
+                Picasso.get().load(urlImage).into(iVPreviewImage);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(requireActivity(), "url non preso", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         iVPreviewImage.setOnClickListener(new View.OnClickListener() {
@@ -129,12 +144,6 @@ public class AccountFragment extends Fragment {
         }else{
             fragmentAccountBinding.nomeutente.setText(userViewModel.getLoggedUser().getEmail().toString());
         }
-
-        DatabaseReference yImage = FirebaseDatabase.getInstance().getReference().child("users").child(code).child("imageUrl");
-
-
-
-
 
     }
 
@@ -207,7 +216,7 @@ public class AccountFragment extends Fragment {
                         public void onSuccess(Uri uri) {
                             Uri URL = uri;
                             DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users").child(code);
-                            ref.child("imageURL").setValue(URL.toString());
+                            ref.child("photoUrl").setValue(URL.toString());
                         }
                     });
                 }else {
