@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="@color/thirdColor"
     app:layoutDescription="@xml/home_main_scene">
 
     <androidx.core.widget.NestedScrollView
@@ -47,9 +47,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="45dp"
                         android:gravity="bottom|center_horizontal"
-                        android:text="@string/cateogoria"
+                        android:text="@string/txt_categorie"
                         android:textColor="#EBFFFFFF"
-                        android:textSize="12sp"
+                        android:textSize="12dp"
                         app:layout_constraintBottom_toBottomOf="@+id/homeCover" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,13 +74,13 @@
                                 app:srcCompat="@drawable/baseline_favorite_24" />
 
                             <TextView
-                                android:id="@+id/textView11"
+                                android:id="@+id/txt_la_mia_lista"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="My List"
+                                android:text="@string/txt_la_mia_lista"
                                 android:textColor="#EBFFFFFF"
-                                android:textSize="10sp" />
+                                android:textSize="10dp" />
 
                         </LinearLayout>
 
@@ -120,16 +120,16 @@
                                         tools:layout_editor_absoluteY="0dp" />
 
                                     <TextView
-                                        android:id="@+id/textView14"
+                                        android:id="@+id/txt_visto"
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
                                         android:layout_marginStart="5dp"
                                         android:layout_marginEnd="13dp"
                                         android:layout_weight="1"
                                         android:gravity="center_vertical"
-                                        android:text="Play"
+                                        android:text="@string/txt_visto"
                                         android:textColor="#000000"
-                                        android:textSize="16sp"
+                                        android:textSize="16dp"
                                         android:textStyle="bold"
                                         app:layout_constraintEnd_toEndOf="parent"
                                         app:layout_constraintStart_toEndOf="@+id/imageView6"
@@ -159,13 +159,13 @@
                                 app:srcCompat="@drawable/baseline_info_24" />
 
                             <TextView
-                                android:id="@+id/textView13"
+                                android:id="@+id/txt_info"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="Info"
+                                android:text="@string/txt_info"
                                 android:textColor="#EBFFFFFF"
-                                android:textSize="10sp" />
+                                android:textSize="10dp" />
 
                         </LinearLayout>
 
@@ -176,15 +176,15 @@
             </FrameLayout>
 
             <TextView
-                android:id="@+id/trendingNow"
+                android:id="@+id/txt_anime_del_momento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="10dp"
-                android:text="Popular on Netflix"
+                android:text="@string/txt_anime_del_momento"
                 android:textColor="#EBFFFFFF"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
             <HorizontalScrollView
@@ -338,15 +338,15 @@
             </HorizontalScrollView>
 
             <TextView
-                android:id="@+id/continueWatching"
+                android:id="@+id/txt_continua_guardare"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="10dp"
-                android:text="Continue Watching for CALVERT"
+                android:text="@string/txt_continua_guardare"
                 android:textColor="#EBFFFFFF"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
             <HorizontalScrollView
@@ -401,7 +401,7 @@
                                     android:gravity="bottom"
                                     android:text="S1:E7"
                                     android:textColor="#D8D4D4"
-                                    android:textSize="10sp" />
+                                    android:textSize="10dp" />
 
                             </FrameLayout>
 
@@ -481,7 +481,7 @@
                                     android:gravity="bottom"
                                     android:text="1h 53m"
                                     android:textColor="#D8D4D4"
-                                    android:textSize="10sp" />
+                                    android:textSize="10dp" />
 
                             </FrameLayout>
 
@@ -577,7 +577,7 @@
                                     android:gravity="bottom"
                                     android:text="S2:E5"
                                     android:textColor="#D8D4D4"
-                                    android:textSize="10sp" />
+                                    android:textSize="10dp" />
 
                             </FrameLayout>
 
@@ -673,7 +673,7 @@
                                     android:gravity="bottom"
                                     android:text="1h 43m"
                                     android:textColor="#D8D4D4"
-                                    android:textSize="10sp" />
+                                    android:textSize="10dp" />
 
                             </FrameLayout>
 
@@ -768,7 +768,7 @@
                                     android:gravity="bottom"
                                     android:text="2h 22m"
                                     android:textColor="#D8D4D4"
-                                    android:textSize="10sp" />
+                                    android:textSize="10dp" />
 
                             </FrameLayout>
 
@@ -830,15 +830,15 @@
             </HorizontalScrollView>
 
             <TextView
-                android:id="@+id/onlyOnNetflix"
+                android:id="@+id/txt_consigliati"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="10dp"
-                android:text="Only on Netflix"
+                android:text="@string/txt_consigliati"
                 android:textColor="#EBFFFFFF"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
             <HorizontalScrollView
@@ -1106,13 +1106,13 @@
             </HorizontalScrollView>
 
             <TextView
-                android:id="@+id/watchAgain"
+                android:id="@+id/txt_novita"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="10dp"
-                android:text="Watch It Again"
+                android:text="@string/txt_novita"
                 android:textColor="#EBFFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -1248,15 +1248,6 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="90dp"
-                android:gravity="center"
-                android:text="Netflix Clone by Calvert Tanudihardjo"
-                android:textColor="#3E3C3C" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
@@ -1276,9 +1267,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        app:layout_constraintTop_toTopOf="@id/constraintLayout4">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -1287,25 +1276,25 @@
             android:orientation="horizontal"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            tools:layout_editor_absoluteY="94dp">
+            tools:layout_editor_absoluteY="120dp">
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/txt_serie_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="TV Shows"
+                android:text="@string/txt_serie_tv"
                 android:textColor="#EBFFFFFF"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/txt_film"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Movies"
+                android:text="@string/txt_film"
                 android:textColor="#EBFFFFFF"
                 android:textSize="16sp" />
 
@@ -1317,10 +1306,10 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/txt_categoire"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Categories"
+                    android:text="@string/txt_categorie"
                     android:textColor="#EBFFFFFF"
                     android:textSize="16sp" />
 

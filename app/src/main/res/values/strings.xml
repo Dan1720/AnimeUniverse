@@ -68,5 +68,9 @@
     <string name="txt_visto">Visto</string>
     <string name="txt_la_mia_lista">La mia lista</string>
     <string name="txt_info">Info</string>
+    <string name="txt_anime_del_momento">Anime del momento</string>
+    <string name="txt_continua_guardare">Continua a guardare</string>
+    <string name="txt_consigliati">Consigliati</string>
+    <string name="txt_novita">Novita</string>
 
 </resources>
