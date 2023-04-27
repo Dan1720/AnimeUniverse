@@ -121,8 +121,12 @@ public class AccountFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String urlImage = snapshot.getValue(String.class);
-                System.out.println("immagine url: "+ urlImage);
-                Picasso.get().load(urlImage).into(iVPreviewImage);
+                if(urlImage != null){
+                    System.out.println("immagine url: "+ urlImage);
+                    Picasso.get().load(urlImage).into(iVPreviewImage);
+
+                }
+
             }
 
             @Override
@@ -138,12 +142,11 @@ public class AccountFragment extends Fragment {
                 imageChooser();
             }
         });
-        String isNomeUtente = userViewModel.getLoggedUser().getNomeUtente();
-        if( isNomeUtente != null){
-            fragmentAccountBinding.nomeutente.setText(userViewModel.getLoggedUser().getNomeUtente().toString());
-        }else{
-            fragmentAccountBinding.nomeutente.setText(userViewModel.getLoggedUser().getEmail().toString());
-        }
+
+
+        setProfileName();
+
+
 
     }
 
@@ -224,7 +227,19 @@ public class AccountFragment extends Fragment {
                 }
             }
         });
+
+
     }
+
+    public void setProfileName(){
+        String isNomeUtente = userViewModel.getLoggedUser().getNomeUtente();
+        if( isNomeUtente != null){
+            fragmentAccountBinding.nomeutente.setText(userViewModel.getLoggedUser().getNomeUtente().toString());
+        }else{
+            fragmentAccountBinding.nomeutente.setText(userViewModel.getLoggedUser().getEmail().toString());
+        }
+    }
+
 
 
     @Override

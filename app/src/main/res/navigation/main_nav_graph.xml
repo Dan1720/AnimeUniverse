@@ -56,6 +56,9 @@
         <action
             android:id="@+id/action_settingsAccountFragment_to_forgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment" />
+        <action
+            android:id="@+id/action_settingsAccountFragment_to_changeNameFragment"
+            app:destination="@id/changeNameFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -82,4 +85,13 @@
         android:name="com.progetto.animeuniverse.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/changeNameFragment"
+        android:name="com.progetto.animeuniverse.ChangeNameFragment"
+        android:label="fragment_change_name"
+        tools:layout="@layout/fragment_change_name" >
+        <action
+            android:id="@+id/action_changeNameFragment_to_settingsAccountFragment"
+            app:destination="@id/settingsAccountFragment" />
+    </fragment>
 </navigation>
