@@ -29,7 +29,7 @@ public class WelcomeActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.listFragment, R.id.notificationsFragment,
+                R.id.listFragment, R.id.notificationsFragment, R.id.homeFragment,
                 R.id.searchFragment, R.id.accountFragment
         ).build();
 
