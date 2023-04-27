@@ -61,5 +61,12 @@
     <string name="cambio_password">Cambia password</string>
     <string name="impostazioni_account">Impostazioni account</string>
     <string name="txt_reimp_email">Reimposta Email</string>
+    <string name="txt_change_name">Cambia nome utente</string>
+    <string name="txt_serie_tv">Serie tv</string>
+    <string name="txt_film">Film</string>
+    <string name="txt_categorie">Categorie</string>
+    <string name="txt_visto">Visto</string>
+    <string name="txt_la_mia_lista">La mia lista</string>
+    <string name="txt_info">Info</string>
 
 </resources>

@@ -33,6 +33,7 @@ public class Constants {
     public static final String EMAIL_SEND_FORGOT_PASSWORD = "Check your email to reset your password";
     public static final String SOMETHING_WRONG = "Try again! Something wrong happened!";
 
+    public static final String CHANGE_NAME_OK = "Name changed, current name is: ";
     public static final String KEY_CAMBIO_PW = "cambio_password";
     public static final String KEY_CAMBIO_NOMEUTENTE = "cambio_nomeutente";
     public static final String KEY_PRIVACY = "privacy";
