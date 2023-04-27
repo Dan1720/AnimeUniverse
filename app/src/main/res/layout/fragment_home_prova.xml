@@ -9,12 +9,13 @@
     app:layoutDescription="@xml/home_main_scene">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollView3"
+        android:id="@+id/scrollViewHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="-60dp"
         android:overScrollMode="never"
         android:scrollbars="none"
+        android:paddingBottom="100dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -38,11 +39,10 @@
                         android:adjustViewBounds="false"
                         android:cropToPadding="false"
                         android:scaleType="fitXY"
-                        android:scrollY="10dp"
-                        />
+                        android:scrollY="10dp" />
 
                     <TextView
-                        android:id="@+id/movieGenres"
+                        android:id="@+id/txt_btn_categorie"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="45dp"
@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom|center_horizontal|center_vertical"
                         android:layout_marginTop="15dp"
-                        app:layout_constraintTop_toBottomOf="@+id/movieGenres">
+                        app:layout_constraintTop_toBottomOf="@+id/txt_btn_categorie">
 
                         <LinearLayout
                             android:id="@+id/linearLayout3"
@@ -68,7 +68,7 @@
                             app:layout_constraintStart_toStartOf="parent">
 
                             <ImageView
-                                android:id="@+id/imageView2"
+                                android:id="@+id/imageView_favorite"
                                 android:layout_width="match_parent"
                                 android:layout_height="28dp"
                                 app:srcCompat="@drawable/baseline_favorite_24" />
@@ -110,7 +110,7 @@
                                     android:padding="4dp">
 
                                     <ImageView
-                                        android:id="@+id/imageView6"
+                                        android:id="@+id/imageView_visto"
                                         android:layout_width="27dp"
                                         android:layout_height="27dp"
                                         android:layout_marginStart="4dp"
@@ -132,7 +132,7 @@
                                         android:textSize="16dp"
                                         android:textStyle="bold"
                                         app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toEndOf="@+id/imageView6"
+                                        app:layout_constraintStart_toEndOf="@+id/imageView_visto"
                                         tools:layout_editor_absoluteY="2dp"
                                         tools:letterSpacing="0.07" />
 
@@ -153,7 +153,7 @@
                             app:layout_constraintTop_toTopOf="@+id/linearLayout3">
 
                             <ImageView
-                                android:id="@+id/imageView4"
+                                android:id="@+id/imageView_info"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:srcCompat="@drawable/baseline_info_24" />
@@ -211,10 +211,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/moneyHeist"
+                                android:id="@+id/card1_popular"
                                 android:layout_width="111dp"
-                                android:layout_height="155dp"
-                                />
+                                android:layout_height="155dp" />
 
                         </androidx.cardview.widget.CardView>
 
@@ -232,10 +231,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/nevertheless"
+                                android:id="@+id/card2_popular"
                                 android:layout_width="111dp"
-                                android:layout_height="155dp"
-                                />
+                                android:layout_height="155dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -251,10 +249,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/intoTheNight"
+                                android:id="@+id/card3_popular"
                                 android:layout_width="111dp"
-                                android:layout_height="155dp"
-                                />
+                                android:layout_height="155dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -270,10 +267,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/dp"
+                                android:id="@+id/card4_popular"
                                 android:layout_width="111dp"
-                                android:layout_height="155dp"
-                                 />
+                                android:layout_height="155dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -289,10 +285,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/afterlife"
+                                android:id="@+id/card5_popular"
                                 android:layout_width="111dp"
-                                android:layout_height="155dp"
-                                />
+                                android:layout_height="155dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -308,10 +303,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/chachacha"
+                                android:id="@+id/card6_popular"
                                 android:layout_width="111dp"
-                                android:layout_height="155dp"
-                                />
+                                android:layout_height="155dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -327,10 +321,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/sexlife"
+                                android:id="@+id/card7_popular"
                                 android:layout_width="111dp"
-                                android:layout_height="155dp"
-                                />
+                                android:layout_height="155dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -379,22 +372,14 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageView
-                                    android:id="@+id/vincenzo"
+                                    android:id="@+id/card1_watching"
                                     android:layout_width="111dp"
                                     android:layout_height="155dp"
                                     android:foreground="@drawable/dark_gradient"
-                                    android:scaleType="fitStart"
-                                     />
-
-                                <ImageView
-                                    android:id="@+id/playVincenzo"
-                                    android:layout_width="100dp"
-                                    android:layout_height="70dp"
-                                    android:layout_gravity="center_horizontal|center_vertical"
-                                    app:srcCompat="@drawable/icon_playcircle" />
+                                    android:scaleType="fitStart" />
 
                                 <TextView
-                                    android:id="@+id/durVincenzo"
+                                    android:id="@+id/s_e_card1_watching"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="bottom|center_horizontal"
@@ -421,7 +406,7 @@
                             android:paddingBottom="7dp">
 
                             <ImageView
-                                android:id="@+id/iVincenzo"
+                                android:id="@+id/i_card1_watching"
                                 android:layout_width="wrap_content"
                                 android:layout_height="22dp"
                                 android:layout_marginStart="16dp"
@@ -430,13 +415,13 @@
                                 tools:layout_editor_absoluteY="5dp" />
 
                             <ImageView
-                                android:id="@+id/mVincenzo"
+                                android:id="@+id/opt_card1_watching"
                                 android:layout_width="wrap_content"
                                 android:layout_height="22dp"
                                 android:layout_marginStart="32dp"
                                 android:layout_marginEnd="8dp"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/iVincenzo"
+                                app:layout_constraintStart_toEndOf="@+id/i_card1_watching"
                                 app:srcCompat="@drawable/icon_more"
                                 tools:layout_editor_absoluteY="5dp" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -459,22 +444,14 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageView
-                                    android:id="@+id/clickbait"
+                                    android:id="@+id/card2_watching"
                                     android:layout_width="111dp"
                                     android:layout_height="155dp"
                                     android:foreground="@drawable/dark_gradient"
-                                    android:scaleType="fitStart"
-                                     />
-
-                                <ImageView
-                                    android:id="@+id/playClickbait"
-                                    android:layout_width="100dp"
-                                    android:layout_height="70dp"
-                                    android:layout_gravity="center_horizontal|center_vertical"
-                                    app:srcCompat="@drawable/icon_playcircle" />
+                                    android:scaleType="fitStart" />
 
                                 <TextView
-                                    android:id="@+id/durClickbait"
+                                    android:id="@+id/s_e_card2_watching"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="bottom|center_horizontal"
@@ -517,7 +494,7 @@
                             android:paddingBottom="7dp">
 
                             <ImageView
-                                android:id="@+id/iClickbait"
+                                android:id="@+id/i_card2_watching"
                                 android:layout_width="wrap_content"
                                 android:layout_height="22dp"
                                 android:layout_marginStart="16dp"
@@ -526,13 +503,13 @@
                                 tools:layout_editor_absoluteY="4dp" />
 
                             <ImageView
-                                android:id="@+id/mClickbait"
+                                android:id="@+id/opt_card2_watching"
                                 android:layout_width="wrap_content"
                                 android:layout_height="22dp"
                                 android:layout_marginStart="32dp"
                                 android:layout_marginEnd="8dp"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/iVincenzo"
+                                app:layout_constraintStart_toEndOf="@+id/i_card2_watching"
                                 app:srcCompat="@drawable/icon_more"
                                 tools:layout_editor_absoluteY="5dp" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -555,22 +532,14 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageView
-                                    android:id="@+id/backtrack"
+                                    android:id="@+id/card3_watching"
                                     android:layout_width="111dp"
                                     android:layout_height="155dp"
                                     android:foreground="@drawable/dark_gradient"
-                                    android:scaleType="centerInside"
-                                    />
-
-                                <ImageView
-                                    android:id="@+id/playbacktrack"
-                                    android:layout_width="100dp"
-                                    android:layout_height="70dp"
-                                    android:layout_gravity="center_horizontal|center_vertical"
-                                    app:srcCompat="@drawable/icon_playcircle" />
+                                    android:scaleType="centerInside" />
 
                                 <TextView
-                                    android:id="@+id/durbacktrack"
+                                    android:id="@+id/s_e_card3_watching"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="bottom|center_horizontal"
@@ -588,20 +557,20 @@
                             android:layout_height="match_parent">
 
                             <LinearLayout
-                                android:id="@+id/linearLayoutRedBacktrack"
+                                android:id="@+id/linearLayoutRedCard3"
                                 android:layout_width="80dp"
                                 android:layout_height="2dp"
                                 android:background="#C40018"
                                 android:orientation="horizontal"></LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/linearLayoutGrayBacktrack"
+                                android:id="@+id/linearLayoutGraylinearLayoutRedCard3"
                                 android:layout_width="31dp"
                                 android:layout_height="2dp"
                                 android:background="#888888"
                                 android:foregroundGravity="right"
                                 android:orientation="horizontal"
-                                app:layout_constraintStart_toEndOf="@+id/linearLayoutRedBacktrack"></LinearLayout>
+                                app:layout_constraintStart_toEndOf="@+id/linearLayoutRedCard3"></LinearLayout>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -613,7 +582,7 @@
                             android:paddingBottom="7dp">
 
                             <ImageView
-                                android:id="@+id/ibacktrack"
+                                android:id="@+id/i_card3_watching"
                                 android:layout_width="wrap_content"
                                 android:layout_height="22dp"
                                 android:layout_marginStart="16dp"
@@ -622,13 +591,13 @@
                                 tools:layout_editor_absoluteY="5dp" />
 
                             <ImageView
-                                android:id="@+id/mbacktrack"
+                                android:id="@+id/opt_card3_watching"
                                 android:layout_width="wrap_content"
                                 android:layout_height="22dp"
                                 android:layout_marginStart="32dp"
                                 android:layout_marginEnd="8dp"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/iVincenzo"
+                                app:layout_constraintStart_toEndOf="@+id/i_card3_watching"
                                 app:srcCompat="@drawable/icon_more"
                                 tools:layout_editor_absoluteY="5dp" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -651,22 +620,14 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageView
-                                    android:id="@+id/kate_grad"
+                                    android:id="@+id/card4_watching"
                                     android:layout_width="111dp"
                                     android:layout_height="155dp"
                                     android:foreground="@drawable/dark_gradient"
-                                    android:scaleType="centerInside"
-                                     />
-
-                                <ImageView
-                                    android:id="@+id/kate"
-                                    android:layout_width="100dp"
-                                    android:layout_height="70dp"
-                                    android:layout_gravity="center_horizontal|center_vertical"
-                                    app:srcCompat="@drawable/icon_playcircle" />
+                                    android:scaleType="centerInside" />
 
                                 <TextView
-                                    android:id="@+id/durkate"
+                                    android:id="@+id/s_e_card4_watching"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="bottom|center_horizontal"
@@ -684,20 +645,20 @@
                             android:layout_height="match_parent">
 
                             <LinearLayout
-                                android:id="@+id/linearLayoutRedkate"
+                                android:id="@+id/linearLayoutRedCard4"
                                 android:layout_width="20dp"
                                 android:layout_height="2dp"
                                 android:background="#C40018"
                                 android:orientation="horizontal"></LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/linearLayoutGraykate"
+                                android:id="@+id/linearLayoutGrayCard4"
                                 android:layout_width="90dp"
                                 android:layout_height="2dp"
                                 android:background="#888888"
                                 android:foregroundGravity="right"
                                 android:orientation="horizontal"
-                                app:layout_constraintStart_toEndOf="@+id/linearLayoutRedkate"></LinearLayout>
+                                app:layout_constraintStart_toEndOf="@+id/linearLayoutRedCard4"></LinearLayout>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -709,7 +670,7 @@
                             android:paddingBottom="7dp">
 
                             <ImageView
-                                android:id="@+id/ikate"
+                                android:id="@+id/i_card4_watching"
                                 android:layout_width="wrap_content"
                                 android:layout_height="22dp"
                                 android:layout_marginStart="16dp"
@@ -718,13 +679,13 @@
                                 tools:layout_editor_absoluteY="5dp" />
 
                             <ImageView
-                                android:id="@+id/mkate"
+                                android:id="@+id/opt_card4_watching"
                                 android:layout_width="wrap_content"
                                 android:layout_height="22dp"
                                 android:layout_marginStart="32dp"
                                 android:layout_marginEnd="8dp"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/iVincenzo"
+                                app:layout_constraintStart_toEndOf="@+id/i_card4_watching"
                                 app:srcCompat="@drawable/icon_more"
                                 tools:layout_editor_absoluteY="5dp" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -746,22 +707,14 @@
                                 android:layout_height="wrap_content">
 
                                 <ImageView
-                                    android:id="@+id/noah_grad"
+                                    android:id="@+id/card5_watching"
                                     android:layout_width="111dp"
                                     android:layout_height="155dp"
                                     android:foreground="@drawable/dark_gradient"
-                                    android:scaleType="centerInside"
-                                     />
-
-                                <ImageView
-                                    android:id="@+id/noah"
-                                    android:layout_width="100dp"
-                                    android:layout_height="70dp"
-                                    android:layout_gravity="center_horizontal|center_vertical"
-                                    app:srcCompat="@drawable/icon_playcircle" />
+                                    android:scaleType="centerInside" />
 
                                 <TextView
-                                    android:id="@+id/durnoah"
+                                    android:id="@+id/s_e_card5_watching"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="bottom|center_horizontal"
@@ -779,20 +732,20 @@
                             android:layout_height="match_parent">
 
                             <LinearLayout
-                                android:id="@+id/linearLayoutRednoah"
+                                android:id="@+id/linearLayoutRedCard5"
                                 android:layout_width="90dp"
                                 android:layout_height="2dp"
                                 android:background="#C40018"
                                 android:orientation="horizontal"></LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/linearLayoutGraynoah"
+                                android:id="@+id/linearLayoutGrayCard5"
                                 android:layout_width="20dp"
                                 android:layout_height="2dp"
                                 android:background="#888888"
                                 android:foregroundGravity="right"
                                 android:orientation="horizontal"
-                                app:layout_constraintStart_toEndOf="@+id/linearLayoutRednoah"></LinearLayout>
+                                app:layout_constraintStart_toEndOf="@+id/linearLayoutRedCard5"></LinearLayout>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -804,7 +757,7 @@
                             android:paddingBottom="7dp">
 
                             <ImageView
-                                android:id="@+id/inoah"
+                                android:id="@+id/i_card5_watching"
                                 android:layout_width="wrap_content"
                                 android:layout_height="22dp"
                                 android:layout_marginStart="16dp"
@@ -813,13 +766,13 @@
                                 tools:layout_editor_absoluteY="5dp" />
 
                             <ImageView
-                                android:id="@+id/mnoah"
+                                android:id="@+id/opt_card5_watching"
                                 android:layout_width="wrap_content"
                                 android:layout_height="22dp"
                                 android:layout_marginStart="32dp"
                                 android:layout_marginEnd="8dp"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/iVincenzo"
+                                app:layout_constraintStart_toEndOf="@+id/i_card5_watching"
                                 app:srcCompat="@drawable/icon_more"
                                 tools:layout_editor_absoluteY="5dp" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -865,10 +818,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/peakyBlinders"
+                                android:id="@+id/card1_recommended"
                                 android:layout_width="160dp"
-                                android:layout_height="320dp"
-                                />
+                                android:layout_height="320dp" />
 
                         </androidx.cardview.widget.CardView>
 
@@ -886,10 +838,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/uncannyCounter"
+                                android:id="@+id/card2_recommended"
                                 android:layout_width="160dp"
-                                android:layout_height="320dp"
-                                />
+                                android:layout_height="320dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -905,10 +856,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/kingdom"
+                                android:id="@+id/card3_recommended"
                                 android:layout_width="160dp"
-                                android:layout_height="320dp"
-                                 />
+                                android:layout_height="320dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -924,10 +874,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/girlfromnowhere"
+                                android:id="@+id/card4_recommended"
                                 android:layout_width="160dp"
-                                android:layout_height="320dp"
-                                 />
+                                android:layout_height="320dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -943,10 +892,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/narcos"
+                                android:id="@+id/card5_recommended"
                                 android:layout_width="160dp"
-                                android:layout_height="320dp"
-                                 />
+                                android:layout_height="320dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -962,10 +910,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/vagabond"
+                                android:id="@+id/card6_recommended"
                                 android:layout_width="160dp"
-                                android:layout_height="320dp"
-                                 />
+                                android:layout_height="320dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -981,10 +928,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/alive"
+                                android:id="@+id/card7_recommended"
                                 android:layout_width="160dp"
-                                android:layout_height="320dp"
-                                 />
+                                android:layout_height="320dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -1000,10 +946,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/rurouni"
+                                android:id="@+id/card8_recommended"
                                 android:layout_width="160dp"
-                                android:layout_height="320dp"
-                                 />
+                                android:layout_height="320dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -1019,10 +964,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/theking"
+                                android:id="@+id/card9_recommended"
                                 android:layout_width="160dp"
-                                android:layout_height="320dp"
-                                 />
+                                android:layout_height="320dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -1038,10 +982,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/prison"
+                                android:id="@+id/card10_recommended"
                                 android:layout_width="160dp"
-                                android:layout_height="320dp"
-                                 />
+                                android:layout_height="320dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -1057,10 +1000,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/strangerthings"
+                                android:id="@+id/card11_recommended"
                                 android:layout_width="160dp"
-                                android:layout_height="320dp"
-                                />
+                                android:layout_height="320dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -1076,10 +1018,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/thewitcher"
+                                android:id="@+id/card12_recommended"
                                 android:layout_width="160dp"
-                                android:layout_height="320dp"
-                                />
+                                android:layout_height="320dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -1095,10 +1036,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/sweetgirl"
+                                android:id="@+id/card13_recommended"
                                 android:layout_width="160dp"
-                                android:layout_height="320dp"
-                                />
+                                android:layout_height="320dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -1141,10 +1081,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/transporter"
+                                android:id="@+id/card1_new"
                                 android:layout_width="111dp"
-                                android:layout_height="155dp"
-                                 />
+                                android:layout_height="155dp" />
 
                         </androidx.cardview.widget.CardView>
 
@@ -1162,10 +1101,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/dragon"
+                                android:id="@+id/card2_new"
                                 android:layout_width="111dp"
-                                android:layout_height="155dp"
-                                 />
+                                android:layout_height="155dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -1181,10 +1119,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/parabellum"
+                                android:id="@+id/card3_new"
                                 android:layout_width="111dp"
-                                android:layout_height="155dp"
-                                 />
+                                android:layout_height="155dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -1200,10 +1137,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/dora"
+                                android:id="@+id/card4_new"
                                 android:layout_width="111dp"
-                                android:layout_height="155dp"
-                                />
+                                android:layout_height="155dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -1219,10 +1155,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/patriotsday"
+                                android:id="@+id/card5_new"
                                 android:layout_width="111dp"
-                                android:layout_height="155dp"
-                                 />
+                                android:layout_height="155dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -1238,10 +1173,9 @@
                             app:cardCornerRadius="8dp">
 
                             <ImageView
-                                android:id="@+id/hospital"
+                                android:id="@+id/card6_new"
                                 android:layout_width="111dp"
-                                android:layout_height="155dp"
-                                 />
+                                android:layout_height="155dp" />
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
@@ -1258,7 +1192,7 @@
         android:layout_height="105dp"
         android:layout_marginTop="-36dp"
         android:alpha="1"
-        android:background="#AA000000"
+        android:background="@color/thirdColor"
         app:layout_constraintTop_toTopOf="parent">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -1273,10 +1207,15 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             android:orientation="horizontal"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            tools:layout_editor_absoluteY="120dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5">
 
             <TextView
                 android:id="@+id/txt_serie_tv"
@@ -1286,7 +1225,7 @@
                 android:gravity="center_horizontal"
                 android:text="@string/txt_serie_tv"
                 android:textColor="#EBFFFFFF"
-                android:textSize="16sp" />
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/txt_film"
@@ -1323,7 +1262,6 @@
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_list">My list</string>
+    <string name="title_list">M</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_search">Search</string>
+    <string name="btn_accedi">Login</string>
+    <string name="forgotpassword">Forgot password?</string>
+    <string name="login_not_ok">login is not ok</string>
+    <string name="error_email">E-mail is not valid. Please check your e-mail</string>
+    <string name="error_password">Password is not correct.</string>
+    <string name="nessun_account">Do not have an account?</string>
+    <string name="registrati_button">Register</string>
+    <string name="crea_account">Create an account</string>
+    <string name="txt_there_is_account">" Do you already have an account?"</string>
+    <string name="error_user_collision_message">The email address is already in use by another account</string>
+    <string name="check_login_data_message">Check the data you inserted</string>
+    <string name="error_login_password_message">The password is invalid</string>
+    <string name="error_login_user_message">There is no user record corresponding</string>
+    <string name="error_no_google_account_found_message">No Google accounts have been found</string>
+    <string name="txt_reimp_password">Reset Password</string>
+    <string name="tempo_visione">" Watch time"</string>
+    <string name="Impostazioni">Settings</string>
+    <string name="account_impostazioni">Account settings</string>
+    <string name="giorni">Days</string>
+    <string name="mesi">Months</string>
+    <string name="ore">Hours</string>
+    <string name="consenti_notifiche">Allow notifications</string>
+    <string name="under_consenti_notifiche">Customize in Settings --> Notifications</string>
+    <string name="preferenze_cookie">Cookie preferences</string>
+    <string name="condizioni_utilizzo">Terms of use</string>
+    <string name="info_legali">Legal informations</string>
+    <string name="cambio_nome_utente">Change user name</string>
+    <string name="cambio_email">Change email</string>
+    <string name="cambio_password">Change password</string>
+    <string name="impostazioni_account">Account settings</string>
+    <string name="txt_reimp_email">Reset Email</string>
+    <string name="txt_change_name">Change user name</string>
+    <string name="txt_serie_tv">Tv series</string>
+    <string name="txt_categorie">Categories</string>
+    <string name="txt_visto">Already seen</string>
+    <string name="txt_la_mia_lista">My list</string>
+    <string name="txt_anime_del_momento">Popular Anime</string>
+    <string name="txt_continua_guardare">Keep watching</string>
+    <string name="txt_consigliati">Recommended</string>
+    <string name="txt_novita">New Anime</string>
+</resources>

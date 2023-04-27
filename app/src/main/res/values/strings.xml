@@ -1,32 +1,27 @@
 <resources>
-    <string name="app_name">AnimeUniverse</string>
+    <string name="app_name" translatable="false">AnimeUniverse</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="title_list">La mia lista</string>
     <string name="title_notifications">Notifiche</string>
     <string name="title_search">Cerca</string>
-    <string name="title_account">Account</string>
+    <string name="title_account" translatable="false">Account</string>
     <string name="btn_accedi">Accedi</string>
-    <string name="login">Login</string>
-    <string name="email">E-mail</string>
-    <string name="password">Password</string>
-    <string name="forgotpassword">Forgot password?</string>
-    <string name="txt_or">OR</string>
-    <string name="google_login">Login with Google</string>
-    <string name="login_not_ok">login is not ok</string>
-    <string name="error_email">E-mail is not valid. Please check your e-mail</string>
-    <string name="error_password">Password is not correct.</string>
+    <string name="login" translatable="false">Login</string>
+    <string name="email" translatable="false">E-mail</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="txt_or" translatable="false">OR</string>
+    <string name="google_login" translatable="false">Login with Google</string>
+    <string name="login_not_ok">login non è corretto</string>
+    <string name="error_email">L\'E-mail non è valida. Controlla la tua e-mail.</string>
+    <string name="error_password">Password non è corretta.</string>
     <string name="nessun_account">Non hai un account?</string>
     <string name="registrati_button">Registrati</string>
     <string name="crea_account">Crea un account</string>
     <string name="txt_there_is_account">Hai già un account?</string>
-    <string name="error_user_collision_message">The email address is already in use by another account</string>
-    <string name="unexpected_error">Unexpected error</string>
-    <string name="check_login_data_message">Check the data you inserted</string>
-    <string name="error_login_password_message">The password is invalid</string>
-    <string name="error_login_user_message">There is no user record corresponding</string>
-    <string name="error_no_google_account_found_message">No Google accounts have been found</string>
-    <string name="logout">Logout</string>
+    <string name="error_user_collision_message">L\'indirizzo email è già utilizzato in un altro account.</string>
+    <string name="unexpected_error" translatable="false">Unexpected error</string>
+    <string name="logout" translatable="false">Logout</string>
     <string name="txt_reimp_password">Reimposta Password</string>
     <string name="tempo_visione">Tempo visione</string>
     <string name="Impostazioni">Impostazioni</string>
@@ -36,26 +31,26 @@
     <string name="ore">Ore</string>
     <string name="consenti_notifiche">Consenti notifiche</string>
     <string name="under_consenti_notifiche">Personalizza in Impostazioni --> Notifiche</string>
-    <string name="privacy">Privacy</string>
+    <string name="privacy" translatable="false">Privacy</string>
     <string name="preferenze_cookie">Preferenze per i cookie</string>
     <string name="condizioni_utilizzo">Condizioni di utilizzo</string>
     <string name="info_legali">Informazioni legali</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_settings" translatable="false">SettingsActivity</string>
 
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="messages_header" translatable="false">Messages</string>
+    <string name="sync_header" translatable="false">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <string name="signature_title" translatable="false">Your signature</string>
+    <string name="reply_title" translatable="false">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    <string name="sync_title" translatable="false">Sync email periodically</string>
+    <string name="attachment_title" translatable="false">Download incoming attachments</string>
+    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
     </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
     <string name="cambio_nome_utente">Cambia nome utente</string>
     <string name="cambio_email">Cambia email</string>
     <string name="cambio_password">Cambia password</string>
@@ -63,14 +58,19 @@
     <string name="txt_reimp_email">Reimposta Email</string>
     <string name="txt_change_name">Cambia nome utente</string>
     <string name="txt_serie_tv">Serie tv</string>
-    <string name="txt_film">Film</string>
+    <string name="txt_film" translatable="false">Film</string>
     <string name="txt_categorie">Categorie</string>
     <string name="txt_visto">Visto</string>
     <string name="txt_la_mia_lista">La mia lista</string>
-    <string name="txt_info">Info</string>
+    <string name="txt_info" translatable="false">Info</string>
     <string name="txt_anime_del_momento">Anime del momento</string>
     <string name="txt_continua_guardare">Continua a guardare</string>
     <string name="txt_consigliati">Consigliati</string>
     <string name="txt_novita">Novita</string>
+    <string name="check_login_data_message">Controlla i dati inseriti</string>
+    <string name="error_login_password_message">La password non è valida</string>
+    <string name="error_login_user_message">Non esiste un utente corrispondente</string>
+    <string name="error_no_google_account_found_message">Nessun  account Google è stato trovato</string>
+    <string name="forgotpassword">Password dimenticata?</string>
 
 </resources>

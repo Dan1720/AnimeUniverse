@@ -95,7 +95,7 @@ public class SearchFragment extends Fragment {
         recyclerViewSearch.setLayoutManager(linearLayoutManager);
         List<Anime> animeList = new ArrayList<>();
         for(int i = 0; i < 100; i++){
-            animeList.add(new Anime("Title" + i, "Author" + i, null));
+            //animeList.add(new Anime("Title" + i, "Author" + i, null));
         }
 
         SearchListAdapter adapter = new SearchListAdapter(animeList, new SearchListAdapter.OnItemClickListener() {
