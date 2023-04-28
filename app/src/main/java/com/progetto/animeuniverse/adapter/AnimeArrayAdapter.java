@@ -8,7 +8,11 @@ import androidx.annotation.NonNull;
 import com.progetto.animeuniverse.Anime;
 
 public class AnimeArrayAdapter extends ArrayAdapter<Anime> {
-    public AnimeArrayAdapter(@NonNull Context context, int resource) {
-        super(context, resource);
+    private final int layout;
+    private final Anime[] animeArray;
+    public AnimeArrayAdapter(@NonNull Context context, int layout,@NonNull Anime [] animeArray ) {
+        super(context, layout, animeArray);
+        this.layout = layout;
+        this.animeArray = animeArray;
     }
 }

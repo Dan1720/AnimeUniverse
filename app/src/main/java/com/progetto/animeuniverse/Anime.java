@@ -5,9 +5,11 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
-
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+@Entity
 public class Anime  implements Parcelable {
-
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String title;
     private String author;
@@ -26,12 +28,18 @@ public class Anime  implements Parcelable {
     private AnimeStudios studios;
     private AnimeGenres genres;
     private AnimeStreaming streaming;
+    @ColumnInfo(name = "is_favorite")
+    private boolean isFavorite;
+    @ColumnInfo(name = "is_synchronized")
+    private boolean isSynchronized;
+
+    public Anime(){};
 
     public Anime(int id, String title, String author, String url, AnimeImages images,
                  AnimeTrailer trailer, boolean approved, String type, String source,
                  int numEpisodes, String status, String duration,
                  String rating, int year, AnimeProducers producers, AnimeStudios studios,
-                 AnimeGenres genres, AnimeStreaming streaming) {
+                 AnimeGenres genres, AnimeStreaming streaming, boolean isFavorite, boolean isSynchronized) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -50,9 +58,45 @@ public class Anime  implements Parcelable {
         this.studios = studios;
         this.genres = genres;
         this.streaming = streaming;
+        this.isFavorite = isFavorite;
+        this.isSynchronized = isSynchronized;
     }
 
 
+    protected Anime(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        author = in.readString();
+        url = in.readString();
+        images = in.readParcelable(AnimeImages.class.getClassLoader());
+        trailer = in.readParcelable(AnimeTrailer.class.getClassLoader());
+        approved = in.readByte() != 0;
+        type = in.readString();
+        source = in.readString();
+        numEpisodes = in.readInt();
+        status = in.readString();
+        duration = in.readString();
+        rating = in.readString();
+        year = in.readInt();
+        producers = in.readParcelable(AnimeProducers.class.getClassLoader());
+        studios = in.readParcelable(AnimeStudios.class.getClassLoader());
+        genres = in.readParcelable(AnimeGenres.class.getClassLoader());
+        streaming = in.readParcelable(AnimeStreaming.class.getClassLoader());
+        isFavorite = in.readByte() != 0;
+        isSynchronized = in.readByte() != 0;
+    }
+
+    public static final Creator<Anime> CREATOR = new Creator<Anime>() {
+        @Override
+        public Anime createFromParcel(Parcel in) {
+            return new Anime(in);
+        }
+
+        @Override
+        public Anime[] newArray(int size) {
+            return new Anime[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -198,38 +242,22 @@ public class Anime  implements Parcelable {
         this.streaming = streaming;
     }
 
-    protected Anime(Parcel in) {
-        id = in.readInt();
-        title = in.readString();
-        author = in.readString();
-        url = in.readString();
-        images = in.readParcelable(AnimeImages.class.getClassLoader());
-        trailer = in.readParcelable(AnimeTrailer.class.getClassLoader());
-        approved = in.readByte() != 0;
-        type = in.readString();
-        source = in.readString();
-        numEpisodes = in.readInt();
-        status = in.readString();
-        duration = in.readString();
-        rating = in.readString();
-        year = in.readInt();
-        producers = in.readParcelable(AnimeProducers.class.getClassLoader());
-        studios = in.readParcelable(AnimeStudios.class.getClassLoader());
-        genres = in.readParcelable(AnimeGenres.class.getClassLoader());
-        streaming = in.readParcelable(AnimeStreaming.class.getClassLoader());
+    public boolean isFavorite() {
+        return isFavorite;
     }
 
-    public static final Creator<Anime> CREATOR = new Creator<Anime>() {
-        @Override
-        public Anime createFromParcel(Parcel in) {
-            return new Anime(in);
-        }
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
+    }
 
-        @Override
-        public Anime[] newArray(int size) {
-            return new Anime[size];
-        }
-    };
+    public boolean isSynchronized() {
+        return isSynchronized;
+    }
+
+    public void setSynchronized(boolean aSynchronized) {
+        isSynchronized = aSynchronized;
+    }
+
 
     @Override
     public int describeContents() {
@@ -256,5 +284,7 @@ public class Anime  implements Parcelable {
         dest.writeParcelable(studios, flags);
         dest.writeParcelable(genres, flags);
         dest.writeParcelable(streaming, flags);
+        dest.writeByte((byte) (isFavorite ? 1 : 0));
+        dest.writeByte((byte) (isSynchronized ? 1 : 0));
     }
 }
