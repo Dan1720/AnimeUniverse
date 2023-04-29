@@ -2,10 +2,10 @@ package com.progetto.animeuniverse.repository.user;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.progetto.animeuniverse.Result;
-import com.progetto.animeuniverse.User;
-import com.progetto.animeuniverse.data.source.BaseUserAuthenticationRemoteDataSource;
-import com.progetto.animeuniverse.data.source.BaseUserDataRemoteDataSource;
+import com.progetto.animeuniverse.model.Result;
+import com.progetto.animeuniverse.model.User;
+import com.progetto.animeuniverse.data.source.users.BaseUserAuthenticationRemoteDataSource;
+import com.progetto.animeuniverse.data.source.users.BaseUserDataRemoteDataSource;
 
 public class UserRepository implements IUserRepository, UserResponseCallback{
     private final MutableLiveData<Result> userMutableLiveData;

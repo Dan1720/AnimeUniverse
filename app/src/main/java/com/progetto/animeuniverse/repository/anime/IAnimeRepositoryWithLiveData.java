@@ -2,8 +2,8 @@ package com.progetto.animeuniverse.repository.anime;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.progetto.animeuniverse.Anime;
-import com.progetto.animeuniverse.Result;
+import com.progetto.animeuniverse.model.Anime;
+import com.progetto.animeuniverse.model.Result;
 
 public interface IAnimeRepositoryWithLiveData {
     MutableLiveData<Result> fetchAnime(String country, int page, long lastUpdate);

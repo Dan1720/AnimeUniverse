@@ -26,6 +26,7 @@ public class Constants {
 
     public static final String FIREBASE_REALTIME_DATABASE = "https://animeuniverse-f9823-default-rtdb.europe-west1.firebasedatabase.app/";
     public static final String FIREBASE_USERS_COLLECTION = "users";
+    public static final String FIREBASE_FAVORITE_ANIME_COLLECTION = "favorite_anime";
 
     public static final int SELECT_PICTURE = 200;
 
@@ -43,6 +44,7 @@ public class Constants {
     public static final String KEY_COND_UTILIZZO = "condizioni_utilizzo";
 
     public static final String ANIME_API_BASE_URL = "https://api.jikan.moe/v4/";
+    public static final String ANIME_API_TEST_JSON_FILE = "animeapi-test.json";
     public static final String TOP_HEADLINES_ENDPOINT = "top-headlines";
     public static final String TOP_HEADLINES_COUNTRY_PARAMETER = "country";
     public static final String TOP_HEADLINES_PAGE_SIZE_PARAMETER = "pageSize";
@@ -50,4 +52,8 @@ public class Constants {
     public static final int TOP_HEADLINES_PAGE_SIZE_VALUE = 10;
     public static final String LAST_UPDATE = "last_update";
     public static final int FRESH_TIMEOUT = 60*60*1000;
+
+    public static final String SHARED_PREFERENCES_FILE_NAME = "com.progetto.animeuniverse.preferences";
+    public static final String SHARED_PREFERENCES_FIRST_LOADING = "first_loading";
+
 }

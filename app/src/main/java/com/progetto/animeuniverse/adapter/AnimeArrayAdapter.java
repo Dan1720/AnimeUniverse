@@ -5,7 +5,7 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 
-import com.progetto.animeuniverse.Anime;
+import com.progetto.animeuniverse.model.Anime;
 
 public class AnimeArrayAdapter extends ArrayAdapter<Anime> {
     private final int layout;

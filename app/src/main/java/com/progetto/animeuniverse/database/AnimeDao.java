@@ -7,7 +7,7 @@ import androidx.room.Query;
 import androidx.room.Dao;
 import androidx.room.Update;
 
-import com.progetto.animeuniverse.Anime;
+import com.progetto.animeuniverse.model.Anime;
 
 import java.util.List;
 @Dao

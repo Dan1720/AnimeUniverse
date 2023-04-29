@@ -7,10 +7,7 @@ import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_ENDPOINT;
 import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_PAGE_PARAMETER;
 import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_PAGE_SIZE_PARAMETER;
 
-import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeApiResponse;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

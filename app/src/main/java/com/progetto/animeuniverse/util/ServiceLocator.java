@@ -2,14 +2,12 @@ package com.progetto.animeuniverse.util;
 
 import android.app.Application;
 
-import com.google.firebase.database.DatabaseReference;
-import com.progetto.animeuniverse.User;
-import com.progetto.animeuniverse.data.source.BaseUserAuthenticationRemoteDataSource;
-import com.progetto.animeuniverse.data.source.BaseUserDataRemoteDataSource;
-import com.progetto.animeuniverse.data.source.UserAuthenticationRemoteDataSource;
-import com.progetto.animeuniverse.data.source.UserDataRemoteDataSource;
-import com.progetto.animeuniverse.repository.user.IUserRepository;
-import com.progetto.animeuniverse.repository.user.UserRepository;
+import com.progetto.animeuniverse.data.source.users.BaseUserAuthenticationRemoteDataSource;
+import com.progetto.animeuniverse.data.source.users.BaseUserDataRemoteDataSource;
+import com.progetto.animeuniverse.data.source.users.UserAuthenticationRemoteDataSource;
+import com.progetto.animeuniverse.data.source.users.UserDataRemoteDataSource;
+import com.progetto.animeuniverse.database.AnimeRoomDatabase;
+import com.progetto.animeuniverse.repository.anime.IAnimeRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.user.IUserRepository;
 import com.progetto.animeuniverse.repository.user.UserRepository;
 import com.progetto.animeuniverse.service.AnimeApiService;
@@ -52,4 +50,12 @@ public class ServiceLocator {
                 addConverterFactory(GsonConverterFactory.create()).build();
         return retrofit.create(AnimeApiService.class);
     }
+
+    public AnimeRoomDatabase getAnimeDao(Application application) {
+        return AnimeRoomDatabase.getDatabase(application);
+    }
+
+    /*public IAnimeRepositoryWithLiveData getAnimeRepository(Application application, boolean debugMode){
+
+    }*/
 }

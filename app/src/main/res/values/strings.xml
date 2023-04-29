@@ -73,6 +73,8 @@
     <string name="error_no_google_account_found_message">Nessun  account Google è stato trovato</string>
     <string name="forgotpassword">Password dimenticata?</string>
 
-    <string name="error_retrieving_anime">Error in retrieving the anime</string>
+    <string name="error_retrieving_anime" translatable="false">Error in retrieving the anime</string>
+    <string name="data_read_from_local_database">Data letti dal database locale</string>
+    <string name="anime_api_key" />
 
 </resources>

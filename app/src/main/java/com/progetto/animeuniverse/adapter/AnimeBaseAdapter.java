@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.progetto.animeuniverse.Anime;
+import com.progetto.animeuniverse.model.Anime;
 
 import java.util.List;
 

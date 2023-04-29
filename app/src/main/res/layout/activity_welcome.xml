@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/thirdColor"
-    tools:context=".WelcomeActivity">
+    tools:context=".ui.welcome.WelcomeActivity">
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/top_appbar"
         android:layout_width="match_parent"

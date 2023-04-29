@@ -1,6 +1,6 @@
 package com.progetto.animeuniverse.repository.user;
 
-import com.progetto.animeuniverse.User;
+import com.progetto.animeuniverse.model.User;
 //interfaccia che permette di notificare dal repository
 // al fragment se l'operazione è andata a buon fine o no
 // o se c'è un cambiamento di stato

@@ -9,9 +9,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.progetto.animeuniverse.Anime;
+import com.progetto.animeuniverse.model.Anime;
 
-import java.lang.reflect.Executable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -21,7 +20,7 @@ public abstract class AnimeRoomDatabase extends RoomDatabase {
 
     private static volatile AnimeRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = Runtime.getRuntime().availableProcessors();
-    private static final ExecutorService databaseWriteExecutor =
+    public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     public static AnimeRoomDatabase getDatabase(final Context context){

@@ -5,15 +5,10 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.progetto.animeuniverse.AnimeGenres;
-import com.progetto.animeuniverse.AnimeImages;
-import com.progetto.animeuniverse.AnimeProducers;
-import com.progetto.animeuniverse.AnimeStreaming;
-import com.progetto.animeuniverse.AnimeStudios;
-import com.progetto.animeuniverse.AnimeTrailer;
 
 @Entity
 public class Anime  implements Parcelable {
@@ -22,7 +17,9 @@ public class Anime  implements Parcelable {
     private String title;
     private String author;
     private String url;
+    @Embedded
     private AnimeImages images;
+    @Embedded
     private AnimeTrailer trailer;
     private boolean approved;
     private String type;
@@ -32,15 +29,18 @@ public class Anime  implements Parcelable {
     private String duration;
     private String rating;
     private int year;
+    @Embedded
     private AnimeProducers producers;
+    @Embedded
     private AnimeStudios studios;
+    @Embedded
     private AnimeGenres genres;
+    @Embedded
     private AnimeStreaming streaming;
     @ColumnInfo(name = "is_favorite")
     private boolean isFavorite;
     @ColumnInfo(name = "is_synchronized")
     private boolean isSynchronized;
-
 
     public Anime(){};
 

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/sfondo"
-        android:name="com.progetto.animeuniverse.Sfondo"
+        android:name="com.progetto.animeuniverse.ui.welcome.Sfondo"
         android:label="Sfondo" >
         <action
             android:id="@+id/action_sfondo_to_loginFragment"
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.progetto.animeuniverse.LoginFragment"
+        android:name="com.progetto.animeuniverse.ui.welcome.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.progetto.animeuniverse.RegistrationFragment"
+        android:name="com.progetto.animeuniverse.ui.welcome.RegistrationFragment"
         android:label="RegistrationFragment" >
         <action
             android:id="@+id/action_registrationFragment_to_welcomeActivity"
@@ -41,12 +41,12 @@
     </fragment>
     <activity
         android:id="@+id/welcomeActivity"
-        android:name="com.progetto.animeuniverse.WelcomeActivity"
+        android:name="com.progetto.animeuniverse.ui.welcome.WelcomeActivity"
         android:label="activity_welcome"
         tools:layout="@layout/activity_welcome" />
     <fragment
         android:id="@+id/forgotPasswordFragment"
-        android:name="com.progetto.animeuniverse.ForgotPasswordFragment"
+        android:name="com.progetto.animeuniverse.ui.welcome.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
         tools:layout="@layout/fragment_forgot_password" >
         <action

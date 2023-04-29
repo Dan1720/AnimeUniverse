@@ -1,6 +1,6 @@
 package com.progetto.animeuniverse.repository.anime;
 
-import com.progetto.animeuniverse.Anime;
+import com.progetto.animeuniverse.model.Anime;
 
 public interface IAnimeRepository {
     void fetchAnime(String country, int page, long lastUpdate);

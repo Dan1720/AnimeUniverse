@@ -1,5 +1,6 @@
 package com.progetto.animeuniverse.util;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -22,6 +23,7 @@ import java.security.GeneralSecurityException;
 public class DataEncryptionUtil {
 
     private final Context context;
+
 
     public DataEncryptionUtil(Context context) {
         this.context = context;
@@ -149,5 +151,15 @@ public class DataEncryptionUtil {
 
         byte[] plaintext = byteArrayOutputStream.toByteArray();
         return new String(plaintext, StandardCharsets.UTF_8);
+    }
+
+    public void deleteAll(String encryptedSharedPreferencesFileName, String encryptedFileDataFileName) {
+        SharedPreferences sharedPref = context.getSharedPreferences(encryptedSharedPreferencesFileName,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.clear();
+        editor.apply();
+
+        new File(context.getFilesDir(), encryptedFileDataFileName).delete();
     }
 }

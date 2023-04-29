@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.progetto.animeuniverse.ListFragment"
+        android:name="com.progetto.animeuniverse.ui.preferences.ListFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_list" />
     <fragment
         android:id="@+id/notificationsFragment"
-        android:name="com.progetto.animeuniverse.NotificationsFragment"
+        android:name="com.progetto.animeuniverse.ui.main.NotificationsFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.progetto.animeuniverse.HomeFragment"
+        android:name="com.progetto.animeuniverse.ui.main.HomeFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.progetto.animeuniverse.SearchFragment"
+        android:name="com.progetto.animeuniverse.ui.main.SearchFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.progetto.animeuniverse.AccountFragment"
+        android:name="com.progetto.animeuniverse.ui.main.AccountFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_account" >
         <action
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.progetto.animeuniverse.SettingsFragment"
+        android:name="com.progetto.animeuniverse.ui.main.SettingsFragment"
         android:label="SettingsFragment" >
         <action
             android:id="@+id/action_settingsFragment_to_privacyFragment"
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsAccountFragment"
-        android:name="com.progetto.animeuniverse.SettingsAccountFragment"
+        android:name="com.progetto.animeuniverse.ui.main.SettingsAccountFragment"
         android:label="SettingsAccountFragment" >
         <action
             android:id="@+id/action_settingsAccountFragment_to_forgotPasswordFragment"
@@ -67,32 +67,32 @@
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
-        android:name="com.progetto.animeuniverse.ForgotPasswordFragment"
+        android:name="com.progetto.animeuniverse.ui.welcome.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
         tools:layout="@layout/fragment_forgot_password" />
     <fragment
         android:id="@+id/privacyFragment"
-        android:name="com.progetto.animeuniverse.PrivacyFragment"
+        android:name="com.progetto.animeuniverse.ui.main.PrivacyFragment"
         android:label="fragment_privacy"
         tools:layout="@layout/fragment_privacy" />
     <fragment
         android:id="@+id/cookiePreferenceFragment"
-        android:name="com.progetto.animeuniverse.CookiePreferenceFragment"
+        android:name="com.progetto.animeuniverse.ui.main.CookiePreferenceFragment"
         android:label="fragment_cookie_preference"
         tools:layout="@layout/fragment_cookie_preference" />
     <fragment
         android:id="@+id/condizioniUtilizzoFragment"
-        android:name="com.progetto.animeuniverse.CondizioniUtilizzoFragment"
+        android:name="com.progetto.animeuniverse.ui.main.CondizioniUtilizzoFragment"
         android:label="fragment_condizioni_utilizzo"
         tools:layout="@layout/fragment_condizioni_utilizzo" />
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.progetto.animeuniverse.MainActivity"
+        android:name="com.progetto.animeuniverse.ui.welcome.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
     <fragment
         android:id="@+id/changeNameFragment"
-        android:name="com.progetto.animeuniverse.ChangeNameFragment"
+        android:name="com.progetto.animeuniverse.ui.main.ChangeNameFragment"
         android:label="fragment_change_name"
         tools:layout="@layout/fragment_change_name" >
         <action
