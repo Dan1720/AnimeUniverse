@@ -47,4 +47,10 @@ public class Constants {
     public static final String KEY_CONDIZIONI_UTILIZZO = "condizioni_utilizzo";
     public static final String KEY_PREF_COOKIE = "preferenze_cookie";
     public static final String KEY_COND_UTILIZZO = "condizioni_utilizzo";
+
+    public static final String ANIME_API_ENDPOINTS = "top/anime";
+    public static final String ANIME_API_SEARCH = "q";
+    //Refresh rate
+    public static final String LAST_UPDATE = "last_update";
+    public static final int FRESH_TIMEOUT = 60*60*1000;
 }
