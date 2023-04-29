@@ -1,4 +1,5 @@
 package com.progetto.animeuniverse;
+import android.app.Application;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,15 +8,25 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.progetto.animeuniverse.model.Anime;
+
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.AnimeViewHolder> {
 
-    public interface OnItemClickListener{
+
+
+
+
+
+   public interface OnItemClickListener{
         void onAnimeClick(Anime anime);
     }
     private List<Anime> animeList;
+
     private OnItemClickListener onItemSelectedListener;
     public SearchListAdapter(List<Anime> animeList, OnItemClickListener onItemSelectedListener){
         this.animeList = animeList;
@@ -47,16 +58,14 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.An
 
     public class AnimeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private final TextView textViewTitle;
-        private final TextView textViewAuthor;
         public AnimeViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.textview_title);
-            textViewAuthor = itemView.findViewById(R.id.textview_author);
             itemView.setOnClickListener(this);
         }
         public void bind(Anime anime){
             textViewTitle.setText(anime.getTitle());
-            textViewAuthor.setText(anime.getAuthor());
+
         }
 
         @Override
@@ -64,4 +73,5 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.An
             onItemSelectedListener.onAnimeClick(animeList.get(getAdapterPosition()));
         }
     }
+
 }
