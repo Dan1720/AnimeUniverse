@@ -40,7 +40,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.progetto.animeuniverse.repository.user.IUserRepository;
 import com.progetto.animeuniverse.util.DataEncryptionUtil;
-import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
 import org.apache.commons.validator.routines.EmailValidator;
