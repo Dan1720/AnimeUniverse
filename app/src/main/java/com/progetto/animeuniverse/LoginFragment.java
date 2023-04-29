@@ -39,7 +39,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.progetto.animeuniverse.repository.user.IUserRepository;
+import com.progetto.animeuniverse.repository.user.IUserRepository;
 import com.progetto.animeuniverse.util.DataEncryptionUtil;
+import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
 import org.apache.commons.validator.routines.EmailValidator;
@@ -85,14 +87,14 @@ public class LoginFragment extends Fragment {
                 .setPasswordRequestOptions(BeginSignInRequest.PasswordRequestOptions.builder()
                         .setSupported(true)
                         .build())
-                        .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-                                .setSupported(true)
-                                .setServerClientId(getString(R.string.default_web_client_id))
-                                .setFilterByAuthorizedAccounts(false)
-                                .build())
+                .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+                        .setSupported(true)
+                        .setServerClientId(getString(R.string.default_web_client_id))
+                        .setFilterByAuthorizedAccounts(false)
+                        .build())
 
-                        .setAutoSelectEnabled(true)
-                        .build();
+                .setAutoSelectEnabled(true)
+                .build();
 
         startIntentSenderForResult = new ActivityResultContracts.StartIntentSenderForResult();
 
@@ -192,7 +194,7 @@ public class LoginFragment extends Fragment {
                                             Snackbar.LENGTH_SHORT).show();
                                 }
                             });
-                    }else{
+                }else{
                     userViewModel.getUser(email, password, true);
                 }
 
@@ -213,7 +215,7 @@ public class LoginFragment extends Fragment {
                         Log.d(TAG, "onSuccess from oneTapClient.beginSignIn(BeginSignInRequest)");
                         IntentSenderRequest intentSenderRequest =
                                 new IntentSenderRequest.Builder(result.getPendingIntent()).build();
-                                        activityResultLauncher.launch(intentSenderRequest);
+                        activityResultLauncher.launch(intentSenderRequest);
 
                     }
                 })

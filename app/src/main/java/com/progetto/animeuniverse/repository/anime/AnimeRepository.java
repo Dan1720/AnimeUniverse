@@ -12,8 +12,9 @@ public class AnimeRepository implements IAnimeRepository{
     private final Application application;
     private final AnimeApiService animeApiService;
 
-    public AnimeRepository(Application application) {
+    public AnimeRepository(Application application, AnimeApiService animeApiService) {
         this.application = application;
+        this.animeApiService = animeApiService;
     }
 
     @Override

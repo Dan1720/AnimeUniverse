@@ -16,9 +16,9 @@ import retrofit2.http.Header;
 public interface AnimeApiService {
     @GET(TOP_HEADLINES_ENDPOINT)
     Call<AnimeApiResponse> getAnime(
-            @Query(TOP_HEADLINES_COUNTRY_PARAMETER) String country,
-            @Query(TOP_HEADLINES_PAGE_SIZE_PARAMETER) int pageSize,
-            @Query(TOP_HEADLINES_PAGE_PARAMETER) int page,
+           // @Query(TOP_HEADLINES_COUNTRY_PARAMETER) String country,
+            //@Query(TOP_HEADLINES_PAGE_SIZE_PARAMETER) int pageSize,
+           // @Query(TOP_HEADLINES_PAGE_PARAMETER) int page,
             @Header("Authorization") String apiKey);
 
 

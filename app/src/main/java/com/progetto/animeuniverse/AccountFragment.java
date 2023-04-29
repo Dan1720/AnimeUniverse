@@ -41,6 +41,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.progetto.animeuniverse.databinding.FragmentAccountBinding;
 import com.progetto.animeuniverse.repository.user.IUserRepository;
+import com.progetto.animeuniverse.util.ServiceLocator;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
