@@ -1,11 +1,11 @@
-package com.progetto.animeuniverse;
+package com.progetto.animeuniverse.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Anime  implements Parcelable {
     private String title;
-    private String author;
+    /*private String author;
     private String date;
 
 
@@ -77,6 +77,45 @@ public class Anime  implements Parcelable {
             return new Anime[size];
         }
     };
+*/
+    public Anime(String title) {
+        this.title = title ;
+    }
+    public String getTitle(){
+        return title;
+    }
+    public void setTitle(String title){
+        this.title = title;
+    }
 
-
+    @Override
+    public String toString() {
+        return "Anime{" +
+                "title='" + title + '\'' +
+                '}';
+    }
+    @Override
+    public int describeContents(){
+        return 0;
+    }
+    @Override
+    public void writeToParcel(Parcel dest, int flags){
+        dest.writeString(this.title);
+    }
+    public void readFromParcel(Parcel source){
+        this.title = source.readString();
+    }
+    protected Anime (Parcel in){
+        this.title = in.readString();
+    }
+    public static final Parcelable.Creator<Anime> CREATOR = new Parcelable.Creator<Anime>(){
+        @Override
+        public Anime createFromParcel(Parcel source){
+            return new Anime(source);
+        }
+        @Override
+        public Anime[] newArray(int size){
+            return new Anime[size];
+        }
+    };
 }

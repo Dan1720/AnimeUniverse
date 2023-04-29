@@ -15,57 +15,50 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.progetto.animeuniverse.model.Anime;
+import com.progetto.animeuniverse.repository.AnimeRepository;
+import com.progetto.animeuniverse.repository.IAnimeRepository;
+import com.progetto.animeuniverse.repository.ResponseCallback;
+import com.progetto.animeuniverse.util.ServiceLocator;
+import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SearchFragment extends Fragment {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class SearchFragment extends Fragment implements ResponseCallback{
+
+   private IAnimeRepository iAnimeRepository;
+    private List<Anime> animeList;
+    private SearchListAdapter adapter;
+    private ProgressBar progressBar;
+    private SharedPreferencesUtil sharedPreferencesUtil;
+    private SearchListAdapter animeRecyclerViewAdapter;
 
     public SearchFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+
+    public static SearchFragment newInstance() {
+        return new SearchFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        iAnimeRepository =
+                new AnimeRepository(requireActivity().getApplication(), this);
+        sharedPreferencesUtil = new SharedPreferencesUtil(requireActivity().getApplication());
+        animeList = new ArrayList<>();
     }
 
     @Override
@@ -89,14 +82,11 @@ public class SearchFragment extends Fragment {
             }
         });
 
+        progressBar = view.findViewById(R.id.progress_bar);
        
         RecyclerView recyclerViewSearch = view.findViewById(R.id.recyclerView_search_anime); //ha bisogno di un layout manager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
         recyclerViewSearch.setLayoutManager(linearLayoutManager);
-        List<Anime> animeList = new ArrayList<>();
-        for(int i = 0; i < 100; i++){
-            animeList.add(new Anime("Title" + i, "Author" + i, null));
-        }
 
         SearchListAdapter adapter = new SearchListAdapter(animeList, new SearchListAdapter.OnItemClickListener() {
             @Override
@@ -105,8 +95,36 @@ public class SearchFragment extends Fragment {
             }
         });
         recyclerViewSearch.setAdapter(adapter);
+        progressBar.setVisibility(View.VISIBLE);
+        iAnimeRepository.fetchAnime();
 
 
+
+    }
+
+
+    @Override
+    public void onSuccess(List<Anime> animeList) {
+        if(animeList != null){
+            this.animeList.clear();
+            this.animeList.addAll(animeList);
+        }
+        requireActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                animeRecyclerViewAdapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    @Override
+    public void onFailure(String errorMessage) {
+
+    }
+
+    @Override
+    public void onAnimeFavoriteStatusChanged(Anime anime) {
 
     }
 

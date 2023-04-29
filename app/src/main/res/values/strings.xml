@@ -73,4 +73,6 @@
     <string name="txt_consigliati">Consigliati</string>
     <string name="txt_novita">Novita</string>
 
+    <string name="error_retrieving_anime">Error in retrieving the anime</string>
+
 </resources>
