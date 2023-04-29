@@ -14,6 +14,12 @@ public class Constants {
     // Constants for managing errors
     public static final String RETROFIT_ERROR = "retrofit_error";
     public static final String API_KEY_ERROR = "api_key_error";
+    public static final String ANIME_API_BASE_URL = "https://api.jikan.moe/v4/";
+    public static final String TOP_HEADLINES_ENDPOINT = "top-headlines";
+    public static final String TOP_HEADLINES_COUNTRY_PARAMETER = "country";
+    public static final String TOP_HEADLINES_PAGE_SIZE_PARAMETER = "pageSize";
+    public static final String TOP_HEADLINES_PAGE_PARAMETER = "page";
+    public static final int TOP_HEADLINES_PAGE_SIZE_VALUE = 10;
     public static final String UNEXPECTED_ERROR = "unexpected_error";
     public static final String INVALID_USER_ERROR = "invalidUserError";
     public static final String INVALID_CREDENTIALS_ERROR = "invalidCredentials";

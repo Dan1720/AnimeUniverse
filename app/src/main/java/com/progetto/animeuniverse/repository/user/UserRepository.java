@@ -1,4 +1,4 @@
-package com.progetto.animeuniverse.repository;
+package com.progetto.animeuniverse.repository.user;
 
 import androidx.lifecycle.MutableLiveData;
 

@@ -1,4 +1,4 @@
-package com.progetto.animeuniverse.repository;
+package com.progetto.animeuniverse.repository.user;
 
 import com.progetto.animeuniverse.User;
 //interfaccia che permette di notificare dal repository

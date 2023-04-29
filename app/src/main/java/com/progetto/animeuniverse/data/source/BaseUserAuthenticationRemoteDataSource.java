@@ -1,7 +1,7 @@
 package com.progetto.animeuniverse.data.source;
 
 import com.progetto.animeuniverse.User;
-import com.progetto.animeuniverse.repository.UserResponseCallback;
+import com.progetto.animeuniverse.repository.user.UserResponseCallback;
 
 public abstract class BaseUserAuthenticationRemoteDataSource {
     protected UserResponseCallback userResponseCallback;

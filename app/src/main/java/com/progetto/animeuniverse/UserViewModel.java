@@ -3,7 +3,7 @@ package com.progetto.animeuniverse;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.progetto.animeuniverse.repository.IUserRepository;
+import com.progetto.animeuniverse.repository.user.IUserRepository;
 
 public class UserViewModel extends ViewModel {
     private static final String TAG = UserViewModel.class.getSimpleName();

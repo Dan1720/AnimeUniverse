@@ -2,14 +2,12 @@ package com.progetto.animeuniverse.util;
 
 import android.app.Application;
 
-import com.google.firebase.database.DatabaseReference;
-import com.progetto.animeuniverse.User;
 import com.progetto.animeuniverse.data.source.BaseUserAuthenticationRemoteDataSource;
 import com.progetto.animeuniverse.data.source.BaseUserDataRemoteDataSource;
 import com.progetto.animeuniverse.data.source.UserAuthenticationRemoteDataSource;
 import com.progetto.animeuniverse.data.source.UserDataRemoteDataSource;
-import com.progetto.animeuniverse.repository.IUserRepository;
-import com.progetto.animeuniverse.repository.UserRepository;
+import com.progetto.animeuniverse.repository.user.IUserRepository;
+import com.progetto.animeuniverse.repository.user.UserRepository;
 
 public class ServiceLocator {
     private static volatile ServiceLocator INSTANCE = null;

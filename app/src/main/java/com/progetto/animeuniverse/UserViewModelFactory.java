@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.progetto.animeuniverse.repository.IUserRepository;
+import com.progetto.animeuniverse.repository.user.IUserRepository;
 
 public class UserViewModelFactory implements ViewModelProvider.Factory {
 
