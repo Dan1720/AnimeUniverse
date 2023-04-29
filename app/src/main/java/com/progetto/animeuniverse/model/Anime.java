@@ -1,4 +1,4 @@
-package com.progetto.animeuniverse;
+package com.progetto.animeuniverse.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -7,6 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.progetto.animeuniverse.AnimeGenres;
+import com.progetto.animeuniverse.AnimeImages;
+import com.progetto.animeuniverse.AnimeProducers;
+import com.progetto.animeuniverse.AnimeStreaming;
+import com.progetto.animeuniverse.AnimeStudios;
+import com.progetto.animeuniverse.AnimeTrailer;
+
 @Entity
 public class Anime  implements Parcelable {
     @PrimaryKey(autoGenerate = true)
@@ -32,6 +40,7 @@ public class Anime  implements Parcelable {
     private boolean isFavorite;
     @ColumnInfo(name = "is_synchronized")
     private boolean isSynchronized;
+
 
     public Anime(){};
 
