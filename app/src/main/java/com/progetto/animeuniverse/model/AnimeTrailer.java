@@ -6,12 +6,16 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 
-public class AnimeTrailer implements Parcelable {
+import com.google.gson.annotations.SerializedName;
 
+public class AnimeTrailer implements Parcelable {
+    @SerializedName("youtube_id")
     @ColumnInfo(name = "youtube_id")
     private String youtubeId;
+    @SerializedName("url")
     private String urlTrailer;
     @ColumnInfo(name = "embed_url")
+    @SerializedName("embed_url")
     private String embedUrl;
 
     public AnimeTrailer(String youtubeId, String urlTrailer, String embedUrl) {

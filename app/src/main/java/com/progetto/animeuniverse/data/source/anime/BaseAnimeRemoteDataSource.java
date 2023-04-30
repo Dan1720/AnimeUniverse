@@ -7,5 +7,6 @@ public abstract class BaseAnimeRemoteDataSource {
         this.animeCallback = animeCallback;
     }
 
-    public abstract void getAnime(String country, int page);
+    public abstract void getAnimeByName(String q, String nameAnime);
+
 }

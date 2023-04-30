@@ -5,8 +5,12 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.annotations.SerializedName;
+
 public class AnimeStreaming implements Parcelable {
+    @SerializedName("name")
     private String nameStreaming;
+    @SerializedName("url")
     private String urlStreaming;
 
     public AnimeStreaming(String nameStreaming, String urlStreaming) {

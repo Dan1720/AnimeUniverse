@@ -19,7 +19,7 @@ public class AnimeMockRemoteDataSource extends BaseAnimeRemoteDataSource{
     }
 
     @Override
-    public void getAnime(String country, int page) {
+    public void getAnimeByName(String q, String nameAnime) {
         AnimeApiResponse animeApiResponse = null;
         switch (jsonParserType) {
             case GSON:

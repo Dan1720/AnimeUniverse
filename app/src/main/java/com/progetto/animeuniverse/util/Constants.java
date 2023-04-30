@@ -45,9 +45,11 @@ public class Constants {
 
     public static final String ANIME_API_BASE_URL = "https://api.jikan.moe/v4/";
     public static final String ANIME_API_TEST_JSON_FILE = "animeapi-test.json";
-    public static final String TOP_HEADLINES_ENDPOINT = "top-headlines";
-    public static final String TOP_HEADLINES_COUNTRY_PARAMETER = "country";
-    public static final String TOP_HEADLINES_PAGE_SIZE_PARAMETER = "pageSize";
+    public static final String TOP_HEADLINES_ENDPOINT = "anime";
+    public static final String TOP_HEADLINES_Q_PARAMETER = "q";
+    public static final String TOP_HEADLINES_ANIME_POPULAR_PARAMETER = "numberPopAnime";
+    public static final String TOP_HEADLINES_ANIME_RECOMMENDED_PARAMETER = "numberRecommAnime";
+    public static final String TOP_HEADLINES_ANIME_NEW_PARAMETER = "numberNewAnime";
     public static final String TOP_HEADLINES_PAGE_PARAMETER = "page";
     public static final int TOP_HEADLINES_PAGE_SIZE_VALUE = 10;
     public static final String LAST_UPDATE = "last_update";

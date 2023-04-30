@@ -2,7 +2,7 @@ package com.progetto.animeuniverse.data.source.anime;
 
 import static com.progetto.animeuniverse.util.Constants.API_KEY_ERROR;
 import static com.progetto.animeuniverse.util.Constants.RETROFIT_ERROR;
-import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_PAGE_SIZE_VALUE;
+
 
 import androidx.annotation.NonNull;
 
@@ -16,16 +16,14 @@ import retrofit2.Response;
 
 public class AnimeRemoteDataSource extends BaseAnimeRemoteDataSource{
     private final AnimeApiService animeApiService;
-    private final String apiKey;
 
-    public AnimeRemoteDataSource(String apiKey){
-        this.apiKey = apiKey;
+    public AnimeRemoteDataSource(){
         this.animeApiService = ServiceLocator.getInstance().getAnimeApiService();
     }
 
     @Override
-    public void getAnime(String country, int page) {
-        Call<AnimeApiResponse> animeResponseCall = animeApiService.getAnime(country, TOP_HEADLINES_PAGE_SIZE_VALUE, page, apiKey);
+    public void getAnimeByName(String q, String nameAnime) {
+        Call<AnimeApiResponse> animeResponseCall = animeApiService.getAnimeByName(q);
         animeResponseCall.enqueue(new Callback<AnimeApiResponse>(){
             @Override
             public void onResponse(@NonNull Call<AnimeApiResponse> call,

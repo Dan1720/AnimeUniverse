@@ -75,6 +75,7 @@
 
     <string name="error_retrieving_anime" translatable="false">Error in retrieving the anime</string>
     <string name="data_read_from_local_database">Data letti dal database locale</string>
-    <string name="anime_api_key" />
+    <string name="add_anime_favorite">Anime aggiunto ai preferiti</string>
+    <string name="remove_anime_favorite">Anime rimosso ai preferiti</string>
 
 </resources>

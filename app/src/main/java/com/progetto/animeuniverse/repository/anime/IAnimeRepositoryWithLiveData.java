@@ -6,8 +6,11 @@ import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.Result;
 
 public interface IAnimeRepositoryWithLiveData {
-    MutableLiveData<Result> fetchAnime(String country, int page, long lastUpdate);
-    void fetchAnime(String country, int page);
+
+    MutableLiveData<Result> fetchAnimeByName(String q, String nameAnime, long lastUpdate);
+
+    void fetchAnimeByName(String q, String nameAnime);
+
     MutableLiveData<Result> getFavoriteAnime(boolean firstLoading);
     void updateAnime(Anime anime);
     void deleteFavoriteAnime();

@@ -4,13 +4,21 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
 public class AnimeImagesJpg implements Parcelable {
-
+    @SerializedName("image_url")
+    @ColumnInfo(name = "image_url")
     private String imageUrl;
+    @SerializedName("small_image_url")
+    @ColumnInfo(name = "small_image_url")
     private String smallImageUrl;
+    @SerializedName("large_image_url")
+    @ColumnInfo(name = "large_image_url")
     private String largeImageUrl;
 
     public AnimeImagesJpg(String imageUrl, String smallImageUrl, String largeImageUrl) {
