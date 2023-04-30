@@ -56,4 +56,8 @@ public class Constants {
     public static final String SHARED_PREFERENCES_FILE_NAME = "com.progetto.animeuniverse.preferences";
     public static final String SHARED_PREFERENCES_FIRST_LOADING = "first_loading";
 
+    public static final String CHANNEL_ID = "my_channel_id";
+    public static final String ACTION_NOTIFICATION_RECEIVED = "com.progetto.animeuniverse.NotificationListenerService.ACTION_NOTIFICATION_RECEIVED";
+
+
 }

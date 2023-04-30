@@ -77,4 +77,8 @@
     <string name="data_read_from_local_database">Data letti dal database locale</string>
     <string name="anime_api_key" />
 
+    <string name="channel_name" translatable="false">Notifications</string>
+    <string name="channel_description" translatable="false">Notifications concerning the anime or the application itself</string>
+
+
 </resources>
