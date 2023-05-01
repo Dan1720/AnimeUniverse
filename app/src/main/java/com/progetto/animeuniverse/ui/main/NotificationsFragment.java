@@ -34,7 +34,7 @@ import com.progetto.animeuniverse.util.Constants;
 
 public class NotificationsFragment extends Fragment {
 
-    
+
     private String textTitle = "Titolo prova";
     private String textContent = "Prima notifica";
 
