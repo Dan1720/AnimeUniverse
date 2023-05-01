@@ -19,7 +19,53 @@ public class AnimeMockRemoteDataSource extends BaseAnimeRemoteDataSource{
     }
 
     @Override
-    public void getAnime(String country, int page) {
+    public void getAnimeByName(String q, String nameAnime) {
+        AnimeApiResponse animeApiResponse = null;
+        switch (jsonParserType) {
+            case GSON:
+                try {
+                    animeApiResponse = jsonParserUtil.parseJSONFileWithGSon(ANIME_API_TEST_JSON_FILE);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case JSON_ERROR:
+                animeCallback.onFailureFromRemote(new Exception(UNEXPECTED_ERROR));
+                break;
+        }
+
+        if (animeApiResponse != null) {
+            animeCallback.onSuccessFromRemote(animeApiResponse, System.currentTimeMillis());
+        } else {
+            animeCallback.onFailureFromRemote(new Exception(API_KEY_ERROR));
+        }
+    }
+
+    @Override
+    public void getAnimeByIdFull(String q, int id) {
+        AnimeApiResponse animeApiResponse = null;
+        switch (jsonParserType) {
+            case GSON:
+                try {
+                    animeApiResponse = jsonParserUtil.parseJSONFileWithGSon(ANIME_API_TEST_JSON_FILE);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case JSON_ERROR:
+                animeCallback.onFailureFromRemote(new Exception(UNEXPECTED_ERROR));
+                break;
+        }
+
+        if (animeApiResponse != null) {
+            animeCallback.onSuccessFromRemote(animeApiResponse, System.currentTimeMillis());
+        } else {
+            animeCallback.onFailureFromRemote(new Exception(API_KEY_ERROR));
+        }
+    }
+
+    @Override
+    public void getAnimeById(String q, int id) {
         AnimeApiResponse animeApiResponse = null;
         switch (jsonParserType) {
             case GSON:

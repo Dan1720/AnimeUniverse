@@ -1,7 +1,6 @@
 package com.progetto.animeuniverse.repository.anime;
 
 import static com.progetto.animeuniverse.util.Constants.FRESH_TIMEOUT;
-import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_PAGE_SIZE_VALUE;
 
 import android.app.Application;
 import android.util.Log;
@@ -35,24 +34,77 @@ public class AnimeRepository implements IAnimeRepository{
 
     public AnimeRepository(Application application, AnimeApiService animeApiService, AnimeDao animeDao, AnimeResponseCallback animeResponseCallback) {
         this.application = application;
-        this.animeApiService = (AnimeApiService) ServiceLocator.getInstance().getAnimeApiService();
+        this.animeApiService = ServiceLocator.getInstance().getAnimeApiService();
         AnimeRoomDatabase animeRoomDatabase = ServiceLocator.getInstance().getAnimeDao(application);
         this.animeDao = animeRoomDatabase.animeDao();
         this.animeResponseCallback = animeResponseCallback;
     }
 
     @Override
-    public void fetchAnime(String country, int page, long lastUpdate) {
+    public void fetchAnimeByName(String q,String nameAnime, long lastUpdate) {
         long currentTime = System.currentTimeMillis();
         if(currentTime - lastUpdate > FRESH_TIMEOUT){
-            Call<AnimeApiResponse> animeResponseCall = animeApiService.getAnime(country,
-                    TOP_HEADLINES_PAGE_SIZE_VALUE, page, application.getString(R.string.anime_api_key));
+            Call<AnimeApiResponse> animeResponseCall = animeApiService.getAnimeByName(q);
 
             animeResponseCall.enqueue(new Callback<AnimeApiResponse>() {
                 @Override
                 public void onResponse(Call<AnimeApiResponse> call, Response<AnimeApiResponse> response) {
                     if(response.body() != null && response.isSuccessful() && !response.body().getStatus().equals("error")){
-                        List<Anime> animeList = response.body().getAnimeList();
+                        List<Anime> animeList = response.body().getData();
+                        saveDataInDatabase(animeList);
+                    }else{
+                        animeResponseCallback.onFailure(application.getString(R.string.error_retrieving_anime));
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AnimeApiResponse> call, @NonNull Throwable t) {
+                    animeResponseCallback.onFailure(t.getMessage());
+                }
+            });
+        }else {
+            Log.d(TAG, application.getString(R.string.data_read_from_local_database));
+        }
+    }
+
+    @Override
+    public void fetchAnimeByIdFull(String q, int id, long lastUpdate) {
+        long currentTime = System.currentTimeMillis();
+        if(currentTime - lastUpdate > FRESH_TIMEOUT){
+            Call<AnimeApiResponse> animeResponseCall = animeApiService.getAnimeByIdFull(q, id);
+
+            animeResponseCall.enqueue(new Callback<AnimeApiResponse>() {
+                @Override
+                public void onResponse(Call<AnimeApiResponse> call, Response<AnimeApiResponse> response) {
+                    if(response.body() != null && response.isSuccessful() && !response.body().getStatus().equals("error")){
+                        List<Anime> animeList = response.body().getData();
+                        saveDataInDatabase(animeList);
+                    }else{
+                        animeResponseCallback.onFailure(application.getString(R.string.error_retrieving_anime));
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<AnimeApiResponse> call, @NonNull Throwable t) {
+                    animeResponseCallback.onFailure(t.getMessage());
+                }
+            });
+        }else {
+            Log.d(TAG, application.getString(R.string.data_read_from_local_database));
+        }
+    }
+
+    @Override
+    public void fetchAnimeById(String q, int id, long lastUpdate) {
+        long currentTime = System.currentTimeMillis();
+        if(currentTime - lastUpdate > FRESH_TIMEOUT){
+            Call<AnimeApiResponse> animeResponseCall = animeApiService.getAnimeById(q, id);
+
+            animeResponseCall.enqueue(new Callback<AnimeApiResponse>() {
+                @Override
+                public void onResponse(Call<AnimeApiResponse> call, Response<AnimeApiResponse> response) {
+                    if(response.body() != null && response.isSuccessful() && !response.body().getStatus().equals("error")){
+                        List<Anime> animeList = response.body().getData();
                         saveDataInDatabase(animeList);
                     }else{
                         animeResponseCallback.onFailure(application.getString(R.string.error_retrieving_anime));

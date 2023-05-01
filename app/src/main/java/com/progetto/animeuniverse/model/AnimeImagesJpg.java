@@ -4,67 +4,46 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
 public class AnimeImagesJpg implements Parcelable {
+    @SerializedName("image_url")
+    @ColumnInfo(name = "image_url_jpg")
+    private String imageUrlJpg;
+    @SerializedName("small_image_url")
+    @ColumnInfo(name = "small_image_url_jpg")
+    private String smallImageUrlJpg;
+    @SerializedName("large_image_url")
+    @ColumnInfo(name = "large_image_url_jpg")
+    private String largeImageUrlJpg;
 
-    private String imageUrl;
-    private String smallImageUrl;
-    private String largeImageUrl;
-
-    public AnimeImagesJpg(String imageUrl, String smallImageUrl, String largeImageUrl) {
-        this.imageUrl = imageUrl;
-        this.smallImageUrl = smallImageUrl;
-        this.largeImageUrl = largeImageUrl;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public String getSmallImageUrl() {
-        return smallImageUrl;
-    }
-
-    public void setSmallImageUrl(String smallImageUrl) {
-        this.smallImageUrl = smallImageUrl;
-    }
-
-    public String getLargeImageUrl() {
-        return largeImageUrl;
-    }
-
-    public void setLargeImageUrl(String largeImageUrl) {
-        this.largeImageUrl = largeImageUrl;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AnimeImagesJpg that = (AnimeImagesJpg) o;
-        return Objects.equals(imageUrl, that.imageUrl) && Objects.equals(smallImageUrl, that.smallImageUrl) && Objects.equals(largeImageUrl, that.largeImageUrl);
-    }
-
-
-    @Override
-    public String toString() {
-        return "AnimeImagesJpg{" +
-                "imageUrl='" + imageUrl + '\'' +
-                ", smallImageUrl='" + smallImageUrl + '\'' +
-                ", largeImageUrl='" + largeImageUrl + '\'' +
-                '}';
+    public AnimeImagesJpg(){}
+    public AnimeImagesJpg(String imageUrlJpg, String smallImageUrlJpg, String largeImageUrlJpg) {
+        this.imageUrlJpg = imageUrlJpg;
+        this.smallImageUrlJpg = smallImageUrlJpg;
+        this.largeImageUrlJpg = largeImageUrlJpg;
     }
 
     protected AnimeImagesJpg(Parcel in) {
-        imageUrl = in.readString();
-        smallImageUrl = in.readString();
-        largeImageUrl = in.readString();
+        imageUrlJpg = in.readString();
+        smallImageUrlJpg = in.readString();
+        largeImageUrlJpg = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(imageUrlJpg);
+        dest.writeString(smallImageUrlJpg);
+        dest.writeString(largeImageUrlJpg);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<AnimeImagesJpg> CREATOR = new Creator<AnimeImagesJpg>() {
@@ -79,15 +58,37 @@ public class AnimeImagesJpg implements Parcelable {
         }
     };
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getImageUrlJpg() {
+        return imageUrlJpg;
+    }
+
+    public void setImageUrlJpg(String imageUrlJpg) {
+        this.imageUrlJpg = imageUrlJpg;
+    }
+
+    public String getSmallImageUrlJpg() {
+        return smallImageUrlJpg;
+    }
+
+    public void setSmallImageUrlJpg(String smallImageUrlJpg) {
+        this.smallImageUrlJpg = smallImageUrlJpg;
+    }
+
+    public String getLargeImageUrlJpg() {
+        return largeImageUrlJpg;
+    }
+
+    public void setLargeImageUrlJpg(String largeImageUrlJpg) {
+        this.largeImageUrlJpg = largeImageUrlJpg;
     }
 
     @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeString(imageUrl);
-        dest.writeString(smallImageUrl);
-        dest.writeString(largeImageUrl);
+    public String toString() {
+        return "AnimeImagesJpg{" +
+                "imageUrlJpg='" + imageUrlJpg + '\'' +
+                ", smallImageUrlJpg='" + smallImageUrlJpg + '\'' +
+                ", largeImageUrlJpg='" + largeImageUrlJpg + '\'' +
+                '}';
     }
+
 }

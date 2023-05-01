@@ -9,10 +9,13 @@ import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
 
-@Entity
+
+@Entity(tableName = "anime")
 public class Anime  implements Parcelable {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
+    @SerializedName("mal_id")
     private int id;
     private String title;
     private String author;
@@ -24,11 +27,14 @@ public class Anime  implements Parcelable {
     private boolean approved;
     private String type;
     private String source;
+
+    @SerializedName("episodes")
     private int numEpisodes;
     private String status;
     private String duration;
     private String rating;
     private int year;
+
     @Embedded
     private AnimeProducers producers;
     @Embedded
@@ -41,6 +47,7 @@ public class Anime  implements Parcelable {
     private boolean isFavorite;
     @ColumnInfo(name = "is_synchronized")
     private boolean isSynchronized;
+    private int popularity;
 
     public Anime(){};
 
@@ -48,7 +55,7 @@ public class Anime  implements Parcelable {
                  AnimeTrailer trailer, boolean approved, String type, String source,
                  int numEpisodes, String status, String duration,
                  String rating, int year, AnimeProducers producers, AnimeStudios studios,
-                 AnimeGenres genres, AnimeStreaming streaming, boolean isFavorite, boolean isSynchronized) {
+                 AnimeGenres genres, AnimeStreaming streaming, boolean isFavorite, boolean isSynchronized, int popularity) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -69,6 +76,7 @@ public class Anime  implements Parcelable {
         this.streaming = streaming;
         this.isFavorite = isFavorite;
         this.isSynchronized = isSynchronized;
+        this.popularity = popularity;
     }
 
 
@@ -93,6 +101,7 @@ public class Anime  implements Parcelable {
         streaming = in.readParcelable(AnimeStreaming.class.getClassLoader());
         isFavorite = in.readByte() != 0;
         isSynchronized = in.readByte() != 0;
+        popularity = in.readInt();
     }
 
     public static final Creator<Anime> CREATOR = new Creator<Anime>() {
@@ -267,6 +276,14 @@ public class Anime  implements Parcelable {
         isSynchronized = aSynchronized;
     }
 
+    public int getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(int popularity) {
+        this.popularity = popularity;
+    }
+
 
     @Override
     public int describeContents() {
@@ -295,5 +312,6 @@ public class Anime  implements Parcelable {
         dest.writeParcelable(streaming, flags);
         dest.writeByte((byte) (isFavorite ? 1 : 0));
         dest.writeByte((byte) (isSynchronized ? 1 : 0));
+        dest.writeInt(popularity);
     }
 }

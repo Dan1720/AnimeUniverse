@@ -11,7 +11,7 @@ public class AnimeResponse implements Parcelable {
 
     private boolean isLoading;
 
-    @SerializedName("anime")
+    @SerializedName("data")
     private List<Anime> animeList;
 
     public AnimeResponse(){}

@@ -3,10 +3,16 @@ package com.progetto.animeuniverse.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class AnimeGenres implements Parcelable {
+    @SerializedName("mal_id")
     private int idGenre;
+    @SerializedName("type")
     private String typeGenre;
+    @SerializedName("name")
     private String nameGenre;
+    @SerializedName("url")
     private String urlGenre;
 
     public AnimeGenres(int idGenre, String typeGenre, String nameGenre, String urlGenre) {

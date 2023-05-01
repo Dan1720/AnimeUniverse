@@ -1,16 +1,31 @@
 package com.progetto.animeuniverse.util;
 
+import static com.progetto.animeuniverse.util.Constants.ENCRYPTED_SHARED_PREFERENCES_FILE_NAME;
+import static com.progetto.animeuniverse.util.Constants.ID_TOKEN;
+
 import android.app.Application;
 
+import com.progetto.animeuniverse.R;
+import com.progetto.animeuniverse.data.source.anime.AnimeLocalDataSource;
+import com.progetto.animeuniverse.data.source.anime.AnimeMockRemoteDataSource;
+import com.progetto.animeuniverse.data.source.anime.AnimeRemoteDataSource;
+import com.progetto.animeuniverse.data.source.anime.BaseAnimeLocalDataSource;
+import com.progetto.animeuniverse.data.source.anime.BaseAnimeRemoteDataSource;
+import com.progetto.animeuniverse.data.source.anime.BaseFavoriteAnimeDataSource;
+import com.progetto.animeuniverse.data.source.anime.FavoriteAnimeDataSource;
 import com.progetto.animeuniverse.data.source.users.BaseUserAuthenticationRemoteDataSource;
 import com.progetto.animeuniverse.data.source.users.BaseUserDataRemoteDataSource;
 import com.progetto.animeuniverse.data.source.users.UserAuthenticationRemoteDataSource;
 import com.progetto.animeuniverse.data.source.users.UserDataRemoteDataSource;
 import com.progetto.animeuniverse.database.AnimeRoomDatabase;
+import com.progetto.animeuniverse.repository.anime.AnimeRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime.IAnimeRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.user.IUserRepository;
 import com.progetto.animeuniverse.repository.user.UserRepository;
 import com.progetto.animeuniverse.service.AnimeApiService;
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -55,7 +70,31 @@ public class ServiceLocator {
         return AnimeRoomDatabase.getDatabase(application);
     }
 
-    /*public IAnimeRepositoryWithLiveData getAnimeRepository(Application application, boolean debugMode){
+    public IAnimeRepositoryWithLiveData getAnimeRepository(Application application, boolean debugMode){
+        BaseAnimeRemoteDataSource animeRemoteDataSource;
+        BaseAnimeLocalDataSource animeLocalDataSource;
+        BaseFavoriteAnimeDataSource favoriteAnimeDataSource;
+        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(application);
+        DataEncryptionUtil dataEncryptionUtil = new DataEncryptionUtil(application);
 
-    }*/
+        if(debugMode){
+            JSONParserUtil jsonParserUtil = new JSONParserUtil(application);
+            animeRemoteDataSource = new AnimeMockRemoteDataSource(jsonParserUtil, JSONParserUtil.JsonParserType.GSON);
+        }else{
+            animeRemoteDataSource = new AnimeRemoteDataSource();
+        }
+
+        animeLocalDataSource = new AnimeLocalDataSource(getAnimeDao(application),
+                sharedPreferencesUtil, dataEncryptionUtil);
+
+        try{
+            favoriteAnimeDataSource = new FavoriteAnimeDataSource(dataEncryptionUtil.
+                    readSecretDataWithEncryptedSharedPreferences(ENCRYPTED_SHARED_PREFERENCES_FILE_NAME, ID_TOKEN)
+            );
+
+        } catch (GeneralSecurityException | IOException e) {
+            return null;
+        }
+        return new AnimeRepositoryWithLiveData(animeRemoteDataSource, animeLocalDataSource, favoriteAnimeDataSource);
+    }
 }

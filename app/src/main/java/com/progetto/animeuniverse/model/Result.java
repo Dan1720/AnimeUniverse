@@ -31,4 +31,14 @@ public abstract class Result {
         }
     }
 
+    public static final class AnimeResponseSuccess extends Result{
+        private final AnimeResponse animeResponse;
+        public AnimeResponseSuccess(AnimeResponse animeResponse){
+            this.animeResponse = animeResponse;
+        }
+        public AnimeResponse getData(){
+            return animeResponse;
+        }
+    }
+
 }

@@ -24,7 +24,7 @@ public class FavoriteAnimeDataSource extends BaseFavoriteAnimeDataSource{
     private final DatabaseReference databaseReference;
     private final String idToken;
 
-    public FavoriteAnimeDataSource(DatabaseReference databaseReference, String idToken) {
+    public FavoriteAnimeDataSource(String idToken) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance(FIREBASE_REALTIME_DATABASE);
         this.databaseReference = firebaseDatabase.getReference().getRef();
         this.idToken = idToken;
