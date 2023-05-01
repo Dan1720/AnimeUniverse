@@ -21,10 +21,10 @@ public interface AnimeApiService {
             @Query(TOP_HEADLINES_Q_PARAMETER) String q);
 
     @GET("anime/{id}/full")
-    Call<List<Anime>> groupListFull(@Path("id")int groupIdFull);
+    Call<AnimeApiResponse> getAnimeByIdFull(String q, @Path("id")int idFull);
 
     @GET("anime/{id}")
-    Call<List<Anime>> groupList(@Path("id")int groupId);
+    Call<AnimeApiResponse> getAnimeById(String q,@Path("id")int id);
 
 
 }

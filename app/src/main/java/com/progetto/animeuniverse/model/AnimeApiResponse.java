@@ -8,9 +8,9 @@ public class AnimeApiResponse extends AnimeResponse{
 
     public AnimeApiResponse(){}
 
-    public AnimeApiResponse(List<Anime>data, String status){
+    public AnimeApiResponse(List<Anime>data){
         this.data = data;
-        this.status = status;
+        this.status = getStatus();
     }
 
     public List<Anime> getData() {
@@ -33,7 +33,6 @@ public class AnimeApiResponse extends AnimeResponse{
     public String toString() {
         return "AnimeApiResponse{" +
                 "data=" + data +
-                ", status='" + status + '\'' +
                 '}';
     }
 }

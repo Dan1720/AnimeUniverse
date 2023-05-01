@@ -43,4 +43,48 @@ public class AnimeRemoteDataSource extends BaseAnimeRemoteDataSource{
         });
 
     }
+
+    @Override
+    public void getAnimeByIdFull(String q, int id) {
+        Call<AnimeApiResponse> animeResponseCall = animeApiService.getAnimeByIdFull(q, id);
+        animeResponseCall.enqueue(new Callback<AnimeApiResponse>(){
+            @Override
+            public void onResponse(@NonNull Call<AnimeApiResponse> call,
+                                   @NonNull Response<AnimeApiResponse> response) {
+                if(response.body() != null && response.isSuccessful() && !response.body().getStatus().equals("error")){
+                    animeCallback.onSuccessFromRemote(response.body(), System.currentTimeMillis());
+                }else{
+                    animeCallback.onFailureFromRemote(new Exception(API_KEY_ERROR));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AnimeApiResponse> call, Throwable t) {
+                animeCallback.onFailureFromRemote(new Exception(RETROFIT_ERROR));
+            }
+
+        });
+    }
+
+    @Override
+    public void getAnimeById(String q, int id) {
+        Call<AnimeApiResponse> animeResponseCall = animeApiService.getAnimeById(q, id);
+        animeResponseCall.enqueue(new Callback<AnimeApiResponse>(){
+            @Override
+            public void onResponse(@NonNull Call<AnimeApiResponse> call,
+                                   @NonNull Response<AnimeApiResponse> response) {
+                if(response.body() != null && response.isSuccessful() && !response.body().getStatus().equals("error")){
+                    animeCallback.onSuccessFromRemote(response.body(), System.currentTimeMillis());
+                }else{
+                    animeCallback.onFailureFromRemote(new Exception(API_KEY_ERROR));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AnimeApiResponse> call, Throwable t) {
+                animeCallback.onFailureFromRemote(new Exception(RETROFIT_ERROR));
+            }
+
+        });
+    }
 }

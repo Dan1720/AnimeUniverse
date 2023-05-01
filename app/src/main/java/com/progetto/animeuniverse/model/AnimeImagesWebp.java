@@ -12,67 +12,39 @@ import java.util.Objects;
 
 public class AnimeImagesWebp implements Parcelable {
     @SerializedName("image_url")
-    @ColumnInfo(name = "image_url")
-    private String imageUrl;
+    @ColumnInfo(name = "image_url_webp")
+    private String imageUrlWebp;
     @SerializedName("small_image_url")
-    @ColumnInfo(name = "small_image_url")
-    private String smallImageUrl;
+    @ColumnInfo(name = "small_image_url_webp")
+    private String smallImageUrlWebp;
     @SerializedName("large_image_url")
-    @ColumnInfo(name = "large_image_url")
-    private String largeImageUrl;
+    @ColumnInfo(name = "large_image_url_webp")
+    private String largeImageUrlWebp;
 
+    public AnimeImagesWebp(){}
 
-    public AnimeImagesWebp(String imageUrl, String smallImageUrl, String largeImageUrl) {
-        this.imageUrl = imageUrl;
-        this.smallImageUrl = smallImageUrl;
-        this.largeImageUrl = largeImageUrl;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public String getSmallImageUrl() {
-        return smallImageUrl;
-    }
-
-    public void setSmallImageUrl(String smallImageUrl) {
-        this.smallImageUrl = smallImageUrl;
-    }
-
-    public String getLargeImageUrl() {
-        return largeImageUrl;
-    }
-
-    public void setLargeImageUrl(String largeImageUrl) {
-        this.largeImageUrl = largeImageUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "AnimeImagesWebp{" +
-                "imageUrl='" + imageUrl + '\'' +
-                ", smallImageUrl='" + smallImageUrl + '\'' +
-                ", largeImageUrl='" + largeImageUrl + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AnimeImagesWebp that = (AnimeImagesWebp) o;
-        return Objects.equals(imageUrl, that.imageUrl) && Objects.equals(smallImageUrl, that.smallImageUrl) && Objects.equals(largeImageUrl, that.largeImageUrl);
+    public AnimeImagesWebp(String imageUrlWebp, String smallImageUrlWebp, String largeImageUrlWebp) {
+        this.imageUrlWebp = imageUrlWebp;
+        this.smallImageUrlWebp = smallImageUrlWebp;
+        this.largeImageUrlWebp = largeImageUrlWebp;
     }
 
     protected AnimeImagesWebp(Parcel in) {
-        imageUrl = in.readString();
-        smallImageUrl = in.readString();
-        largeImageUrl = in.readString();
+        imageUrlWebp = in.readString();
+        smallImageUrlWebp = in.readString();
+        largeImageUrlWebp = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(imageUrlWebp);
+        dest.writeString(smallImageUrlWebp);
+        dest.writeString(largeImageUrlWebp);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<AnimeImagesWebp> CREATOR = new Creator<AnimeImagesWebp>() {
@@ -87,15 +59,38 @@ public class AnimeImagesWebp implements Parcelable {
         }
     };
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getImageUrlWebp() {
+        return imageUrlWebp;
+    }
+
+    public void setImageUrlWebp(String imageUrlWebp) {
+        this.imageUrlWebp = imageUrlWebp;
+    }
+
+    public String getSmallImageUrlWebp() {
+        return smallImageUrlWebp;
+    }
+
+    public void setSmallImageUrlWebp(String smallImageUrlWebp) {
+        this.smallImageUrlWebp = smallImageUrlWebp;
+    }
+
+    public String getLargeImageUrlWebp() {
+        return largeImageUrlWebp;
+    }
+
+    public void setLargeImageUrlWebp(String largeImageUrlWebp) {
+        this.largeImageUrlWebp = largeImageUrlWebp;
     }
 
     @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeString(imageUrl);
-        dest.writeString(smallImageUrl);
-        dest.writeString(largeImageUrl);
+    public String toString() {
+        return "AnimeImagesWebp{" +
+                "imageUrlWebp='" + imageUrlWebp + '\'' +
+                ", smallImageUrlWebp='" + smallImageUrlWebp + '\'' +
+                ", largeImageUrlWebp='" + largeImageUrlWebp + '\'' +
+                '}';
     }
+
+
 }

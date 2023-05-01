@@ -41,6 +41,75 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
         this.backupDataSource.setAnimeCallback(this);
     }
 
+
+    @Override
+    public void fetchAnimeByName(String q, String nameAnime) {
+        animeRemoteDataSource.getAnimeByName(q, nameAnime);
+    }
+
+    @Override
+    public void fetchAnimeByIdFull(String q, int id) {
+        animeRemoteDataSource.getAnimeByIdFull(q, id);
+    }
+
+    @Override
+    public void fetchAnimeById(String q, int id) {
+        animeRemoteDataSource.getAnimeById(q, id);
+    }
+
+    @Override
+    public MutableLiveData<Result> fetchAnimeByName(String q, String nameAnime, long lastUpdate) {
+        long currentTime = System.currentTimeMillis();
+        if(currentTime - lastUpdate > FRESH_TIMEOUT){
+            animeRemoteDataSource.getAnimeByName(q, nameAnime);
+        }else{
+            animeLocalDataSource.getAnime();
+        }
+        return allAnimeMutableLiveData;
+    }
+
+    @Override
+    public MutableLiveData<Result> fetchAnimeByIdFull(String q, int id, long lastUpdate) {
+        long currentTime = System.currentTimeMillis();
+        if(currentTime - lastUpdate > FRESH_TIMEOUT){
+            animeRemoteDataSource.getAnimeByIdFull(q, id);
+        }else{
+            animeLocalDataSource.getAnime();
+        }
+        return allAnimeMutableLiveData;
+    }
+
+    @Override
+    public MutableLiveData<Result> fetchAnimeById(String q, int id, long lastUpdate) {
+        long currentTime = System.currentTimeMillis();
+        if(currentTime - lastUpdate > FRESH_TIMEOUT){
+            animeRemoteDataSource.getAnimeById(q, id);
+        }else{
+            animeLocalDataSource.getAnime();
+        }
+        return allAnimeMutableLiveData;
+    }
+
+    @Override
+    public MutableLiveData<Result> getFavoriteAnime(boolean firstLoading) {
+        if(firstLoading){
+            backupDataSource.getFavoriteAnime();
+        }else {
+            animeLocalDataSource.getFavoriteAnime();
+        }
+        return favoriteAnimeMutableLiveData;
+    }
+
+    @Override
+    public void updateAnime(Anime anime) {
+        animeLocalDataSource.updateAnime(anime);
+        if(anime.isFavorite()){
+            backupDataSource.addFavoriteAnime(anime);
+        }else {
+            backupDataSource.deleteFavoriteAnime(anime);
+        }
+    }
+
     @Override
     public void onSuccessFromRemote(AnimeApiResponse animeApiResponse, long lastUpdate) {
         animeLocalDataSource.insertAnime(animeApiResponse);
@@ -158,41 +227,9 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
 
     }
 
-    @Override
-    public MutableLiveData<Result> fetchAnimeByName(String q, String nameAnime, long lastUpdate) {
-        long currentTime = System.currentTimeMillis();
-        if(currentTime - lastUpdate > FRESH_TIMEOUT){
-            animeRemoteDataSource.getAnimeByName(q, nameAnime);
-        }else{
-            animeLocalDataSource.getAnime();
-        }
-        return allAnimeMutableLiveData;
-    }
 
-    @Override
-    public void fetchAnimeByName(String q, String nameAnime) {
-        animeRemoteDataSource.getAnimeByName(q, nameAnime);
-    }
 
-    @Override
-    public MutableLiveData<Result> getFavoriteAnime(boolean firstLoading) {
-        if(firstLoading){
-            backupDataSource.getFavoriteAnime();
-        }else {
-            animeLocalDataSource.getFavoriteAnime();
-        }
-        return favoriteAnimeMutableLiveData;
-    }
 
-    @Override
-    public void updateAnime(Anime anime) {
-        animeLocalDataSource.updateAnime(anime);
-        if(anime.isFavorite()){
-            backupDataSource.addFavoriteAnime(anime);
-        }else {
-            backupDataSource.deleteFavoriteAnime(anime);
-        }
-    }
 
     @Override
     public void deleteFavoriteAnime() {
