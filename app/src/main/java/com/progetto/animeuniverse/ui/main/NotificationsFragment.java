@@ -20,7 +20,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.service.notification.NotificationListenerService;
 import android.view.LayoutInflater;
@@ -30,7 +33,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.progetto.animeuniverse.R;
+import com.progetto.animeuniverse.adapter.NotificationAdapter;
 import com.progetto.animeuniverse.model.Notification;
+import com.progetto.animeuniverse.model.NotificationViewModel;
 import com.progetto.animeuniverse.util.Constants;
 
 import org.w3c.dom.Text;
@@ -41,12 +46,16 @@ import java.util.ArrayList;
 public class NotificationsFragment extends Fragment {
 
 
-    private String textTitle = "Titolo prova";
-    private String textContent = "Prima notifica";
+    private String textTitle = "Titolo prova" + getNotificationId();
+    private String textContent = "Prima notifica" + getNotificationId();
     private boolean notificationSent = false;
     private View rootView;
-    private ArrayList<Notification> notifications = new ArrayList<>();
+
     private int id = 0;
+
+    private RecyclerView recyclerView;
+    private NotificationAdapter notificationAdapter;
+    private NotificationViewModel notificationViewModel;
 
     public NotificationsFragment() {
         // Required empty public constructor
@@ -68,6 +77,15 @@ public class NotificationsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_notifications, container, false);
+        recyclerView = rootView.findViewById(R.id.notification_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        notificationAdapter = new NotificationAdapter(new ArrayList<>());
+        recyclerView.setAdapter(notificationAdapter);
+        notificationViewModel = new ViewModelProvider(requireActivity()).get(NotificationViewModel.class);
+        notificationViewModel.getNotifications().observe(getViewLifecycleOwner(), notifications -> {
+            notificationAdapter.updateNotifications(notifications);
+        });
+
         return rootView;
     }
 
@@ -100,25 +118,10 @@ public class NotificationsFragment extends Fragment {
             }
             notificationManager.notify(getNotificationId(), builder.build());
             Notification notification = new Notification(textTitle, textContent);
-            notifications.add(notification);
-            LinearLayout notificationContainer = rootView.findViewById(R.id.notification_container);
-            notificationContainer.removeAllViews();
-            for (Notification notificationItem: notifications){
-                View notificationView = LayoutInflater.from(getContext()).inflate(R.layout.notification_item, notificationContainer, false);
-                TextView titleTextView = notificationView.findViewById(R.id.notification_title);
-                titleTextView.setText(notificationItem.getTitle());
-                TextView textTextView = notificationView.findViewById(R.id.notification_text);
-                textTextView.setText(notificationItem.getText());
-                notificationContainer.addView(notificationView);
-            }
-
-
-
-
-
+            notificationViewModel.addNotification(notification);
+            notificationAdapter.notifyDataSetChanged();
 
         }
-
 
     }
 
