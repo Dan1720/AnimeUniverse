@@ -13,7 +13,6 @@ public class AnimeResponse implements Parcelable {
 
     @SerializedName("data")
     private List<Anime> animeList;
-
     public AnimeResponse(){}
 
     public AnimeResponse(List<Anime> animeList) {

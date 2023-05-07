@@ -12,7 +12,7 @@ public class AnimeViewModelFactory implements ViewModelProvider.Factory {
     public AnimeViewModelFactory(IAnimeRepositoryWithLiveData iAnimeRepositoryWithLiveData){
         this.iAnimeRepositoryWithLiveData = iAnimeRepositoryWithLiveData;
     }
-
+    @SuppressWarnings("unchecked")
     @NonNull
     @Override
     public <T extends ViewModel> T create (@NonNull Class <T> modelClass){

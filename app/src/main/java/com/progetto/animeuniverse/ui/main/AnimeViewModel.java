@@ -15,13 +15,27 @@ public class AnimeViewModel extends ViewModel {
     private String nameAnime;
     private boolean isLoading;
     private boolean firstLoading;
+    private int current_page;
+    private int count;
+
     private MutableLiveData<Result> animeListLiveData;
     private MutableLiveData<Result> favoriteAnimeListLiveData;
 
+    private int currentResults;
 
-    public AnimeViewModel(IAnimeRepositoryWithLiveData animeRepositoryWithLiveData) {
-        this.animeRepositoryWithLiveData = animeRepositoryWithLiveData;
+
+    public AnimeViewModel(IAnimeRepositoryWithLiveData iAnimeRepositoryWithLiveData) {
+        this.animeRepositoryWithLiveData = iAnimeRepositoryWithLiveData;
         this.firstLoading = true;
+        this.current_page = 1;
+        this.count = 0;
+    }
+
+    public MutableLiveData<Result> getAnimeTop(long lastUpdate){
+        if(animeListLiveData == null){
+            fetchAnimeTop(lastUpdate);
+        }
+        return animeListLiveData;
     }
 
     public MutableLiveData<Result> getAnimeByName(String q, String nameAnime, long lastUpdate){
@@ -31,42 +45,50 @@ public class AnimeViewModel extends ViewModel {
         return animeListLiveData;
     }
 
-    public MutableLiveData<Result> getAnimeByIdFull(String q, int id, long lastUpdate){
+    public MutableLiveData<Result> getAnimeByIdFull(String anime, int id, long lastUpdate){
         if(animeListLiveData == null){
-            fetchAnimeByIdFull(q, id, lastUpdate);
+            fetchAnimeByIdFull(anime, id, lastUpdate);
         }
         return animeListLiveData;
     }
 
-    public MutableLiveData<Result> getAnimeById(String q, int id, long lastUpdate){
+    public MutableLiveData<Result> getAnimeById(String anime, int id, long lastUpdate){
         if(animeListLiveData == null){
-            fetchAnimeById(q, id, lastUpdate);
+            fetchAnimeById(anime, id, lastUpdate);
         }
         return animeListLiveData;
+    }
+
+    public void fetchAnimeTop(){
+        animeRepositoryWithLiveData.fetchAnimeTop();
+    }
+
+    private void fetchAnimeTop(long lastUpdate){
+        animeListLiveData = animeRepositoryWithLiveData.fetchAnimeTop(lastUpdate);
     }
 
     public void fetchAnimeByName(String q, String nameAnime){
         animeRepositoryWithLiveData.fetchAnimeByName(q, nameAnime);
     }
 
-    public void fetchAnimeByName(String q, String nameAnime, long lastUpdate){
+    private void fetchAnimeByName(String q, String nameAnime, long lastUpdate){
         animeListLiveData = animeRepositoryWithLiveData.fetchAnimeByName(q, nameAnime, lastUpdate);
     }
 
-    public void fetchAnimeByIdFull(String q, int id){
-        animeRepositoryWithLiveData.fetchAnimeByIdFull(q, id);
+    public void fetchAnimeByIdFull(String anime, int id){
+        animeRepositoryWithLiveData.fetchAnimeByIdFull(anime, id);
     }
 
-    public void fetchAnimeByIdFull(String q, int id, long lastUpdate){
-        animeListLiveData = animeRepositoryWithLiveData.fetchAnimeByIdFull(q, id, lastUpdate);
+    private void fetchAnimeByIdFull(String anime, int id, long lastUpdate){
+        animeListLiveData = animeRepositoryWithLiveData.fetchAnimeByIdFull(anime, id, lastUpdate);
     }
 
-    public void fetchAnimeById(String q, int id){
-        animeRepositoryWithLiveData.fetchAnimeById(q, id);
+    public void fetchAnimeById(String anime, int id){
+        animeRepositoryWithLiveData.fetchAnimeById(anime, id);
     }
 
-    public void fetchAnimeById(String q, int id, long lastUpdate){
-        animeListLiveData = animeRepositoryWithLiveData.fetchAnimeById(q, id, lastUpdate);
+    private void fetchAnimeById(String anime, int id, long lastUpdate){
+        animeListLiveData = animeRepositoryWithLiveData.fetchAnimeById(anime, id, lastUpdate);
     }
 
 
@@ -79,6 +101,14 @@ public class AnimeViewModel extends ViewModel {
 
     private void getFavoriteAnime(boolean firstLoading)  {
         favoriteAnimeListLiveData = animeRepositoryWithLiveData.getFavoriteAnime(firstLoading);
+    }
+
+    public int getCurrentResults() {
+        return currentResults;
+    }
+
+    public void setCurrentResults(int currentResults) {
+        this.currentResults = currentResults;
     }
 
     public void updateAnime(Anime anime){
@@ -115,6 +145,22 @@ public class AnimeViewModel extends ViewModel {
 
     public void setFirstLoading(boolean firstLoading) {
         this.firstLoading = firstLoading;
+    }
+
+    public int getCurrent_page() {
+        return current_page;
+    }
+
+    public void setCurrent_page(int current_page) {
+        this.current_page = current_page;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public MutableLiveData<Result> getAnimeResponseLiveData(){

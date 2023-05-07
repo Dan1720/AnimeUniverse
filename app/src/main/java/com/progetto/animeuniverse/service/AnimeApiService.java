@@ -2,8 +2,11 @@ package com.progetto.animeuniverse.service;
 
 
 
+import static com.progetto.animeuniverse.util.Constants.ANIME_API_ENDPOINTS;
+import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_ANIME_NEW_PARAMETER;
 import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_ENDPOINT;
 import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_Q_PARAMETER;
+import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_TOP_PARAMETER;
 
 import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeApiResponse;
@@ -21,10 +24,14 @@ public interface AnimeApiService {
             @Query(TOP_HEADLINES_Q_PARAMETER) String q);
 
     @GET("anime/{id}/full")
-    Call<AnimeApiResponse> getAnimeByIdFull(String q, @Path("id")int idFull);
+    Call<AnimeApiResponse> getAnimeByIdFull(String anime, @Path("id")int idFull);
 
     @GET("anime/{id}")
-    Call<AnimeApiResponse> getAnimeById(String q,@Path("id")int id);
+    Call<AnimeApiResponse> getAnimeById(String anime,@Path("id")int id);
+
+    @GET(ANIME_API_ENDPOINTS)
+    Call<AnimeApiResponse> getAnimeTop();
+
 
 
 }

@@ -1,38 +1,39 @@
 package com.progetto.animeuniverse.model;
 
+import android.os.Parcelable;
+
+import androidx.room.Embedded;
+
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 //Classe che riceve il risultato della chiamata alla Api e mette tutto in una lista
 public class AnimeApiResponse extends AnimeResponse{
-    private List<Anime> data;
-    private String status;
-
-    public AnimeApiResponse(){}
-
-    public AnimeApiResponse(List<Anime>data){
-        this.data = data;
-        this.status = getStatus();
+    @SerializedName("pagination")
+    private AnimePagination pagination;
+    public AnimeApiResponse(){
+        super();
     }
 
-    public List<Anime> getData() {
-        return data;
+    public AnimeApiResponse(AnimePagination pagination, List<Anime> animeTopList) {
+        super(animeTopList);
+        this.pagination = pagination;
     }
 
-    public void setData(List<Anime> data) {
-        this.data = data;
+    public AnimePagination getPagination() {
+        return pagination;
     }
 
-    public String getStatus() {
-        return status;
+    public void setPagination(AnimePagination pagination) {
+        this.pagination = pagination;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     @Override
     public String toString() {
+        super.toString();
         return "AnimeApiResponse{" +
-                "data=" + data +
+                "pagination=" + pagination +
                 '}';
     }
 }

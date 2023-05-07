@@ -4,7 +4,7 @@ public abstract class Result {
     private Result(){}
 
     public boolean isSuccess(){
-        if(this instanceof UserResponseSuccess){
+        if(this instanceof AnimeResponseSuccess || this instanceof UserResponseSuccess){
             return true;
         }else{
             return false;

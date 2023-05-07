@@ -8,7 +8,8 @@ public abstract class BaseAnimeRemoteDataSource {
     }
 
     public abstract void getAnimeByName(String q, String nameAnime);
-    public abstract void getAnimeByIdFull(String q, int id);
-    public abstract void getAnimeById(String q, int id);
+    public abstract void getAnimeByIdFull(String anime, int id);
+    public abstract void getAnimeById(String anime, int id);
+    public abstract void getAnimeTop();
 
 }

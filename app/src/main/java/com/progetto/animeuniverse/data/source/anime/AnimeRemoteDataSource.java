@@ -21,62 +21,38 @@ public class AnimeRemoteDataSource extends BaseAnimeRemoteDataSource{
         this.animeApiService = ServiceLocator.getInstance().getAnimeApiService();
     }
 
+
     @Override
     public void getAnimeByName(String q, String nameAnime) {
-        Call<AnimeApiResponse> animeResponseCall = animeApiService.getAnimeByName(q);
-        animeResponseCall.enqueue(new Callback<AnimeApiResponse>(){
-            @Override
-            public void onResponse(@NonNull Call<AnimeApiResponse> call,
-                                   @NonNull Response<AnimeApiResponse> response) {
-                if(response.body() != null && response.isSuccessful() && !response.body().getStatus().equals("error")){
-                    animeCallback.onSuccessFromRemote(response.body(), System.currentTimeMillis());
-                }else{
-                    animeCallback.onFailureFromRemote(new Exception(API_KEY_ERROR));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<AnimeApiResponse> call, Throwable t) {
-                animeCallback.onFailureFromRemote(new Exception(RETROFIT_ERROR));
-            }
-
-        });
 
     }
 
     @Override
-    public void getAnimeByIdFull(String q, int id) {
-        Call<AnimeApiResponse> animeResponseCall = animeApiService.getAnimeByIdFull(q, id);
-        animeResponseCall.enqueue(new Callback<AnimeApiResponse>(){
-            @Override
-            public void onResponse(@NonNull Call<AnimeApiResponse> call,
-                                   @NonNull Response<AnimeApiResponse> response) {
-                if(response.body() != null && response.isSuccessful() && !response.body().getStatus().equals("error")){
-                    animeCallback.onSuccessFromRemote(response.body(), System.currentTimeMillis());
-                }else{
-                    animeCallback.onFailureFromRemote(new Exception(API_KEY_ERROR));
-                }
-            }
+    public void getAnimeByIdFull(String anime, int id) {
 
-            @Override
-            public void onFailure(Call<AnimeApiResponse> call, Throwable t) {
-                animeCallback.onFailureFromRemote(new Exception(RETROFIT_ERROR));
-            }
-
-        });
     }
 
     @Override
-    public void getAnimeById(String q, int id) {
-        Call<AnimeApiResponse> animeResponseCall = animeApiService.getAnimeById(q, id);
+    public void getAnimeById(String anime, int id) {
+
+    }
+
+    @Override
+    public void getAnimeTop() {
+        Call<AnimeApiResponse> animeResponseCall = animeApiService.getAnimeTop();
+
+        System.out.println(" CIAONE " + animeResponseCall.toString());
+
         animeResponseCall.enqueue(new Callback<AnimeApiResponse>(){
+
             @Override
             public void onResponse(@NonNull Call<AnimeApiResponse> call,
                                    @NonNull Response<AnimeApiResponse> response) {
-                if(response.body() != null && response.isSuccessful() && !response.body().getStatus().equals("error")){
+                if(response.isSuccessful()&& response.body() != null){
+                    System.out.println("HO STAMPATO " + response.body());
                     animeCallback.onSuccessFromRemote(response.body(), System.currentTimeMillis());
                 }else{
-                    animeCallback.onFailureFromRemote(new Exception(API_KEY_ERROR));
+                    animeCallback.onFailureFromRemote(new Exception());
                 }
             }
 

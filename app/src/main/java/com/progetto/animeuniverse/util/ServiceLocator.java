@@ -26,7 +26,10 @@ import com.progetto.animeuniverse.service.AnimeApiService;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -61,8 +64,11 @@ public class ServiceLocator {
     }
 
     public AnimeApiService getAnimeApiService() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(10,TimeUnit.SECONDS).readTimeout(10, TimeUnit.SECONDS).addInterceptor(interceptor).build();
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.ANIME_API_BASE_URL).
-                addConverterFactory(GsonConverterFactory.create()).build();
+                addConverterFactory(GsonConverterFactory.create()).client(client).build();
         return retrofit.create(AnimeApiService.class);
     }
 

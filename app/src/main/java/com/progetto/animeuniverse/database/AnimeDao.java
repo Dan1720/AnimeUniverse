@@ -16,7 +16,7 @@ public interface AnimeDao {
     List<Anime> getAll();
 
     @Query("SELECT * FROM anime WHERE id = :id")
-    Anime getAnime(long id);
+    Anime getAnime(int id);
 
     @Query("SELECT * FROM anime WHERE is_favorite = 1 ORDER BY rating DESC")
     List<Anime> getFavoriteAnime();

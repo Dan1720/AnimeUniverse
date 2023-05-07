@@ -4,6 +4,7 @@ import static com.progetto.animeuniverse.util.Constants.FRESH_TIMEOUT;
 
 import android.util.Log;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 
 import com.progetto.animeuniverse.data.source.anime.AnimeCallback;
@@ -26,19 +27,19 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
     private final MutableLiveData<Result> favoriteAnimeMutableLiveData;
     private final BaseAnimeRemoteDataSource animeRemoteDataSource;
     private final BaseAnimeLocalDataSource animeLocalDataSource;
-    private final BaseFavoriteAnimeDataSource backupDataSource;
+    private final BaseFavoriteAnimeDataSource favoriteAnimeDataSource;
 
     public AnimeRepositoryWithLiveData(BaseAnimeRemoteDataSource animeRemoteDataSource,
                                        BaseAnimeLocalDataSource animeLocalDataSource,
-                                       BaseFavoriteAnimeDataSource backupDataSource) {
+                                       BaseFavoriteAnimeDataSource favoriteAnimeDataSource) {
         allAnimeMutableLiveData = new MutableLiveData<>();
         favoriteAnimeMutableLiveData = new MutableLiveData<>();
         this.animeRemoteDataSource = animeRemoteDataSource;
         this.animeLocalDataSource = animeLocalDataSource;
-        this.backupDataSource = backupDataSource;
+        this.favoriteAnimeDataSource = favoriteAnimeDataSource;
         this.animeRemoteDataSource.setAnimeCallback(this);
         this.animeLocalDataSource.setAnimeCallback(this);
-        this.backupDataSource.setAnimeCallback(this);
+        this.favoriteAnimeDataSource.setAnimeCallback(this);
     }
 
 
@@ -55,6 +56,11 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
     @Override
     public void fetchAnimeById(String q, int id) {
         animeRemoteDataSource.getAnimeById(q, id);
+    }
+
+    @Override
+    public void fetchAnimeTop() {
+        animeRemoteDataSource.getAnimeTop();
     }
 
     @Override
@@ -91,9 +97,25 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
     }
 
     @Override
+    public MutableLiveData<Result> fetchAnimeTop(long lastUpdate) {
+        long currentTime = System.currentTimeMillis();
+        if(currentTime - lastUpdate > FRESH_TIMEOUT){
+            animeRemoteDataSource.getAnimeTop();
+            String animeApiResponse = new AnimeApiResponse().toString();
+            System.out.println("Risposta:" + animeApiResponse);
+            String animeResponse = new AnimeResponse().toString();
+            System.out.println("Risposta:" + animeResponse);
+
+        }else{
+            animeLocalDataSource.getAnime();
+        }
+        return allAnimeMutableLiveData;
+    }
+
+    @Override
     public MutableLiveData<Result> getFavoriteAnime(boolean firstLoading) {
         if(firstLoading){
-            backupDataSource.getFavoriteAnime();
+            favoriteAnimeDataSource.getFavoriteAnime();
         }else {
             animeLocalDataSource.getFavoriteAnime();
         }
@@ -104,9 +126,9 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
     public void updateAnime(Anime anime) {
         animeLocalDataSource.updateAnime(anime);
         if(anime.isFavorite()){
-            backupDataSource.addFavoriteAnime(anime);
+            favoriteAnimeDataSource.addFavoriteAnime(anime);
         }else {
-            backupDataSource.deleteFavoriteAnime(anime);
+            favoriteAnimeDataSource.deleteFavoriteAnime(anime);
         }
     }
 
@@ -165,7 +187,7 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
             }
         }
         if(!notSynchronizedAnimeList.isEmpty()){
-            backupDataSource.synchronizeFavoriteAnime(notSynchronizedAnimeList);
+            favoriteAnimeDataSource.synchronizeFavoriteAnime(notSynchronizedAnimeList);
         }
         favoriteAnimeMutableLiveData.postValue(new Result.AnimeResponseSuccess(new AnimeResponse(animeList)));
     }
@@ -186,10 +208,10 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
         if(favoriteAnimeMutableLiveData.getValue() != null &&
                 favoriteAnimeMutableLiveData.getValue().isSuccess()){
             favoriteAnime.clear();
-            Result.AnimeResponseSuccess result = new Result.AnimeResponseSuccess(new AnimeResponse(favoriteAnime));
+            Result.AnimeResponseSuccess result = new Result.AnimeResponseSuccess(new AnimeResponse( favoriteAnime));
             favoriteAnimeMutableLiveData.postValue(result);
         }
-        backupDataSource.deleteAllFavoriteAnime();
+        favoriteAnimeDataSource.deleteAllFavoriteAnime();
     }
 
     @Override
@@ -199,7 +221,7 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
                 anime.setSynchronized(true);
             }
             animeLocalDataSource.insertAnime(animeList);
-            favoriteAnimeMutableLiveData.postValue(new Result.AnimeResponseSuccess(new AnimeResponse(animeList)));
+            favoriteAnimeMutableLiveData.postValue(new Result.AnimeResponseSuccess(new AnimeResponse( animeList)));
         }
     }
 
@@ -209,7 +231,7 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
             anime.setSynchronized(false);
         }
         animeLocalDataSource.updateAnime(anime);
-        backupDataSource.getFavoriteAnime();
+        favoriteAnimeDataSource.getFavoriteAnime();
     }
 
     @Override
