@@ -22,16 +22,7 @@ public class Anime  implements Parcelable {
     @SerializedName("url")
     private String url;
 
-    @Embedded(prefix = "images_")
-    @SerializedName("images")
-    private ArrayList<AnimeImages> images;
-    @Embedded(prefix = "trailer_")
-    @SerializedName("trailer")
-    private ArrayList<AnimeTrailer> trailer;
-
-    @SerializedName("approved")
     private boolean approved;
-
     @SerializedName("title")
     private String title;
     @SerializedName("type")
@@ -44,45 +35,24 @@ public class Anime  implements Parcelable {
     private String status;
     @SerializedName("duration")
     private String duration;
-
     @SerializedName("rating")
     private String rating;
     @SerializedName("popularity")
     private int popularity;
     @SerializedName("year")
     private int year;
-
-    @Embedded(prefix = "producers_")
-    @SerializedName("producers")
-    private ArrayList<AnimeProducers> producers;
-    @Embedded(prefix = "studios_")
-    @SerializedName("studios")
-    private ArrayList<AnimeStudios> studios;
-    @Embedded(prefix = "genres_")
-    @SerializedName("genres")
-    private ArrayList<AnimeGenres> genres;
-    @Embedded(prefix = "streaming_")
-    @SerializedName("streaming")
-    private ArrayList<AnimeStreaming> streaming;
-    @SerializedName("synopsis")
-    private String synopsis;
     @ColumnInfo(name = "is_favorite")
     private boolean isFavorite;
     @ColumnInfo(name = "is_synchronized")
     private boolean isSynchronized;
+    @SerializedName("synopsis")
+    private String synopsis;
 
-    public Anime(){};
-
-    public Anime(int id, String url, ArrayList<AnimeImages> images, ArrayList<AnimeTrailer> trailer,
-                 boolean approved, String title, String type, String source, int numEpisodes,
-                 String status, String duration, String rating, int popularity, int year,
-                 ArrayList<AnimeProducers> producers, ArrayList<AnimeStudios> studios,
-                 ArrayList<AnimeGenres> genres, ArrayList<AnimeStreaming> streaming,
-                 String synopsis, boolean isFavorite, boolean isSynchronized) {
+    public Anime(int id, String url, boolean approved, String title, String type, String source,
+                 int numEpisodes, String status, String duration, String rating, int popularity,
+                 int year, boolean isFavorite, boolean isSynchronized, String synopsis) {
         this.id = id;
         this.url = url;
-        this.images = images;
-        this.trailer = trailer;
         this.approved = approved;
         this.title = title;
         this.type = type;
@@ -93,20 +63,14 @@ public class Anime  implements Parcelable {
         this.rating = rating;
         this.popularity = popularity;
         this.year = year;
-        this.producers = producers;
-        this.studios = studios;
-        this.genres = genres;
-        this.streaming = streaming;
-        this.synopsis = synopsis;
         this.isFavorite = isFavorite;
         this.isSynchronized = isSynchronized;
+        this.synopsis = synopsis;
     }
 
     protected Anime(Parcel in) {
         id = in.readInt();
         url = in.readString();
-        images = in.createTypedArrayList(AnimeImages.CREATOR);
-        trailer = in.createTypedArrayList(AnimeTrailer.CREATOR);
         approved = in.readByte() != 0;
         title = in.readString();
         type = in.readString();
@@ -117,13 +81,9 @@ public class Anime  implements Parcelable {
         rating = in.readString();
         popularity = in.readInt();
         year = in.readInt();
-        producers = in.createTypedArrayList(AnimeProducers.CREATOR);
-        studios = in.createTypedArrayList(AnimeStudios.CREATOR);
-        genres = in.createTypedArrayList(AnimeGenres.CREATOR);
-        streaming = in.createTypedArrayList(AnimeStreaming.CREATOR);
-        synopsis = in.readString();
         isFavorite = in.readByte() != 0;
         isSynchronized = in.readByte() != 0;
+        synopsis = in.readString();
     }
 
     public static final Creator<Anime> CREATOR = new Creator<Anime>() {
@@ -152,22 +112,6 @@ public class Anime  implements Parcelable {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public ArrayList<AnimeImages> getImages() {
-        return images;
-    }
-
-    public void setImages(ArrayList<AnimeImages> images) {
-        this.images = images;
-    }
-
-    public ArrayList<AnimeTrailer> getTrailer() {
-        return trailer;
-    }
-
-    public void setTrailer(ArrayList<AnimeTrailer> trailer) {
-        this.trailer = trailer;
     }
 
     public boolean isApproved() {
@@ -250,46 +194,6 @@ public class Anime  implements Parcelable {
         this.year = year;
     }
 
-    public ArrayList<AnimeProducers> getProducers() {
-        return producers;
-    }
-
-    public void setProducers(ArrayList<AnimeProducers> producers) {
-        this.producers = producers;
-    }
-
-    public ArrayList<AnimeStudios> getStudios() {
-        return studios;
-    }
-
-    public void setStudios(ArrayList<AnimeStudios> studios) {
-        this.studios = studios;
-    }
-
-    public ArrayList<AnimeGenres> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(ArrayList<AnimeGenres> genres) {
-        this.genres = genres;
-    }
-
-    public ArrayList<AnimeStreaming> getStreaming() {
-        return streaming;
-    }
-
-    public void setStreaming(ArrayList<AnimeStreaming> streaming) {
-        this.streaming = streaming;
-    }
-
-    public String getSynopsis() {
-        return synopsis;
-    }
-
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
-    }
-
     public boolean isFavorite() {
         return isFavorite;
     }
@@ -306,6 +210,14 @@ public class Anime  implements Parcelable {
         isSynchronized = aSynchronized;
     }
 
+    public String getSynopsis() {
+        return synopsis;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -315,8 +227,6 @@ public class Anime  implements Parcelable {
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(url);
-        dest.writeTypedList(images);
-        dest.writeTypedList(trailer);
         dest.writeByte((byte) (approved ? 1 : 0));
         dest.writeString(title);
         dest.writeString(type);
@@ -327,12 +237,8 @@ public class Anime  implements Parcelable {
         dest.writeString(rating);
         dest.writeInt(popularity);
         dest.writeInt(year);
-        dest.writeTypedList(producers);
-        dest.writeTypedList(studios);
-        dest.writeTypedList(genres);
-        dest.writeTypedList(streaming);
-        dest.writeString(synopsis);
         dest.writeByte((byte) (isFavorite ? 1 : 0));
         dest.writeByte((byte) (isSynchronized ? 1 : 0));
+        dest.writeString(synopsis);
     }
 }
