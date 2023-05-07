@@ -79,9 +79,9 @@ public class AnimeRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.
         }
 
         public void bind(Anime anime){
-            Glide.with(application)
+           /* Glide.with(application)
                     .load(anime.getImages().get(getAdapterPosition()).getJpg().getImageUrlJpg())
-                    .into(imageViewAnimeCoverCard);
+                    .into(imageViewAnimeCoverCard);*/
         }
 
         @Override

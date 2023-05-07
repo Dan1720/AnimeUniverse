@@ -28,7 +28,7 @@ public abstract class AnimeRoomDatabase extends RoomDatabase {
             synchronized (AnimeRoomDatabase.class){
                 if(INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            AnimeRoomDatabase.class, ANIMEUNIVERSE_DATABASE_NAME).build();
+                            AnimeRoomDatabase.class, ANIMEUNIVERSE_DATABASE_NAME).fallbackToDestructiveMigration().build();
                 }
 
             }

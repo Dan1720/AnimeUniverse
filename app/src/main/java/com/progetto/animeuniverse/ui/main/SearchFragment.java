@@ -81,7 +81,7 @@ public class SearchFragment extends Fragment{
         SearchListAdapter adapter = new SearchListAdapter(animeList, new SearchListAdapter.OnItemClickListener() {
             @Override
             public void onAnimeClick(Anime anime) {
-                Snackbar.make(view, anime.getTitle(), Snackbar.LENGTH_SHORT).show();
+                // Snackbar.make(view, anime.getTitle(), Snackbar.LENGTH_SHORT).show();
             }
         });
         recyclerViewSearch.setAdapter(adapter);

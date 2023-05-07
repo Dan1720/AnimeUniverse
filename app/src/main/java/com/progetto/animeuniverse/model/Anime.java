@@ -21,14 +21,17 @@ public class Anime  implements Parcelable {
     private int id;
     @SerializedName("url")
     private String url;
+
     @Embedded(prefix = "images_")
     @SerializedName("images")
     private ArrayList<AnimeImages> images;
     @Embedded(prefix = "trailer_")
     @SerializedName("trailer")
     private ArrayList<AnimeTrailer> trailer;
+
     @SerializedName("approved")
     private boolean approved;
+
     @SerializedName("title")
     private String title;
     @SerializedName("type")
@@ -48,6 +51,7 @@ public class Anime  implements Parcelable {
     private int popularity;
     @SerializedName("year")
     private int year;
+
     @Embedded(prefix = "producers_")
     @SerializedName("producers")
     private ArrayList<AnimeProducers> producers;
@@ -60,69 +64,66 @@ public class Anime  implements Parcelable {
     @Embedded(prefix = "streaming_")
     @SerializedName("streaming")
     private ArrayList<AnimeStreaming> streaming;
+    @SerializedName("synopsis")
+    private String synopsis;
     @ColumnInfo(name = "is_favorite")
     private boolean isFavorite;
     @ColumnInfo(name = "is_synchronized")
     private boolean isSynchronized;
 
-
-
-    @SerializedName("synopsis")
-    private String synopsis;
-
     public Anime(){};
 
-    public Anime(int id, String title, String url, ArrayList<AnimeImages> images,
-                 ArrayList<AnimeTrailer> trailer, boolean approved, String type, String source,
-                 int numEpisodes, String status, String duration,
-                 String rating, int year, ArrayList<AnimeProducers> producers, ArrayList<AnimeStudios> studios,
-                 ArrayList<AnimeGenres> genres, ArrayList<AnimeStreaming> streaming, boolean isFavorite,
-                 boolean isSynchronized, int popularity,String synopsis ) {
+    public Anime(int id, String url, ArrayList<AnimeImages> images, ArrayList<AnimeTrailer> trailer,
+                 boolean approved, String title, String type, String source, int numEpisodes,
+                 String status, String duration, String rating, int popularity, int year,
+                 ArrayList<AnimeProducers> producers, ArrayList<AnimeStudios> studios,
+                 ArrayList<AnimeGenres> genres, ArrayList<AnimeStreaming> streaming,
+                 String synopsis, boolean isFavorite, boolean isSynchronized) {
         this.id = id;
-        this.title = title;
         this.url = url;
         this.images = images;
         this.trailer = trailer;
         this.approved = approved;
+        this.title = title;
         this.type = type;
         this.source = source;
         this.numEpisodes = numEpisodes;
         this.status = status;
         this.duration = duration;
         this.rating = rating;
+        this.popularity = popularity;
         this.year = year;
         this.producers = producers;
         this.studios = studios;
         this.genres = genres;
         this.streaming = streaming;
+        this.synopsis = synopsis;
         this.isFavorite = isFavorite;
         this.isSynchronized = isSynchronized;
-        this.popularity = popularity;
-        this.synopsis = synopsis;
     }
 
     protected Anime(Parcel in) {
         id = in.readInt();
-        title = in.readString();
         url = in.readString();
         images = in.createTypedArrayList(AnimeImages.CREATOR);
         trailer = in.createTypedArrayList(AnimeTrailer.CREATOR);
         approved = in.readByte() != 0;
+        title = in.readString();
         type = in.readString();
         source = in.readString();
         numEpisodes = in.readInt();
         status = in.readString();
         duration = in.readString();
         rating = in.readString();
+        popularity = in.readInt();
         year = in.readInt();
         producers = in.createTypedArrayList(AnimeProducers.CREATOR);
         studios = in.createTypedArrayList(AnimeStudios.CREATOR);
         genres = in.createTypedArrayList(AnimeGenres.CREATOR);
         streaming = in.createTypedArrayList(AnimeStreaming.CREATOR);
+        synopsis = in.readString();
         isFavorite = in.readByte() != 0;
         isSynchronized = in.readByte() != 0;
-        popularity = in.readInt();
-        synopsis = in.readString();
     }
 
     public static final Creator<Anime> CREATOR = new Creator<Anime>() {
@@ -143,14 +144,6 @@ public class Anime  implements Parcelable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getUrl() {
@@ -183,6 +176,14 @@ public class Anime  implements Parcelable {
 
     public void setApproved(boolean approved) {
         this.approved = approved;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getType() {
@@ -233,19 +234,20 @@ public class Anime  implements Parcelable {
         this.rating = rating;
     }
 
+    public int getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(int popularity) {
+        this.popularity = popularity;
+    }
+
     public int getYear() {
         return year;
     }
 
     public void setYear(int year) {
         this.year = year;
-    }
-    public String getSynopsis() {
-        return synopsis;
-    }
-
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
     }
 
     public ArrayList<AnimeProducers> getProducers() {
@@ -280,6 +282,14 @@ public class Anime  implements Parcelable {
         this.streaming = streaming;
     }
 
+    public String getSynopsis() {
+        return synopsis;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
+    }
+
     public boolean isFavorite() {
         return isFavorite;
     }
@@ -296,15 +306,6 @@ public class Anime  implements Parcelable {
         isSynchronized = aSynchronized;
     }
 
-    public int getPopularity() {
-        return popularity;
-    }
-
-    public void setPopularity(int popularity) {
-        this.popularity = popularity;
-    }
-
-
     @Override
     public int describeContents() {
         return 0;
@@ -313,25 +314,25 @@ public class Anime  implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(id);
-        dest.writeString(title);
         dest.writeString(url);
         dest.writeTypedList(images);
         dest.writeTypedList(trailer);
         dest.writeByte((byte) (approved ? 1 : 0));
+        dest.writeString(title);
         dest.writeString(type);
         dest.writeString(source);
         dest.writeInt(numEpisodes);
         dest.writeString(status);
         dest.writeString(duration);
         dest.writeString(rating);
+        dest.writeInt(popularity);
         dest.writeInt(year);
         dest.writeTypedList(producers);
         dest.writeTypedList(studios);
         dest.writeTypedList(genres);
         dest.writeTypedList(streaming);
+        dest.writeString(synopsis);
         dest.writeByte((byte) (isFavorite ? 1 : 0));
         dest.writeByte((byte) (isSynchronized ? 1 : 0));
-        dest.writeInt(popularity);
-        dest.writeString(synopsis);
     }
 }

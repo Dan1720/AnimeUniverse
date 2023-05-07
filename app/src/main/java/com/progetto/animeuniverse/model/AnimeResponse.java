@@ -72,6 +72,6 @@ public class AnimeResponse implements Parcelable {
         return "AnimeResponse{" +
                 "isLoading=" + isLoading +
                 ", animeList=" + animeList +
-                '}';
+                '}' + super.toString();
     }
 }

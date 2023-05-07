@@ -123,11 +123,11 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         animeViewModel.getAnimeTop(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
             System.out.println("Result: "+ result.isSuccess());
             if(result.isSuccess()){
-                AnimeResponse animeResponse = ((Result.AnimeResponseSuccess) result).getData();
+                /*AnimeResponse animeResponse = ((Result.AnimeResponseSuccess) result).getData();
                 List<Anime> fetchedAnime = animeResponse.getAnimeList();
                 if(!animeViewModel.isLoading()){
                     if(animeViewModel.isFirstLoading()){
-                        animeViewModel.setCount(((AnimeApiResponse)animeResponse).getPagination().getItems().getCount());
+                        //animeViewModel.setCount(((AnimeApiResponse)animeResponse).getPagination().getItems().getCount());
                         animeViewModel.setFirstLoading(false);
                         this.animeList.addAll(fetchedAnime);
                         animeRecyclerViewAdapter.notifyItemRangeInserted(0, this.animeList.size());
@@ -151,7 +151,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
                         animeList.add(fetchedAnime.get(i));
                     }
                     animeRecyclerViewAdapter.notifyItemRangeInserted(initialSize, animeList.size());
-                }
+                }*/
             }else {
                 ErrorMessagesUtil errorMessagesUtil =
                         new ErrorMessagesUtil(requireActivity().getApplication());
@@ -181,13 +181,13 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
 
     @Override
     public void onAnimeFavoriteStatusChanged(Anime anime) {
-        if(anime.isFavorite()){
+        /*if(anime.isFavorite()){
             Snackbar.make(requireActivity().findViewById(android.R.id.content),
                     R.string.add_anime_favorite, Snackbar.LENGTH_LONG).show();
         }else{
             Snackbar.make(requireActivity().findViewById(android.R.id.content),
                     R.string.remove_anime_favorite, Snackbar.LENGTH_LONG).show();
-        }
+        }*/
     }
 
     private boolean isConnected(){

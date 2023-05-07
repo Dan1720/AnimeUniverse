@@ -62,7 +62,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.An
             itemView.setOnClickListener(this);
         }
         public void bind(Anime anime){
-            textViewTitle.setText(anime.getTitle());
+          //  textViewTitle.setText(anime.getTitle());
 
         }
 

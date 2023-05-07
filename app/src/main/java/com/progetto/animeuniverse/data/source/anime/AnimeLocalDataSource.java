@@ -39,8 +39,8 @@ public class AnimeLocalDataSource extends BaseAnimeLocalDataSource{
     @Override
     public void getFavoriteAnime() {
         AnimeRoomDatabase.databaseWriteExecutor.execute(()->{
-            List<Anime> favoriteAnime = animeDao.getFavoriteAnime();
-            animeCallback.onAnimeFavoriteStatusChanged(favoriteAnime);
+         //   List<Anime> favoriteAnime = animeDao.getFavoriteAnime();
+            //animeCallback.onAnimeFavoriteStatusChanged(favoriteAnime);
         });
     }
 
@@ -51,14 +51,14 @@ public class AnimeLocalDataSource extends BaseAnimeLocalDataSource{
                 int rowUpdatedCounter = animeDao.updateSingleFavoriteAnime(anime);
                 if(rowUpdatedCounter == 1){
                     Anime updateAnime = animeDao.getAnime(anime.getId());
-                    animeCallback.onAnimeFavoriteStatusChanged(updateAnime, animeDao.getFavoriteAnime());
+                    //animeCallback.onAnimeFavoriteStatusChanged(updateAnime, animeDao.getFavoriteAnime());
                 }else{
                     animeCallback.onFailureFromLocal(new Exception(UNEXPECTED_ERROR));
                 }
             }else{
                 List<Anime> allAnime = animeDao.getAll();
                 for(Anime n: allAnime){
-                    n.setSynchronized(false);
+                   // n.setSynchronized(false);
                     animeDao.updateSingleFavoriteAnime(n);
                 }
             }
@@ -68,7 +68,7 @@ public class AnimeLocalDataSource extends BaseAnimeLocalDataSource{
     @Override
     public void deleteFavoriteAnime() {
         AnimeRoomDatabase.databaseWriteExecutor.execute(()->{
-            List<Anime> favoriteAnime = animeDao.getFavoriteAnime();
+          /*  List<Anime> favoriteAnime = animeDao.getFavoriteAnime();
             for(Anime anime : favoriteAnime){
                 anime.setFavorite(false);
             }
@@ -77,7 +77,7 @@ public class AnimeLocalDataSource extends BaseAnimeLocalDataSource{
                 animeCallback.onDeleteFavoriteAnimeSuccess(favoriteAnime);
             }else{
                 animeCallback.onFailureFromLocal(new Exception(UNEXPECTED_ERROR));
-            }
+            }*/
         });
     }
 
@@ -109,7 +109,7 @@ public class AnimeLocalDataSource extends BaseAnimeLocalDataSource{
                 List<Anime> allAnime = animeDao.getAll();
                 for (Anime anime : allAnime){
                     if(animeList.contains(anime)){
-                        anime.setSynchronized(true);
+                        //anime.setSynchronized(true);
                         animeList.set(animeList.indexOf(anime), anime);
                     }
                 }

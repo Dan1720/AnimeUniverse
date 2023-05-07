@@ -125,11 +125,11 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
     @Override
     public void updateAnime(Anime anime) {
         animeLocalDataSource.updateAnime(anime);
-        if(anime.isFavorite()){
+        //    if(anime.isFavorite()){
             favoriteAnimeDataSource.addFavoriteAnime(anime);
-        }else {
-            favoriteAnimeDataSource.deleteFavoriteAnime(anime);
-        }
+        //  }else {
+        //    favoriteAnimeDataSource.deleteFavoriteAnime(anime);
+        //  }
     }
 
     @Override
@@ -182,14 +182,14 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
     public void onAnimeFavoriteStatusChanged(List<Anime> animeList) {
         List<Anime> notSynchronizedAnimeList = new ArrayList<>();
         for(Anime anime : animeList){
-            if(!anime.isSynchronized()){
+            //   if(!anime.isSynchronized()){
                 notSynchronizedAnimeList.add(anime);
             }
-        }
-        if(!notSynchronizedAnimeList.isEmpty()){
-            favoriteAnimeDataSource.synchronizeFavoriteAnime(notSynchronizedAnimeList);
-        }
-        favoriteAnimeMutableLiveData.postValue(new Result.AnimeResponseSuccess(new AnimeResponse(animeList)));
+        //  }
+    //   if(!notSynchronizedAnimeList.isEmpty()){
+    //      favoriteAnimeDataSource.synchronizeFavoriteAnime(notSynchronizedAnimeList);
+    //    }
+    //  favoriteAnimeMutableLiveData.postValue(new Result.AnimeResponseSuccess(new AnimeResponse(animeList)));
     }
 
     @Override
@@ -218,7 +218,7 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
     public void onSuccessFromCloudReading(List<Anime> animeList) {
         if(animeList != null){
             for(Anime anime : animeList){
-                anime.setSynchronized(true);
+                //  anime.setSynchronized(true);
             }
             animeLocalDataSource.insertAnime(animeList);
             favoriteAnimeMutableLiveData.postValue(new Result.AnimeResponseSuccess(new AnimeResponse( animeList)));
@@ -227,11 +227,11 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
 
     @Override
     public void onSuccessFromCloudWriting(Anime anime) {
-        if(anime != null && !anime.isFavorite()){
-            anime.setSynchronized(false);
-        }
-        animeLocalDataSource.updateAnime(anime);
-        favoriteAnimeDataSource.getFavoriteAnime();
+        // if(anime != null && !anime.isFavorite()){
+        //     anime.setSynchronized(false);
+        //  }
+    //   animeLocalDataSource.updateAnime(anime);
+    //  favoriteAnimeDataSource.getFavoriteAnime();
     }
 
     @Override

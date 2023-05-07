@@ -18,8 +18,8 @@ public interface AnimeDao {
     @Query("SELECT * FROM anime WHERE id = :id")
     Anime getAnime(int id);
 
-    @Query("SELECT * FROM anime WHERE is_favorite = 1 ORDER BY rating DESC")
-    List<Anime> getFavoriteAnime();
+   /* @Query("SELECT * FROM anime WHERE is_favorite = 1 ORDER BY rating DESC")
+    List<Anime> getFavoriteAnime();*/
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     List<Long> insertAnimeList(List<Anime> animeList);
@@ -42,6 +42,6 @@ public interface AnimeDao {
     @Query("DELETE FROM anime")
     int deleteAll();
 
-    @Query("DELETE FROM anime WHERE is_favorite = 0")
-    void deleteNotFavoriteNews();
+   /* @Query("DELETE FROM anime WHERE is_favorite = 0")
+    void deleteNotFavoriteNews();*/
 }

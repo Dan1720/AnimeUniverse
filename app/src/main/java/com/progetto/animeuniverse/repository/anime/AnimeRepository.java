@@ -176,20 +176,20 @@ public class AnimeRepository implements IAnimeRepository{
     @Override
     public void getFavoriteAnime() {
         AnimeRoomDatabase.databaseWriteExecutor.execute(()->{
-            animeResponseCallback.onSuccess(animeDao.getFavoriteAnime(), System.currentTimeMillis());
+            //    animeResponseCallback.onSuccess(animeDao.getFavoriteAnime(), System.currentTimeMillis());
         });
     }
 
     @Override
     public void deleteFavoriteAnime() {
         AnimeRoomDatabase.databaseWriteExecutor.execute(()->{
-            List<Anime> favoriteAnime = animeDao.getFavoriteAnime();
-            for(Anime anime : favoriteAnime){
-                anime.setFavorite(false);
-            }
-            animeDao.updateListFavoriteAnime(favoriteAnime);
-            animeResponseCallback.onSuccess(animeDao.getFavoriteAnime(), System.currentTimeMillis());
-        });
+            //      List<Anime> favoriteAnime = animeDao.getFavoriteAnime();
+                    //       for(Anime anime : favoriteAnime){
+                    //          anime.setFavorite(false);
+            //   }
+                //     animeDao.updateListFavoriteAnime(favoriteAnime);
+                //    animeResponseCallback.onSuccess(animeDao.getFavoriteAnime(), System.currentTimeMillis());
+                 });
     }
 
     private void readDataFromDatabase(long lastUpdate){
