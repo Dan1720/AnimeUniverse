@@ -9,7 +9,7 @@ public class Constants {
     public static final String ENCRYPTED_DATA_FILE_NAME = "com.progetto.animeuniverse.encrypted_file.txt";
     public static final String ANIMEUNIVERSE_DATABASE_NAME = "animeuniverse_db";
 
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 1;
 
     // Constants for managing errors
     public static final String RETROFIT_ERROR = "retrofit_error";
