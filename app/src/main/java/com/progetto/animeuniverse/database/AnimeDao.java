@@ -45,3 +45,4 @@ public interface AnimeDao {
    /* @Query("DELETE FROM anime WHERE is_favorite = 0")
     void deleteNotFavoriteNews();*/
 }
+

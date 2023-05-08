@@ -66,7 +66,6 @@ public class Anime  implements Parcelable {
     @TypeConverters(Converter.class)
     @SerializedName("genres")
     private List<AnimeGenres> genres;
-
     @Embedded(prefix = "images_")
     @SerializedName("images")
     private AnimeImages images;

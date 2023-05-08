@@ -5,11 +5,17 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.room.Embedded;
+import androidx.room.TypeConverters;
+
+import com.google.gson.annotations.SerializedName;
+import com.progetto.animeuniverse.util.Converter;
 
 public class AnimeImages implements Parcelable {
-    @Embedded(prefix = "jpg_images")
+    @Embedded(prefix = "jpg_")
+    @SerializedName("jpg")
     private AnimeImageUrls jpgImages;
-    @Embedded(prefix = "webp_images")
+    @Embedded(prefix = "webp_")
+    @SerializedName("webp")
     private AnimeImageUrls webpImages;
 
     public AnimeImages(AnimeImageUrls jpgImages, AnimeImageUrls webpImages) {

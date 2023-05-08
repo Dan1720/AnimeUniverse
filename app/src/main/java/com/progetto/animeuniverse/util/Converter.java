@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.progetto.animeuniverse.model.AnimeGenres;
 
+import com.progetto.animeuniverse.model.AnimeImageUrls;
+import com.progetto.animeuniverse.model.AnimeImages;
 import com.progetto.animeuniverse.model.AnimeProducers;
 import com.progetto.animeuniverse.model.AnimeStudios;
 
