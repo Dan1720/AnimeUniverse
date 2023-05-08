@@ -6,21 +6,20 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.room.Embedded;
 
-public class AnimeImages implements Parcelable{
-    @Embedded
-    private AnimeImagesJpg jpg;
-    @Embedded
-    private AnimeImagesWebp webp;
+public class AnimeImages implements Parcelable {
+    @Embedded(prefix = "jpg_images")
+    private AnimeImageUrls jpgImages;
+    @Embedded(prefix = "webp_images")
+    private AnimeImageUrls webpImages;
 
-
-    public AnimeImages(AnimeImagesJpg jpg, AnimeImagesWebp webp) {
-        this.jpg = jpg;
-        this.webp = webp;
+    public AnimeImages(AnimeImageUrls jpgImages, AnimeImageUrls webpImages) {
+        this.jpgImages = jpgImages;
+        this.webpImages = webpImages;
     }
 
     protected AnimeImages(Parcel in) {
-        jpg = in.readParcelable(AnimeImagesJpg.class.getClassLoader());
-        webp = in.readParcelable(AnimeImagesWebp.class.getClassLoader());
+        jpgImages = in.readParcelable(AnimeImageUrls.class.getClassLoader());
+        webpImages = in.readParcelable(AnimeImageUrls.class.getClassLoader());
     }
 
     public static final Creator<AnimeImages> CREATOR = new Creator<AnimeImages>() {
@@ -35,30 +34,21 @@ public class AnimeImages implements Parcelable{
         }
     };
 
-    public AnimeImagesJpg getJpg() {
-        return jpg;
+    public AnimeImageUrls getJpgImages() {
+        return jpgImages;
     }
 
-    public void setJpg(AnimeImagesJpg jpg) {
-        this.jpg = jpg;
+    public void setJpgImages(AnimeImageUrls jpgImages) {
+        this.jpgImages = jpgImages;
     }
 
-    public AnimeImagesWebp getWebp() {
-        return webp;
+    public AnimeImageUrls getWebpImages() {
+        return webpImages;
     }
 
-    public void setWebp(AnimeImagesWebp webp) {
-        this.webp = webp;
+    public void setWebpImages(AnimeImageUrls webpImages) {
+        this.webpImages = webpImages;
     }
-
-    @Override
-    public String toString() {
-        return "AnimeImages{" +
-                "jpg=" + jpg +
-                ", webp=" + webp +
-                '}';
-    }
-
 
     @Override
     public int describeContents() {
@@ -67,7 +57,7 @@ public class AnimeImages implements Parcelable{
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeParcelable(jpg, flags);
-        dest.writeParcelable(webp, flags);
+        dest.writeParcelable(jpgImages, flags);
+        dest.writeParcelable(webpImages, flags);
     }
 }

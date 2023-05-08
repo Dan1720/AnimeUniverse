@@ -8,10 +8,14 @@ import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 
 import com.google.gson.annotations.SerializedName;
+import com.progetto.animeuniverse.util.Converter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity(tableName = "anime")
@@ -47,10 +51,27 @@ public class Anime  implements Parcelable {
     private boolean isSynchronized;
     @SerializedName("synopsis")
     private String synopsis;
+    @Embedded(prefix = "trailer_")
+    @SerializedName("trailer")
+    private AnimeTrailer trailer;
 
-    public Anime(int id, String url, boolean approved, String title, String type, String source,
-                 int numEpisodes, String status, String duration, String rating, int popularity,
-                 int year, boolean isFavorite, boolean isSynchronized, String synopsis) {
+    @TypeConverters(Converter.class)
+    @SerializedName("producers")
+    private List<AnimeProducers> producers;
+
+    @TypeConverters(Converter.class)
+    @SerializedName("studios")
+    private List<AnimeStudios> studios;
+
+    @TypeConverters(Converter.class)
+    @SerializedName("genres")
+    private List<AnimeGenres> genres;
+
+    @Embedded(prefix = "images_")
+    @SerializedName("images")
+    private AnimeImages images;
+
+    public Anime(int id, String url, boolean approved, String title, String type, String source, int numEpisodes, String status, String duration, String rating, int popularity, int year, boolean isFavorite, boolean isSynchronized, String synopsis, AnimeTrailer trailer, List<AnimeProducers> producers, List<AnimeStudios> studios, List<AnimeGenres> genres, AnimeImages images) {
         this.id = id;
         this.url = url;
         this.approved = approved;
@@ -66,6 +87,11 @@ public class Anime  implements Parcelable {
         this.isFavorite = isFavorite;
         this.isSynchronized = isSynchronized;
         this.synopsis = synopsis;
+        this.trailer = trailer;
+        this.producers = producers;
+        this.studios = studios;
+        this.genres = genres;
+        this.images = images;
     }
 
     protected Anime(Parcel in) {
@@ -84,6 +110,11 @@ public class Anime  implements Parcelable {
         isFavorite = in.readByte() != 0;
         isSynchronized = in.readByte() != 0;
         synopsis = in.readString();
+        trailer = in.readParcelable(AnimeTrailer.class.getClassLoader());
+        producers = in.createTypedArrayList(AnimeProducers.CREATOR);
+        studios = in.createTypedArrayList(AnimeStudios.CREATOR);
+        genres = in.createTypedArrayList(AnimeGenres.CREATOR);
+        images = in.readParcelable(AnimeImages.class.getClassLoader());
     }
 
     public static final Creator<Anime> CREATOR = new Creator<Anime>() {
@@ -218,6 +249,46 @@ public class Anime  implements Parcelable {
         this.synopsis = synopsis;
     }
 
+    public AnimeTrailer getTrailer() {
+        return trailer;
+    }
+
+    public void setTrailer(AnimeTrailer trailer) {
+        this.trailer = trailer;
+    }
+
+    public List<AnimeProducers> getProducers() {
+        return producers;
+    }
+
+    public void setProducers(List<AnimeProducers> producers) {
+        this.producers = producers;
+    }
+
+    public List<AnimeStudios> getStudios() {
+        return studios;
+    }
+
+    public void setStudios(List<AnimeStudios> studios) {
+        this.studios = studios;
+    }
+
+    public List<AnimeGenres> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<AnimeGenres> genres) {
+        this.genres = genres;
+    }
+
+    public AnimeImages getImages() {
+        return images;
+    }
+
+    public void setImages(AnimeImages images) {
+        this.images = images;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -240,5 +311,10 @@ public class Anime  implements Parcelable {
         dest.writeByte((byte) (isFavorite ? 1 : 0));
         dest.writeByte((byte) (isSynchronized ? 1 : 0));
         dest.writeString(synopsis);
+        dest.writeParcelable(trailer, flags);
+        dest.writeTypedList(producers);
+        dest.writeTypedList(studios);
+        dest.writeTypedList(genres);
+        dest.writeParcelable(images, flags);
     }
 }
