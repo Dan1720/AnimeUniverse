@@ -1,5 +1,7 @@
 package com.progetto.animeuniverse.model;
 
+import android.view.View;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -23,6 +25,5 @@ public class NotificationViewModel extends ViewModel {
         currentNotifications.add(notification);
         notifications.setValue(currentNotifications);
     }
-
 
 }

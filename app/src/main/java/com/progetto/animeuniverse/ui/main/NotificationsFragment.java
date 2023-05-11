@@ -1,9 +1,12 @@
 package com.progetto.animeuniverse.ui.main;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
+import androidx.appcompat.widget.Toolbar;
 import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -68,6 +71,7 @@ public class NotificationsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         createNotificationChannel();
         resetNotificationFlag();
     }
@@ -85,7 +89,6 @@ public class NotificationsFragment extends Fragment {
         notificationViewModel.getNotifications().observe(getViewLifecycleOwner(), notifications -> {
             notificationAdapter.updateNotifications(notifications);
         });
-
         return rootView;
     }
 
