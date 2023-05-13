@@ -4,9 +4,11 @@ import static com.progetto.animeuniverse.util.Constants.LAST_UPDATE;
 import static com.progetto.animeuniverse.util.Constants.SHARED_PREFERENCES_FILE_NAME;
 import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_ENDPOINT;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.MediaController;
+import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -27,6 +33,7 @@ import com.progetto.animeuniverse.adapter.ParentItemAdapter;
 import com.progetto.animeuniverse.databinding.FragmentHomeBinding;
 import com.progetto.animeuniverse.model.Anime;
 
+import com.progetto.animeuniverse.model.AnimeGenres;
 import com.progetto.animeuniverse.model.AnimeResponse;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.anime.AnimeResponseCallback;
@@ -34,9 +41,11 @@ import com.progetto.animeuniverse.repository.anime.IAnimeRepositoryWithLiveData;
 import com.progetto.animeuniverse.util.ErrorMessagesUtil;
 import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class HomeFragment extends Fragment implements AnimeResponseCallback {
@@ -86,9 +95,18 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        RecyclerView ParentRecyclerViewItem = view.findViewById(R.id.parent_recyclerview);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
+        ParentItemAdapter parentItemAdapter = new ParentItemAdapter(ParentItemList(animeList));
+        ParentRecyclerViewItem.setAdapter(parentItemAdapter);
+        ParentRecyclerViewItem.setLayoutManager(layoutManager);
+
 
 
         String lastUpdate ="0";
@@ -98,6 +116,8 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
                 AnimeResponse animeResponse = ((Result.AnimeResponseSuccess) result).getData();
                 List<Anime> fetchedAnime = animeResponse.getAnimeList();
                 this.animeList.addAll(fetchedAnime);
+                parentItemAdapter.notifyDataSetChanged();
+                setImageHomeCover(animeList);
             }else {
                 ErrorMessagesUtil errorMessagesUtil =
                         new ErrorMessagesUtil(requireActivity().getApplication());
@@ -107,12 +127,8 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             }
         });
 
-        RecyclerView ParentRecyclerViewItem = view.findViewById(R.id.parent_recyclerview);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
-        ParentItemAdapter parentItemAdapter = new ParentItemAdapter(ParentItemList(animeList));
-        ParentRecyclerViewItem.setAdapter(parentItemAdapter);
-        ParentRecyclerViewItem.setLayoutManager(layoutManager);
+
     }
 
 
@@ -173,6 +189,19 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         return itemList;
     }
 
+    @SuppressLint("SetTextI18n")
+    public void setImageHomeCover(List<Anime>animeList) {
+        ImageView homeCover = getView().findViewById(R.id.homeCover);
+        TextView categories = getView().findViewById(R.id.txt_btn_categorie);
+        Random random = new Random();
+        int number = random.nextInt(animeList.size());
+        Anime animeHomeCover = animeList.get(number);
+        Picasso.get()
+                .load(animeHomeCover.getImages().getJpgImages().getLargeImageUrl())
+                .into(homeCover);
+        List<AnimeGenres> genres = animeHomeCover.getGenres();
+        categories.setText(genres.get(0).getNameGenre() + " - " + genres.get(1).getNameGenre() +" - "+ genres.get(2).getNameGenre());
+    }
 
 
 }
