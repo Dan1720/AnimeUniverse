@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,7 @@ import android.view.ViewGroup;
 import com.google.android.material.snackbar.Snackbar;
 
 import com.progetto.animeuniverse.R;
+import com.progetto.animeuniverse.adapter.ParentItemAdapter;
 import com.progetto.animeuniverse.databinding.FragmentHomeBinding;
 import com.progetto.animeuniverse.model.Anime;
 
@@ -94,6 +97,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             if(result.isSuccess()){
                 AnimeResponse animeResponse = ((Result.AnimeResponseSuccess) result).getData();
                 List<Anime> fetchedAnime = animeResponse.getAnimeList();
+                this.animeList.addAll(fetchedAnime);
             }else {
                 ErrorMessagesUtil errorMessagesUtil =
                         new ErrorMessagesUtil(requireActivity().getApplication());
@@ -103,6 +107,12 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             }
         });
 
+        RecyclerView ParentRecyclerViewItem = view.findViewById(R.id.parent_recyclerview);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
+        ParentItemAdapter parentItemAdapter = new ParentItemAdapter(ParentItemList(animeList));
+        ParentRecyclerViewItem.setAdapter(parentItemAdapter);
+        ParentRecyclerViewItem.setLayoutManager(layoutManager);
     }
 
 
@@ -148,4 +158,21 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         super.onDestroyView();
         fragmentHomeBinding = null;
     }
+
+    private List<ParentItem> ParentItemList(List<Anime> animeList)
+    {
+        List<ParentItem> itemList
+                = new ArrayList<>();
+
+        ParentItem item
+                = new ParentItem(
+                "Anime del momento", animeList
+                );
+        itemList.add(item);
+
+        return itemList;
+    }
+
+
+
 }

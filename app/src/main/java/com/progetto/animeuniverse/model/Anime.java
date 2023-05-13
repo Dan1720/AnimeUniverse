@@ -128,6 +128,10 @@ public class Anime  implements Parcelable {
         }
     };
 
+    public Anime() {
+
+    }
+
     public int getId() {
         return id;
     }
