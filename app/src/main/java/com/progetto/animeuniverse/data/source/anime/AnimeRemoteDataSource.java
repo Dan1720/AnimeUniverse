@@ -23,8 +23,26 @@ public class AnimeRemoteDataSource extends BaseAnimeRemoteDataSource{
 
 
     @Override
-    public void getAnimeByName(String q, String nameAnime) {
+    public void getAnimeByName(String nameAnime) {
+        Call<AnimeApiResponse> animeResponseCall = animeApiService.getAnimeByName(nameAnime);
+        animeResponseCall.enqueue(new Callback<AnimeApiResponse>(){
 
+            @Override
+            public void onResponse(@NonNull Call<AnimeApiResponse> call,
+                                   @NonNull Response<AnimeApiResponse> response) {
+                if(response.isSuccessful()&& response.body() != null){
+                    animeCallback.onSuccessFromRemote(response.body(), System.currentTimeMillis());
+                }else{
+                    animeCallback.onFailureFromRemote(new Exception());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AnimeApiResponse> call, Throwable t) {
+                animeCallback.onFailureFromRemote(new Exception(RETROFIT_ERROR));
+            }
+
+        });
     }
 
     @Override
@@ -40,16 +58,12 @@ public class AnimeRemoteDataSource extends BaseAnimeRemoteDataSource{
     @Override
     public void getAnimeTop() {
         Call<AnimeApiResponse> animeResponseCall = animeApiService.getAnimeTop();
-
-        System.out.println(" CIAONE " + animeResponseCall.toString());
-
         animeResponseCall.enqueue(new Callback<AnimeApiResponse>(){
 
             @Override
             public void onResponse(@NonNull Call<AnimeApiResponse> call,
                                    @NonNull Response<AnimeApiResponse> response) {
                 if(response.isSuccessful()&& response.body() != null){
-                    System.out.println("HO STAMPATO " + response.body());
                     animeCallback.onSuccessFromRemote(response.body(), System.currentTimeMillis());
                 }else{
                     animeCallback.onFailureFromRemote(new Exception());

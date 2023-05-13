@@ -41,7 +41,7 @@ public class AnimeMockRemoteDataSource extends BaseAnimeRemoteDataSource{
     }
 
     @Override
-    public void getAnimeByName(String q, String nameAnime) {
+    public void getAnimeByName(String nameAnime) {
 
     }
 

@@ -5,7 +5,6 @@ import static com.progetto.animeuniverse.util.Constants.ID_TOKEN;
 
 import android.app.Application;
 
-import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.data.source.anime.AnimeLocalDataSource;
 import com.progetto.animeuniverse.data.source.anime.AnimeMockRemoteDataSource;
 import com.progetto.animeuniverse.data.source.anime.AnimeRemoteDataSource;
@@ -76,19 +75,14 @@ public class ServiceLocator {
         return AnimeRoomDatabase.getDatabase(application);
     }
 
-    public IAnimeRepositoryWithLiveData getAnimeRepository(Application application, boolean debugMode){
+    public IAnimeRepositoryWithLiveData getAnimeRepository(Application application){
         BaseAnimeRemoteDataSource animeRemoteDataSource;
         BaseAnimeLocalDataSource animeLocalDataSource;
         BaseFavoriteAnimeDataSource favoriteAnimeDataSource;
         SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(application);
         DataEncryptionUtil dataEncryptionUtil = new DataEncryptionUtil(application);
 
-        if(debugMode){
-            JSONParserUtil jsonParserUtil = new JSONParserUtil(application);
-            animeRemoteDataSource = new AnimeMockRemoteDataSource(jsonParserUtil, JSONParserUtil.JsonParserType.GSON);
-        }else{
-            animeRemoteDataSource = new AnimeRemoteDataSource();
-        }
+        animeRemoteDataSource = new AnimeRemoteDataSource();
 
         animeLocalDataSource = new AnimeLocalDataSource(getAnimeDao(application),
                 sharedPreferencesUtil, dataEncryptionUtil);

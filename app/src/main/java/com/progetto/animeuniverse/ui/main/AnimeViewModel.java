@@ -38,9 +38,9 @@ public class AnimeViewModel extends ViewModel {
         return animeListLiveData;
     }
 
-    public MutableLiveData<Result> getAnimeByName(String q, String nameAnime, long lastUpdate){
+    public MutableLiveData<Result> getAnimeByName(String nameAnime, long lastUpdate){
         if(animeListLiveData == null){
-            fetchAnimeByName(q, nameAnime, lastUpdate);
+            fetchAnimeByName(nameAnime, lastUpdate);
         }
         return animeListLiveData;
     }
@@ -67,12 +67,12 @@ public class AnimeViewModel extends ViewModel {
         animeListLiveData = animeRepositoryWithLiveData.fetchAnimeTop(lastUpdate);
     }
 
-    public void fetchAnimeByName(String q, String nameAnime){
-        animeRepositoryWithLiveData.fetchAnimeByName(q, nameAnime);
+    public void fetchAnimeByName(String nameAnime){
+        animeRepositoryWithLiveData.fetchAnimeByName(nameAnime);
     }
 
-    private void fetchAnimeByName(String q, String nameAnime, long lastUpdate){
-        animeListLiveData = animeRepositoryWithLiveData.fetchAnimeByName(q, nameAnime, lastUpdate);
+    private void fetchAnimeByName(String nameAnime, long lastUpdate){
+        animeListLiveData = animeRepositoryWithLiveData.fetchAnimeByName(nameAnime, lastUpdate);
     }
 
     public void fetchAnimeByIdFull(String anime, int id){

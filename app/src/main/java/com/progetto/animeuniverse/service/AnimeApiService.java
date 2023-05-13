@@ -21,7 +21,7 @@ import retrofit2.http.Query;
 public interface AnimeApiService {
     @GET(TOP_HEADLINES_ENDPOINT)
     Call<AnimeApiResponse> getAnimeByName(
-            @Query(TOP_HEADLINES_Q_PARAMETER) String q);
+            @Query(TOP_HEADLINES_Q_PARAMETER) String nameAnime);
 
     @GET("anime/{id}/full")
     Call<AnimeApiResponse> getAnimeByIdFull(String anime, @Path("id")int idFull);

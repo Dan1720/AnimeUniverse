@@ -41,10 +41,10 @@ public class AnimeRepository implements IAnimeRepository{
     }
 
     @Override
-    public void fetchAnimeByName(String q,String nameAnime, long lastUpdate) {
+    public void fetchAnimeByName(String nameAnime, long lastUpdate) {
         long currentTime = System.currentTimeMillis();
         if(currentTime - lastUpdate > FRESH_TIMEOUT){
-            Call<AnimeApiResponse> animeResponseCall = animeApiService.getAnimeByName(q);
+            Call<AnimeApiResponse> animeResponseCall = animeApiService.getAnimeByName(nameAnime);
 
             animeResponseCall.enqueue(new Callback<AnimeApiResponse>() {
                 @Override

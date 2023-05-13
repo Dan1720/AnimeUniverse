@@ -7,13 +7,13 @@ import com.progetto.animeuniverse.model.Result;
 
 public interface IAnimeRepositoryWithLiveData {
 
-    MutableLiveData<Result> fetchAnimeByName(String q, String nameAnime, long lastUpdate);
+    MutableLiveData<Result> fetchAnimeByName(String nameAnime, long lastUpdate);
     MutableLiveData<Result> fetchAnimeByIdFull(String q, int id, long lastUpdate);
     MutableLiveData<Result> fetchAnimeById(String q, int id, long lastUpdate);
 
     MutableLiveData<Result> fetchAnimeTop(long lastUpdate);
 
-    void fetchAnimeByName(String q, String nameAnime);
+    void fetchAnimeByName(String nameAnime);
     void fetchAnimeByIdFull(String q, int id);
     void fetchAnimeById(String q, int id);
     void fetchAnimeTop();

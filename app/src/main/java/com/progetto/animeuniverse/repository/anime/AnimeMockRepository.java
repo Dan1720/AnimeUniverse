@@ -32,7 +32,7 @@ public class AnimeMockRepository implements IAnimeRepository{
     }
 
     @Override
-    public void fetchAnimeByName(String q, String nameAnime, long lastUpdate) {
+    public void fetchAnimeByName(String nameAnime, long lastUpdate) {
 
     }
 

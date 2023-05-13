@@ -44,8 +44,8 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
 
 
     @Override
-    public void fetchAnimeByName(String q, String nameAnime) {
-        animeRemoteDataSource.getAnimeByName(q, nameAnime);
+    public void fetchAnimeByName(String nameAnime) {
+        animeRemoteDataSource.getAnimeByName(nameAnime);
     }
 
     @Override
@@ -64,10 +64,10 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
     }
 
     @Override
-    public MutableLiveData<Result> fetchAnimeByName(String q, String nameAnime, long lastUpdate) {
+    public MutableLiveData<Result> fetchAnimeByName(String nameAnime, long lastUpdate) {
         long currentTime = System.currentTimeMillis();
         if(currentTime - lastUpdate > FRESH_TIMEOUT){
-            animeRemoteDataSource.getAnimeByName(q, nameAnime);
+            animeRemoteDataSource.getAnimeByName(nameAnime);
         }else{
             animeLocalDataSource.getAnime();
         }
@@ -101,10 +101,10 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
         long currentTime = System.currentTimeMillis();
         if(currentTime - lastUpdate > FRESH_TIMEOUT){
             animeRemoteDataSource.getAnimeTop();
-            String animeApiResponse = new AnimeApiResponse().toString();
+            /*String animeApiResponse = new AnimeApiResponse().toString();
             System.out.println("Risposta:" + animeApiResponse);
             String animeResponse = new AnimeResponse().toString();
-            System.out.println("Risposta:" + animeResponse);
+            System.out.println("Risposta:" + animeResponse);*/
 
         }else{
             animeLocalDataSource.getAnime();
@@ -182,10 +182,10 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
     public void onAnimeFavoriteStatusChanged(List<Anime> animeList) {
         List<Anime> notSynchronizedAnimeList = new ArrayList<>();
         for(Anime anime : animeList){
-            //   if(!anime.isSynchronized()){
+            if(!anime.isSynchronized()){
                 notSynchronizedAnimeList.add(anime);
             }
-        //  }
+          }
     //   if(!notSynchronizedAnimeList.isEmpty()){
     //      favoriteAnimeDataSource.synchronizeFavoriteAnime(notSynchronizedAnimeList);
     //    }
@@ -218,7 +218,7 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
     public void onSuccessFromCloudReading(List<Anime> animeList) {
         if(animeList != null){
             for(Anime anime : animeList){
-                //  anime.setSynchronized(true);
+                  anime.setSynchronized(true);
             }
             animeLocalDataSource.insertAnime(animeList);
             favoriteAnimeMutableLiveData.postValue(new Result.AnimeResponseSuccess(new AnimeResponse( animeList)));

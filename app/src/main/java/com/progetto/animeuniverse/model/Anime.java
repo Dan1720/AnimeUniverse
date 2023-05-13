@@ -316,4 +316,30 @@ public class Anime  implements Parcelable {
         dest.writeTypedList(genres);
         dest.writeParcelable(images, flags);
     }
+
+    @Override
+    public String toString() {
+        return "Anime{" +
+                "id=" + id +
+                ", url='" + url + '\'' +
+                ", approved=" + approved +
+                ", title='" + title + '\'' +
+                ", type='" + type + '\'' +
+                ", source='" + source + '\'' +
+                ", numEpisodes=" + numEpisodes +
+                ", status='" + status + '\'' +
+                ", duration='" + duration + '\'' +
+                ", rating='" + rating + '\'' +
+                ", popularity=" + popularity +
+                ", year=" + year +
+                ", isFavorite=" + isFavorite +
+                ", isSynchronized=" + isSynchronized +
+                ", synopsis='" + synopsis + '\'' +
+                ", trailer=" + trailer +
+                ", producers=" + producers +
+                ", studios=" + studios +
+                ", genres=" + genres +
+                ", images=" + images +
+                '}';
+    }
 }

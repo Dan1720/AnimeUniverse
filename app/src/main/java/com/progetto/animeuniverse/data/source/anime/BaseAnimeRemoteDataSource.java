@@ -7,7 +7,7 @@ public abstract class BaseAnimeRemoteDataSource {
         this.animeCallback = animeCallback;
     }
 
-    public abstract void getAnimeByName(String q, String nameAnime);
+    public abstract void getAnimeByName(String nameAnime);
     public abstract void getAnimeByIdFull(String anime, int id);
     public abstract void getAnimeById(String anime, int id);
     public abstract void getAnimeTop();
