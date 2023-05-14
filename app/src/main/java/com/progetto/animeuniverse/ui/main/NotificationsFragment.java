@@ -32,6 +32,8 @@ import android.service.notification.NotificationListenerService;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -44,6 +46,7 @@ import com.progetto.animeuniverse.util.Constants;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class NotificationsFragment extends Fragment {
@@ -51,6 +54,7 @@ public class NotificationsFragment extends Fragment {
 
     private String textTitle = "Titolo prova" + getNotificationId();
     private String textContent = "Prima notifica" + getNotificationId();
+    private boolean checkBoxChecked;
     private boolean notificationSent = false;
     private View rootView;
 
@@ -89,6 +93,7 @@ public class NotificationsFragment extends Fragment {
         notificationViewModel.getNotifications().observe(getViewLifecycleOwner(), notifications -> {
             notificationAdapter.updateNotifications(notifications);
         });
+
         return rootView;
     }
 
@@ -120,11 +125,32 @@ public class NotificationsFragment extends Fragment {
                 return;
             }
             notificationManager.notify(getNotificationId(), builder.build());
-            Notification notification = new Notification(textTitle, textContent);
+            Notification notification = new Notification(textTitle, textContent, checkBoxChecked);
             notificationViewModel.addNotification(notification);
             notificationAdapter.notifyDataSetChanged();
 
         }
+        Button button = (Button) getView().findViewById(R.id.delete_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+                List<Notification> myData = ((NotificationAdapter) recyclerView.getAdapter()).getData();
+                int count = 0;
+                for(int i = 0; i < myData.size(); i++){
+                    if(myData.get(i).isChecked()){
+                        count++;
+                    }
+                }
+                for(int i = myData.size() - 1; i >= 0; i--){
+                    if(myData.get(i).isChecked()){
+                        myData.remove(i);
+                        recyclerView.getAdapter().notifyItemRemoved(i);
+                    }
+
+                }
+            }
+        });
 
     }
 

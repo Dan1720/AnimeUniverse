@@ -6,6 +6,9 @@ import android.service.notification.StatusBarNotification;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,6 +34,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public NotificationAdapter(List<Notification> notifications){
         notificationList = notifications;
     }
+    public List<Notification> getData(){
+        return notificationList;
+    }
     @NonNull
     @Override
     public NotificationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
@@ -43,6 +49,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         Notification notification = notificationList.get(position);
         holder.titleTextView.setText(notification.getTitle());
         holder.textTextView.setText(notification.getText());
+        holder.checkBox.setChecked(notification.isChecked());
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                notification.setChecked(isChecked);
+            }
+        });
     }
     @Override
     public int getItemCount(){
@@ -55,10 +68,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public static class NotificationViewHolder extends RecyclerView.ViewHolder{
         public TextView titleTextView;
         public TextView textTextView;
+        public CheckBox checkBox;
         public NotificationViewHolder(@NonNull View itemView){
             super(itemView);
             titleTextView = itemView.findViewById(R.id.notification_title);
             textTextView = itemView.findViewById(R.id.notification_text);
+            checkBox = itemView.findViewById(R.id.checkBox);
         }
     }
     public void updateNotifications(List<Notification> notifications) {

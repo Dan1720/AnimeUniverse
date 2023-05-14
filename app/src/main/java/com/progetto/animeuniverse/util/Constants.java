@@ -64,4 +64,5 @@ public class Constants {
     public static final String ACTION_NOTIFICATION_RECEIVED = "com.progetto.animeuniverse.NotificationListenerService.ACTION_NOTIFICATION_RECEIVED";
 
 
+
 }
