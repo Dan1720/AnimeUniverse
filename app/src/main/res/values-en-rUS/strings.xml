@@ -43,4 +43,14 @@
     <string name="txt_continua_guardare">Keep watching</string>
     <string name="txt_consigliati">Recommended</string>
     <string name="txt_novita">New Anime</string>
+    <string name="data_read_from_local_database">Data read from local database</string>
+    <string name="add_anime_favorite">Anime added to favorites</string>
+    <string name="remove_anime_favorite">Anime removed to favorites</string>
+    <string name="title">Title:</string>
+    <string name="year">Year:</string>
+    <string name="description">Description:</string>
+    <string name="genres">Genre:</string>
+    <string name="reviews">Reviews:</string>
+    <string name="episodes_number">Episodes number:</string>
+    <string name="episodes">Episodes:</string>
 </resources>
