@@ -40,6 +40,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
                     android:text="@string/title"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
@@ -48,7 +50,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:text="TextView"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView_details_title" />
 
                 <TextView
@@ -56,6 +59,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/year"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_details_title" />
 
@@ -64,9 +69,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="TextView"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView_details_year"
-                    tools:layout_editor_absoluteY="19dp" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView_details_titleIn" />
 
                 <TextView
                     android:id="@+id/textView_n_episodes"
@@ -74,58 +80,71 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
                     android:text="@string/episodes_number"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView_details_yearIn"
-                    tools:layout_editor_absoluteY="19dp" />
+                    app:layout_constraintTop_toTopOf="@+id/textView_details_yearIn" />
 
                 <TextView
                     android:id="@+id/textView_n_episodesIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="TextView"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView_n_episodes"
-                    tools:layout_editor_absoluteY="19dp" />
+                    app:layout_constraintTop_toTopOf="@+id/textView_details_yearIn" />
 
                 <TextView
                     android:id="@+id/textView_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/description"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_details_year" />
 
-                <EditText
-                    android:id="@+id/editTextTextMultiLine_descriptionIn"
+                <TextView
+                    android:id="@+id/textView_descriptionIn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:gravity="start|top"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
                     android:inputType="textMultiLine"
+                    android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="58dp" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView_description" />
 
                 <TextView
                     android:id="@+id/textView_genres"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/genres"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine_descriptionIn" />
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_descriptionIn" />
 
                 <TextView
                     android:id="@+id/textView_genresIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="TextView"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView_genres"
-                    tools:layout_editor_absoluteY="103dp" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView_descriptionIn" />
 
                 <TextView
                     android:id="@+id/textView_studios"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/studios"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_genres" />
 
@@ -134,15 +153,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="TextView"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView_studios"
-                    tools:layout_editor_absoluteY="123dp" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView_genresIn" />
 
                 <TextView
                     android:id="@+id/textView_producers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/producers"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_studios" />
 
@@ -151,34 +173,43 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="TextView"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView_producers"
-                    tools:layout_editor_absoluteY="142dp" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView_studiosIn" />
 
                 <TextView
                     android:id="@+id/textView_trailerLink"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/trailer_link"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_producers" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView_producersIn" />
 
                 <TextView
                     android:id="@+id/textView_trailerLinkIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="TextView"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    android:textColor="@color/secondaryColor"
+                    android:textColorLink="@color/white"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView_trailerLink"
-                    tools:layout_editor_absoluteY="161dp" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView_producersIn" />
 
                 <TextView
                     android:id="@+id/textView_reviews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/reviews"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_trailerLink" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView_trailerLinkIn" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
@@ -192,6 +223,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/episodes"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="18dp"
                     app:layout_constraintTop_toBottomOf="@+id/recyclerView"
                     tools:layout_editor_absoluteX="2dp" />
 

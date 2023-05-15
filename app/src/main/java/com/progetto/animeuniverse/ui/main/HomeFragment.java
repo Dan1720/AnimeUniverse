@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +30,7 @@ import android.widget.VideoView;
 import com.google.android.material.snackbar.Snackbar;
 
 import com.progetto.animeuniverse.R;
+import com.progetto.animeuniverse.adapter.ChildItemAdapter;
 import com.progetto.animeuniverse.adapter.ParentItemAdapter;
 import com.progetto.animeuniverse.databinding.FragmentHomeBinding;
 import com.progetto.animeuniverse.model.Anime;
@@ -103,7 +105,14 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         RecyclerView ParentRecyclerViewItem = view.findViewById(R.id.parent_recyclerview);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
-        ParentItemAdapter parentItemAdapter = new ParentItemAdapter(ParentItemList(animeList));
+        ParentItemAdapter parentItemAdapter = new ParentItemAdapter(ParentItemList(animeList), requireActivity().getApplication(),new ChildItemAdapter.OnItemClickListener(){
+            @Override
+            public void onAnimeItemClick(Anime anime){
+                HomeFragmentDirections.ActionHomeFragmentToAnimeDetailsFragment action =
+                        HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(anime);
+                Navigation.findNavController(view).navigate(action);
+            }
+        });
         ParentRecyclerViewItem.setAdapter(parentItemAdapter);
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
 
@@ -200,7 +209,12 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
                 .load(animeHomeCover.getImages().getJpgImages().getLargeImageUrl())
                 .into(homeCover);
         List<AnimeGenres> genres = animeHomeCover.getGenres();
-        categories.setText(genres.get(0).getNameGenre() + " - " + genres.get(1).getNameGenre() +" - "+ genres.get(2).getNameGenre());
+        if(genres.size() >= 3){
+            categories.setText(genres.get(0).getNameGenre() + " - " + genres.get(1).getNameGenre() +" - "+ genres.get(2).getNameGenre());
+        }else{
+            categories.setText(genres.get(0).getNameGenre());
+        }
+
     }
 
 
