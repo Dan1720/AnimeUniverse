@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
 
@@ -21,18 +22,28 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.databinding.FragmentAnimeDetailsBinding;
 import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeGenres;
 import com.progetto.animeuniverse.model.AnimeProducers;
 import com.progetto.animeuniverse.model.AnimeStudios;
+import com.progetto.animeuniverse.model.Review;
+import com.progetto.animeuniverse.repository.reviews.IReviewsRepositoryWithLiveData;
+import com.progetto.animeuniverse.util.ServiceLocator;
+import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnimeDetailsFragment extends Fragment {
     private static final String TAG = AnimeDetailsFragment.class.getSimpleName();
     private FragmentAnimeDetailsBinding fragmentAnimeDetailsBinding;
+    private List<Review> reviewsList;
+    private SharedPreferencesUtil sharedPreferencesUtil;
+    private ReviewsViewModel reviewsViewModel;
+
     public AnimeDetailsFragment() {
         // Required empty public constructor
     }
@@ -45,6 +56,20 @@ public class AnimeDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sharedPreferencesUtil = new SharedPreferencesUtil(requireActivity().getApplication());
+
+        IReviewsRepositoryWithLiveData reviewsRepositoryWithLiveData =
+                ServiceLocator.getInstance().getReviewsRepository(requireActivity().getApplication());
+        if(reviewsRepositoryWithLiveData != null){
+            reviewsViewModel = new ViewModelProvider(requireActivity(), new ReviewsViewModelFactory(reviewsRepositoryWithLiveData)).get(ReviewsViewModel.class);
+        }else {
+            Snackbar.make(requireActivity().findViewById(android.R.id.content),
+                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
+        }
+
+        reviewsList = new ArrayList<>();
+
     }
 
     @Override
@@ -117,5 +142,10 @@ public class AnimeDetailsFragment extends Fragment {
             ((BottomNavigationView) requireActivity().findViewById(R.id.bottom_navigation)).
                     getMenu().findItem(R.id.listFragment).setChecked(true);
         }
+
+        String lastUpdate = "0";
+        reviewsViewModel.getReviewsByIdAnime(anime.getId(), Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
+            System.out.println("Result reviews: "+ result.isSuccess());
+        });
     }
 }

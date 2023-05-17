@@ -86,6 +86,8 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         }
         animeList = new ArrayList<>();
 
+
+
     }
 
     @Override

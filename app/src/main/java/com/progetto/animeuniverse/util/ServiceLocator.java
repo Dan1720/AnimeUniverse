@@ -12,6 +12,10 @@ import com.progetto.animeuniverse.data.source.anime.BaseAnimeLocalDataSource;
 import com.progetto.animeuniverse.data.source.anime.BaseAnimeRemoteDataSource;
 import com.progetto.animeuniverse.data.source.anime.BaseFavoriteAnimeDataSource;
 import com.progetto.animeuniverse.data.source.anime.FavoriteAnimeDataSource;
+import com.progetto.animeuniverse.data.source.reviews.BaseReviewsLocalDataSource;
+import com.progetto.animeuniverse.data.source.reviews.BaseReviewsRemoteDataSource;
+import com.progetto.animeuniverse.data.source.reviews.ReviewsLocalDataSource;
+import com.progetto.animeuniverse.data.source.reviews.ReviewsRemoteDataSource;
 import com.progetto.animeuniverse.data.source.users.BaseUserAuthenticationRemoteDataSource;
 import com.progetto.animeuniverse.data.source.users.BaseUserDataRemoteDataSource;
 import com.progetto.animeuniverse.data.source.users.UserAuthenticationRemoteDataSource;
@@ -19,6 +23,8 @@ import com.progetto.animeuniverse.data.source.users.UserDataRemoteDataSource;
 import com.progetto.animeuniverse.database.AnimeRoomDatabase;
 import com.progetto.animeuniverse.repository.anime.AnimeRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime.IAnimeRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.reviews.IReviewsRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.reviews.ReviewsRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.user.IUserRepository;
 import com.progetto.animeuniverse.repository.user.UserRepository;
 import com.progetto.animeuniverse.service.AnimeApiService;
@@ -75,6 +81,10 @@ public class ServiceLocator {
         return AnimeRoomDatabase.getDatabase(application);
     }
 
+    public AnimeRoomDatabase getReviewsDao(Application application){
+        return AnimeRoomDatabase.getDatabase(application);
+    }
+
     public IAnimeRepositoryWithLiveData getAnimeRepository(Application application){
         BaseAnimeRemoteDataSource animeRemoteDataSource;
         BaseAnimeLocalDataSource animeLocalDataSource;
@@ -96,5 +106,18 @@ public class ServiceLocator {
             return null;
         }
         return new AnimeRepositoryWithLiveData(animeRemoteDataSource, animeLocalDataSource, favoriteAnimeDataSource);
+    }
+
+    public IReviewsRepositoryWithLiveData getReviewsRepository(Application application){
+        BaseReviewsLocalDataSource reviewsLocalDataSource;
+        BaseReviewsRemoteDataSource reviewsRemoteDataSource;
+        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(application);
+        DataEncryptionUtil dataEncryptionUtil = new DataEncryptionUtil(application);
+
+        reviewsRemoteDataSource = new ReviewsRemoteDataSource();
+
+        reviewsLocalDataSource = new ReviewsLocalDataSource(getReviewsDao(application), sharedPreferencesUtil, dataEncryptionUtil);
+
+        return new ReviewsRepositoryWithLiveData(reviewsRemoteDataSource, reviewsLocalDataSource);
     }
 }

@@ -4,7 +4,7 @@ public abstract class Result {
     private Result(){}
 
     public boolean isSuccess(){
-        if(this instanceof AnimeResponseSuccess || this instanceof UserResponseSuccess){
+        if(this instanceof AnimeResponseSuccess || this instanceof UserResponseSuccess || this instanceof ReviewsResponseSuccess){
             return true;
         }else{
             return false;
@@ -41,4 +41,13 @@ public abstract class Result {
         }
     }
 
+    public static final class ReviewsResponseSuccess extends Result{
+        private final ReviewsResponse reviewsResponse;
+        public ReviewsResponseSuccess(ReviewsResponse reviewsResponse){
+            this.reviewsResponse = reviewsResponse;
+        }
+        public ReviewsResponse getData(){
+            return reviewsResponse;
+        }
+    }
 }
