@@ -1,5 +1,8 @@
 package com.progetto.animeuniverse.ui.main;
 
+import static com.progetto.animeuniverse.util.Constants.LAST_UPDATE;
+import static com.progetto.animeuniverse.util.Constants.SHARED_PREFERENCES_FILE_NAME;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
@@ -11,6 +14,8 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -24,20 +29,26 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
+import com.progetto.animeuniverse.adapter.ReviewsRecyclerViewAdapter;
 import com.progetto.animeuniverse.databinding.FragmentAnimeDetailsBinding;
 import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeGenres;
 import com.progetto.animeuniverse.model.AnimeProducers;
 import com.progetto.animeuniverse.model.AnimeStudios;
+import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.model.Review;
+import com.progetto.animeuniverse.model.ReviewsApiResponse;
+import com.progetto.animeuniverse.model.ReviewsResponse;
 import com.progetto.animeuniverse.repository.reviews.IReviewsRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.reviews.ReviewsResponseCallback;
+import com.progetto.animeuniverse.util.ErrorMessagesUtil;
 import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnimeDetailsFragment extends Fragment {
+public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCallback {
     private static final String TAG = AnimeDetailsFragment.class.getSimpleName();
     private FragmentAnimeDetailsBinding fragmentAnimeDetailsBinding;
     private List<Review> reviewsList;
@@ -80,7 +91,7 @@ public class AnimeDetailsFragment extends Fragment {
         return fragmentAnimeDetailsBinding.getRoot();
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -143,9 +154,55 @@ public class AnimeDetailsFragment extends Fragment {
                     getMenu().findItem(R.id.listFragment).setChecked(true);
         }
 
+        RecyclerView ReviewsRecyclerViewItem = view.findViewById(R.id.recyclerView_reviews);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
+        ReviewsRecyclerViewAdapter reviewsRecyclerViewAdapter = new ReviewsRecyclerViewAdapter(reviewsList, requireActivity().getApplication());
+
+        ReviewsRecyclerViewItem.setAdapter(reviewsRecyclerViewAdapter);
+        ReviewsRecyclerViewItem.setLayoutManager(layoutManager);
+
         String lastUpdate = "0";
         reviewsViewModel.getReviewsByIdAnime(anime.getId(), Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
             System.out.println("Result reviews: "+ result.isSuccess());
+            if(result.isSuccess()){
+                ReviewsResponse reviewsResponse = ((Result.ReviewsResponseSuccess) result).getData();
+                List<Review> fetchedReviews = reviewsResponse.getReviewList();
+                this.reviewsList.addAll(fetchedReviews);
+                reviewsRecyclerViewAdapter.notifyDataSetChanged();
+            }else{
+                ErrorMessagesUtil errorMessagesUtil =
+                        new ErrorMessagesUtil(requireActivity().getApplication());
+                Snackbar.make(view, errorMessagesUtil.
+                                getErrorMessage(((Result.Error) result).getMessage()),
+                        Snackbar.LENGTH_SHORT).show();
+            }
         });
+    }
+
+    @Override
+    public void onSuccess(List<Review> reviewList, long lastUpdate) {
+        if(reviewList != null){
+            this.reviewsList.clear();
+            this.reviewsList.addAll(reviewList);
+            sharedPreferencesUtil.writeStringData(SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE, String.valueOf(lastUpdate));
+        }
+    }
+
+    @Override
+    public void onFailure(String errorMessage) {
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        reviewsViewModel.setFirstLoading(true);
+        reviewsViewModel.setLoading(false);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        fragmentAnimeDetailsBinding = null;
     }
 }

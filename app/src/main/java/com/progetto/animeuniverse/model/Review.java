@@ -19,14 +19,15 @@ public class Review implements Parcelable {
 
     private String review;
     private int score;
-
+    private String date;
     @ColumnInfo(name = "is_synchronized")
     private boolean isSynchronized;
 
-    public Review(int idReview, String review, int score, boolean isSynchronized) {
+    public Review(int idReview, String review, int score, String date, boolean isSynchronized) {
         this.idReview = idReview;
         this.review = review;
         this.score = score;
+        this.date = date;
         this.isSynchronized = isSynchronized;
     }
 
@@ -34,6 +35,7 @@ public class Review implements Parcelable {
         idReview = in.readInt();
         review = in.readString();
         score = in.readInt();
+        date = in.readString();
         isSynchronized = in.readByte() != 0;
     }
 
@@ -73,6 +75,14 @@ public class Review implements Parcelable {
         this.score = score;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public boolean isSynchronized() {
         return isSynchronized;
     }
@@ -87,6 +97,7 @@ public class Review implements Parcelable {
                 "idReview=" + idReview +
                 ", review='" + review + '\'' +
                 ", score=" + score +
+                ", date='" + date + '\'' +
                 ", isSynchronized=" + isSynchronized +
                 '}';
     }
@@ -101,6 +112,7 @@ public class Review implements Parcelable {
         dest.writeInt(idReview);
         dest.writeString(review);
         dest.writeInt(score);
+        dest.writeString(date);
         dest.writeByte((byte) (isSynchronized ? 1 : 0));
     }
 }
