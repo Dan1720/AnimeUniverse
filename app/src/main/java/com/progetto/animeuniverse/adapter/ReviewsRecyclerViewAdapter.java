@@ -18,12 +18,17 @@ import java.util.List;
 
 public class ReviewsRecyclerViewAdapter extends RecyclerView.Adapter<ReviewsRecyclerViewAdapter.ReviewsRecyclerViewHolder> {
 
+    public interface OnItemClickListener{
+        void onReviewItemClick(Review review);
+    }
     private final List<Review> reviewList;
     private final Application application;
+    private final OnItemClickListener onItemClickListener;
 
-    public ReviewsRecyclerViewAdapter(List<Review> reviewList, Application application) {
+    public ReviewsRecyclerViewAdapter(List<Review> reviewList, Application application, OnItemClickListener onItemClickListener) {
         this.reviewList = reviewList;
         this.application = application;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -47,7 +52,7 @@ public class ReviewsRecyclerViewAdapter extends RecyclerView.Adapter<ReviewsRecy
         return reviewList.size();
     }
 
-    public class ReviewsRecyclerViewHolder extends RecyclerView.ViewHolder{
+    public class ReviewsRecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private final TextView textViewScoreIn;
         private final TextView textViewDateIn;
         private final TextView textViewReviewIn;
@@ -57,6 +62,7 @@ public class ReviewsRecyclerViewAdapter extends RecyclerView.Adapter<ReviewsRecy
             this.textViewScoreIn = itemView.findViewById(R.id.textView_scoreIn);
             this.textViewDateIn = itemView.findViewById(R.id.textView_dateIn);
             this.textViewReviewIn = itemView.findViewById(R.id.textView_reviewIn);
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Review review) {
@@ -64,6 +70,11 @@ public class ReviewsRecyclerViewAdapter extends RecyclerView.Adapter<ReviewsRecy
             textViewDateIn.setText(DateTimeUtil.getDate(review.getDate()));
             textViewReviewIn.setText(review.getReview());
 
+        }
+
+        @Override
+        public void onClick(View v) {
+            onItemClickListener.onReviewItemClick(reviewList.get(getAdapterPosition()));
         }
     }
 }

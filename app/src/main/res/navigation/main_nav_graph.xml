@@ -111,5 +111,17 @@
         <argument
             android:name="anime"
             app:argType="com.progetto.animeuniverse.model.Anime" />
+        <action
+            android:id="@+id/action_animeDetailsFragment_to_reviewDetailsFragment"
+            app:destination="@id/reviewDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewDetailsFragment"
+        android:name="com.progetto.animeuniverse.ui.main.ReviewDetailsFragment"
+        android:label="fragment_review_details"
+        tools:layout="@layout/fragment_review_details" >
+        <argument
+            android:name="review"
+            app:argType="com.progetto.animeuniverse.model.Review" />
     </fragment>
 </navigation>

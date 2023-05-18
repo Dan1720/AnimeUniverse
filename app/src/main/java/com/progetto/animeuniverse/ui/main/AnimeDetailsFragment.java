@@ -156,7 +156,14 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
 
         RecyclerView ReviewsRecyclerViewItem = view.findViewById(R.id.recyclerView_reviews);
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
-        ReviewsRecyclerViewAdapter reviewsRecyclerViewAdapter = new ReviewsRecyclerViewAdapter(reviewsList, requireActivity().getApplication());
+        ReviewsRecyclerViewAdapter reviewsRecyclerViewAdapter = new ReviewsRecyclerViewAdapter(reviewsList, requireActivity().getApplication(), new ReviewsRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onReviewItemClick(Review review) {
+                AnimeDetailsFragmentDirections.ActionAnimeDetailsFragmentToReviewDetailsFragment action =
+                        AnimeDetailsFragmentDirections.actionAnimeDetailsFragmentToReviewDetailsFragment(review);
+                Navigation.findNavController(view).navigate(action);
+            }
+        });
 
         ReviewsRecyclerViewItem.setAdapter(reviewsRecyclerViewAdapter);
         ReviewsRecyclerViewItem.setLayoutManager(layoutManager);
@@ -169,6 +176,7 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
                 List<Review> fetchedReviews = reviewsResponse.getReviewList();
                 this.reviewsList.addAll(fetchedReviews);
                 reviewsRecyclerViewAdapter.notifyDataSetChanged();
+
             }else{
                 ErrorMessagesUtil errorMessagesUtil =
                         new ErrorMessagesUtil(requireActivity().getApplication());
