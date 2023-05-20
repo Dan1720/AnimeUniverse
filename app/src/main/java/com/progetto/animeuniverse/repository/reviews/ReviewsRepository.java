@@ -32,7 +32,7 @@ public class ReviewsRepository implements IReviewsRepository{
     private final ReviewDao reviewDao;
     private final ReviewsResponseCallback reviewsResponseCallback;
 
-    public ReviewsRepository(Application application, AnimeApiService animeApiService, ReviewDao reviewDao, ReviewsResponseCallback reviewsResponseCallback) {
+    public ReviewsRepository(Application application, ReviewsResponseCallback reviewsResponseCallback) {
         this.application = application;
         this.animeApiService = ServiceLocator.getInstance().getAnimeApiService();
         AnimeRoomDatabase animeRoomDatabase = ServiceLocator.getInstance().getReviewsDao(application);

@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_homeFragment_to_animeDetailsFragment"
             app:destination="@id/animeDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_genresFragment"
+            app:destination="@id/genresFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -124,4 +127,9 @@
             android:name="review"
             app:argType="com.progetto.animeuniverse.model.Review" />
     </fragment>
+    <fragment
+        android:id="@+id/genresFragment"
+        android:name="com.progetto.animeuniverse.ui.main.GenresFragment"
+        android:label="fragment_genres"
+        tools:layout="@layout/fragment_genres" />
 </navigation>

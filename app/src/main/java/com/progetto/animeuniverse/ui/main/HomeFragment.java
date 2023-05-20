@@ -138,7 +138,9 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             }
         });
 
-
+        fragmentHomeBinding.txtCategorie.setOnClickListener(v -> {
+            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_genresFragment);
+        });
 
     }
 

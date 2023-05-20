@@ -12,6 +12,10 @@ import com.progetto.animeuniverse.data.source.anime.BaseAnimeLocalDataSource;
 import com.progetto.animeuniverse.data.source.anime.BaseAnimeRemoteDataSource;
 import com.progetto.animeuniverse.data.source.anime.BaseFavoriteAnimeDataSource;
 import com.progetto.animeuniverse.data.source.anime.FavoriteAnimeDataSource;
+import com.progetto.animeuniverse.data.source.genres.BaseGenresLocalDataSource;
+import com.progetto.animeuniverse.data.source.genres.BaseGenresRemoteDataSource;
+import com.progetto.animeuniverse.data.source.genres.GenresLocalDataSource;
+import com.progetto.animeuniverse.data.source.genres.GenresRemoteDataSource;
 import com.progetto.animeuniverse.data.source.reviews.BaseReviewsLocalDataSource;
 import com.progetto.animeuniverse.data.source.reviews.BaseReviewsRemoteDataSource;
 import com.progetto.animeuniverse.data.source.reviews.ReviewsLocalDataSource;
@@ -21,8 +25,11 @@ import com.progetto.animeuniverse.data.source.users.BaseUserDataRemoteDataSource
 import com.progetto.animeuniverse.data.source.users.UserAuthenticationRemoteDataSource;
 import com.progetto.animeuniverse.data.source.users.UserDataRemoteDataSource;
 import com.progetto.animeuniverse.database.AnimeRoomDatabase;
+import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.repository.anime.AnimeRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime.IAnimeRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.genres.GenresRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.genres.IGenresRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.reviews.IReviewsRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.reviews.ReviewsRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.user.IUserRepository;
@@ -85,6 +92,10 @@ public class ServiceLocator {
         return AnimeRoomDatabase.getDatabase(application);
     }
 
+    public AnimeRoomDatabase getGenresDao(Application application){
+        return AnimeRoomDatabase.getDatabase(application);
+    }
+
     public IAnimeRepositoryWithLiveData getAnimeRepository(Application application){
         BaseAnimeRemoteDataSource animeRemoteDataSource;
         BaseAnimeLocalDataSource animeLocalDataSource;
@@ -119,5 +130,16 @@ public class ServiceLocator {
         reviewsLocalDataSource = new ReviewsLocalDataSource(getReviewsDao(application), sharedPreferencesUtil, dataEncryptionUtil);
 
         return new ReviewsRepositoryWithLiveData(reviewsRemoteDataSource, reviewsLocalDataSource);
+    }
+
+    public IGenresRepositoryWithLiveData getGenresRepository(Application application){
+        BaseGenresLocalDataSource genresLocalDataSource;
+        BaseGenresRemoteDataSource genresRemoteDataSource;
+        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(application);
+        DataEncryptionUtil dataEncryptionUtil = new DataEncryptionUtil(application);
+
+        genresRemoteDataSource = new GenresRemoteDataSource();
+        genresLocalDataSource = new GenresLocalDataSource(getGenresDao(application), sharedPreferencesUtil, dataEncryptionUtil);
+        return new GenresRepositoryWithLiveData(genresRemoteDataSource, genresLocalDataSource);
     }
 }

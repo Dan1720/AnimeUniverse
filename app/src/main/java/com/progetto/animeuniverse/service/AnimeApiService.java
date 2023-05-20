@@ -10,6 +10,7 @@ import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_TOP_PARAME
 
 import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeApiResponse;
+import com.progetto.animeuniverse.model.GenresApiResponse;
 import com.progetto.animeuniverse.model.ReviewsApiResponse;
 
 import java.util.List;
@@ -35,6 +36,9 @@ public interface AnimeApiService {
 
     @GET("anime/{id}/reviews")
     Call<ReviewsApiResponse> getReviewByIdAnime(@Path("id")int id);
+
+    @GET("genres/anime")
+    Call<GenresApiResponse> getGenres();
 
 
 

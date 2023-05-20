@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 
 import com.google.gson.Gson;
 import com.progetto.animeuniverse.model.AnimeApiResponse;
+import com.progetto.animeuniverse.model.GenresApiResponse;
 import com.progetto.animeuniverse.model.ReviewsApiResponse;
 
 public class JSONParserUtil {
@@ -34,5 +35,12 @@ public class JSONParserUtil {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
         return new Gson().fromJson(bufferedReader, ReviewsApiResponse.class);
+    }
+
+    public GenresApiResponse parseJSONFileWithGSonGenres(String fileName) throws IOException {
+        InputStream inputStream = application.getAssets().open(fileName);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+        return new Gson().fromJson(bufferedReader, GenresApiResponse.class);
     }
 }

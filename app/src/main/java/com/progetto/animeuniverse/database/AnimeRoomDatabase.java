@@ -10,15 +10,17 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.progetto.animeuniverse.model.Anime;
+import com.progetto.animeuniverse.model.Genre;
 import com.progetto.animeuniverse.model.Review;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Anime.class, Review.class}, version = DATABASE_VERSION)
+@Database(entities = {Anime.class, Review.class, Genre.class}, version = DATABASE_VERSION)
 public abstract class AnimeRoomDatabase extends RoomDatabase {
     public abstract AnimeDao animeDao();
     public abstract ReviewDao reviewDao();
+    public abstract GenreDao genreDao();
 
     private static volatile AnimeRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = Runtime.getRuntime().availableProcessors();
