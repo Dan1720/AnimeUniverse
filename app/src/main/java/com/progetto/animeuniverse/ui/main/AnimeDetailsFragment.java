@@ -123,7 +123,11 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
         fragmentAnimeDetailsBinding.textViewDetailsYearIn.setText(String.valueOf(anime.getYear()));
         fragmentAnimeDetailsBinding.textViewDescriptionIn.setText(anime.getSynopsis());
         List<AnimeGenres> genres = anime.getGenres();
-        fragmentAnimeDetailsBinding.textViewGenresIn.setText(genres.get(0).getNameGenre() + " - " + genres.get(1).getNameGenre() +" - "+ genres.get(2).getNameGenre());
+        if(genres.size() >= 3){
+            fragmentAnimeDetailsBinding.textViewGenresIn.setText(genres.get(0).getNameGenre() + " - " + genres.get(1).getNameGenre() +" - "+ genres.get(2).getNameGenre());
+        }else {
+            fragmentAnimeDetailsBinding.textViewGenresIn.setText(genres.get(0).getNameGenre());
+        }
         List<AnimeStudios> studios = anime.getStudios();
         if(studios.size() >= 3){
             fragmentAnimeDetailsBinding.textViewStudiosIn.setText(studios.get(0).getNameStudio() + " - " + studios.get(1).getNameStudio() +" - "+ studios.get(2).getNameStudio());

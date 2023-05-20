@@ -3,6 +3,7 @@ package com.progetto.animeuniverse.util;
 import androidx.room.TypeConverter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.progetto.animeuniverse.model.AnimeEntry;
 import com.progetto.animeuniverse.model.AnimeGenres;
 
 import com.progetto.animeuniverse.model.AnimeImageUrls;
@@ -56,6 +57,20 @@ public class Converter {
 
     @TypeConverter
     public static String someAnimeStudiosListToString(List<AnimeStudios> object){
+        return gson.toJson(object);
+    }
+
+    @TypeConverter
+    public static List<AnimeEntry> stringToAnimeEntryList(String value){
+        if(value == null){
+            return Collections.emptyList();
+        }
+        Type listType = new TypeToken<List<AnimeEntry>>(){}.getType();
+        return gson.fromJson(value, listType);
+    }
+
+    @TypeConverter
+    public static String someAnimeEntryListToString(List<AnimeEntry> object){
         return gson.toJson(object);
     }
 

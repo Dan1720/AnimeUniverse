@@ -142,6 +142,8 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_genresFragment);
         });
 
+
+
     }
 
 
@@ -218,6 +220,18 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         }else{
             categories.setText(genres.get(0).getNameGenre());
         }
+        fragmentHomeBinding.imageViewInfo.setOnClickListener(v ->{
+            HomeFragmentDirections.ActionHomeFragmentToAnimeDetailsFragment action =
+                    HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(animeHomeCover);
+            Navigation.findNavController(requireView()).navigate(action);
+        });
+
+        fragmentHomeBinding.homeCover.setOnClickListener(v ->{
+            HomeFragmentDirections.ActionHomeFragmentToAnimeDetailsFragment action =
+                    HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(animeHomeCover);
+            Navigation.findNavController(requireView()).navigate(action);
+        });
+
 
     }
 

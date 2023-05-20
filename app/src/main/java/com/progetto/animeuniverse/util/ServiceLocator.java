@@ -96,6 +96,10 @@ public class ServiceLocator {
         return AnimeRoomDatabase.getDatabase(application);
     }
 
+    public AnimeRoomDatabase getAnimeRecommendations(Application application){
+        return AnimeRoomDatabase.getDatabase(application);
+    }
+
     public IAnimeRepositoryWithLiveData getAnimeRepository(Application application){
         BaseAnimeRemoteDataSource animeRemoteDataSource;
         BaseAnimeLocalDataSource animeLocalDataSource;

@@ -92,4 +92,5 @@
     <string name="episodes_number"> Numero episodi:</string>
     <string name="episodes"> Episodi:</string>
     <string name="read_more">Leggi tutto</string>
+    <string name="txt_episode">Episodio</string>
 </resources>
