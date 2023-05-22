@@ -43,6 +43,7 @@ public class AnimeViewModel extends ViewModel {
             fetchAnimeByName(nameAnime, lastUpdate);
         }
         return animeListLiveData;
+
     }
 
     public MutableLiveData<Result> getAnimeByIdFull(String anime, int id, long lastUpdate){

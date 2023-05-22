@@ -71,8 +71,10 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
         }else{
             animeLocalDataSource.getAnime();
         }
+
         return allAnimeMutableLiveData;
     }
+
 
     @Override
     public MutableLiveData<Result> fetchAnimeByIdFull(String q, int id, long lastUpdate) {

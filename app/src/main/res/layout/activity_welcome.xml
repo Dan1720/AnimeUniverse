@@ -9,7 +9,7 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/top_appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.Material3.Dark"
@@ -18,7 +18,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/app_name"/>
+        app:title="@string/app_name">
+        <ImageView
+            android:id="@+id/toolbar_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_intero"
+            />
+    </com.google.android.material.appbar.MaterialToolbar>
 
 
     <androidx.fragment.app.FragmentContainerView

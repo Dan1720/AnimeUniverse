@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
@@ -58,6 +59,9 @@ public class SearchFragment extends Fragment implements AnimeResponseCallback {
 
     private final String q = TOP_HEADLINES_ENDPOINT;
     private final int threshold = 1;
+    String finalLastUpdate = "0";
+
+
 
     public SearchFragment() {
         // Required empty public constructor
@@ -92,6 +96,7 @@ public class SearchFragment extends Fragment implements AnimeResponseCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         fragmentSearchBinding = FragmentSearchBinding.inflate(inflater, container, false);
         return fragmentSearchBinding.getRoot();
     }
@@ -129,7 +134,7 @@ public class SearchFragment extends Fragment implements AnimeResponseCallback {
             lastUpdate = sharedPreferencesUtil.readStringData(
                     SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE);
         }
-        animeViewModel.getAnimeTop(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
+        /*animeViewModel.getAnimeTop(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
             System.out.println("Result anime top:" + result.isSuccess());
             if(result.isSuccess()) {
                 AnimeResponse animeResponse = ((Result.AnimeResponseSuccess) result).getData();
@@ -144,7 +149,59 @@ public class SearchFragment extends Fragment implements AnimeResponseCallback {
                         getErrorMessage(((Result.Error) result).getMessage()),
                         Snackbar.LENGTH_SHORT).show();
             }
+        });*/
+        SearchView searchView = view.findViewById(R.id.search_view);
+        searchView.clearFocus();
+        String finalLastUpdate = lastUpdate;
+        /*animeViewModel.getAnimeByName("bleach",Long.parseLong(finalLastUpdate)).observe(getViewLifecycleOwner(), result -> {
+            System.out.println("Result anime searched by name:" + result.isSuccess());
+            if(result.isSuccess()){
+                AnimeResponse animeResponse = ((Result.AnimeResponseSuccess) result).getData();
+                List<Anime> fetchedAnime = animeResponse.getAnimeList();
+                animeList.clear();
+                animeList.addAll(fetchedAnime);
+                searchListAdapter.notifyDataSetChanged();
+            } else{
+                ErrorMessagesUtil errorMessagesUtil =
+                        new ErrorMessagesUtil(requireActivity().getApplication());
+                Snackbar.make(view, errorMessagesUtil.
+                                getErrorMessage(((Result.Error) result).getMessage()),
+                        Snackbar.LENGTH_SHORT).show();
+            }
+
+        });*/
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                animeViewModel.getAnimeByName(query,Long.parseLong(finalLastUpdate)).observe(getViewLifecycleOwner(), result -> {
+                    System.out.println("Result anime searched by name:" + result.isSuccess());
+                    if(result.isSuccess()){
+                        AnimeResponse animeResponse = ((Result.AnimeResponseSuccess) result).getData();
+                        List<Anime> fetchedAnime = animeResponse.getAnimeList();
+                        animeList.clear();
+                        animeList.addAll(fetchedAnime);
+                        searchListAdapter.notifyDataSetChanged();
+                    } else{
+                        ErrorMessagesUtil errorMessagesUtil =
+                                new ErrorMessagesUtil(requireActivity().getApplication());
+                        Snackbar.make(view, errorMessagesUtil.
+                                        getErrorMessage(((Result.Error) result).getMessage()),
+                                Snackbar.LENGTH_SHORT).show();
+                    }
+
+                });
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return false;
+            }
         });
+
 
 
     }
