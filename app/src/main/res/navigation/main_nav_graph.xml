@@ -26,6 +26,12 @@
         <action
             android:id="@+id/action_homeFragment_to_genresFragment"
             app:destination="@id/genresFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_serieTvFragment"
+            app:destination="@id/serieTvFragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_filmFragment"
+            app:destination="@id/filmFragment"/>
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -136,4 +142,42 @@
         android:name="com.progetto.animeuniverse.ui.main.GenresFragment"
         android:label="fragment_genres"
         tools:layout="@layout/fragment_genres" />
+    <fragment
+        android:id="@+id/serieTvFragment"
+        android:name="com.progetto.animeuniverse.ui.main.SerieTvFragment"
+        android:label="fragment_serie_tv"
+        tools:layout="@layout/fragment_serie_tv">
+        <action
+            android:id="@+id/action_serieTvFragment_to_animeDetailsFragment"
+            app:destination="@id/animeDetailsFragment" />
+        <action
+            android:id="@+id/action_serieTvFragment_to_genresFragment"
+            app:destination="@id/genresFragment" />
+        <action
+            android:id="@+id/action_serieTvFragment_to_filmFragment"
+            app:destination="@id/filmFragment" />
+        <action
+            android:id="@+id/action_serieTvFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filmFragment"
+        android:name="com.progetto.animeuniverse.ui.main.FilmFragment"
+        android:label="fragment_film"
+        tools:layout="@layout/fragment_film">
+        <action
+            android:id="@+id/action_filmFragment_to_animeDetailsFragment"
+            app:destination="@id/animeDetailsFragment"/>
+        <action
+            android:id="@+id/action_filmFragment_to_genresFragment"
+            app:destination="@id/genresFragment" />
+        <action
+            android:id="@+id/action_filmFragment_to_serieTvFragment"
+            app:destination="@id/serieTvFragment" />
+        <action
+            android:id="@+id/action_filmFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+
+    </fragment>
+
 </navigation>

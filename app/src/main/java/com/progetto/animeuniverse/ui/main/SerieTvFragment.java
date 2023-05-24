@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,12 +28,13 @@ import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.adapter.ChildItemAdapter;
 import com.progetto.animeuniverse.adapter.ParentItemAdapter;
-import com.progetto.animeuniverse.databinding.FragmentHomeBinding;
+import com.progetto.animeuniverse.databinding.FragmentSerieTvBinding;
 import com.progetto.animeuniverse.model.Anime;
 
 import com.progetto.animeuniverse.model.AnimeGenres;
@@ -50,22 +52,22 @@ import java.util.List;
 import java.util.Random;
 
 
-public class HomeFragment extends Fragment implements AnimeResponseCallback {
+public class SerieTvFragment extends Fragment implements AnimeResponseCallback {
 
     private List<Anime> animeList;
     private SharedPreferencesUtil sharedPreferencesUtil;
     private AnimeViewModel animeViewModel;
 
-    private FragmentHomeBinding fragmentHomeBinding;
+    private FragmentSerieTvBinding fragmentSerieTvBinding;
 
     private final String q = TOP_HEADLINES_ENDPOINT;
     private final int threshold = 1;
-    public HomeFragment() {
+    public SerieTvFragment() {
         // Required empty public constructor
     }
 
-    public static HomeFragment newInstance(){
-        return new HomeFragment();
+    public static SerieTvFragment newInstance(){
+        return new SerieTvFragment();
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,8 +96,8 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false);
-        return fragmentHomeBinding.getRoot();
+        fragmentSerieTvBinding = FragmentSerieTvBinding.inflate(inflater, container, false);
+        return fragmentSerieTvBinding.getRoot();
     }
 
 
@@ -110,11 +112,20 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         ParentItemAdapter parentItemAdapter = new ParentItemAdapter(ParentItemList(animeList), requireActivity().getApplication(),new ChildItemAdapter.OnItemClickListener(){
             @Override
             public void onAnimeItemClick(Anime anime){
-                HomeFragmentDirections.ActionHomeFragmentToAnimeDetailsFragment action =
-                        HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(anime);
+                SerieTvFragmentDirections.ActionSerieTvFragmentToAnimeDetailsFragment action =
+                        SerieTvFragmentDirections.actionSerieTvFragmentToAnimeDetailsFragment(anime);
                 Navigation.findNavController(view).navigate(action);
             }
         });
+        NavBackStackEntry navBackStackEntry = Navigation.findNavController(view).getPreviousBackStackEntry();
+        if(navBackStackEntry != null && navBackStackEntry.getDestination().getId() == R.id.serieTvFragment){
+            ((BottomNavigationView) requireActivity().findViewById(R.id.bottom_navigation)).
+                    getMenu().findItem(R.id.serieTvFragment).setChecked(true);
+
+        }else if(navBackStackEntry != null && navBackStackEntry.getDestination().getId() == R.id.listFragment){
+            ((BottomNavigationView) requireActivity().findViewById(R.id.bottom_navigation)).
+                    getMenu().findItem(R.id.listFragment).setChecked(true);
+        }
         ParentRecyclerViewItem.setAdapter(parentItemAdapter);
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
 
@@ -138,15 +149,16 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             }
         });
 
-        fragmentHomeBinding.txtCategorie.setOnClickListener(v -> {
-            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_genresFragment);
+        fragmentSerieTvBinding.txtCategorie.setOnClickListener(v -> {
+            Navigation.findNavController(requireView()).navigate(R.id.action_serieTvFragment_to_genresFragment);
         });
-        fragmentHomeBinding.txtSerieTv.setOnClickListener(v -> {
-            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_serieTvFragment);
+        fragmentSerieTvBinding.txtFilm.setOnClickListener(v -> {
+            Navigation.findNavController(requireView()).navigate(R.id.action_serieTvFragment_to_filmFragment);
         });
-        fragmentHomeBinding.txtFilm.setOnClickListener(v -> {
-            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_filmFragment);
+        fragmentSerieTvBinding.txtHome.setOnClickListener(v -> {
+            Navigation.findNavController(requireView()).navigate(R.id.action_serieTvFragment_to_homeFragment);
         });
+
 
 
     }
@@ -192,7 +204,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
     @Override
     public void onDestroyView(){
         super.onDestroyView();
-        fragmentHomeBinding = null;
+        fragmentSerieTvBinding = null;
     }
 
     private List<ParentItem> ParentItemList(List<Anime> animeList)
@@ -203,7 +215,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         ParentItem item
                 = new ParentItem(
                 "Anime del momento", animeList
-                );
+        );
         itemList.add(item);
 
         return itemList;
@@ -211,29 +223,29 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
 
     @SuppressLint("SetTextI18n")
     public void setImageHomeCover(List<Anime>animeList) {
-        ImageView homeCover = getView().findViewById(R.id.homeCover);
+        ImageView homeCover = getView().findViewById(R.id.serieTvCover);
         TextView categories = getView().findViewById(R.id.txt_btn_categorie);
         Random random = new Random();
         int number = random.nextInt(animeList.size());
-        Anime animeHomeCover = animeList.get(number);
+        Anime animeSerieTvCover = animeList.get(number);
         Picasso.get()
-                .load(animeHomeCover.getImages().getJpgImages().getLargeImageUrl())
+                .load(animeSerieTvCover.getImages().getJpgImages().getLargeImageUrl())
                 .into(homeCover);
-        List<AnimeGenres> genres = animeHomeCover.getGenres();
+        List<AnimeGenres> genres = animeSerieTvCover.getGenres();
         if(genres.size() >= 3){
             categories.setText(genres.get(0).getNameGenre() + " - " + genres.get(1).getNameGenre() +" - "+ genres.get(2).getNameGenre());
         }else{
             categories.setText(genres.get(0).getNameGenre());
         }
-        fragmentHomeBinding.imageViewInfo.setOnClickListener(v ->{
-            HomeFragmentDirections.ActionHomeFragmentToAnimeDetailsFragment action =
-                    HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(animeHomeCover);
+        fragmentSerieTvBinding.imageViewInfo.setOnClickListener(v ->{
+            SerieTvFragmentDirections.ActionSerieTvFragmentToAnimeDetailsFragment action =
+                    SerieTvFragmentDirections.actionSerieTvFragmentToAnimeDetailsFragment(animeSerieTvCover);
             Navigation.findNavController(requireView()).navigate(action);
         });
 
-        fragmentHomeBinding.homeCover.setOnClickListener(v ->{
-            HomeFragmentDirections.ActionHomeFragmentToAnimeDetailsFragment action =
-                    HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(animeHomeCover);
+        fragmentSerieTvBinding.serieTvCover.setOnClickListener(v ->{
+            SerieTvFragmentDirections.ActionSerieTvFragmentToAnimeDetailsFragment action =
+                    SerieTvFragmentDirections.actionSerieTvFragmentToAnimeDetailsFragment(animeSerieTvCover);
             Navigation.findNavController(requireView()).navigate(action);
         });
 

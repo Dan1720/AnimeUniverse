@@ -128,7 +128,6 @@ public class SearchFragment extends Fragment implements AnimeResponseCallback {
 
                     @Override
                     public void onAnimeClick(Anime anime) {
-                        Snackbar.make(view, anime.getTitle(), Snackbar.LENGTH_SHORT).show();
                         SearchFragmentDirections.ActionSearchFragmentToAnimeDetailsFragment action =
                                 SearchFragmentDirections.actionSearchFragmentToAnimeDetailsFragment(anime);
                         Navigation.findNavController(view).navigate(action);
