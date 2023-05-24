@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavBackStackEntry;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,8 +29,11 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
+import com.progetto.animeuniverse.adapter.ChildItemAdapter;
+import com.progetto.animeuniverse.adapter.ParentItemAdapter;
 import com.progetto.animeuniverse.adapter.SearchListAdapter;
 import com.progetto.animeuniverse.databinding.FragmentHomeBinding;
 import com.progetto.animeuniverse.databinding.FragmentSearchBinding;
@@ -124,9 +129,20 @@ public class SearchFragment extends Fragment implements AnimeResponseCallback {
                     @Override
                     public void onAnimeClick(Anime anime) {
                         Snackbar.make(view, anime.getTitle(), Snackbar.LENGTH_SHORT).show();
+                        SearchFragmentDirections.ActionSearchFragmentToAnimeDetailsFragment action =
+                                SearchFragmentDirections.actionSearchFragmentToAnimeDetailsFragment(anime);
+                        Navigation.findNavController(view).navigate(action);
                     }
         });
+        NavBackStackEntry navBackStackEntry = Navigation.findNavController(view).getPreviousBackStackEntry();
+        if(navBackStackEntry != null && navBackStackEntry.getDestination().getId() == R.id.searchFragment){
+            ((BottomNavigationView) requireActivity().findViewById(R.id.bottom_navigation)).
+                    getMenu().findItem(R.id.searchFragment).setChecked(true);
 
+        }else if(navBackStackEntry != null && navBackStackEntry.getDestination().getId() == R.id.listFragment){
+            ((BottomNavigationView) requireActivity().findViewById(R.id.bottom_navigation)).
+                    getMenu().findItem(R.id.listFragment).setChecked(true);
+        }
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(searchListAdapter);
         String lastUpdate = "0";
@@ -205,7 +221,6 @@ public class SearchFragment extends Fragment implements AnimeResponseCallback {
 
 
     }
-
 
     //@Override
     @Override

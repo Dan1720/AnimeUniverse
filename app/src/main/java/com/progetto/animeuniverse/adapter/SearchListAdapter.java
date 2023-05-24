@@ -11,9 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.model.Anime;
+import com.progetto.animeuniverse.service.AnimeApiService;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.AnimeViewHolder> {
