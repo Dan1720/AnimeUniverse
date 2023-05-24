@@ -35,11 +35,15 @@ import com.progetto.animeuniverse.adapter.ParentItemAdapter;
 import com.progetto.animeuniverse.databinding.FragmentHomeBinding;
 import com.progetto.animeuniverse.model.Anime;
 
+import com.progetto.animeuniverse.model.AnimeByName;
 import com.progetto.animeuniverse.model.AnimeGenres;
+import com.progetto.animeuniverse.model.AnimeRecommendations;
 import com.progetto.animeuniverse.model.AnimeResponse;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.anime.AnimeResponseCallback;
 import com.progetto.animeuniverse.repository.anime.IAnimeRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_by_name.IAnimeByNameRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_recommendations.IAnimeRecommendationsRepositoryWithLiveData;
 import com.progetto.animeuniverse.util.ErrorMessagesUtil;
 import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
@@ -53,8 +57,12 @@ import java.util.Random;
 public class HomeFragment extends Fragment implements AnimeResponseCallback {
 
     private List<Anime> animeList;
+    private List<AnimeRecommendations> animeRecommendationsList;
+    private List<AnimeByName> animeByNameList;
     private SharedPreferencesUtil sharedPreferencesUtil;
     private AnimeViewModel animeViewModel;
+    private AnimeRecommendationsViewModel animeRecommendationsViewModel;
+    private AnimeByNameViewModel animeByNameViewModel;
 
     private FragmentHomeBinding fragmentHomeBinding;
 
@@ -86,7 +94,22 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         }
         animeList = new ArrayList<>();
 
+        IAnimeRecommendationsRepositoryWithLiveData animeRecommendationsRepositoryWithLiveData =
+                ServiceLocator.getInstance().getAnimeRecommendationsRepository(
+                        requireActivity().getApplication()
+                );
 
+        if(animeRecommendationsRepositoryWithLiveData != null){
+            animeRecommendationsViewModel = new ViewModelProvider(requireActivity(),
+                    new AnimeRecommendationsViewModelFactory(animeRecommendationsRepositoryWithLiveData)).get(AnimeRecommendationsViewModel.class);
+        }else {
+            Snackbar.make(requireActivity().findViewById(android.R.id.content),
+                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
+        }
+
+        animeRecommendationsList = new ArrayList<>();
+
+        
 
     }
 
@@ -137,6 +160,17 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
                         Snackbar.LENGTH_SHORT).show();
             }
         });
+
+        lastUpdate = "0";
+        animeRecommendationsViewModel.getAnimeRecommendations(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
+            System.out.println("Result rec: "+ result.isSuccess());
+        });
+
+        lastUpdate = "0";
+        animeByNameViewModel.getAnimeByName("Naruto", Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
+            System.out.println("Result name: "+ result.isSuccess());
+        });
+
 
         fragmentHomeBinding.txtCategorie.setOnClickListener(v -> {
             Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_genresFragment);

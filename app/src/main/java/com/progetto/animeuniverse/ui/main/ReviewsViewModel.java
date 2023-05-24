@@ -14,7 +14,7 @@ public class ReviewsViewModel extends ViewModel {
     private boolean firstLoading;
     private int current_page;
     private int count;
-    private MutableLiveData<com.progetto.animeuniverse.model.Result> reviewsListLiveData;
+    private MutableLiveData<Result> reviewsListLiveData;
     private int currentResults;
 
     public ReviewsViewModel(IReviewsRepositoryWithLiveData iReviewsRepositoryWithLiveData){

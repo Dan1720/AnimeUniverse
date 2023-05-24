@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverter;
@@ -14,7 +16,7 @@ import com.progetto.animeuniverse.util.Converter;
 
 import java.util.List;
 
-@Entity(tableName = "anime_reccomendations")
+@Entity(tableName = "anime_recommendations")
 public class AnimeRecommendations implements Parcelable {
     @PrimaryKey()
     @SerializedName("mal_id")
@@ -22,16 +24,21 @@ public class AnimeRecommendations implements Parcelable {
 
     @TypeConverters(Converter.class)
     @SerializedName("entry")
-    private List<AnimeEntry> entryList;
+    private List<AnimeEntry> entry;
 
-    public AnimeRecommendations(int id, List<AnimeEntry> entryList) {
+    @ColumnInfo(name = "is_synchronized")
+    private boolean isSynchronized;
+
+    public AnimeRecommendations(int id, List<AnimeEntry> entry, boolean isSynchronized) {
         this.id = id;
-        this.entryList = entryList;
+        this.entry = entry;
+        this.isSynchronized = isSynchronized;
     }
 
     protected AnimeRecommendations(Parcel in) {
         id = in.readInt();
-        entryList = in.createTypedArrayList(AnimeEntry.CREATOR);
+        entry = in.createTypedArrayList(AnimeEntry.CREATOR);
+        isSynchronized = in.readByte() != 0;
     }
 
     public static final Creator<AnimeRecommendations> CREATOR = new Creator<AnimeRecommendations>() {
@@ -54,19 +61,28 @@ public class AnimeRecommendations implements Parcelable {
         this.id = id;
     }
 
-    public List<AnimeEntry> getEntryList() {
-        return entryList;
+    public List<AnimeEntry> getEntry() {
+        return entry;
     }
 
-    public void setEntryList(List<AnimeEntry> entryList) {
-        this.entryList = entryList;
+    public void setEntry(List<AnimeEntry> entry) {
+        this.entry = entry;
+    }
+
+    public boolean isSynchronized() {
+        return isSynchronized;
+    }
+
+    public void setSynchronized(boolean aSynchronized) {
+        isSynchronized = aSynchronized;
     }
 
     @Override
     public String toString() {
         return "AnimeRecommendations{" +
                 "id=" + id +
-                ", entryList=" + entryList +
+                ", entry=" + entry +
+                ", isSynchronized=" + isSynchronized +
                 '}';
     }
 
@@ -78,6 +94,7 @@ public class AnimeRecommendations implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(id);
-        dest.writeTypedList(entryList);
+        dest.writeTypedList(entry);
+        dest.writeByte((byte) (isSynchronized ? 1 : 0));
     }
 }
