@@ -109,18 +109,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
 
         animeRecommendationsList = new ArrayList<>();
 
-        IAnimeByNameRepositoryWithLiveData animeByNameRepositoryWithLiveData = ServiceLocator.getInstance().getAnimeByNameRepository(
-                requireActivity().getApplication()
-        );
-
-        if(animeByNameRepositoryWithLiveData != null){
-            animeByNameViewModel = new ViewModelProvider(requireActivity(), new AnimeByNameViewModelFactory(animeByNameRepositoryWithLiveData)).get(AnimeByNameViewModel.class);
-        }else{
-            Snackbar.make(requireActivity().findViewById(android.R.id.content),
-                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
-        }
-
-        animeByNameList = new ArrayList<>();
+        
 
     }
 
