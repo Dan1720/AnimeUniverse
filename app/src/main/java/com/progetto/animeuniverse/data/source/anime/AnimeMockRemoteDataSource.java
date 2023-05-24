@@ -40,20 +40,7 @@ public class AnimeMockRemoteDataSource extends BaseAnimeRemoteDataSource{
         }
     }
 
-    @Override
-    public void getAnimeByName(String nameAnime) {
 
-    }
-
-    @Override
-    public void getAnimeByIdFull(String anime, int id) {
-
-    }
-
-    @Override
-    public void getAnimeById(String anime, int id) {
-
-    }
 
 
 }

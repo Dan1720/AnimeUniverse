@@ -82,7 +82,8 @@ public class GenresLocalDataSource extends BaseGenresLocalDataSource{
                 for(int i=0; i<genresList.size(); i++){
                     genresList.get(i).setId(Math.toIntExact(insertedGenresIds.get(i)));
                 }
-            }   GenresApiResponse genresApiResponse = new GenresApiResponse();
+            }
+            GenresApiResponse genresApiResponse = new GenresApiResponse();
             genresApiResponse.setGernesList(genresList);
         });
     }

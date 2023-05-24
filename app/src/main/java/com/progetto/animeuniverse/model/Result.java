@@ -5,7 +5,8 @@ public abstract class Result {
 
     public boolean isSuccess(){
         if(this instanceof AnimeResponseSuccess || this instanceof UserResponseSuccess ||
-                this instanceof ReviewsResponseSuccess || this instanceof GenresResponseSuccess){
+                this instanceof ReviewsResponseSuccess || this instanceof GenresResponseSuccess ||
+                this instanceof AnimeRecommendationsSuccess || this instanceof AnimeByNameSuccess){
             return true;
         }else{
             return false;
@@ -60,5 +61,23 @@ public abstract class Result {
         public GenresResponse getData(){
             return genresResponse;
         }
+    }
+
+    public static final class AnimeRecommendationsSuccess extends Result{
+        private final AnimeRecommendationsResponse animeRecommendationsResponse;
+        public AnimeRecommendationsSuccess(AnimeRecommendationsResponse animeRecommendationsResponse){
+            this.animeRecommendationsResponse = animeRecommendationsResponse;
+        }
+        public AnimeRecommendationsResponse getData(){
+            return animeRecommendationsResponse;
+        }
+    }
+
+    public static final class AnimeByNameSuccess extends Result{
+        private final AnimeByNameResponse animeByNameResponse;
+        public AnimeByNameSuccess(AnimeByNameResponse animeByNameResponse){
+            this.animeByNameResponse = animeByNameResponse;
+        }
+        public AnimeByNameResponse getData(){return animeByNameResponse;}
     }
 }

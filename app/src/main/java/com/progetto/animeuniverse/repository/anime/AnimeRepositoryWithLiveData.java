@@ -43,58 +43,13 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
     }
 
 
-    @Override
-    public void fetchAnimeByName(String nameAnime) {
-        animeRemoteDataSource.getAnimeByName(nameAnime);
-    }
-
-    @Override
-    public void fetchAnimeByIdFull(String q, int id) {
-        animeRemoteDataSource.getAnimeByIdFull(q, id);
-    }
-
-    @Override
-    public void fetchAnimeById(String q, int id) {
-        animeRemoteDataSource.getAnimeById(q, id);
-    }
 
     @Override
     public void fetchAnimeTop() {
         animeRemoteDataSource.getAnimeTop();
     }
 
-    @Override
-    public MutableLiveData<Result> fetchAnimeByName(String nameAnime, long lastUpdate) {
-        long currentTime = System.currentTimeMillis();
-        if(currentTime - lastUpdate > FRESH_TIMEOUT){
-            animeRemoteDataSource.getAnimeByName(nameAnime);
-        }else{
-            animeLocalDataSource.getAnime();
-        }
-        return allAnimeMutableLiveData;
-    }
 
-    @Override
-    public MutableLiveData<Result> fetchAnimeByIdFull(String q, int id, long lastUpdate) {
-        long currentTime = System.currentTimeMillis();
-        if(currentTime - lastUpdate > FRESH_TIMEOUT){
-            animeRemoteDataSource.getAnimeByIdFull(q, id);
-        }else{
-            animeLocalDataSource.getAnime();
-        }
-        return allAnimeMutableLiveData;
-    }
-
-    @Override
-    public MutableLiveData<Result> fetchAnimeById(String q, int id, long lastUpdate) {
-        long currentTime = System.currentTimeMillis();
-        if(currentTime - lastUpdate > FRESH_TIMEOUT){
-            animeRemoteDataSource.getAnimeById(q, id);
-        }else{
-            animeLocalDataSource.getAnime();
-        }
-        return allAnimeMutableLiveData;
-    }
 
     @Override
     public MutableLiveData<Result> fetchAnimeTop(long lastUpdate) {

@@ -31,20 +31,6 @@ public class AnimeMockRepository implements IAnimeRepository{
         this.jsonParserType = jsonParserType;
     }
 
-    @Override
-    public void fetchAnimeByName(String nameAnime, long lastUpdate) {
-
-    }
-
-    @Override
-    public void fetchAnimeByIdFull(String q, int id, long lastUpdate) {
-
-    }
-
-    @Override
-    public void fetchAnimeById(String q, int id, long lastUpdate) {
-
-    }
 
     @Override
     public void fetchAnimeTop(long lastUpdate) {

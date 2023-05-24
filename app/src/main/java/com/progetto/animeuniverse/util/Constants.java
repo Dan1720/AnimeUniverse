@@ -9,7 +9,7 @@ public class Constants {
     public static final String ENCRYPTED_DATA_FILE_NAME = "com.progetto.animeuniverse.encrypted_file.txt";
     public static final String ANIMEUNIVERSE_DATABASE_NAME = "animeuniverse_db";
 
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 7;
 
     // Constants for managing errors
     public static final String RETROFIT_ERROR = "retrofit_error";
@@ -47,6 +47,9 @@ public class Constants {
     public static final String ANIME_API_TEST_JSON_FILE = "animeapi-test.json";
     public static final String REVIEWS_API_TEST_JSON_FILE = "reviewsapiid-test.json";
     public static final String GENRES_API_TEST_JSON_FILE = "genresapi-test.json";
+
+    public static final String ANIMERECOMMENDATIONS_API_TEST_JSON_FILE = "animerecommendationsapi-test.json";
+    public static final String ANIMEBYNAME_API_TEST_JSON_FILE = "animebynameapi-test.json";
     public static final String ANIME_API_ENDPOINTS = "top/anime";
     public static final String TOP_HEADLINES_ENDPOINT = "anime";
     public static final String TOP_HEADLINES_Q_PARAMETER = "q";

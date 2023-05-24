@@ -38,26 +38,6 @@ public class AnimeViewModel extends ViewModel {
         return animeListLiveData;
     }
 
-    public MutableLiveData<Result> getAnimeByName(String nameAnime, long lastUpdate){
-        if(animeListLiveData == null){
-            fetchAnimeByName(nameAnime, lastUpdate);
-        }
-        return animeListLiveData;
-    }
-
-    public MutableLiveData<Result> getAnimeByIdFull(String anime, int id, long lastUpdate){
-        if(animeListLiveData == null){
-            fetchAnimeByIdFull(anime, id, lastUpdate);
-        }
-        return animeListLiveData;
-    }
-
-    public MutableLiveData<Result> getAnimeById(String anime, int id, long lastUpdate){
-        if(animeListLiveData == null){
-            fetchAnimeById(anime, id, lastUpdate);
-        }
-        return animeListLiveData;
-    }
 
     public void fetchAnimeTop(){
         animeRepositoryWithLiveData.fetchAnimeTop();
@@ -67,29 +47,6 @@ public class AnimeViewModel extends ViewModel {
         animeListLiveData = animeRepositoryWithLiveData.fetchAnimeTop(lastUpdate);
     }
 
-    public void fetchAnimeByName(String nameAnime){
-        animeRepositoryWithLiveData.fetchAnimeByName(nameAnime);
-    }
-
-    private void fetchAnimeByName(String nameAnime, long lastUpdate){
-        animeListLiveData = animeRepositoryWithLiveData.fetchAnimeByName(nameAnime, lastUpdate);
-    }
-
-    public void fetchAnimeByIdFull(String anime, int id){
-        animeRepositoryWithLiveData.fetchAnimeByIdFull(anime, id);
-    }
-
-    private void fetchAnimeByIdFull(String anime, int id, long lastUpdate){
-        animeListLiveData = animeRepositoryWithLiveData.fetchAnimeByIdFull(anime, id, lastUpdate);
-    }
-
-    public void fetchAnimeById(String anime, int id){
-        animeRepositoryWithLiveData.fetchAnimeById(anime, id);
-    }
-
-    private void fetchAnimeById(String anime, int id, long lastUpdate){
-        animeListLiveData = animeRepositoryWithLiveData.fetchAnimeById(anime, id, lastUpdate);
-    }
 
 
     public MutableLiveData<Result> getFavoriteAnimeLiveData(boolean isFirstLoading){
