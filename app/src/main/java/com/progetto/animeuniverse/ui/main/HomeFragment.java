@@ -166,11 +166,6 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             System.out.println("Result rec: "+ result.isSuccess());
         });
 
-        lastUpdate = "0";
-        animeByNameViewModel.getAnimeByName("Naruto", Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
-            System.out.println("Result name: "+ result.isSuccess());
-        });
-
 
         fragmentHomeBinding.txtCategorie.setOnClickListener(v -> {
             Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_genresFragment);

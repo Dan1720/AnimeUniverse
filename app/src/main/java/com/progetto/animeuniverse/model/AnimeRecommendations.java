@@ -18,8 +18,7 @@ import java.util.List;
 
 @Entity(tableName = "anime_recommendations")
 public class AnimeRecommendations implements Parcelable {
-    @PrimaryKey()
-    @SerializedName("mal_id")
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
     @TypeConverters(Converter.class)
