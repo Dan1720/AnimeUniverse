@@ -11,6 +11,8 @@ import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_TOP_PARAME
 import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeApiResponse;
 import com.progetto.animeuniverse.model.AnimeByNameApiResponse;
+import com.progetto.animeuniverse.model.AnimeEpisodesApiResponse;
+import com.progetto.animeuniverse.model.AnimeNewApiResponse;
 import com.progetto.animeuniverse.model.AnimeRecommendations;
 import com.progetto.animeuniverse.model.AnimeRecommendationsApiResponse;
 import com.progetto.animeuniverse.model.GenresApiResponse;
@@ -45,6 +47,12 @@ public interface AnimeApiService {
 
     @GET("recommendations/anime")
     Call<AnimeRecommendationsApiResponse> getAnimeRecommendations();
+
+    @GET("watch/promos")
+    Call<AnimeNewApiResponse> getAnimeNew();
+
+    @GET("anime/{id}/episodes")
+    Call<AnimeEpisodesApiResponse> getAnimeEpisodes(@Path("id")int id);
 
 
 

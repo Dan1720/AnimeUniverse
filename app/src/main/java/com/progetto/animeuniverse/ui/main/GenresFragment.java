@@ -33,6 +33,8 @@ import com.progetto.animeuniverse.model.GenresResponse;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.genres.GenresResponseCallback;
 import com.progetto.animeuniverse.repository.genres.IGenresRepositoryWithLiveData;
+import com.progetto.animeuniverse.ui.main.GenresViewModel;
+import com.progetto.animeuniverse.ui.main.GenresViewModelFactory;
 import com.progetto.animeuniverse.util.ErrorMessagesUtil;
 import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;

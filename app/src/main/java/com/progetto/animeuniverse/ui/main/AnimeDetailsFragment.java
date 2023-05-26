@@ -37,7 +37,6 @@ import com.progetto.animeuniverse.model.AnimeProducers;
 import com.progetto.animeuniverse.model.AnimeStudios;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.model.Review;
-import com.progetto.animeuniverse.model.ReviewsApiResponse;
 import com.progetto.animeuniverse.model.ReviewsResponse;
 import com.progetto.animeuniverse.repository.reviews.IReviewsRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.reviews.ReviewsResponseCallback;
@@ -163,7 +162,7 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
         ReviewsRecyclerViewAdapter reviewsRecyclerViewAdapter = new ReviewsRecyclerViewAdapter(reviewsList, requireActivity().getApplication(), new ReviewsRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onReviewItemClick(Review review) {
-                AnimeDetailsFragmentDirections.ActionAnimeDetailsFragmentToReviewDetailsFragment action =
+                com.progetto.animeuniverse.ui.main.AnimeDetailsFragmentDirections.ActionAnimeDetailsFragmentToReviewDetailsFragment action =
                         AnimeDetailsFragmentDirections.actionAnimeDetailsFragmentToReviewDetailsFragment(review);
                 Navigation.findNavController(view).navigate(action);
             }
