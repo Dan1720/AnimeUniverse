@@ -19,6 +19,10 @@ import com.progetto.animeuniverse.data.source.anime_episodes.AnimeEpisodesLocalD
 import com.progetto.animeuniverse.data.source.anime_episodes.AnimeEpisodesRemoteDataSource;
 import com.progetto.animeuniverse.data.source.anime_episodes.BaseAnimeEpisodesLocalDataSource;
 import com.progetto.animeuniverse.data.source.anime_episodes.BaseAnimeEpisodesRemoteDataSource;
+import com.progetto.animeuniverse.data.source.anime_episodes_images.AnimeEpisodesImagesLocalDataSource;
+import com.progetto.animeuniverse.data.source.anime_episodes_images.AnimeEpisodesImagesRemoteDataSource;
+import com.progetto.animeuniverse.data.source.anime_episodes_images.BaseAnimeEpisodesImagesLocalDataSource;
+import com.progetto.animeuniverse.data.source.anime_episodes_images.BaseAnimeEpisodesImagesRemoteDataSource;
 import com.progetto.animeuniverse.data.source.anime_new.AnimeNewLocalDataSource;
 import com.progetto.animeuniverse.data.source.anime_new.AnimeNewRemoteDataSource;
 import com.progetto.animeuniverse.data.source.anime_new.BaseAnimeNewLocalDataSource;
@@ -46,6 +50,8 @@ import com.progetto.animeuniverse.repository.anime_by_name.AnimeByNameRepository
 import com.progetto.animeuniverse.repository.anime_by_name.IAnimeByNameRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_episodes.AnimeEpisodesRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_episodes_images.AnimeEpisodesImagesRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_episodes_images.IAnimeEpisodesImagesRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_new.AnimeNewRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_new.IAnimeNewRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_recommendations.AnimeRecommendationsRepositoryWithLiveData;
@@ -131,6 +137,10 @@ public class ServiceLocator {
     }
 
     public AnimeRoomDatabase getAnimeEpisodesDao(Application application){
+        return AnimeRoomDatabase.getDatabase(application);
+    }
+
+    public AnimeRoomDatabase getAnimeEpisodesImagesDao(Application application){
         return AnimeRoomDatabase.getDatabase(application);
     }
 
@@ -223,6 +233,16 @@ public class ServiceLocator {
         animeEpisodesRemoteDataSource = new AnimeEpisodesRemoteDataSource();
         animeEpisodesLocalDataSource = new AnimeEpisodesLocalDataSource(getAnimeEpisodesDao(application), sharedPreferencesUtil, dataEncryptionUtil);
         return new AnimeEpisodesRepositoryWithLiveData(animeEpisodesRemoteDataSource,animeEpisodesLocalDataSource);
+    }
 
+    public IAnimeEpisodesImagesRepositoryWithLiveData getAnimeEpisodesImagesRepository(Application application){
+        BaseAnimeEpisodesImagesRemoteDataSource animeEpisodesImagesRemoteDataSource;
+        BaseAnimeEpisodesImagesLocalDataSource animeEpisodesImagesLocalDataSource;
+        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(application);
+        DataEncryptionUtil dataEncryptionUtil = new DataEncryptionUtil(application);
+
+        animeEpisodesImagesRemoteDataSource = new AnimeEpisodesImagesRemoteDataSource();
+        animeEpisodesImagesLocalDataSource = new AnimeEpisodesImagesLocalDataSource(getAnimeEpisodesImagesDao(application), sharedPreferencesUtil, dataEncryptionUtil);
+        return new AnimeEpisodesImagesRepositoryWithLiveData(animeEpisodesImagesRemoteDataSource,animeEpisodesImagesLocalDataSource);
     }
 }

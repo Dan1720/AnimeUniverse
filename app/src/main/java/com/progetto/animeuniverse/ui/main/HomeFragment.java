@@ -33,6 +33,7 @@ import com.progetto.animeuniverse.databinding.FragmentHomeBinding;
 import com.progetto.animeuniverse.model.Anime;
 
 import com.progetto.animeuniverse.model.AnimeEpisodes;
+import com.progetto.animeuniverse.model.AnimeEpisodesImages;
 import com.progetto.animeuniverse.model.AnimeGenres;
 import com.progetto.animeuniverse.model.AnimeNew;
 import com.progetto.animeuniverse.model.AnimeRecommendations;
@@ -41,6 +42,7 @@ import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.anime.AnimeResponseCallback;
 import com.progetto.animeuniverse.repository.anime.IAnimeRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_episodes_images.IAnimeEpisodesImagesRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_new.IAnimeNewRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_recommendations.IAnimeRecommendationsRepositoryWithLiveData;
 import com.progetto.animeuniverse.util.ErrorMessagesUtil;
@@ -59,12 +61,14 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
     private List<AnimeRecommendations> animeRecommendationsList;
     private List<AnimeNew> animeNewList;
     private List<AnimeEpisodes> animeEpisodesList;
+    private List<AnimeEpisodesImages> animeEpisodesImagesList;
     private SharedPreferencesUtil sharedPreferencesUtil;
     private AnimeViewModel animeViewModel;
     private AnimeRecommendationsViewModel animeRecommendationsViewModel;
     private AnimeByNameViewModel animeByNameViewModel;
     private AnimeNewViewModel animeNewViewModel;
     private AnimeEpisodesViewModel animeEpisodesViewModel;
+    private AnimeEpisodesImagesViewModel animeEpisodesImagesViewModel;
 
     private FragmentHomeBinding fragmentHomeBinding;
 
@@ -138,6 +142,18 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         }
 
         animeEpisodesList = new ArrayList<>();
+
+        IAnimeEpisodesImagesRepositoryWithLiveData animeEpisodesImagesRepositoryWithLiveData =
+                ServiceLocator.getInstance().getAnimeEpisodesImagesRepository(
+                        requireActivity().getApplication()
+                );
+        if(animeEpisodesImagesRepositoryWithLiveData != null){
+            animeEpisodesImagesViewModel = new ViewModelProvider(requireActivity(), new AnimeEpisodesImagesViewModelFactory(animeEpisodesImagesRepositoryWithLiveData)).get(AnimeEpisodesImagesViewModel.class);
+        }else {
+            Snackbar.make(requireActivity().findViewById(android.R.id.content),
+                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
+        }
+        animeEpisodesImagesList = new ArrayList<>();
     }
 
     @Override
@@ -201,6 +217,11 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         lastUpdate = "0";
         animeEpisodesViewModel.getAnimeEpisodes(20, (Long.parseLong(lastUpdate))).observe(getViewLifecycleOwner(), result ->{
             System.out.println("Result epis: "+ result.isSuccess());
+        });
+
+        lastUpdate = "0";
+        animeEpisodesImagesViewModel.getAnimeEpisodesImages(20, (Long.parseLong(lastUpdate))).observe(getViewLifecycleOwner(), result ->{
+            System.out.println("Result episImm: "+ result.isSuccess());
         });
 
 

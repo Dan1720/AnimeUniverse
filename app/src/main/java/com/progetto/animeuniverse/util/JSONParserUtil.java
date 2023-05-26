@@ -11,6 +11,8 @@ import com.google.gson.Gson;
 import com.progetto.animeuniverse.model.AnimeApiResponse;
 import com.progetto.animeuniverse.model.AnimeByNameApiResponse;
 import com.progetto.animeuniverse.model.AnimeEpisodesApiResponse;
+import com.progetto.animeuniverse.model.AnimeEpisodesImagesApiResponse;
+import com.progetto.animeuniverse.model.AnimeEpisodesImagesResponse;
 import com.progetto.animeuniverse.model.AnimeNewApiResponse;
 import com.progetto.animeuniverse.model.AnimeRecommendationsApiResponse;
 import com.progetto.animeuniverse.model.GenresApiResponse;
@@ -71,5 +73,11 @@ public class JSONParserUtil {
         InputStream inputStream = application.getAssets().open(filename);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         return new Gson().fromJson(bufferedReader, AnimeEpisodesApiResponse.class);
+    }
+
+    public AnimeEpisodesImagesApiResponse parseJSONFileWithGSonAnimeEpisodesImages(String filename) throws IOException{
+        InputStream inputStream = application.getAssets().open(filename);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        return new Gson().fromJson(bufferedReader, AnimeEpisodesImagesApiResponse.class);
     }
 }
