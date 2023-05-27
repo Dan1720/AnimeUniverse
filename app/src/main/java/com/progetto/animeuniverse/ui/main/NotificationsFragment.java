@@ -1,20 +1,14 @@
 package com.progetto.animeuniverse.ui.main;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
-import androidx.appcompat.widget.Toolbar;
 import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -28,22 +22,16 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.service.notification.NotificationListenerService;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.adapter.NotificationAdapter;
 import com.progetto.animeuniverse.model.Notification;
 import com.progetto.animeuniverse.model.NotificationViewModel;
 import com.progetto.animeuniverse.util.Constants;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;

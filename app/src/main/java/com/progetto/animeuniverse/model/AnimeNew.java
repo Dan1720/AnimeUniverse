@@ -8,7 +8,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 
 import com.google.gson.annotations.SerializedName;
@@ -16,39 +15,38 @@ import com.progetto.animeuniverse.util.Converter;
 
 import java.util.List;
 
-@Entity(tableName = "anime_recommendations")
-public class AnimeRecommendations implements Parcelable {
+@Entity(tableName = "anime_new")
+public class AnimeNew implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private int id;
-
-    @TypeConverters(Converter.class)
+    @Embedded(prefix = "entry_")
     @SerializedName("entry")
-    private List<AnimeEntry> entry;
+    private AnimeEntry entry;
 
     @ColumnInfo(name = "is_synchronized")
     private boolean isSynchronized;
 
-    public AnimeRecommendations(int id, List<AnimeEntry> entry, boolean isSynchronized) {
+    public AnimeNew(int id, AnimeEntry entry, boolean isSynchronized) {
         this.id = id;
         this.entry = entry;
         this.isSynchronized = isSynchronized;
     }
 
-    protected AnimeRecommendations(Parcel in) {
+    protected AnimeNew(Parcel in) {
         id = in.readInt();
-        entry = in.createTypedArrayList(AnimeEntry.CREATOR);
+        entry = in.readParcelable(AnimeEntry.class.getClassLoader());
         isSynchronized = in.readByte() != 0;
     }
 
-    public static final Creator<AnimeRecommendations> CREATOR = new Creator<AnimeRecommendations>() {
+    public static final Creator<AnimeNew> CREATOR = new Creator<AnimeNew>() {
         @Override
-        public AnimeRecommendations createFromParcel(Parcel in) {
-            return new AnimeRecommendations(in);
+        public AnimeNew createFromParcel(Parcel in) {
+            return new AnimeNew(in);
         }
 
         @Override
-        public AnimeRecommendations[] newArray(int size) {
-            return new AnimeRecommendations[size];
+        public AnimeNew[] newArray(int size) {
+            return new AnimeNew[size];
         }
     };
 
@@ -60,11 +58,11 @@ public class AnimeRecommendations implements Parcelable {
         this.id = id;
     }
 
-    public List<AnimeEntry> getEntry() {
+    public AnimeEntry getEntry() {
         return entry;
     }
 
-    public void setEntry(List<AnimeEntry> entry) {
+    public void setEntry(AnimeEntry entry) {
         this.entry = entry;
     }
 
@@ -78,7 +76,7 @@ public class AnimeRecommendations implements Parcelable {
 
     @Override
     public String toString() {
-        return "AnimeRecommendations{" +
+        return "AnimeNew{" +
                 "id=" + id +
                 ", entry=" + entry +
                 ", isSynchronized=" + isSynchronized +
@@ -93,7 +91,7 @@ public class AnimeRecommendations implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(id);
-        dest.writeTypedList(entry);
+        dest.writeParcelable(entry, flags);
         dest.writeByte((byte) (isSynchronized ? 1 : 0));
     }
 }

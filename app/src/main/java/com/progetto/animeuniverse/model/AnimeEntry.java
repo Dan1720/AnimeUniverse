@@ -19,6 +19,12 @@ public class AnimeEntry implements Parcelable {
     @SerializedName("title")
     private String title;
 
+    public AnimeEntry(int idAnime, AnimeImages images, String title) {
+        this.idAnime = idAnime;
+        this.images = images;
+        this.title = title;
+    }
+
     protected AnimeEntry(Parcel in) {
         idAnime = in.readInt();
         images = in.readParcelable(AnimeImages.class.getClassLoader());

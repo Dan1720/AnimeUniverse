@@ -8,7 +8,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,9 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -35,14 +32,18 @@ import com.progetto.animeuniverse.adapter.ParentItemAdapter;
 import com.progetto.animeuniverse.databinding.FragmentHomeBinding;
 import com.progetto.animeuniverse.model.Anime;
 
-import com.progetto.animeuniverse.model.AnimeByName;
+import com.progetto.animeuniverse.model.AnimeEpisodes;
+import com.progetto.animeuniverse.model.AnimeEpisodesImages;
 import com.progetto.animeuniverse.model.AnimeGenres;
+import com.progetto.animeuniverse.model.AnimeNew;
 import com.progetto.animeuniverse.model.AnimeRecommendations;
 import com.progetto.animeuniverse.model.AnimeResponse;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.anime.AnimeResponseCallback;
 import com.progetto.animeuniverse.repository.anime.IAnimeRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_by_name.IAnimeByNameRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_episodes_images.IAnimeEpisodesImagesRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_new.IAnimeNewRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_recommendations.IAnimeRecommendationsRepositoryWithLiveData;
 import com.progetto.animeuniverse.util.ErrorMessagesUtil;
 import com.progetto.animeuniverse.util.ServiceLocator;
@@ -58,11 +59,16 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
 
     private List<Anime> animeList;
     private List<AnimeRecommendations> animeRecommendationsList;
-    private List<AnimeByName> animeByNameList;
+    private List<AnimeNew> animeNewList;
+    private List<AnimeEpisodes> animeEpisodesList;
+    private List<AnimeEpisodesImages> animeEpisodesImagesList;
     private SharedPreferencesUtil sharedPreferencesUtil;
     private AnimeViewModel animeViewModel;
     private AnimeRecommendationsViewModel animeRecommendationsViewModel;
     private AnimeByNameViewModel animeByNameViewModel;
+    private AnimeNewViewModel animeNewViewModel;
+    private AnimeEpisodesViewModel animeEpisodesViewModel;
+    private AnimeEpisodesImagesViewModel animeEpisodesImagesViewModel;
 
     private FragmentHomeBinding fragmentHomeBinding;
 
@@ -109,8 +115,45 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
 
         animeRecommendationsList = new ArrayList<>();
 
-        
+        IAnimeNewRepositoryWithLiveData animeNewRepositoryWithLiveData =
+                ServiceLocator.getInstance().getAnimeNewRepository(
+                        requireActivity().getApplication()
+                );
+        if(animeNewRepositoryWithLiveData != null){
+            animeNewViewModel = new ViewModelProvider(requireActivity(),
+                    new AnimeNewViewModelFactory(animeNewRepositoryWithLiveData)).get(AnimeNewViewModel.class);
+        }else {
+            Snackbar.make(requireActivity().findViewById(android.R.id.content),
+                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
+        }
 
+        animeNewList = new ArrayList<>();
+
+        IAnimeEpisodesRepositoryWithLiveData animeEpisodesRepositoryWithLiveData =
+                ServiceLocator.getInstance().getAnimeEpisodesRepository(
+                        requireActivity().getApplication()
+                );
+        if(animeEpisodesRepositoryWithLiveData != null){
+            animeEpisodesViewModel = new ViewModelProvider(requireActivity(),
+                    new AnimeEpisodesViewModelFactory(animeEpisodesRepositoryWithLiveData)).get(AnimeEpisodesViewModel.class);
+        }else {
+            Snackbar.make(requireActivity().findViewById(android.R.id.content),
+                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
+        }
+
+        animeEpisodesList = new ArrayList<>();
+
+        IAnimeEpisodesImagesRepositoryWithLiveData animeEpisodesImagesRepositoryWithLiveData =
+                ServiceLocator.getInstance().getAnimeEpisodesImagesRepository(
+                        requireActivity().getApplication()
+                );
+        if(animeEpisodesImagesRepositoryWithLiveData != null){
+            animeEpisodesImagesViewModel = new ViewModelProvider(requireActivity(), new AnimeEpisodesImagesViewModelFactory(animeEpisodesImagesRepositoryWithLiveData)).get(AnimeEpisodesImagesViewModel.class);
+        }else {
+            Snackbar.make(requireActivity().findViewById(android.R.id.content),
+                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
+        }
+        animeEpisodesImagesList = new ArrayList<>();
     }
 
     @Override
@@ -133,8 +176,8 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         ParentItemAdapter parentItemAdapter = new ParentItemAdapter(ParentItemList(animeList), requireActivity().getApplication(),new ChildItemAdapter.OnItemClickListener(){
             @Override
             public void onAnimeItemClick(Anime anime){
-                HomeFragmentDirections.ActionHomeFragmentToAnimeDetailsFragment action =
-                        HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(anime);
+                com.progetto.animeuniverse.ui.main.HomeFragmentDirections.ActionHomeFragmentToAnimeDetailsFragment action =
+                        com.progetto.animeuniverse.ui.main.HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(anime);
                 Navigation.findNavController(view).navigate(action);
             }
         });
@@ -162,13 +205,23 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         });
 
         lastUpdate = "0";
+        animeNewViewModel.getAnimeNew(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
+            System.out.println("Result new: "+ result.isSuccess());
+        });
+
+        lastUpdate = "0";
         animeRecommendationsViewModel.getAnimeRecommendations(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
             System.out.println("Result rec: "+ result.isSuccess());
         });
 
         lastUpdate = "0";
-        animeByNameViewModel.getAnimeByName("Naruto", Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
-            System.out.println("Result name: "+ result.isSuccess());
+        animeEpisodesViewModel.getAnimeEpisodes(20, (Long.parseLong(lastUpdate))).observe(getViewLifecycleOwner(), result ->{
+            System.out.println("Result epis: "+ result.isSuccess());
+        });
+
+        lastUpdate = "0";
+        animeEpisodesImagesViewModel.getAnimeEpisodesImages(20, (Long.parseLong(lastUpdate))).observe(getViewLifecycleOwner(), result ->{
+            System.out.println("Result episImm: "+ result.isSuccess());
         });
 
 
@@ -260,13 +313,13 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             categories.setText(genres.get(0).getNameGenre());
         }
         fragmentHomeBinding.imageViewInfo.setOnClickListener(v ->{
-            HomeFragmentDirections.ActionHomeFragmentToAnimeDetailsFragment action =
-                    HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(animeHomeCover);
+            com.progetto.animeuniverse.ui.main.HomeFragmentDirections.ActionHomeFragmentToAnimeDetailsFragment action =
+                    com.progetto.animeuniverse.ui.main.HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(animeHomeCover);
             Navigation.findNavController(requireView()).navigate(action);
         });
 
         fragmentHomeBinding.homeCover.setOnClickListener(v ->{
-            HomeFragmentDirections.ActionHomeFragmentToAnimeDetailsFragment action =
+            com.progetto.animeuniverse.ui.main.HomeFragmentDirections.ActionHomeFragmentToAnimeDetailsFragment action =
                     HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(animeHomeCover);
             Navigation.findNavController(requireView()).navigate(action);
         });

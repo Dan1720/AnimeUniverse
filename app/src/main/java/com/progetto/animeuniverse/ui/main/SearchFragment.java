@@ -17,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -35,9 +34,7 @@ import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.adapter.ChildItemAdapter;
 import com.progetto.animeuniverse.adapter.ParentItemAdapter;
 import com.progetto.animeuniverse.adapter.SearchListAdapter;
-import com.progetto.animeuniverse.database.AnimeByNameDao;
-import com.progetto.animeuniverse.database.AnimeRoomDatabase;
-import com.progetto.animeuniverse.databinding.FragmentHomeBinding;
+
 import com.progetto.animeuniverse.databinding.FragmentSearchBinding;
 import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeByName;
@@ -45,7 +42,6 @@ import com.progetto.animeuniverse.model.AnimeByNameResponse;
 import com.progetto.animeuniverse.model.AnimeResponse;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.anime.AnimeResponseCallback;
-import com.progetto.animeuniverse.repository.anime.IAnimeRepository;
 import com.progetto.animeuniverse.repository.anime.IAnimeRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_by_name.AnimeByNameResponseCallback;
 import com.progetto.animeuniverse.repository.anime_by_name.IAnimeByNameRepositoryWithLiveData;

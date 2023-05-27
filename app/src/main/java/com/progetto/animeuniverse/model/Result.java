@@ -6,7 +6,9 @@ public abstract class Result {
     public boolean isSuccess(){
         if(this instanceof AnimeResponseSuccess || this instanceof UserResponseSuccess ||
                 this instanceof ReviewsResponseSuccess || this instanceof GenresResponseSuccess ||
-                this instanceof AnimeRecommendationsSuccess || this instanceof AnimeByNameSuccess){
+                this instanceof AnimeRecommendationsSuccess || this instanceof AnimeByNameSuccess ||
+                this instanceof AnimeNewSuccess || this instanceof AnimeEpisodesSuccess ||
+                this instanceof AnimeEpisodesImagesSuccess){
             return true;
         }else{
             return false;
@@ -79,5 +81,35 @@ public abstract class Result {
             this.animeByNameResponse = animeByNameResponse;
         }
         public AnimeByNameResponse getData(){return animeByNameResponse;}
+    }
+
+    public static final class AnimeNewSuccess extends Result{
+        private final AnimeNewResponse animeNewResponse;
+
+        public AnimeNewSuccess(AnimeNewResponse animeNewResponse) {
+            this.animeNewResponse = animeNewResponse;
+        }
+
+        public AnimeNewResponse getData(){return animeNewResponse;}
+    }
+
+    public static final class AnimeEpisodesSuccess extends Result{
+        private final AnimeEpisodesResponse animeEpisodesResponse;
+
+        public AnimeEpisodesSuccess(AnimeEpisodesResponse animeEpisodesResponse) {
+            this.animeEpisodesResponse = animeEpisodesResponse;
+        }
+
+        public AnimeEpisodesResponse getData(){ return animeEpisodesResponse; }
+    }
+
+    public static final class AnimeEpisodesImagesSuccess extends Result{
+        private final AnimeEpisodesImagesResponse animeEpisodesImagesResponse;
+
+        public AnimeEpisodesImagesSuccess(AnimeEpisodesImagesResponse animeEpisodesImagesResponse) {
+            this.animeEpisodesImagesResponse = animeEpisodesImagesResponse;
+        }
+
+        public AnimeEpisodesImagesResponse getData(){ return animeEpisodesImagesResponse; }
     }
 }

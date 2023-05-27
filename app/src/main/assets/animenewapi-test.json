@@ -1,0 +1,968 @@
+{
+  "pagination": {
+    "last_visible_page": 2,
+    "has_next_page": true
+  },
+  "data": [
+    {
+      "title": "PV",
+      "entry": {
+        "mal_id": 54772,
+        "url": "https://myanimelist.net/anime/54772/Ququ_Bucai_Zaixia_Yeguai",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1697/134541.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1697/134541t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1697/134541l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1697/134541.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1697/134541t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1697/134541l.webp"
+          }
+        },
+        "title": "Ququ Bucai, Zaixia Yeguai"
+      },
+      "trailer": {
+        "youtube_id": "RanFCSgkEXI",
+        "url": "https://www.youtube.com/watch?v=RanFCSgkEXI",
+        "embed_url": "https://www.youtube.com/embed/RanFCSgkEXI?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/RanFCSgkEXI/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/RanFCSgkEXI/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/RanFCSgkEXI/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/RanFCSgkEXI/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/RanFCSgkEXI/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "PV 1",
+      "entry": {
+        "mal_id": 54850,
+        "url": "https://myanimelist.net/anime/54850/Oooku",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1000/136038.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1000/136038t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1000/136038l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1000/136038.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1000/136038t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1000/136038l.webp"
+          }
+        },
+        "title": "Oooku"
+      },
+      "trailer": {
+        "youtube_id": "vAybfUg6vUc",
+        "url": "https://www.youtube.com/watch?v=vAybfUg6vUc",
+        "embed_url": "https://www.youtube.com/embed/vAybfUg6vUc?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/vAybfUg6vUc/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/vAybfUg6vUc/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/vAybfUg6vUc/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/vAybfUg6vUc/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/vAybfUg6vUc/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "Teaser PV",
+      "entry": {
+        "mal_id": 55397,
+        "url": "https://myanimelist.net/anime/55397/Pon_no_Michi",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1796/136042.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1796/136042t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1796/136042l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1796/136042.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1796/136042t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1796/136042l.webp"
+          }
+        },
+        "title": "Pon no Michi"
+      },
+      "trailer": {
+        "youtube_id": "i0mmLxa_MzA",
+        "url": "https://www.youtube.com/watch?v=i0mmLxa_MzA",
+        "embed_url": "https://www.youtube.com/embed/i0mmLxa_MzA?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/i0mmLxa_MzA/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/i0mmLxa_MzA/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/i0mmLxa_MzA/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/i0mmLxa_MzA/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/i0mmLxa_MzA/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "Character PV",
+      "entry": {
+        "mal_id": 49894,
+        "url": "https://myanimelist.net/anime/49894/Eiyuu_Kyoushitsu",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1179/136000.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1179/136000t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1179/136000l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1179/136000.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1179/136000t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1179/136000l.webp"
+          }
+        },
+        "title": "Eiyuu Kyoushitsu"
+      },
+      "trailer": {
+        "youtube_id": "o1wUoOAhacw",
+        "url": "https://www.youtube.com/watch?v=o1wUoOAhacw",
+        "embed_url": "https://www.youtube.com/embed/o1wUoOAhacw?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/o1wUoOAhacw/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/o1wUoOAhacw/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/o1wUoOAhacw/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/o1wUoOAhacw/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/o1wUoOAhacw/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "Trailer 2",
+      "entry": {
+        "mal_id": 49303,
+        "url": "https://myanimelist.net/anime/49303/Alice_to_Therese_no_Maboroshi_Koujou",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1685/135984.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1685/135984t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1685/135984l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1685/135984.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1685/135984t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1685/135984l.webp"
+          }
+        },
+        "title": "Alice to Therese no Maboroshi Koujou"
+      },
+      "trailer": {
+        "youtube_id": "NvM28WMdRLQ",
+        "url": "https://www.youtube.com/watch?v=NvM28WMdRLQ",
+        "embed_url": "https://www.youtube.com/embed/NvM28WMdRLQ?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/NvM28WMdRLQ/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/NvM28WMdRLQ/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/NvM28WMdRLQ/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/NvM28WMdRLQ/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/NvM28WMdRLQ/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "Teaser PV",
+      "entry": {
+        "mal_id": 51956,
+        "url": "https://myanimelist.net/anime/51956/Paradox_Live_the_Animation",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1640/134701.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1640/134701t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1640/134701l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1640/134701.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1640/134701t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1640/134701l.webp"
+          }
+        },
+        "title": "Paradox Live the Animation"
+      },
+      "trailer": {
+        "youtube_id": "LooRv4QsHMA",
+        "url": "https://www.youtube.com/watch?v=LooRv4QsHMA",
+        "embed_url": "https://www.youtube.com/embed/LooRv4QsHMA?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/LooRv4QsHMA/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/LooRv4QsHMA/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/LooRv4QsHMA/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/LooRv4QsHMA/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/LooRv4QsHMA/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "Production Trailer",
+      "entry": {
+        "mal_id": 55359,
+        "url": "https://myanimelist.net/anime/55359/Tsurubamiiro_no_Nagiko-tachi",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1755/135983.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1755/135983t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1755/135983l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1755/135983.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1755/135983t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1755/135983l.webp"
+          }
+        },
+        "title": "Tsurubamiiro no Nagiko-tachi"
+      },
+      "trailer": {
+        "youtube_id": "q2tbmz0p4YU",
+        "url": "https://www.youtube.com/watch?v=q2tbmz0p4YU",
+        "embed_url": "https://www.youtube.com/embed/q2tbmz0p4YU?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/q2tbmz0p4YU/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/q2tbmz0p4YU/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/q2tbmz0p4YU/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/q2tbmz0p4YU/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/q2tbmz0p4YU/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "Teaser PV",
+      "entry": {
+        "mal_id": 55358,
+        "url": "https://myanimelist.net/anime/55358/Bucchigiri",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1934/135982.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1934/135982t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1934/135982l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1934/135982.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1934/135982t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1934/135982l.webp"
+          }
+        },
+        "title": "Bucchigiri?!"
+      },
+      "trailer": {
+        "youtube_id": "3lz1HWsNF-I",
+        "url": "https://www.youtube.com/watch?v=3lz1HWsNF-I",
+        "embed_url": "https://www.youtube.com/embed/3lz1HWsNF-I?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/3lz1HWsNF-I/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/3lz1HWsNF-I/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/3lz1HWsNF-I/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/3lz1HWsNF-I/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/3lz1HWsNF-I/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "PV 2",
+      "entry": {
+        "mal_id": 51009,
+        "url": "https://myanimelist.net/anime/51009/Jujutsu_Kaisen_2nd_Season",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1600/134703.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1600/134703t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1600/134703l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1600/134703.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1600/134703t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1600/134703l.webp"
+          }
+        },
+        "title": "Jujutsu Kaisen 2nd Season"
+      },
+      "trailer": {
+        "youtube_id": "O6qVieflwqs",
+        "url": "https://www.youtube.com/watch?v=O6qVieflwqs",
+        "embed_url": "https://www.youtube.com/embed/O6qVieflwqs?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/O6qVieflwqs/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/O6qVieflwqs/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/O6qVieflwqs/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/O6qVieflwqs/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/O6qVieflwqs/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "Announcement",
+      "entry": {
+        "mal_id": 55357,
+        "url": "https://myanimelist.net/anime/55357/Bocchi_the_Rock_Movie",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1009/135981.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1009/135981t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1009/135981l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1009/135981.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1009/135981t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1009/135981l.webp"
+          }
+        },
+        "title": "Bocchi the Rock! Movie"
+      },
+      "trailer": {
+        "youtube_id": "WKbfk7vXmc4",
+        "url": "https://www.youtube.com/watch?v=WKbfk7vXmc4",
+        "embed_url": "https://www.youtube.com/embed/WKbfk7vXmc4?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/WKbfk7vXmc4/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/WKbfk7vXmc4/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/WKbfk7vXmc4/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/WKbfk7vXmc4/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/WKbfk7vXmc4/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "PV 6",
+      "entry": {
+        "mal_id": 49387,
+        "url": "https://myanimelist.net/anime/49387/Vinland_Saga_Season_2",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1170/124312.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1170/124312t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1170/124312l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1170/124312.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1170/124312t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1170/124312l.webp"
+          }
+        },
+        "title": "Vinland Saga Season 2"
+      },
+      "trailer": {
+        "youtube_id": "jBetoIlnDIM",
+        "url": "https://www.youtube.com/watch?v=jBetoIlnDIM",
+        "embed_url": "https://www.youtube.com/embed/jBetoIlnDIM?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/jBetoIlnDIM/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/jBetoIlnDIM/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/jBetoIlnDIM/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/jBetoIlnDIM/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/jBetoIlnDIM/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "PV 2",
+      "entry": {
+        "mal_id": 39489,
+        "url": "https://myanimelist.net/anime/39489/Spriggan_ONA",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1195/123948.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1195/123948t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1195/123948l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1195/123948.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1195/123948t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1195/123948l.webp"
+          }
+        },
+        "title": "Spriggan (ONA)"
+      },
+      "trailer": {
+        "youtube_id": "8s81vEfy5dY",
+        "url": "https://www.youtube.com/watch?v=8s81vEfy5dY",
+        "embed_url": "https://www.youtube.com/embed/8s81vEfy5dY?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/8s81vEfy5dY/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/8s81vEfy5dY/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/8s81vEfy5dY/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/8s81vEfy5dY/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/8s81vEfy5dY/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "Character PV",
+      "entry": {
+        "mal_id": 48917,
+        "url": "https://myanimelist.net/anime/48917/Stand_My_Heroes__Warmth_of_Memories",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1132/127673.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1132/127673t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1132/127673l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1132/127673.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1132/127673t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1132/127673l.webp"
+          }
+        },
+        "title": "Stand My Heroes: Warmth of Memories"
+      },
+      "trailer": {
+        "youtube_id": "bk9rwwsvP4Y",
+        "url": "https://www.youtube.com/watch?v=bk9rwwsvP4Y",
+        "embed_url": "https://www.youtube.com/embed/bk9rwwsvP4Y?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/bk9rwwsvP4Y/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/bk9rwwsvP4Y/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/bk9rwwsvP4Y/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/bk9rwwsvP4Y/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/bk9rwwsvP4Y/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "Teaser PV",
+      "entry": {
+        "mal_id": 49613,
+        "url": "https://myanimelist.net/anime/49613/Chiyu_Mahou_no_Machigatta_Tsukaikata__Senjou_wo_Kakeru_Kaifuku_Youin",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1564/135909.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1564/135909t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1564/135909l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1564/135909.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1564/135909t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1564/135909l.webp"
+          }
+        },
+        "title": "Chiyu Mahou no Machigatta Tsukaikata: Senjou wo Kakeru Kaifuku Youin"
+      },
+      "trailer": {
+        "youtube_id": "WMBLLOa3Ldw",
+        "url": "https://www.youtube.com/watch?v=WMBLLOa3Ldw",
+        "embed_url": "https://www.youtube.com/embed/WMBLLOa3Ldw?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/WMBLLOa3Ldw/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/WMBLLOa3Ldw/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/WMBLLOa3Ldw/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/WMBLLOa3Ldw/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/WMBLLOa3Ldw/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "PV 3",
+      "entry": {
+        "mal_id": 52308,
+        "url": "https://myanimelist.net/anime/52308/Kanojo_ga_Koushaku-tei_ni_Itta_Riyuu",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1109/130452.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1109/130452t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1109/130452l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1109/130452.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1109/130452t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1109/130452l.webp"
+          }
+        },
+        "title": "Kanojo ga Koushaku-tei ni Itta Riyuu"
+      },
+      "trailer": {
+        "youtube_id": "MtpZJTTJEjA",
+        "url": "https://www.youtube.com/watch?v=MtpZJTTJEjA",
+        "embed_url": "https://www.youtube.com/embed/MtpZJTTJEjA?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/MtpZJTTJEjA/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/MtpZJTTJEjA/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/MtpZJTTJEjA/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/MtpZJTTJEjA/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/MtpZJTTJEjA/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "Trailer",
+      "entry": {
+        "mal_id": 55305,
+        "url": "https://myanimelist.net/anime/55305/Bastions",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1850/135882.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1850/135882t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1850/135882l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1850/135882.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1850/135882t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1850/135882l.webp"
+          }
+        },
+        "title": "Bastions"
+      },
+      "trailer": {
+        "youtube_id": "3GREzftI-e4",
+        "url": "https://www.youtube.com/watch?v=3GREzftI-e4",
+        "embed_url": "https://www.youtube.com/embed/3GREzftI-e4?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/3GREzftI-e4/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/3GREzftI-e4/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/3GREzftI-e4/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/3GREzftI-e4/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/3GREzftI-e4/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "Teaser",
+      "entry": {
+        "mal_id": 52701,
+        "url": "https://myanimelist.net/anime/52701/Dungeon_Meshi",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1981/126812.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1981/126812t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1981/126812l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1981/126812.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1981/126812t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1981/126812l.webp"
+          }
+        },
+        "title": "Dungeon Meshi"
+      },
+      "trailer": {
+        "youtube_id": "tJQb5BP1nTU",
+        "url": "https://www.youtube.com/watch?v=tJQb5BP1nTU",
+        "embed_url": "https://www.youtube.com/embed/tJQb5BP1nTU?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/tJQb5BP1nTU/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/tJQb5BP1nTU/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/tJQb5BP1nTU/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/tJQb5BP1nTU/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/tJQb5BP1nTU/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "PV 1",
+      "entry": {
+        "mal_id": 52969,
+        "url": "https://myanimelist.net/anime/52969/Jitsu_wa_Ore_Saikyou_deshita",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1238/127714.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1238/127714t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1238/127714l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1238/127714.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1238/127714t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1238/127714l.webp"
+          }
+        },
+        "title": "Jitsu wa Ore, Saikyou deshita?"
+      },
+      "trailer": {
+        "youtube_id": "wKClbRrzlng",
+        "url": "https://www.youtube.com/watch?v=wKClbRrzlng",
+        "embed_url": "https://www.youtube.com/embed/wKClbRrzlng?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/wKClbRrzlng/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/wKClbRrzlng/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/wKClbRrzlng/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/wKClbRrzlng/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/wKClbRrzlng/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "PV 1",
+      "entry": {
+        "mal_id": 52985,
+        "url": "https://myanimelist.net/anime/52985/Dekoboko_Majo_no_Oyako_Jijou",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1480/135854.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1480/135854t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1480/135854l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1480/135854.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1480/135854t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1480/135854l.webp"
+          }
+        },
+        "title": "Dekoboko Majo no Oyako Jijou"
+      },
+      "trailer": {
+        "youtube_id": "3V7IiSfruCs",
+        "url": "https://www.youtube.com/watch?v=3V7IiSfruCs",
+        "embed_url": "https://www.youtube.com/embed/3V7IiSfruCs?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/3V7IiSfruCs/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/3V7IiSfruCs/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/3V7IiSfruCs/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/3V7IiSfruCs/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/3V7IiSfruCs/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "PV 1",
+      "entry": {
+        "mal_id": 54760,
+        "url": "https://myanimelist.net/anime/54760/Ryza_no_Atelier__Tokoyami_no_Joou_to_Himitsu_no_Kakurega",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1069/135852.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1069/135852t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1069/135852l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1069/135852.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1069/135852t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1069/135852l.webp"
+          }
+        },
+        "title": "Ryza no Atelier: Tokoyami no Joou to Himitsu no Kakurega"
+      },
+      "trailer": {
+        "youtube_id": "RrgA_6M_WUo",
+        "url": "https://www.youtube.com/watch?v=RrgA_6M_WUo",
+        "embed_url": "https://www.youtube.com/embed/RrgA_6M_WUo?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/RrgA_6M_WUo/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/RrgA_6M_WUo/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/RrgA_6M_WUo/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/RrgA_6M_WUo/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/RrgA_6M_WUo/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "PV 1",
+      "entry": {
+        "mal_id": 51764,
+        "url": "https://myanimelist.net/anime/51764/Level_1_dakedo_Unique_Skill_de_Saikyou_desu",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1795/134037.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1795/134037t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1795/134037l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1795/134037.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1795/134037t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1795/134037l.webp"
+          }
+        },
+        "title": "Level 1 dakedo Unique Skill de Saikyou desu"
+      },
+      "trailer": {
+        "youtube_id": "jMJXNG79kUs",
+        "url": "https://www.youtube.com/watch?v=jMJXNG79kUs",
+        "embed_url": "https://www.youtube.com/embed/jMJXNG79kUs?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/jMJXNG79kUs/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/jMJXNG79kUs/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/jMJXNG79kUs/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/jMJXNG79kUs/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/jMJXNG79kUs/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "PV",
+      "entry": {
+        "mal_id": 39905,
+        "url": "https://myanimelist.net/anime/39905/Collar_x_Malice_Movie__Deep_Cover",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1535/133157.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1535/133157t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1535/133157l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1535/133157.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1535/133157t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1535/133157l.webp"
+          }
+        },
+        "title": "Collar x Malice Movie: Deep Cover"
+      },
+      "trailer": {
+        "youtube_id": "BRrNw2R6DQU",
+        "url": "https://www.youtube.com/watch?v=BRrNw2R6DQU",
+        "embed_url": "https://www.youtube.com/embed/BRrNw2R6DQU?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/BRrNw2R6DQU/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/BRrNw2R6DQU/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/BRrNw2R6DQU/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/BRrNw2R6DQU/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/BRrNw2R6DQU/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "Trailer",
+      "entry": {
+        "mal_id": 39905,
+        "url": "https://myanimelist.net/anime/39905/Collar_x_Malice_Movie__Deep_Cover",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1535/133157.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1535/133157t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1535/133157l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1535/133157.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1535/133157t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1535/133157l.webp"
+          }
+        },
+        "title": "Collar x Malice Movie: Deep Cover"
+      },
+      "trailer": {
+        "youtube_id": "BRrNw2R6DQU",
+        "url": "https://www.youtube.com/watch?v=BRrNw2R6DQU",
+        "embed_url": "https://www.youtube.com/embed/BRrNw2R6DQU?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/BRrNw2R6DQU/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/BRrNw2R6DQU/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/BRrNw2R6DQU/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/BRrNw2R6DQU/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/BRrNw2R6DQU/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "PV 1",
+      "entry": {
+        "mal_id": 54431,
+        "url": "https://myanimelist.net/anime/54431/Toaru_Ossan_no_VRMMO_Katsudouki",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1354/135849.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1354/135849t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1354/135849l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1354/135849.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1354/135849t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1354/135849l.webp"
+          }
+        },
+        "title": "Toaru Ossan no VRMMO Katsudouki"
+      },
+      "trailer": {
+        "youtube_id": "77WX-vYqWJo",
+        "url": "https://www.youtube.com/watch?v=77WX-vYqWJo",
+        "embed_url": "https://www.youtube.com/embed/77WX-vYqWJo?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/77WX-vYqWJo/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/77WX-vYqWJo/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/77WX-vYqWJo/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/77WX-vYqWJo/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/77WX-vYqWJo/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "PV 1",
+      "entry": {
+        "mal_id": 53833,
+        "url": "https://myanimelist.net/anime/53833/Watashi_no_Oshi_wa_Akuyaku_Reijou",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1067/135850.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1067/135850t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1067/135850l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1067/135850.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1067/135850t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1067/135850l.webp"
+          }
+        },
+        "title": "Watashi no Oshi wa Akuyaku Reijou."
+      },
+      "trailer": {
+        "youtube_id": "nn_DCILXlLg",
+        "url": "https://www.youtube.com/watch?v=nn_DCILXlLg",
+        "embed_url": "https://www.youtube.com/embed/nn_DCILXlLg?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/nn_DCILXlLg/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/nn_DCILXlLg/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/nn_DCILXlLg/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/nn_DCILXlLg/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/nn_DCILXlLg/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "Teaser PV",
+      "entry": {
+        "mal_id": 54616,
+        "url": "https://myanimelist.net/anime/54616/Potion-danomi_de_Ikinobimasu",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1616/133748.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1616/133748t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1616/133748l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1616/133748.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1616/133748t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1616/133748l.webp"
+          }
+        },
+        "title": "Potion-danomi de Ikinobimasu!"
+      },
+      "trailer": {
+        "youtube_id": "ql7CJw3jbH4",
+        "url": "https://www.youtube.com/watch?v=ql7CJw3jbH4",
+        "embed_url": "https://www.youtube.com/embed/ql7CJw3jbH4?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/ql7CJw3jbH4/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/ql7CJw3jbH4/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/ql7CJw3jbH4/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/ql7CJw3jbH4/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/ql7CJw3jbH4/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "Teaser PV 2",
+      "entry": {
+        "mal_id": 54839,
+        "url": "https://myanimelist.net/anime/54839/Yoru_no_Kurage_wa_Oyogenai",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1164/135834.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1164/135834t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1164/135834l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1164/135834.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1164/135834t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1164/135834l.webp"
+          }
+        },
+        "title": "Yoru no Kurage wa Oyogenai"
+      },
+      "trailer": {
+        "youtube_id": "yWGlEDGvjpU",
+        "url": "https://www.youtube.com/watch?v=yWGlEDGvjpU",
+        "embed_url": "https://www.youtube.com/embed/yWGlEDGvjpU?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/yWGlEDGvjpU/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/yWGlEDGvjpU/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/yWGlEDGvjpU/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/yWGlEDGvjpU/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/yWGlEDGvjpU/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "PV 4",
+      "entry": {
+        "mal_id": 50613,
+        "url": "https://myanimelist.net/anime/50613/Rurouni_Kenshin__Meiji_Kenkaku_Romantan_2023",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1595/134609.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1595/134609t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1595/134609l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1595/134609.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1595/134609t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1595/134609l.webp"
+          }
+        },
+        "title": "Rurouni Kenshin: Meiji Kenkaku Romantan (2023)"
+      },
+      "trailer": {
+        "youtube_id": "smDi17yAGVw",
+        "url": "https://www.youtube.com/watch?v=smDi17yAGVw",
+        "embed_url": "https://www.youtube.com/embed/smDi17yAGVw?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/smDi17yAGVw/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/smDi17yAGVw/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/smDi17yAGVw/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/smDi17yAGVw/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/smDi17yAGVw/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "Character PV (Aya, Ibara, and Taihei ver.)",
+      "entry": {
+        "mal_id": 53428,
+        "url": "https://myanimelist.net/anime/53428/Ayaka",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1997/129823.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1997/129823t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1997/129823l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1997/129823.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1997/129823t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1997/129823l.webp"
+          }
+        },
+        "title": "Ayaka"
+      },
+      "trailer": {
+        "youtube_id": "yJiZYI2Hd4g",
+        "url": "https://www.youtube.com/watch?v=yJiZYI2Hd4g",
+        "embed_url": "https://www.youtube.com/embed/yJiZYI2Hd4g?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/yJiZYI2Hd4g/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/yJiZYI2Hd4g/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/yJiZYI2Hd4g/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/yJiZYI2Hd4g/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/yJiZYI2Hd4g/maxresdefault.jpg"
+        }
+      }
+    },
+    {
+      "title": "PV 1",
+      "entry": {
+        "mal_id": 55265,
+        "url": "https://myanimelist.net/anime/55265/Tensei_Kizoku_Kantei_Skill_de_Nariagaru",
+        "images": {
+          "jpg": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1828/135811.jpg",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1828/135811t.jpg",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1828/135811l.jpg"
+          },
+          "webp": {
+            "image_url": "https://cdn.myanimelist.net/images/anime/1828/135811.webp",
+            "small_image_url": "https://cdn.myanimelist.net/images/anime/1828/135811t.webp",
+            "large_image_url": "https://cdn.myanimelist.net/images/anime/1828/135811l.webp"
+          }
+        },
+        "title": "Tensei Kizoku, Kantei Skill de Nariagaru"
+      },
+      "trailer": {
+        "youtube_id": "3-sXWlVc6ds",
+        "url": "https://www.youtube.com/watch?v=3-sXWlVc6ds",
+        "embed_url": "https://www.youtube.com/embed/3-sXWlVc6ds?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https://img.youtube.com/vi/3-sXWlVc6ds/default.jpg",
+          "small_image_url": "https://img.youtube.com/vi/3-sXWlVc6ds/sddefault.jpg",
+          "medium_image_url": "https://img.youtube.com/vi/3-sXWlVc6ds/mqdefault.jpg",
+          "large_image_url": "https://img.youtube.com/vi/3-sXWlVc6ds/hqdefault.jpg",
+          "maximum_image_url": "https://img.youtube.com/vi/3-sXWlVc6ds/maxresdefault.jpg"
+        }
+      }
+    }
+  ]
+}

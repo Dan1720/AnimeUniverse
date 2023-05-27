@@ -59,7 +59,7 @@ public class AnimeRecommendationsRepositoryWithLiveData implements IAnimeRecomme
 
     @Override
     public void onSuccessFromLocal(AnimeRecommendationsApiResponse animeRecommendationsApiResponse) {
-        if(allAnimeRecommendationsMutableLiveData.getValue() != null & allAnimeRecommendationsMutableLiveData.getValue().isSuccess()){
+        if(allAnimeRecommendationsMutableLiveData.getValue() != null && allAnimeRecommendationsMutableLiveData.getValue().isSuccess()){
             List<AnimeRecommendations> animeRecommendationsList = ((Result.AnimeRecommendationsSuccess) allAnimeRecommendationsMutableLiveData.getValue()).getData().getAnimeRecommendationsList();
             animeRecommendationsApiResponse.setAnimeRecommendationsList(animeRecommendationsList);
             Result.AnimeRecommendationsSuccess result  = new Result.AnimeRecommendationsSuccess(animeRecommendationsApiResponse);

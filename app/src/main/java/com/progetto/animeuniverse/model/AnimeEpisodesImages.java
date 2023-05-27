@@ -8,47 +8,43 @@ import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverter;
-import androidx.room.TypeConverters;
 
 import com.google.gson.annotations.SerializedName;
-import com.progetto.animeuniverse.util.Converter;
 
-import java.util.List;
-
-@Entity(tableName = "anime_recommendations")
-public class AnimeRecommendations implements Parcelable {
-    @PrimaryKey(autoGenerate = true)
+@Entity(tableName = "anime_episodes_images")
+public class AnimeEpisodesImages implements Parcelable {
+    @PrimaryKey()
+    @SerializedName("mal_id")
     private int id;
 
-    @TypeConverters(Converter.class)
-    @SerializedName("entry")
-    private List<AnimeEntry> entry;
+    @Embedded(prefix = "images_")
+    @SerializedName("images")
+    private AnimeImages images;
 
     @ColumnInfo(name = "is_synchronized")
     private boolean isSynchronized;
 
-    public AnimeRecommendations(int id, List<AnimeEntry> entry, boolean isSynchronized) {
+    public AnimeEpisodesImages(int id, AnimeImages images, boolean isSynchronized) {
         this.id = id;
-        this.entry = entry;
+        this.images = images;
         this.isSynchronized = isSynchronized;
     }
 
-    protected AnimeRecommendations(Parcel in) {
+    protected AnimeEpisodesImages(Parcel in) {
         id = in.readInt();
-        entry = in.createTypedArrayList(AnimeEntry.CREATOR);
+        images = in.readParcelable(AnimeImages.class.getClassLoader());
         isSynchronized = in.readByte() != 0;
     }
 
-    public static final Creator<AnimeRecommendations> CREATOR = new Creator<AnimeRecommendations>() {
+    public static final Creator<AnimeEpisodesImages> CREATOR = new Creator<AnimeEpisodesImages>() {
         @Override
-        public AnimeRecommendations createFromParcel(Parcel in) {
-            return new AnimeRecommendations(in);
+        public AnimeEpisodesImages createFromParcel(Parcel in) {
+            return new AnimeEpisodesImages(in);
         }
 
         @Override
-        public AnimeRecommendations[] newArray(int size) {
-            return new AnimeRecommendations[size];
+        public AnimeEpisodesImages[] newArray(int size) {
+            return new AnimeEpisodesImages[size];
         }
     };
 
@@ -60,12 +56,12 @@ public class AnimeRecommendations implements Parcelable {
         this.id = id;
     }
 
-    public List<AnimeEntry> getEntry() {
-        return entry;
+    public AnimeImages getImages() {
+        return images;
     }
 
-    public void setEntry(List<AnimeEntry> entry) {
-        this.entry = entry;
+    public void setImages(AnimeImages images) {
+        this.images = images;
     }
 
     public boolean isSynchronized() {
@@ -78,9 +74,9 @@ public class AnimeRecommendations implements Parcelable {
 
     @Override
     public String toString() {
-        return "AnimeRecommendations{" +
+        return "AnimeEpisodesImages{" +
                 "id=" + id +
-                ", entry=" + entry +
+                ", images=" + images +
                 ", isSynchronized=" + isSynchronized +
                 '}';
     }
@@ -93,7 +89,7 @@ public class AnimeRecommendations implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(id);
-        dest.writeTypedList(entry);
+        dest.writeParcelable(images, flags);
         dest.writeByte((byte) (isSynchronized ? 1 : 0));
     }
 }

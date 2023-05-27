@@ -1,0 +1,448 @@
+{
+  "pagination": {
+    "last_visible_page": 6,
+    "has_next_page": true
+  },
+  "data": [
+    {
+      "mal_id": 220,
+      "title": "Departure",
+      "episode": "Episode 220",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/220",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire3-tmb/10423622ded8a32cb39a7be2e237fd841255513405_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 219,
+      "title": "The Ultimate Weapon Reborn",
+      "episode": "Episode 219",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/219",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire3-tmb/523d5209295c9949a1c574c6a78e24661255513903_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 218,
+      "title": "Sealed Sand: The Counterattack!",
+      "episode": "Episode 218",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/218",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire1-tmb/bf08155e5f92ade063cd104f0abaa02d1255511290_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 217,
+      "title": "Sand Alliance With the Leaf Shinobi",
+      "episode": "Episode 217",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/217",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire1-tmb/f2f97541416d64455e5d6214e9d53cff1255510406_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 216,
+      "title": "The Targeted Shukaku",
+      "episode": "Episode 216",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/216",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire1-tmb/22816c396dac665d51e45253e4cdb0891255509042_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 215,
+      "title": "A Past to Be Erased",
+      "episode": "Episode 215",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/215",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire1-tmb/e2aea5e40ddd16b1d6e78388cf0f97791255508857_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 214,
+      "title": "Bringing Back Reality",
+      "episode": "Episode 214",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/214",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire1-tmb/ef77608a643b0f47ebbfe098265ea9f11255508860_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 213,
+      "title": "Vanished Memories",
+      "episode": "Episode 213",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/213",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire1-tmb/5fab6cfac1c360f54fb81266fc80817a1255507636_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 212,
+      "title": "To Each His Own Path",
+      "episode": "Episode 212",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/212",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire4-tmb/345e55e79d988c90256455813e8370741255506859_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 211,
+      "title": "Memory of Flames",
+      "episode": "Episode 211",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/211",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire3-tmb/487d5331634ae69c7ecd1a04841b9cd71255506829_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 210,
+      "title": "The Bewildering Forest",
+      "episode": "Episode 210",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/210",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire2-tmb/81e131d3412ef11c35b17ed185d122021255506739_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 209,
+      "title": "The Enemy: Ninja Dropouts",
+      "episode": "Episode 209",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/209",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire1-tmb/20785149cd02f4cc13a899e6d27504bc1255504780_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 208,
+      "title": "The Weight of the Prized Artifact!",
+      "episode": "Episode 208",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/208",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire1-tmb/c07db7761f1d71fe990aaa89249d9b921255504745_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 207,
+      "title": "The Supposed Sealed Ability",
+      "episode": "Episode 207",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/207",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire4-tmb/a4a11b0e2de3478f990a2ba1c756cce31255504764_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 206,
+      "title": "Genjutsu or Reality?",
+      "episode": "Episode 206",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/206",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire1-tmb/9908c2e1ede766363c02b6ff9d1650001255504723_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 205,
+      "title": "Kurenai's Top Secret Mission: The Promise with the Third Hokage",
+      "episode": "Episode 205",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/205",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire4-tmb/cd495224919a6f0010d199998d9696b21253927503_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 204,
+      "title": "Yakumo's Sealed Power",
+      "episode": "Episode 204",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/204",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire1-tmb/fd84dbac38df6c5a127a76b5b598d5851253927128_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 203,
+      "title": "Kurenai's Decision: Squad 8 Left Behind",
+      "episode": "Episode 203",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/203",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire3-tmb/caf940d86e325e6d6df15e30bca3d7261253927120_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 202,
+      "title": "The Top 5 Ninja Battles!",
+      "episode": "Episode 202",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/202",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire1-tmb/bb698095e6003709f2a9efca96124f371253927612_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 201,
+      "title": "Multiple Traps! Countdown to Destruction",
+      "episode": "Episode 201",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/201",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire3-tmb/21dd2ac304d0fe14cab76d9a25dc5ba91253925080_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 200,
+      "title": "The Powerful Helper",
+      "episode": "Episode 200",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/200",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire3-tmb/86e165d5790a3c15e4b64615ce999ebf1253924823_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 199,
+      "title": "The Missed Target",
+      "episode": "Episode 199",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/199",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire1-tmb/4a3e5d06881d0f09beae948e1bd854fe1253924697_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 198,
+      "title": "The Anbu Gives Up? Naruto's Recollection",
+      "episode": "Episode 198",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/198",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire3-tmb/aaf6d58e360a4b451f0664dcb4aabe851253922978_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 197,
+      "title": "Crisis: The Hidden Leaf 11 Gather!",
+      "episode": "Episode 197",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/197",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire4-tmb/b3b1d972fdf7ecdaaef3fc4ef9e2bb471253922743_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 196,
+      "title": "Hot-Blooded Confrontation: Student vs. Sensei",
+      "episode": "Episode 196",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/196",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire2-tmb/2ee89704f96e6a3491edca6616f6d81b1253919639_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 195,
+      "title": "The Third Super-Beast!",
+      "episode": "Episode 195",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/195",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire1-tmb/3a5bf9721c57f2b0ae27623bc5110a311253920207_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 194,
+      "title": "The Mysterious Curse of the Haunted Castle",
+      "episode": "Episode 194",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/194",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire1-tmb/7ba2c30585dcd12be0f0ab8a4734ac911253919397_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 193,
+      "title": "Viva Dojo Challenge! Youth is All About Passion!",
+      "episode": "Episode 193",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/193",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire2-tmb/af36473a01cd552f9f410bc3a26c2b171253919400_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 192,
+      "title": "Ino Screams! Chubby Paradise!",
+      "episode": "Episode 192",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/192",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire1-tmb/631613462d4af3a6bb7ababae577158a1253851503_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 191,
+      "title": "Forecast: Death! Cloudy with Chance of Sun!",
+      "episode": "Episode 191",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/191",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire2-tmb/0a10a0080fc411ad8c74ade052755bfa1245281946_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 190,
+      "title": "The Byakugan Sees the Blind Spot!",
+      "episode": "Episode 190",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/190",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire4-tmb/fca26d44606c80f4efd8b26e1d8971f01245281805_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 189,
+      "title": "A Limitless Supply of Ninja Tools",
+      "episode": "Episode 189",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/189",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire4-tmb/e016cccf2e798f58d31a04468cc11b1d1245280979_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 188,
+      "title": "The Mystery of the Targeted Merchants",
+      "episode": "Episode 188",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/188",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire1-tmb/8cd51cbda9d78adf2e46d919e6f647411245280324_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 187,
+      "title": "Open for Business! The Leaf Moving Service",
+      "episode": "Episode 187",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/187",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire4-tmb/51baadfcb8eb767a161761d1878c2c851245280235_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 186,
+      "title": "Laughing Shino",
+      "episode": "Episode 186",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/186",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire2-tmb/c36696cee768bcdf19318276a126946a1245280324_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 185,
+      "title": "A Legend from the Hidden Leaf: The Onbaa!",
+      "episode": "Episode 185",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/185",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire4-tmb/94f13c4743292c345a0f5deb645103b81245278322_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 184,
+      "title": "Kiba's Long Day",
+      "episode": "Episode 184",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/184",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire4-tmb/26cbab205e6618c20699c77bb63986711245278264_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 183,
+      "title": "The Star's Radiance",
+      "episode": "Episode 183",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/183",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire3-tmb/03fd2af0cd134dfa1b07d7d6addcc6021245277739_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 182,
+      "title": "Reunion: The Remaining Time",
+      "episode": "Episode 182",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/182",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire2-tmb/7c7847d066039b5fa1d10bfe98699daa1245276445_large.jpg"
+        }
+      }
+    },
+    {
+      "mal_id": 181,
+      "title": "Hoshikage: The Buried Truth",
+      "episode": "Episode 181",
+      "url": "https://myanimelist.net/anime/20/Naruto/episode/181",
+      "images": {
+        "jpg": {
+          "image_url": "https://img1.ak.crunchyroll.com/i/spire2-tmb/452614d52b6275ea6e212e653bbf1d0e1245276371_large.jpg"
+        }
+      }
+    }
+  ]
+}
