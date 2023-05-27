@@ -16,6 +16,7 @@ import com.progetto.animeuniverse.model.AnimeEpisodesImages;
 import com.progetto.animeuniverse.model.AnimeMovie;
 import com.progetto.animeuniverse.model.AnimeNew;
 import com.progetto.animeuniverse.model.AnimeRecommendations;
+import com.progetto.animeuniverse.model.AnimeSpecificGenres;
 import com.progetto.animeuniverse.model.AnimeTv;
 import com.progetto.animeuniverse.model.Genre;
 import com.progetto.animeuniverse.model.Review;
@@ -25,7 +26,7 @@ import java.util.concurrent.Executors;
 
 @Database(entities = {Anime.class, Review.class, Genre.class, AnimeRecommendations.class,
         AnimeByName.class, AnimeNew.class, AnimeEpisodes.class, AnimeEpisodesImages.class,
-        AnimeTv.class, AnimeMovie.class}, version = DATABASE_VERSION)
+        AnimeTv.class, AnimeMovie.class, AnimeSpecificGenres.class}, version = DATABASE_VERSION)
 public abstract class AnimeRoomDatabase extends RoomDatabase {
     public abstract AnimeDao animeDao();
     public abstract ReviewDao reviewDao();
@@ -37,6 +38,7 @@ public abstract class AnimeRoomDatabase extends RoomDatabase {
     public abstract AnimeEpisodesImagesDao animeEpisodesImagesDao();
     public abstract AnimeTvDao animeTvDao();
     public abstract AnimeMovieDao animeMovieDao();
+    public abstract AnimeSpecificGenresDao animeSpecificGenresDao();
 
     private static volatile AnimeRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = Runtime.getRuntime().availableProcessors();

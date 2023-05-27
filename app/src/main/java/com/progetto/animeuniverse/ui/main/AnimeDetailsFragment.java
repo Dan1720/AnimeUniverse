@@ -29,15 +29,24 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
+import com.progetto.animeuniverse.adapter.EpisodesImagesRecyclerViewAdapter;
+import com.progetto.animeuniverse.adapter.EpisodesRecyclerViewAdapter;
 import com.progetto.animeuniverse.adapter.ReviewsRecyclerViewAdapter;
 import com.progetto.animeuniverse.databinding.FragmentAnimeDetailsBinding;
 import com.progetto.animeuniverse.model.Anime;
+import com.progetto.animeuniverse.model.AnimeEpisodes;
+import com.progetto.animeuniverse.model.AnimeEpisodesImages;
+import com.progetto.animeuniverse.model.AnimeEpisodesImagesResponse;
+import com.progetto.animeuniverse.model.AnimeEpisodesResponse;
 import com.progetto.animeuniverse.model.AnimeGenres;
 import com.progetto.animeuniverse.model.AnimeProducers;
+import com.progetto.animeuniverse.model.AnimeSpecificGenres;
 import com.progetto.animeuniverse.model.AnimeStudios;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.model.Review;
 import com.progetto.animeuniverse.model.ReviewsResponse;
+import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_episodes_images.IAnimeEpisodesImagesRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.reviews.IReviewsRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.reviews.ReviewsResponseCallback;
 import com.progetto.animeuniverse.util.ErrorMessagesUtil;
@@ -51,8 +60,12 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
     private static final String TAG = AnimeDetailsFragment.class.getSimpleName();
     private FragmentAnimeDetailsBinding fragmentAnimeDetailsBinding;
     private List<Review> reviewsList;
+    private List<AnimeEpisodes> animeEpisodesList;
+    private List<AnimeEpisodesImages> animeEpisodesImagesList;
     private SharedPreferencesUtil sharedPreferencesUtil;
     private ReviewsViewModel reviewsViewModel;
+    private AnimeEpisodesViewModel animeEpisodesViewModel;
+    private AnimeEpisodesImagesViewModel animeEpisodesImagesViewModel;
 
     public AnimeDetailsFragment() {
         // Required empty public constructor
@@ -79,6 +92,28 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
         }
 
         reviewsList = new ArrayList<>();
+
+        IAnimeEpisodesRepositoryWithLiveData animeEpisodesRepositoryWithLiveData =
+                ServiceLocator.getInstance().getAnimeEpisodesRepository(requireActivity().getApplication());
+        if(animeEpisodesRepositoryWithLiveData != null){
+            animeEpisodesViewModel = new ViewModelProvider(requireActivity(), new AnimeEpisodesViewModelFactory(animeEpisodesRepositoryWithLiveData)).get(AnimeEpisodesViewModel.class);
+        }else {
+            Snackbar.make(requireActivity().findViewById(android.R.id.content),
+                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
+        }
+
+        animeEpisodesList = new ArrayList<>();
+
+        IAnimeEpisodesImagesRepositoryWithLiveData animeEpisodesImagesRepositoryWithLiveData =
+                ServiceLocator.getInstance().getAnimeEpisodesImagesRepository(requireActivity().getApplication());
+        if(animeEpisodesImagesRepositoryWithLiveData != null){
+            animeEpisodesImagesViewModel = new ViewModelProvider(requireActivity(), new AnimeEpisodesImagesViewModelFactory(animeEpisodesImagesRepositoryWithLiveData)).get(AnimeEpisodesImagesViewModel.class);
+        }else{
+            Snackbar.make(requireActivity().findViewById(android.R.id.content),
+                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
+        }
+
+        animeEpisodesImagesList = new ArrayList<>();
 
     }
 
@@ -188,6 +223,40 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
                         Snackbar.LENGTH_SHORT).show();
             }
         });
+
+        RecyclerView EpisodesRecyclerViewItem = view.findViewById(R.id.recyclerView_episodesIn);
+        LinearLayoutManager layoutManagerEp = new LinearLayoutManager(requireContext());
+        EpisodesRecyclerViewAdapter episodesRecyclerViewAdapter = new EpisodesRecyclerViewAdapter(animeEpisodesList, requireActivity().getApplication(), new EpisodesRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onEpisodeItemClick(AnimeEpisodes animeEpisodes) {
+
+            }
+
+        });
+
+        EpisodesRecyclerViewItem.setAdapter(episodesRecyclerViewAdapter);
+        EpisodesRecyclerViewItem.setLayoutManager(layoutManagerEp);
+
+
+        lastUpdate = "0";
+        animeEpisodesViewModel.getAnimeEpisodes(anime.getId(), Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
+            System.out.println("Result episodes: "+ result.isSuccess());
+            if(result.isSuccess()){
+                AnimeEpisodesResponse animeEpisodesResponse = ((Result.AnimeEpisodesSuccess) result).getData();
+                List<AnimeEpisodes> fetchedAnimeEpisodes = animeEpisodesResponse.getAnimeEpisodesList();
+                this.animeEpisodesList.addAll(fetchedAnimeEpisodes);
+                episodesRecyclerViewAdapter.notifyDataSetChanged();
+            }else{
+                ErrorMessagesUtil errorMessagesUtil =
+                        new ErrorMessagesUtil(requireActivity().getApplication());
+                Snackbar.make(view, errorMessagesUtil.
+                                getErrorMessage(((Result.Error) result).getMessage()),
+                        Snackbar.LENGTH_SHORT).show();
+            }
+        });
+
+
+
     }
 
     @Override

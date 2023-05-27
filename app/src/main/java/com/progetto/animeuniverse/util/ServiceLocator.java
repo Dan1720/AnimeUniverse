@@ -35,6 +35,10 @@ import com.progetto.animeuniverse.data.source.anime_recommendations.AnimeRecomme
 import com.progetto.animeuniverse.data.source.anime_recommendations.AnimeRecommendationsRemoteDataSource;
 import com.progetto.animeuniverse.data.source.anime_recommendations.BaseAnimeRecommendationsLocalDataSource;
 import com.progetto.animeuniverse.data.source.anime_recommendations.BaseAnimeRecommendationsRemoteDataSource;
+import com.progetto.animeuniverse.data.source.anime_specific_genres.AnimeSpecificGenresLocalDataSource;
+import com.progetto.animeuniverse.data.source.anime_specific_genres.AnimeSpecificGenresRemoteDataSource;
+import com.progetto.animeuniverse.data.source.anime_specific_genres.BaseAnimeSpecificGenresLocalDataSource;
+import com.progetto.animeuniverse.data.source.anime_specific_genres.BaseAnimeSpecificGenresRemoteDataSource;
 import com.progetto.animeuniverse.data.source.anime_tv.AnimeTvLocalDataSource;
 import com.progetto.animeuniverse.data.source.anime_tv.AnimeTvRemoteDataSource;
 import com.progetto.animeuniverse.data.source.anime_tv.BaseAnimeTvLocalDataSource;
@@ -66,6 +70,8 @@ import com.progetto.animeuniverse.repository.anime_new.AnimeNewRepositoryWithLiv
 import com.progetto.animeuniverse.repository.anime_new.IAnimeNewRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_recommendations.AnimeRecommendationsRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_recommendations.IAnimeRecommendationsRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_specific_genres.AnimeSpecificGenresRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_specific_genres.IAnimeSpecificGenresRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_tv.AnimeTvRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_tv.IAnimeTvRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.genres.GenresRepositoryWithLiveData;
@@ -160,6 +166,10 @@ public class ServiceLocator {
         return AnimeRoomDatabase.getDatabase(application);
     }
     public AnimeRoomDatabase getAnimeMovieDao(Application application){
+        return AnimeRoomDatabase.getDatabase(application);
+    }
+
+    public AnimeRoomDatabase getAnimeSpecificGenresDao(Application application){
         return AnimeRoomDatabase.getDatabase(application);
     }
 
@@ -285,5 +295,16 @@ public class ServiceLocator {
         animeMovieRemoteDataSource = new AnimeMovieRemoteDataSource();
         animeMovieLocalDataSource = new AnimeMovieLocalDataSource(getAnimeMovieDao(application), sharedPreferencesUtil, dataEncryptionUtil);
         return new AnimeMovieRepositoryWithLiveData(animeMovieRemoteDataSource, animeMovieLocalDataSource);
+    }
+
+    public IAnimeSpecificGenresRepositoryWithLiveData getAnimeSpecificGenresRepository(Application application){
+        BaseAnimeSpecificGenresRemoteDataSource animeSpecificGenresRemoteDataSource;
+        BaseAnimeSpecificGenresLocalDataSource animeSpecificGenresLocalDataSource;
+        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(application);
+        DataEncryptionUtil dataEncryptionUtil = new DataEncryptionUtil(application);
+
+        animeSpecificGenresRemoteDataSource = new AnimeSpecificGenresRemoteDataSource();
+        animeSpecificGenresLocalDataSource = new AnimeSpecificGenresLocalDataSource(getAnimeSpecificGenresDao(application), sharedPreferencesUtil, dataEncryptionUtil);
+        return new AnimeSpecificGenresRepositoryWithLiveData(animeSpecificGenresRemoteDataSource, animeSpecificGenresLocalDataSource);
     }
 }

@@ -11,15 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView_episodeImageIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
-
         <TextView
             android:id="@+id/textView_episodeTitleIn"
             android:layout_width="wrap_content"
@@ -27,7 +18,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
             android:text="Titolo"
-            app:layout_constraintStart_toEndOf="@+id/imageView_episodeImageIn"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -39,7 +30,7 @@
             android:layout_marginBottom="50dp"
             android:text="@string/txt_episode"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView_episodeImageIn"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_episodeTitleIn"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -75,7 +66,6 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="50dp"
-            android:text="Filler"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView_episodeDivider"
             app:layout_constraintTop_toBottomOf="@+id/textView_episodeTitleIn" />

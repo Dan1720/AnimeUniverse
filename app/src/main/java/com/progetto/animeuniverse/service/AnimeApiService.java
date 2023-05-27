@@ -17,6 +17,7 @@ import com.progetto.animeuniverse.model.AnimeMovieApiResponse;
 import com.progetto.animeuniverse.model.AnimeNewApiResponse;
 import com.progetto.animeuniverse.model.AnimeRecommendations;
 import com.progetto.animeuniverse.model.AnimeRecommendationsApiResponse;
+import com.progetto.animeuniverse.model.AnimeSpecificGenresApiResponse;
 import com.progetto.animeuniverse.model.AnimeTvApiResponse;
 import com.progetto.animeuniverse.model.GenresApiResponse;
 import com.progetto.animeuniverse.model.ReviewsApiResponse;
@@ -32,6 +33,11 @@ public interface AnimeApiService {
     @GET(TOP_HEADLINES_ENDPOINT)
     Call<AnimeByNameApiResponse> getAnimeByName(
             @Query(TOP_HEADLINES_Q_PARAMETER) String nameAnime);
+
+    @GET(TOP_HEADLINES_ENDPOINT)
+    Call<AnimeSpecificGenresApiResponse> getAnimeSpecificGenres(
+            @Query("genres") int idGenre);
+
 
     @GET("anime/{id}/full")
     Call<AnimeApiResponse> getAnimeByIdFull(String anime, @Path("id")int idFull);
