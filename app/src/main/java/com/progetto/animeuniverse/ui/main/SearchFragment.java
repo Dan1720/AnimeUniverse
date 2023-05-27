@@ -35,28 +35,36 @@ import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.adapter.ChildItemAdapter;
 import com.progetto.animeuniverse.adapter.ParentItemAdapter;
 import com.progetto.animeuniverse.adapter.SearchListAdapter;
+import com.progetto.animeuniverse.database.AnimeByNameDao;
+import com.progetto.animeuniverse.database.AnimeRoomDatabase;
 import com.progetto.animeuniverse.databinding.FragmentHomeBinding;
 import com.progetto.animeuniverse.databinding.FragmentSearchBinding;
 import com.progetto.animeuniverse.model.Anime;
+import com.progetto.animeuniverse.model.AnimeByName;
+import com.progetto.animeuniverse.model.AnimeByNameResponse;
 import com.progetto.animeuniverse.model.AnimeResponse;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.anime.AnimeResponseCallback;
 import com.progetto.animeuniverse.repository.anime.IAnimeRepository;
 import com.progetto.animeuniverse.repository.anime.IAnimeRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_by_name.AnimeByNameResponseCallback;
+import com.progetto.animeuniverse.repository.anime_by_name.IAnimeByNameRepositoryWithLiveData;
 import com.progetto.animeuniverse.util.ErrorMessagesUtil;
 import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
-public class SearchFragment extends Fragment implements AnimeResponseCallback {
+public class SearchFragment extends Fragment implements AnimeByNameResponseCallback {
 
-    private List<Anime> animeList;
-    private IAnimeRepositoryWithLiveData iAnimeRepository;
+    private List<AnimeByName> animeList;
+    private IAnimeByNameRepositoryWithLiveData iAnimeRepository;
     private SharedPreferencesUtil sharedPreferencesUtil;
-    private AnimeViewModel animeViewModel;
+    private AnimeByNameViewModel animeViewModel;
     private SearchListAdapter searchListAdapter;
 
     private FragmentSearchBinding fragmentSearchBinding;
@@ -64,7 +72,11 @@ public class SearchFragment extends Fragment implements AnimeResponseCallback {
 
     private final String q = TOP_HEADLINES_ENDPOINT;
     private final int threshold = 1;
-    String finalLastUpdate = "0";
+    //String finalLastUpdate = "0";
+    
+    private ServiceLocator serviceLocator;
+    private AnimeRoomDatabase animeRoomDatabase;
+
 
 
 
@@ -82,17 +94,16 @@ public class SearchFragment extends Fragment implements AnimeResponseCallback {
         super.onCreate(savedInstanceState);
         sharedPreferencesUtil = new SharedPreferencesUtil(requireActivity().getApplication());
 
-        IAnimeRepositoryWithLiveData animeRepositoryWithLiveData =
-                ServiceLocator.getInstance().getAnimeRepository(
-                        requireActivity().getApplication()
-                );
+        IAnimeByNameRepositoryWithLiveData animeRepositoryWithLiveData =
+                ServiceLocator.getInstance().getAnimeByNameRepository(requireActivity().getApplication());
         if(animeRepositoryWithLiveData != null){
             animeViewModel = new ViewModelProvider(requireActivity(),
-                    new AnimeViewModelFactory(animeRepositoryWithLiveData)).get(AnimeViewModel.class);
+                    new AnimeByNameViewModelFactory(animeRepositoryWithLiveData)).get(AnimeByNameViewModel.class);
         }else{
             Snackbar.make(requireActivity().findViewById(android.R.id.content),
                     getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
         }
+        animeRoomDatabase = AnimeRoomDatabase.getDatabase(getContext());
         animeList = new ArrayList<>();
 
     }
@@ -127,11 +138,12 @@ public class SearchFragment extends Fragment implements AnimeResponseCallback {
                 new SearchListAdapter.OnItemClickListener() {
 
                     @Override
-                    public void onAnimeClick(Anime anime) {
-                        SearchFragmentDirections.ActionSearchFragmentToAnimeDetailsFragment action =
+                    public void onAnimeClick(AnimeByName anime) {
+                        /*SearchFragmentDirections.ActionSearchFragmentToAnimeDetailsFragment action =
                                 SearchFragmentDirections.actionSearchFragmentToAnimeDetailsFragment(anime);
-                        Navigation.findNavController(view).navigate(action);
+                        Navigation.findNavController(view).navigate(action);*/
                     }
+
         });
         NavBackStackEntry navBackStackEntry = Navigation.findNavController(view).getPreviousBackStackEntry();
         if(navBackStackEntry != null && navBackStackEntry.getDestination().getId() == R.id.searchFragment){
@@ -185,6 +197,7 @@ public class SearchFragment extends Fragment implements AnimeResponseCallback {
             }
 
         });*/
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
 
@@ -193,11 +206,27 @@ public class SearchFragment extends Fragment implements AnimeResponseCallback {
                 animeViewModel.getAnimeByName(query,Long.parseLong(finalLastUpdate)).observe(getViewLifecycleOwner(), result -> {
                     System.out.println("Result anime searched by name:" + result.isSuccess());
                     if(result.isSuccess()){
-                        AnimeResponse animeResponse = ((Result.AnimeResponseSuccess) result).getData();
-                        List<Anime> fetchedAnime = animeResponse.getAnimeList();
-                        animeList.clear();
-                        animeList.addAll(fetchedAnime);
-                        searchListAdapter.notifyDataSetChanged();
+                        //AnimeByNameResponse animeResponse = ((Result.AnimeResponseSuccess) result).getData();
+                        AnimeByNameResponse animeByNameResponse = ((Result.AnimeByNameSuccess) result).getData();
+                        List<AnimeByName> fetchedAnime = animeByNameResponse.getAnimeByNameList();
+                        ExecutorService executor = Executors.newSingleThreadExecutor();
+                        executor.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                AnimeByNameDao animeByNameDao = animeRoomDatabase.animeByNameDao();
+                                animeByNameDao.insertAnimeByNameList(fetchedAnime); // Inserimento dei nuovi dati
+                                animeList.clear(); // Rimozione dei dati precedenti dalla lista
+                                animeList.addAll(fetchedAnime); // Aggiunta dei nuovi dati alla lista
+                                requireActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        searchListAdapter.notifyDataSetChanged(); // Aggiornamento dell'adapter
+                                    }
+                                });
+                            }
+                        });
+                        executor.shutdown();
+
                     } else{
                         ErrorMessagesUtil errorMessagesUtil =
                                 new ErrorMessagesUtil(requireActivity().getApplication());
@@ -223,7 +252,7 @@ public class SearchFragment extends Fragment implements AnimeResponseCallback {
 
     //@Override
     @Override
-    public void onSuccess(List<Anime> animeList, long lastUpdate) {
+    public void onSuccess(List<AnimeByName> animeList, long lastUpdate) {
         if(animeList != null) {
             this.animeList.clear();
             this.animeList.addAll(animeList);
@@ -235,17 +264,6 @@ public class SearchFragment extends Fragment implements AnimeResponseCallback {
     @Override
     public void onFailure(String errorMessage) {
 
-    }
-
-    @Override
-    public void onAnimeFavoriteStatusChanged(Anime anime) {
-        /*if(anime.isFavorite()){
-            Snackbar.make(requireActivity().findViewById(android.R.id.content),
-                    R.string.add_anime_favorite, Snackbar.LENGTH_LONG).show();
-        }else{
-            Snackbar.make(requireActivity().findViewById(android.R.id.content),
-                    R.string.remove_anime_favorite, Snackbar.LENGTH_LONG).show();
-        }*/
     }
 
     private boolean isConnected(){

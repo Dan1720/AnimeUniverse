@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.model.Anime;
+import com.progetto.animeuniverse.model.AnimeByName;
 import com.progetto.animeuniverse.service.AnimeApiService;
 import com.squareup.picasso.Picasso;
 
@@ -20,7 +21,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.AnimeViewHolder> {
+public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.AnimeByNameViewHolder> {
 
 
 
@@ -28,13 +29,13 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.An
 
 
    public interface OnItemClickListener{
-        void onAnimeClick(Anime anime);
+        void onAnimeClick(AnimeByName anime);
     }
-    private List<Anime> animeList;
+    private List<AnimeByName> animeList;
     private Application application;
 
     private OnItemClickListener onItemSelectedListener;
-    public SearchListAdapter(List<Anime> animeList,Application application, OnItemClickListener onItemSelectedListener){
+    public SearchListAdapter(List<AnimeByName> animeList,Application application, OnItemClickListener onItemSelectedListener){
         this.animeList = animeList;
         this.application = application;
         this.onItemSelectedListener = onItemSelectedListener;
@@ -42,17 +43,17 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.An
 
     @NonNull
     @Override
-    public AnimeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AnimeByNameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.search_anime_list_item,parent, false);
 
-        return new AnimeViewHolder(view);
+        return new AnimeByNameViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AnimeViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AnimeByNameViewHolder holder, int position) {
         //holder.bind(animeList.get(position));
-        Anime animeItem = animeList.get(position);
+        AnimeByName animeItem = animeList.get(position);
         Picasso.get()
                 .load(animeItem.getImages().getJpgImages().getImageUrl())
                 .into(holder.imageViewAnime);
@@ -69,10 +70,10 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.An
         return animeList.size();
     }
 
-    public class AnimeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class AnimeByNameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private final TextView textViewTitle;
         private final ImageView imageViewAnime;
-        public AnimeViewHolder(@NonNull View itemView) {
+        public AnimeByNameViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.textview_title);
             imageViewAnime = itemView.findViewById(R.id.imageview_anime_search);
