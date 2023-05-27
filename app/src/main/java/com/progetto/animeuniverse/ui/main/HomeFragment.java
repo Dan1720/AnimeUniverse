@@ -35,16 +35,20 @@ import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeEpisodes;
 import com.progetto.animeuniverse.model.AnimeEpisodesImages;
 import com.progetto.animeuniverse.model.AnimeGenres;
+import com.progetto.animeuniverse.model.AnimeMovie;
 import com.progetto.animeuniverse.model.AnimeNew;
 import com.progetto.animeuniverse.model.AnimeRecommendations;
 import com.progetto.animeuniverse.model.AnimeResponse;
+import com.progetto.animeuniverse.model.AnimeTv;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.anime.AnimeResponseCallback;
 import com.progetto.animeuniverse.repository.anime.IAnimeRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_episodes_images.IAnimeEpisodesImagesRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_movie.IAnimeMovieRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_new.IAnimeNewRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_recommendations.IAnimeRecommendationsRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_tv.IAnimeTvRepositoryWithLiveData;
 import com.progetto.animeuniverse.util.ErrorMessagesUtil;
 import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
@@ -62,6 +66,8 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
     private List<AnimeNew> animeNewList;
     private List<AnimeEpisodes> animeEpisodesList;
     private List<AnimeEpisodesImages> animeEpisodesImagesList;
+    private List<AnimeTv> animeTvList;
+    private List<AnimeMovie> animeMovieList;
     private SharedPreferencesUtil sharedPreferencesUtil;
     private AnimeViewModel animeViewModel;
     private AnimeRecommendationsViewModel animeRecommendationsViewModel;
@@ -69,6 +75,8 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
     private AnimeNewViewModel animeNewViewModel;
     private AnimeEpisodesViewModel animeEpisodesViewModel;
     private AnimeEpisodesImagesViewModel animeEpisodesImagesViewModel;
+    private AnimeTvViewModel animeTvViewModel;
+    private AnimeMovieViewModel animeMovieViewModel;
 
     private FragmentHomeBinding fragmentHomeBinding;
 
@@ -129,31 +137,29 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
 
         animeNewList = new ArrayList<>();
 
-        IAnimeEpisodesRepositoryWithLiveData animeEpisodesRepositoryWithLiveData =
-                ServiceLocator.getInstance().getAnimeEpisodesRepository(
+        IAnimeTvRepositoryWithLiveData animeTvRepositoryWithLiveData =
+                ServiceLocator.getInstance().getAnimeTvRepository(
                         requireActivity().getApplication()
                 );
-        if(animeEpisodesRepositoryWithLiveData != null){
-            animeEpisodesViewModel = new ViewModelProvider(requireActivity(),
-                    new AnimeEpisodesViewModelFactory(animeEpisodesRepositoryWithLiveData)).get(AnimeEpisodesViewModel.class);
-        }else {
+        if(animeTvRepositoryWithLiveData != null){
+            animeTvViewModel = new ViewModelProvider(requireActivity(), new AnimeTvViewModelFactory(animeTvRepositoryWithLiveData)).get(AnimeTvViewModel.class);
+        }else{
             Snackbar.make(requireActivity().findViewById(android.R.id.content),
                     getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
         }
 
-        animeEpisodesList = new ArrayList<>();
+        animeTvList = new ArrayList<>();
 
-        IAnimeEpisodesImagesRepositoryWithLiveData animeEpisodesImagesRepositoryWithLiveData =
-                ServiceLocator.getInstance().getAnimeEpisodesImagesRepository(
+        IAnimeMovieRepositoryWithLiveData animeMovieRepositoryWithLiveData =
+                ServiceLocator.getInstance().getAnimeMovieRepository(
                         requireActivity().getApplication()
                 );
-        if(animeEpisodesImagesRepositoryWithLiveData != null){
-            animeEpisodesImagesViewModel = new ViewModelProvider(requireActivity(), new AnimeEpisodesImagesViewModelFactory(animeEpisodesImagesRepositoryWithLiveData)).get(AnimeEpisodesImagesViewModel.class);
+        if(animeMovieRepositoryWithLiveData != null){
+            animeMovieViewModel = new ViewModelProvider(requireActivity(), new AnimeMovieViewModelFactory(animeMovieRepositoryWithLiveData)).get(AnimeMovieViewModel.class);
         }else {
             Snackbar.make(requireActivity().findViewById(android.R.id.content),
                     getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
         }
-        animeEpisodesImagesList = new ArrayList<>();
     }
 
     @Override
@@ -204,24 +210,15 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             }
         });
 
+
         lastUpdate = "0";
-        animeNewViewModel.getAnimeNew(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
-            System.out.println("Result new: "+ result.isSuccess());
+        animeTvViewModel.getAnimeTv((Long.parseLong(lastUpdate))).observe(getViewLifecycleOwner(), result -> {
+            System.out.println("Result TV: "+ result.isSuccess());
         });
 
         lastUpdate = "0";
-        animeRecommendationsViewModel.getAnimeRecommendations(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
-            System.out.println("Result rec: "+ result.isSuccess());
-        });
-
-        lastUpdate = "0";
-        animeEpisodesViewModel.getAnimeEpisodes(20, (Long.parseLong(lastUpdate))).observe(getViewLifecycleOwner(), result ->{
-            System.out.println("Result epis: "+ result.isSuccess());
-        });
-
-        lastUpdate = "0";
-        animeEpisodesImagesViewModel.getAnimeEpisodesImages(20, (Long.parseLong(lastUpdate))).observe(getViewLifecycleOwner(), result ->{
-            System.out.println("Result episImm: "+ result.isSuccess());
+        animeMovieViewModel.getAnimeMovie((Long.parseLong(lastUpdate))).observe(getViewLifecycleOwner(), result ->{
+            System.out.println("Result Movie: "+ result.isSuccess());
         });
 
 

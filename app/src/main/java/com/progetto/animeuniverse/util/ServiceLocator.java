@@ -23,6 +23,10 @@ import com.progetto.animeuniverse.data.source.anime_episodes_images.AnimeEpisode
 import com.progetto.animeuniverse.data.source.anime_episodes_images.AnimeEpisodesImagesRemoteDataSource;
 import com.progetto.animeuniverse.data.source.anime_episodes_images.BaseAnimeEpisodesImagesLocalDataSource;
 import com.progetto.animeuniverse.data.source.anime_episodes_images.BaseAnimeEpisodesImagesRemoteDataSource;
+import com.progetto.animeuniverse.data.source.anime_movie.AnimeMovieLocalDataSource;
+import com.progetto.animeuniverse.data.source.anime_movie.AnimeMovieRemoteDataSource;
+import com.progetto.animeuniverse.data.source.anime_movie.BaseAnimeMovieLocalDataSource;
+import com.progetto.animeuniverse.data.source.anime_movie.BaseAnimeMovieRemoteDataSource;
 import com.progetto.animeuniverse.data.source.anime_new.AnimeNewLocalDataSource;
 import com.progetto.animeuniverse.data.source.anime_new.AnimeNewRemoteDataSource;
 import com.progetto.animeuniverse.data.source.anime_new.BaseAnimeNewLocalDataSource;
@@ -31,6 +35,10 @@ import com.progetto.animeuniverse.data.source.anime_recommendations.AnimeRecomme
 import com.progetto.animeuniverse.data.source.anime_recommendations.AnimeRecommendationsRemoteDataSource;
 import com.progetto.animeuniverse.data.source.anime_recommendations.BaseAnimeRecommendationsLocalDataSource;
 import com.progetto.animeuniverse.data.source.anime_recommendations.BaseAnimeRecommendationsRemoteDataSource;
+import com.progetto.animeuniverse.data.source.anime_tv.AnimeTvLocalDataSource;
+import com.progetto.animeuniverse.data.source.anime_tv.AnimeTvRemoteDataSource;
+import com.progetto.animeuniverse.data.source.anime_tv.BaseAnimeTvLocalDataSource;
+import com.progetto.animeuniverse.data.source.anime_tv.BaseAnimeTvRemoteDataSource;
 import com.progetto.animeuniverse.data.source.genres.BaseGenresLocalDataSource;
 import com.progetto.animeuniverse.data.source.genres.BaseGenresRemoteDataSource;
 import com.progetto.animeuniverse.data.source.genres.GenresLocalDataSource;
@@ -52,10 +60,14 @@ import com.progetto.animeuniverse.repository.anime_episodes.AnimeEpisodesReposit
 import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_episodes_images.AnimeEpisodesImagesRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_episodes_images.IAnimeEpisodesImagesRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_movie.AnimeMovieRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_movie.IAnimeMovieRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_new.AnimeNewRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_new.IAnimeNewRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_recommendations.AnimeRecommendationsRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_recommendations.IAnimeRecommendationsRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_tv.AnimeTvRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_tv.IAnimeTvRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.genres.GenresRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.genres.IGenresRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.reviews.IReviewsRepositoryWithLiveData;
@@ -141,6 +153,13 @@ public class ServiceLocator {
     }
 
     public AnimeRoomDatabase getAnimeEpisodesImagesDao(Application application){
+        return AnimeRoomDatabase.getDatabase(application);
+    }
+
+    public AnimeRoomDatabase getAnimeTvDao(Application application){
+        return AnimeRoomDatabase.getDatabase(application);
+    }
+    public AnimeRoomDatabase getAnimeMovieDao(Application application){
         return AnimeRoomDatabase.getDatabase(application);
     }
 
@@ -244,5 +263,27 @@ public class ServiceLocator {
         animeEpisodesImagesRemoteDataSource = new AnimeEpisodesImagesRemoteDataSource();
         animeEpisodesImagesLocalDataSource = new AnimeEpisodesImagesLocalDataSource(getAnimeEpisodesImagesDao(application), sharedPreferencesUtil, dataEncryptionUtil);
         return new AnimeEpisodesImagesRepositoryWithLiveData(animeEpisodesImagesRemoteDataSource,animeEpisodesImagesLocalDataSource);
+    }
+
+    public IAnimeTvRepositoryWithLiveData getAnimeTvRepository(Application application){
+        BaseAnimeTvRemoteDataSource animeTvRemoteDataSource;
+        BaseAnimeTvLocalDataSource animeTvLocalDataSource;
+        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(application);
+        DataEncryptionUtil dataEncryptionUtil = new DataEncryptionUtil(application);
+
+        animeTvRemoteDataSource = new AnimeTvRemoteDataSource();
+        animeTvLocalDataSource = new AnimeTvLocalDataSource(getAnimeTvDao(application), sharedPreferencesUtil, dataEncryptionUtil);
+        return new AnimeTvRepositoryWithLiveData(animeTvRemoteDataSource, animeTvLocalDataSource);
+    }
+
+    public IAnimeMovieRepositoryWithLiveData getAnimeMovieRepository(Application application){
+        BaseAnimeMovieRemoteDataSource animeMovieRemoteDataSource;
+        BaseAnimeMovieLocalDataSource animeMovieLocalDataSource;
+        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(application);
+        DataEncryptionUtil dataEncryptionUtil = new DataEncryptionUtil(application);
+
+        animeMovieRemoteDataSource = new AnimeMovieRemoteDataSource();
+        animeMovieLocalDataSource = new AnimeMovieLocalDataSource(getAnimeMovieDao(application), sharedPreferencesUtil, dataEncryptionUtil);
+        return new AnimeMovieRepositoryWithLiveData(animeMovieRemoteDataSource, animeMovieLocalDataSource);
     }
 }

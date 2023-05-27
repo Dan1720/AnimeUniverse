@@ -13,9 +13,11 @@ import com.progetto.animeuniverse.model.AnimeApiResponse;
 import com.progetto.animeuniverse.model.AnimeByNameApiResponse;
 import com.progetto.animeuniverse.model.AnimeEpisodesApiResponse;
 import com.progetto.animeuniverse.model.AnimeEpisodesImagesApiResponse;
+import com.progetto.animeuniverse.model.AnimeMovieApiResponse;
 import com.progetto.animeuniverse.model.AnimeNewApiResponse;
 import com.progetto.animeuniverse.model.AnimeRecommendations;
 import com.progetto.animeuniverse.model.AnimeRecommendationsApiResponse;
+import com.progetto.animeuniverse.model.AnimeTvApiResponse;
 import com.progetto.animeuniverse.model.GenresApiResponse;
 import com.progetto.animeuniverse.model.ReviewsApiResponse;
 
@@ -57,6 +59,12 @@ public interface AnimeApiService {
 
     @GET("anime/{id}/videos/episodes")
     Call<AnimeEpisodesImagesApiResponse> getAnimeEpisodesImages(@Path("id")int id);
+
+    @GET("anime?type=tv")
+    Call<AnimeTvApiResponse> getAnimeTv();
+
+    @GET("anime?type=movie")
+    Call<AnimeMovieApiResponse> getAnimeMovie();
 
 
 }
