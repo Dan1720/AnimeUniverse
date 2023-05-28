@@ -1,5 +1,6 @@
 package com.progetto.animeuniverse.model;
 
+
 public abstract class Result {
     private Result(){}
 
@@ -112,4 +113,16 @@ public abstract class Result {
 
         public AnimeEpisodesImagesResponse getData(){ return animeEpisodesImagesResponse; }
     }
+    public static final class AnimeByNameResponseSuccess extends Result {
+        private final AnimeByNameResponse animeByNameResponse;
+
+        public AnimeByNameResponseSuccess(AnimeByNameResponse animeByNameResponse) {
+            this.animeByNameResponse = animeByNameResponse;
+        }
+
+        public AnimeByNameResponse getData() {
+            return animeByNameResponse;
+        }
+    }
+
 }

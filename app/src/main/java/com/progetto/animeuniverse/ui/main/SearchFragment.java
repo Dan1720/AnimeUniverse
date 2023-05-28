@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
@@ -31,21 +32,17 @@ import android.widget.SearchView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
-import com.progetto.animeuniverse.adapter.ChildItemAdapter;
-import com.progetto.animeuniverse.adapter.ParentItemAdapter;
 import com.progetto.animeuniverse.adapter.SearchListAdapter;
 
+import com.progetto.animeuniverse.database.AnimeByNameDao;
+import com.progetto.animeuniverse.database.AnimeRoomDatabase;
 import com.progetto.animeuniverse.databinding.FragmentSearchBinding;
-import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeByName;
 import com.progetto.animeuniverse.model.AnimeByNameResponse;
-import com.progetto.animeuniverse.model.AnimeResponse;
 import com.progetto.animeuniverse.model.Result;
-import com.progetto.animeuniverse.repository.anime.AnimeResponseCallback;
-import com.progetto.animeuniverse.repository.anime.IAnimeRepositoryWithLiveData;
+
 import com.progetto.animeuniverse.repository.anime_by_name.AnimeByNameResponseCallback;
 import com.progetto.animeuniverse.repository.anime_by_name.IAnimeByNameRepositoryWithLiveData;
-import com.progetto.animeuniverse.util.ErrorMessagesUtil;
 import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
@@ -72,6 +69,9 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
     
     private ServiceLocator serviceLocator;
     private AnimeRoomDatabase animeRoomDatabase;
+    private AnimeByNameDao animeByNameDao;
+    private MutableLiveData<Result.AnimeByNameSuccess> animeSearchResult = new MutableLiveData<>();
+
 
 
 
@@ -100,6 +100,14 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
                     getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
         }
         animeRoomDatabase = AnimeRoomDatabase.getDatabase(getContext());
+        if (animeRoomDatabase != null) {
+            animeByNameDao = animeRoomDatabase.animeByNameDao();
+            if (animeByNameDao == null) {
+                System.out.println("è null");
+            }
+        }
+
+
         animeList = new ArrayList<>();
 
     }
@@ -157,80 +165,24 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
             lastUpdate = sharedPreferencesUtil.readStringData(
                     SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE);
         }
-        /*animeViewModel.getAnimeTop(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
-            System.out.println("Result anime top:" + result.isSuccess());
-            if(result.isSuccess()) {
-                AnimeResponse animeResponse = ((Result.AnimeResponseSuccess) result).getData();
-                List<Anime> fetchedAnime = animeResponse.getAnimeList();
-                this.animeList.addAll(fetchedAnime);
-                searchListAdapter.notifyDataSetChanged();
 
-            } else{
-                ErrorMessagesUtil errorMessagesUtil =
-                        new ErrorMessagesUtil(requireActivity().getApplication());
-                Snackbar.make(view, errorMessagesUtil.
-                        getErrorMessage(((Result.Error) result).getMessage()),
-                        Snackbar.LENGTH_SHORT).show();
-            }
-        });*/
         SearchView searchView = view.findViewById(R.id.search_view);
         searchView.clearFocus();
         String finalLastUpdate = lastUpdate;
-        /*animeViewModel.getAnimeByName("bleach",Long.parseLong(finalLastUpdate)).observe(getViewLifecycleOwner(), result -> {
-            System.out.println("Result anime searched by name:" + result.isSuccess());
-            if(result.isSuccess()){
-                AnimeResponse animeResponse = ((Result.AnimeResponseSuccess) result).getData();
-                List<Anime> fetchedAnime = animeResponse.getAnimeList();
-                animeList.clear();
-                animeList.addAll(fetchedAnime);
-                searchListAdapter.notifyDataSetChanged();
-            } else{
-                ErrorMessagesUtil errorMessagesUtil =
-                        new ErrorMessagesUtil(requireActivity().getApplication());
-                Snackbar.make(view, errorMessagesUtil.
-                                getErrorMessage(((Result.Error) result).getMessage()),
-                        Snackbar.LENGTH_SHORT).show();
-            }
 
-        });*/
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                animeViewModel.getAnimeByName(query,Long.parseLong(finalLastUpdate)).observe(getViewLifecycleOwner(), result -> {
-                    System.out.println("Result anime searched by name:" + result.isSuccess());
-                    if(result.isSuccess()){
-                        //AnimeByNameResponse animeResponse = ((Result.AnimeResponseSuccess) result).getData();
+                animeViewModel.getAnimeByName(query, Long.parseLong(finalLastUpdate)).observe(getViewLifecycleOwner(), result -> {
+                    if (result.isSuccess()) {
                         AnimeByNameResponse animeByNameResponse = ((Result.AnimeByNameSuccess) result).getData();
-                        List<AnimeByName> fetchedAnime = animeByNameResponse.getAnimeByNameList();
-                        ExecutorService executor = Executors.newSingleThreadExecutor();
-                        executor.execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                AnimeByNameDao animeByNameDao = animeRoomDatabase.animeByNameDao();
-                                animeByNameDao.insertAnimeByNameList(fetchedAnime); // Inserimento dei nuovi dati
-                                animeList.clear(); // Rimozione dei dati precedenti dalla lista
-                                animeList.addAll(fetchedAnime); // Aggiunta dei nuovi dati alla lista
-                                requireActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        searchListAdapter.notifyDataSetChanged(); // Aggiornamento dell'adapter
-                                    }
-                                });
-                            }
-                        });
-                        executor.shutdown();
-
-                    } else{
-                        ErrorMessagesUtil errorMessagesUtil =
-                                new ErrorMessagesUtil(requireActivity().getApplication());
-                        Snackbar.make(view, errorMessagesUtil.
-                                        getErrorMessage(((Result.Error) result).getMessage()),
-                                Snackbar.LENGTH_SHORT).show();
+                        onSuccess(animeByNameResponse.getAnimeByNameList(), Long.parseLong(finalLastUpdate));
+                    } else {
+                        onFailure(((Result.Error) result).getMessage());
                     }
-
                 });
                 return true;
             }
@@ -249,11 +201,23 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
     //@Override
     @Override
     public void onSuccess(List<AnimeByName> animeList, long lastUpdate) {
-        if(animeList != null) {
-            this.animeList.clear();
-            this.animeList.addAll(animeList);
-            sharedPreferencesUtil.writeStringData(SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE, String.valueOf(lastUpdate));
+        if (animeList != null) {
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.execute(() -> {
+                // Cancella le tabelle nel database
+                animeByNameDao.deleteAll();
 
+                // Inserisci i nuovi dati nel database
+                animeByNameDao.insertAnimeByNameList(animeList);
+
+                requireActivity().runOnUiThread(() -> {
+                    this.animeList.clear(); // Rimuovi i dati precedenti dalla lista
+                    this.animeList.addAll(animeList); // Aggiungi i nuovi dati alla lista
+                    searchListAdapter.notifyDataSetChanged(); // Aggiorna l'adapter
+                });
+            });
+            searchListAdapter.notifyDataSetChanged();
+            executor.shutdown();
         }
     }
 
