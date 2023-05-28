@@ -19,12 +19,12 @@ public class AnimeEpisodesImages implements Parcelable {
 
     @Embedded(prefix = "images_")
     @SerializedName("images")
-    private AnimeImages images;
+    private AnimeImageSingle images;
 
     @ColumnInfo(name = "is_synchronized")
     private boolean isSynchronized;
 
-    public AnimeEpisodesImages(int id, AnimeImages images, boolean isSynchronized) {
+    public AnimeEpisodesImages(int id, AnimeImageSingle images, boolean isSynchronized) {
         this.id = id;
         this.images = images;
         this.isSynchronized = isSynchronized;
@@ -32,7 +32,7 @@ public class AnimeEpisodesImages implements Parcelable {
 
     protected AnimeEpisodesImages(Parcel in) {
         id = in.readInt();
-        images = in.readParcelable(AnimeImages.class.getClassLoader());
+        images = in.readParcelable(AnimeImageSingle.class.getClassLoader());
         isSynchronized = in.readByte() != 0;
     }
 
@@ -56,11 +56,11 @@ public class AnimeEpisodesImages implements Parcelable {
         this.id = id;
     }
 
-    public AnimeImages getImages() {
+    public AnimeImageSingle getImages() {
         return images;
     }
 
-    public void setImages(AnimeImages images) {
+    public void setImages(AnimeImageSingle images) {
         this.images = images;
     }
 
@@ -70,15 +70,6 @@ public class AnimeEpisodesImages implements Parcelable {
 
     public void setSynchronized(boolean aSynchronized) {
         isSynchronized = aSynchronized;
-    }
-
-    @Override
-    public String toString() {
-        return "AnimeEpisodesImages{" +
-                "id=" + id +
-                ", images=" + images +
-                ", isSynchronized=" + isSynchronized +
-                '}';
     }
 
     @Override

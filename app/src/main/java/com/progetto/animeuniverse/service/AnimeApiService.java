@@ -13,9 +13,12 @@ import com.progetto.animeuniverse.model.AnimeApiResponse;
 import com.progetto.animeuniverse.model.AnimeByNameApiResponse;
 import com.progetto.animeuniverse.model.AnimeEpisodesApiResponse;
 import com.progetto.animeuniverse.model.AnimeEpisodesImagesApiResponse;
+import com.progetto.animeuniverse.model.AnimeMovieApiResponse;
 import com.progetto.animeuniverse.model.AnimeNewApiResponse;
 import com.progetto.animeuniverse.model.AnimeRecommendations;
 import com.progetto.animeuniverse.model.AnimeRecommendationsApiResponse;
+import com.progetto.animeuniverse.model.AnimeSpecificGenresApiResponse;
+import com.progetto.animeuniverse.model.AnimeTvApiResponse;
 import com.progetto.animeuniverse.model.GenresApiResponse;
 import com.progetto.animeuniverse.model.ReviewsApiResponse;
 
@@ -30,6 +33,11 @@ public interface AnimeApiService {
     @GET(TOP_HEADLINES_ENDPOINT)
     Call<AnimeByNameApiResponse> getAnimeByName(
             @Query(TOP_HEADLINES_Q_PARAMETER) String nameAnime);
+
+    @GET(TOP_HEADLINES_ENDPOINT)
+    Call<AnimeSpecificGenresApiResponse> getAnimeSpecificGenres(
+            @Query("genres") int idGenre);
+
 
     @GET("anime/{id}/full")
     Call<AnimeApiResponse> getAnimeByIdFull(String anime, @Path("id")int idFull);
@@ -57,6 +65,12 @@ public interface AnimeApiService {
 
     @GET("anime/{id}/videos/episodes")
     Call<AnimeEpisodesImagesApiResponse> getAnimeEpisodesImages(@Path("id")int id);
+
+    @GET("anime?type=tv")
+    Call<AnimeTvApiResponse> getAnimeTv();
+
+    @GET("anime?type=movie")
+    Call<AnimeMovieApiResponse> getAnimeMovie();
 
 
 }
