@@ -144,5 +144,5 @@ public abstract class Result {
 
         public AnimeSpecificGenresResponse getData(){ return animeSpecificGenresResponse; }
     }
->>>>>>> master
+
 }

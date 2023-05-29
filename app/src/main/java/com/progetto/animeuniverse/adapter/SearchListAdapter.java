@@ -61,13 +61,13 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.An
 
     @Override
     public int getItemCount() {
-        /*if(animeList != null){
+        if(animeList != null){
             return animeList.size();
         }
         else{
             return 0;
-        }*/
-        return animeList.size();
+        }
+        //return animeList.size();
     }
 
     public class AnimeByNameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
