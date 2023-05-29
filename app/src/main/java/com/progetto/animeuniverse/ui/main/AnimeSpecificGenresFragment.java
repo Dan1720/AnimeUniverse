@@ -1,8 +1,5 @@
 package com.progetto.animeuniverse.ui.main;
 
-import static com.progetto.animeuniverse.util.Constants.LAST_UPDATE;
-import static com.progetto.animeuniverse.util.Constants.SHARED_PREFERENCES_FILE_NAME;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,7 +10,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -26,16 +23,14 @@ import android.view.ViewGroup;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
-import com.progetto.animeuniverse.adapter.GenresRecyclerViewAdapter;
-import com.progetto.animeuniverse.database.AnimeSpecificGenresDao;
-import com.progetto.animeuniverse.databinding.FragmentGenresBinding;
+import com.progetto.animeuniverse.adapter.AnimeSpecificGenresRecyclerViewAdapter;
+import com.progetto.animeuniverse.databinding.FragmentAnimeSpecificGenresBinding;
+import com.progetto.animeuniverse.model.Anime;
+import com.progetto.animeuniverse.model.AnimeSpecificGenres;
+import com.progetto.animeuniverse.model.AnimeSpecificGenresResponse;
 import com.progetto.animeuniverse.model.Genre;
-import com.progetto.animeuniverse.model.GenresResponse;
 import com.progetto.animeuniverse.model.Result;
-import com.progetto.animeuniverse.repository.genres.GenresResponseCallback;
-import com.progetto.animeuniverse.repository.genres.IGenresRepositoryWithLiveData;
-import com.progetto.animeuniverse.ui.main.GenresViewModel;
-import com.progetto.animeuniverse.ui.main.GenresViewModelFactory;
+import com.progetto.animeuniverse.repository.anime_specific_genres.IAnimeSpecificGenresRepositoryWithLiveData;
 import com.progetto.animeuniverse.util.ErrorMessagesUtil;
 import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
@@ -43,45 +38,51 @@ import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenresFragment extends Fragment implements GenresResponseCallback {
-    private List<Genre> genresList;
-    private AnimeSpecificGenresDao animeSpecificGenresDao;
-    private FragmentGenresBinding genresFragmentBinding;
-    private SharedPreferencesUtil sharedPreferencesUtil;
-    private GenresViewModel genresViewModel;
+public class AnimeSpecificGenresFragment extends Fragment {
 
-    public GenresFragment() {
+
+
+    private FragmentAnimeSpecificGenresBinding fragmentAnimeSpecificGenresBinding;
+    private List<AnimeSpecificGenres> animeSpecificGenresList;
+    private SharedPreferencesUtil sharedPreferencesUtil;
+    private AnimeSpecificGenresViewModel animeSpecificGenresViewModel;
+
+    public AnimeSpecificGenresFragment() {
         // Required empty public constructor
     }
+
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         sharedPreferencesUtil = new SharedPreferencesUtil(requireActivity().getApplication());
 
-        IGenresRepositoryWithLiveData genresRepositoryWithLiveData =
-                ServiceLocator.getInstance().getGenresRepository(requireActivity().getApplication());
-        if(genresRepositoryWithLiveData != null){
-            genresViewModel = new ViewModelProvider(requireActivity(), new GenresViewModelFactory(genresRepositoryWithLiveData)).get(GenresViewModel.class);
-        }else {
+        IAnimeSpecificGenresRepositoryWithLiveData animeSpecificGenresRepositoryWithLiveData =
+                ServiceLocator.getInstance().getAnimeSpecificGenresRepository(requireActivity().getApplication());
+        if(animeSpecificGenresRepositoryWithLiveData != null){
+            animeSpecificGenresViewModel = new ViewModelProvider(requireActivity(), new AnimeSpecificGenresViewModelFactory(animeSpecificGenresRepositoryWithLiveData)).get(AnimeSpecificGenresViewModel.class);
+        }else{
             Snackbar.make(requireActivity().findViewById(android.R.id.content),
                     getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
         }
 
-        genresList = new ArrayList<>();
+        animeSpecificGenresList = new ArrayList<>();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        genresFragmentBinding = FragmentGenresBinding.inflate(inflater, container, false);
-        return genresFragmentBinding.getRoot();
+        // Inflate the layout for this fragment
+        fragmentAnimeSpecificGenresBinding = FragmentAnimeSpecificGenresBinding.inflate(inflater, container, false);
+        return fragmentAnimeSpecificGenresBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         requireActivity().addMenuProvider(new MenuProvider() {
             @Override
             public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
@@ -107,32 +108,29 @@ public class GenresFragment extends Fragment implements GenresResponseCallback {
                     getMenu().findItem(R.id.listFragment).setChecked(true);
         }
 
-        RecyclerView GenresRecyclerViewItem = view.findViewById(R.id.recyclerView_genres);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
+        Genre genre = AnimeSpecificGenresFragmentArgs.fromBundle(getArguments()).getGenres();
 
-
-        GenresRecyclerViewAdapter genresRecyclerViewAdapter = new GenresRecyclerViewAdapter(genresList, requireActivity().getApplication(), new GenresRecyclerViewAdapter.OnItemClickListener() {
+        RecyclerView AnimeSpecificGenresRecyclerViewItem = view.findViewById(R.id.recyclerView_gridSpecificGenres);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
+        AnimeSpecificGenresRecyclerViewAdapter animeSpecificGenresRecyclerViewAdapter = new AnimeSpecificGenresRecyclerViewAdapter(animeSpecificGenresList, requireActivity().getApplication(), new AnimeSpecificGenresRecyclerViewAdapter.OnItemClickListener() {
             @Override
-            public void onGenreItemClick(Genre genre) {
-                GenresFragmentDirections.ActionGenresFragmentToAnimeSpecificGenresFragment action =
-                        GenresFragmentDirections.actionGenresFragmentToAnimeSpecificGenresFragment(genre);
+            public void onAnimeSpecificGenresClick(AnimeSpecificGenres animeSpecificGenres) {
+                AnimeSpecificGenresFragmentDirections.ActionAnimeSpecificGenresFragmentToAnimeSpecificGenresDetailsFragment action =
+                        AnimeSpecificGenresFragmentDirections.actionAnimeSpecificGenresFragmentToAnimeSpecificGenresDetailsFragment(animeSpecificGenres);
                 Navigation.findNavController(view).navigate(action);
-
-
             }
         });
-
-        GenresRecyclerViewItem.setAdapter(genresRecyclerViewAdapter);
-        GenresRecyclerViewItem.setLayoutManager(layoutManager);
+        AnimeSpecificGenresRecyclerViewItem.setAdapter(animeSpecificGenresRecyclerViewAdapter);
+        AnimeSpecificGenresRecyclerViewItem.setLayoutManager(layoutManager);
 
         String lastUpdate = "0";
-        genresViewModel.getGenres(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
-            System.out.println("Result genre: "+ result.isSuccess());
+        animeSpecificGenresViewModel.getAnimeSpecificGenres(genre.getId(), Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
+            System.out.println("Result anime SpecificGenres: " + result.isSuccess());
             if(result.isSuccess()){
-                GenresResponse genresResponse = ((Result.GenresResponseSuccess) result).getData();
-                List<Genre> fetchedGenres = genresResponse.getGernesList();
-                this.genresList.addAll(fetchedGenres);
-                genresRecyclerViewAdapter.notifyDataSetChanged();
+                AnimeSpecificGenresResponse animeSpecificGenresResponse = ((Result.AnimeSpecificGenresSuccess) result).getData();
+                List<AnimeSpecificGenres> fetchedAnimeSpecificGenres = animeSpecificGenresResponse.getAnimeSpecificGenresList();
+                this.animeSpecificGenresList.addAll(fetchedAnimeSpecificGenres);
+                animeSpecificGenresRecyclerViewAdapter.notifyDataSetChanged();
             }else{
                 ErrorMessagesUtil errorMessagesUtil =
                         new ErrorMessagesUtil(requireActivity().getApplication());
@@ -141,34 +139,5 @@ public class GenresFragment extends Fragment implements GenresResponseCallback {
                         Snackbar.LENGTH_SHORT).show();
             }
         });
-
-
-    }
-
-    @Override
-    public void onSuccess(List<Genre> genresList, long lastUpdate) {
-        if(genresList != null){
-            this.genresList.clear();
-            this.genresList.addAll(genresList);
-            sharedPreferencesUtil.writeStringData(SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE, String.valueOf(lastUpdate));
-        }
-    }
-
-    @Override
-    public void onFailure(String errorMessage) {
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        genresViewModel.setFirstLoading(true);
-        genresViewModel.setLoading(false);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        genresFragmentBinding = null;
     }
 }

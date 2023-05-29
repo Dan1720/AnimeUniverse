@@ -141,7 +141,11 @@
         android:id="@+id/genresFragment"
         android:name="com.progetto.animeuniverse.ui.main.GenresFragment"
         android:label="fragment_genres"
-        tools:layout="@layout/fragment_genres" />
+        tools:layout="@layout/fragment_genres" >
+        <action
+            android:id="@+id/action_genresFragment_to_animeSpecificGenresFragment"
+            app:destination="@id/animeSpecificGenresFragment" />
+    </fragment>
     <fragment
         android:id="@+id/animeTvFragment"
         android:name="com.progetto.animeuniverse.ui.main.AnimeTvFragment"
@@ -182,6 +186,30 @@
             app:argType="com.progetto.animeuniverse.model.AnimeMovie" />
         <action
             android:id="@+id/action_animeMovieDetailsFragment_to_reviewDetailsFragment"
+            app:destination="@id/reviewDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/animeSpecificGenresFragment"
+        android:name="com.progetto.animeuniverse.ui.main.AnimeSpecificGenresFragment"
+        android:label="fragment_anime_specific_genres"
+        tools:layout="@layout/fragment_anime_specific_genres" >
+        <argument
+            android:name="genres"
+            app:argType="com.progetto.animeuniverse.model.Genre" />
+        <action
+            android:id="@+id/action_animeSpecificGenresFragment_to_animeSpecificGenresDetailsFragment"
+            app:destination="@id/animeSpecificGenresDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/animeSpecificGenresDetailsFragment"
+        android:name="com.progetto.animeuniverse.ui.main.AnimeSpecificGenresDetailsFragment"
+        android:label="fragment_anime_specific_genres_details"
+        tools:layout="@layout/fragment_anime_specific_genres_details" >
+        <argument
+            android:name="animeSpecificGenres"
+            app:argType="com.progetto.animeuniverse.model.AnimeSpecificGenres" />
+        <action
+            android:id="@+id/action_animeSpecificGenresDetailsFragment_to_reviewDetailsFragment"
             app:destination="@id/reviewDetailsFragment" />
     </fragment>
 

@@ -7,4 +7,5 @@ import com.progetto.animeuniverse.model.Result;
 public interface IAnimeSpecificGenresRepositoryWithLiveData {
     MutableLiveData<Result> fetchAnimeSpecificGenres(int idGenre, long lastUpdate);
     void fetchAnimeSpecificGenres(int idGenre);
+
 }
