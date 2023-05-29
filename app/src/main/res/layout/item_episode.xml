@@ -13,12 +13,12 @@
 
         <ImageView
             android:id="@+id/imageView_episodeImageIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:srcCompat="@drawable/imageepisode" />
 
         <TextView
             android:id="@+id/textView_episodeTitleIn"
