@@ -31,19 +31,21 @@ import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.adapter.EpisodesRecyclerViewAdapter;
 import com.progetto.animeuniverse.adapter.ReviewsRecyclerViewAdapter;
-import com.progetto.animeuniverse.databinding.FragmentAnimeDetailsBinding;
-import com.progetto.animeuniverse.model.Anime;
+import com.progetto.animeuniverse.databinding.FragmentAnimeTvBinding;
+import com.progetto.animeuniverse.databinding.FragmentAnimeTvDetailsBinding;
 import com.progetto.animeuniverse.model.AnimeEpisodes;
 import com.progetto.animeuniverse.model.AnimeEpisodesImages;
 import com.progetto.animeuniverse.model.AnimeEpisodesResponse;
 import com.progetto.animeuniverse.model.AnimeGenres;
 import com.progetto.animeuniverse.model.AnimeProducers;
 import com.progetto.animeuniverse.model.AnimeStudios;
+import com.progetto.animeuniverse.model.AnimeTv;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.model.Review;
 import com.progetto.animeuniverse.model.ReviewsResponse;
 import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_episodes_images.IAnimeEpisodesImagesRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_tv.AnimeTvResponseCallback;
 import com.progetto.animeuniverse.repository.reviews.IReviewsRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.reviews.ReviewsResponseCallback;
 import com.progetto.animeuniverse.util.ErrorMessagesUtil;
@@ -53,24 +55,20 @@ import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCallback {
-    private static final String TAG = AnimeDetailsFragment.class.getSimpleName();
-    private FragmentAnimeDetailsBinding fragmentAnimeDetailsBinding;
+public class AnimeTvDetailsFragment extends Fragment implements ReviewsResponseCallback {
+
+    private static final String TAG = AnimeTvDetailsFragment.class.getSimpleName();
+
+    private FragmentAnimeTvDetailsBinding fragmentAnimeTvDetailsBinding;
     private List<Review> reviewsList;
     private List<AnimeEpisodes> animeEpisodesList;
     private List<AnimeEpisodesImages> animeEpisodesImagesList;
     private SharedPreferencesUtil sharedPreferencesUtil;
     private ReviewsViewModel reviewsViewModel;
     private AnimeEpisodesViewModel animeEpisodesViewModel;
-    private AnimeEpisodesImagesViewModel animeEpisodesImagesViewModel;
 
-    public AnimeDetailsFragment() {
+    public AnimeTvDetailsFragment() {
         // Required empty public constructor
-    }
-
-    public static AnimeDetailsFragment newInstance() {
-
-        return new AnimeDetailsFragment();
     }
 
     @Override
@@ -101,28 +99,17 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
 
         animeEpisodesList = new ArrayList<>();
 
-        IAnimeEpisodesImagesRepositoryWithLiveData animeEpisodesImagesRepositoryWithLiveData =
-                ServiceLocator.getInstance().getAnimeEpisodesImagesRepository(requireActivity().getApplication());
-        if(animeEpisodesImagesRepositoryWithLiveData != null){
-            animeEpisodesImagesViewModel = new ViewModelProvider(requireActivity(), new AnimeEpisodesImagesViewModelFactory(animeEpisodesImagesRepositoryWithLiveData)).get(AnimeEpisodesImagesViewModel.class);
-        }else{
-            Snackbar.make(requireActivity().findViewById(android.R.id.content),
-                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
-        }
-
-        animeEpisodesImagesList = new ArrayList<>();
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        fragmentAnimeDetailsBinding = FragmentAnimeDetailsBinding.inflate(inflater, container, false);
-        return fragmentAnimeDetailsBinding.getRoot();
+        fragmentAnimeTvDetailsBinding = FragmentAnimeTvDetailsBinding.inflate(inflater, container, false);
+        return fragmentAnimeTvDetailsBinding.getRoot();
     }
 
-    @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -142,47 +129,46 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
             }
         }, getViewLifecycleOwner(), Lifecycle.State.RESUMED);
 
+        AnimeTv animeTv = AnimeTvDetailsFragmentArgs.fromBundle(getArguments()).getAnimeTv();
+        Glide.with(fragmentAnimeTvDetailsBinding.imageViewDetails.getContext())
+                .load(animeTv.getImages().getJpgImages().getLargeImageUrl())
+                .placeholder(R.drawable.ic_home).into(fragmentAnimeTvDetailsBinding.imageViewDetails);
 
+        fragmentAnimeTvDetailsBinding.textViewDetailsTitleIn.setText(animeTv.getTitle());
+        fragmentAnimeTvDetailsBinding.textViewNEpisodesIn.setText(String.valueOf(animeTv.getNumEpisodes()));
 
-        Anime anime = AnimeDetailsFragmentArgs.fromBundle(getArguments()).getAnime();
-
-        Glide.with(fragmentAnimeDetailsBinding.imageViewDetails.getContext())
-                .load(anime.getImages().getJpgImages().getLargeImageUrl())
-                .placeholder(R.drawable.ic_home).into(fragmentAnimeDetailsBinding.imageViewDetails);
-
-        fragmentAnimeDetailsBinding.textViewDetailsTitleIn.setText(anime.getTitle());
-        fragmentAnimeDetailsBinding.textViewNEpisodesIn.setText(String.valueOf(anime.getNumEpisodes()));
-
-        fragmentAnimeDetailsBinding.textViewDetailsYearIn.setText(String.valueOf(anime.getYear()));
-        fragmentAnimeDetailsBinding.textViewDescriptionIn.setText(anime.getSynopsis());
-        List<AnimeGenres> genres = anime.getGenres();
+        fragmentAnimeTvDetailsBinding.textViewDetailsYearIn.setText(String.valueOf(animeTv.getYear()));
+        fragmentAnimeTvDetailsBinding.textViewDescriptionIn.setText(animeTv.getSynopsis());
+        List<AnimeGenres> genres = animeTv.getGenres();
         if(genres.size() >= 3){
-            fragmentAnimeDetailsBinding.textViewGenresIn.setText(genres.get(0).getNameGenre() + " - " + genres.get(1).getNameGenre() +" - "+ genres.get(2).getNameGenre());
+            fragmentAnimeTvDetailsBinding.textViewGenresIn.setText(genres.get(0).getNameGenre() + " - " + genres.get(1).getNameGenre() +" - "+ genres.get(2).getNameGenre());
         }else {
-            fragmentAnimeDetailsBinding.textViewGenresIn.setText(genres.get(0).getNameGenre());
+            fragmentAnimeTvDetailsBinding.textViewGenresIn.setText(genres.get(0).getNameGenre());
         }
-        List<AnimeStudios> studios = anime.getStudios();
+        List<AnimeStudios> studios = animeTv.getStudios();
         if(studios.size() >= 3){
-            fragmentAnimeDetailsBinding.textViewStudiosIn.setText(studios.get(0).getNameStudio() + " - " + studios.get(1).getNameStudio() +" - "+ studios.get(2).getNameStudio());
+            fragmentAnimeTvDetailsBinding.textViewStudiosIn.setText(studios.get(0).getNameStudio() + " - " + studios.get(1).getNameStudio() +" - "+ studios.get(2).getNameStudio());
         }else{
-            fragmentAnimeDetailsBinding.textViewStudiosIn.setText(studios.get(0).getNameStudio());
+            fragmentAnimeTvDetailsBinding.textViewStudiosIn.setText(studios.get(0).getNameStudio());
         }
-        List<AnimeProducers> producers = anime.getProducers();
+        List<AnimeProducers> producers = animeTv.getProducers();
         if(producers.size() >= 3){
-            fragmentAnimeDetailsBinding.textViewProducersIn.setText(producers.get(0).getNameProducer() + " - " + producers.get(1).getNameProducer() + " - "+ producers.get(2).getNameProducer());
+            fragmentAnimeTvDetailsBinding.textViewProducersIn.setText(producers.get(0).getNameProducer() + " - " + producers.get(1).getNameProducer() + " - "+ producers.get(2).getNameProducer());
+        }else if(producers.size() != 0 && producers.size() < 3){
+            fragmentAnimeTvDetailsBinding.textViewProducersIn.setText(producers.get(0).getNameProducer());
         }else{
-            fragmentAnimeDetailsBinding.textViewProducersIn.setText(producers.get(0).getNameProducer());
+            fragmentAnimeTvDetailsBinding.textViewProducersIn.setText("not found");
         }
-        if(anime.getTrailer().getUrlTrailer() != null){
-            fragmentAnimeDetailsBinding.textViewTrailerLinkIn.setText(Html.fromHtml(anime.getTrailer().getUrlTrailer(), Html.FROM_HTML_MODE_COMPACT));
+        if(animeTv.getTrailer().getUrlTrailer() != null){
+            fragmentAnimeTvDetailsBinding.textViewTrailerLinkIn.setText(Html.fromHtml(animeTv.getTrailer().getUrlTrailer(), Html.FROM_HTML_MODE_COMPACT));
         }else{
-            fragmentAnimeDetailsBinding.textViewTrailerLinkIn.setText("not found");
+            fragmentAnimeTvDetailsBinding.textViewTrailerLinkIn.setText("not found");
         }
 
 
 
         NavBackStackEntry navBackStackEntry = Navigation.findNavController(view).getPreviousBackStackEntry();
-        if(navBackStackEntry != null && navBackStackEntry.getDestination().getId() == R.id.homeFragment){
+        if(navBackStackEntry != null && navBackStackEntry.getDestination().getId() == R.id.animeTvFragment){
             ((BottomNavigationView) requireActivity().findViewById(R.id.bottom_navigation)).
                     getMenu().findItem(R.id.homeFragment).setChecked(true);
 
@@ -196,8 +182,8 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
         ReviewsRecyclerViewAdapter reviewsRecyclerViewAdapter = new ReviewsRecyclerViewAdapter(reviewsList, requireActivity().getApplication(), new ReviewsRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onReviewItemClick(Review review) {
-                com.progetto.animeuniverse.ui.main.AnimeDetailsFragmentDirections.ActionAnimeDetailsFragmentToReviewDetailsFragment action =
-                        AnimeDetailsFragmentDirections.actionAnimeDetailsFragmentToReviewDetailsFragment(review);
+                AnimeTvDetailsFragmentDirections.ActionAnimeTvDetailsFragmentToReviewDetailsFragment action =
+                        AnimeTvDetailsFragmentDirections.actionAnimeTvDetailsFragmentToReviewDetailsFragment(review);
                 Navigation.findNavController(view).navigate(action);
             }
         });
@@ -206,7 +192,7 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
         ReviewsRecyclerViewItem.setLayoutManager(layoutManager);
 
         String lastUpdate = "0";
-        reviewsViewModel.getReviewsByIdAnime(anime.getId(), Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
+        reviewsViewModel.getReviewsByIdAnime(animeTv.getId(), Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
             System.out.println("Result reviews: "+ result.isSuccess());
             if(result.isSuccess()){
                 ReviewsResponse reviewsResponse = ((Result.ReviewsResponseSuccess) result).getData();
@@ -238,7 +224,7 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
 
 
         lastUpdate = "0";
-        animeEpisodesViewModel.getAnimeEpisodes(anime.getId(), Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
+        animeEpisodesViewModel.getAnimeEpisodes(animeTv.getId(), Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
             System.out.println("Result episodes: "+ result.isSuccess());
             if(result.isSuccess()){
                 AnimeEpisodesResponse animeEpisodesResponse = ((Result.AnimeEpisodesSuccess) result).getData();
@@ -282,6 +268,6 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        fragmentAnimeDetailsBinding = null;
+        fragmentAnimeTvDetailsBinding = null;
     }
 }

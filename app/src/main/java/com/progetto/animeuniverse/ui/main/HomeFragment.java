@@ -195,7 +195,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_genresFragment);
         });
         fragmentHomeBinding.txtSerieTv.setOnClickListener(v -> {
-            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_serieTvFragment);
+            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_animeTvFragment);
         });
         fragmentHomeBinding.txtFilm.setOnClickListener(v -> {
             Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_filmFragment);

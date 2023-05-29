@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_homeFragment_to_filmFragment"
             app:destination="@id/filmFragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_animeTvFragment"
+            app:destination="@id/animeTvFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -178,6 +181,27 @@
             android:id="@+id/action_filmFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/animeTvFragment"
+        android:name="com.progetto.animeuniverse.ui.main.AnimeTvFragment"
+        android:label="fragment_anime_tv"
+        tools:layout="@layout/fragment_anime_tv" >
+        <action
+            android:id="@+id/action_animeTvFragment_to_animeTvDetailsFragment"
+            app:destination="@id/animeTvDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/animeTvDetailsFragment"
+        android:name="com.progetto.animeuniverse.ui.main.AnimeTvDetailsFragment"
+        android:label="fragment_anime_tv_details"
+        tools:layout="@layout/fragment_anime_tv_details" >
+        <argument
+            android:name="animeTv"
+            app:argType="com.progetto.animeuniverse.model.AnimeTv" />
+        <action
+            android:id="@+id/action_animeTvDetailsFragment_to_reviewDetailsFragment"
+            app:destination="@id/reviewDetailsFragment" />
     </fragment>
 
 </navigation>
