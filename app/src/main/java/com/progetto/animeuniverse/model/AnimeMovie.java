@@ -49,6 +49,9 @@ public class AnimeMovie implements Parcelable {
     @SerializedName("synopsis")
     private String synopsis;
 
+    @Embedded(prefix = "trailer_")
+    @SerializedName("trailer")
+    private AnimeTrailer trailer;
     @TypeConverters(Converter.class)
     @SerializedName("producers")
     private List<AnimeProducers> producers;
@@ -64,7 +67,7 @@ public class AnimeMovie implements Parcelable {
     @SerializedName("images")
     private AnimeImages images;
 
-    public AnimeMovie(int id, String url, boolean approved, String title, String type, String source, int numEpisodes, String status, String duration, String rating, int popularity, int year, boolean isFavorite, boolean isSynchronized, String synopsis, List<AnimeProducers> producers, List<AnimeStudios> studios, List<AnimeGenres> genres, AnimeImages images) {
+    public AnimeMovie(int id, String url, boolean approved, String title, String type, String source, int numEpisodes, String status, String duration, String rating, int popularity, int year, boolean isFavorite, boolean isSynchronized, String synopsis, AnimeTrailer trailer, List<AnimeProducers> producers, List<AnimeStudios> studios, List<AnimeGenres> genres, AnimeImages images) {
         this.id = id;
         this.url = url;
         this.approved = approved;
@@ -80,6 +83,7 @@ public class AnimeMovie implements Parcelable {
         this.isFavorite = isFavorite;
         this.isSynchronized = isSynchronized;
         this.synopsis = synopsis;
+        this.trailer = trailer;
         this.producers = producers;
         this.studios = studios;
         this.genres = genres;
@@ -102,6 +106,7 @@ public class AnimeMovie implements Parcelable {
         isFavorite = in.readByte() != 0;
         isSynchronized = in.readByte() != 0;
         synopsis = in.readString();
+        trailer = in.readParcelable(AnimeTrailer.class.getClassLoader());
         producers = in.createTypedArrayList(AnimeProducers.CREATOR);
         studios = in.createTypedArrayList(AnimeStudios.CREATOR);
         genres = in.createTypedArrayList(AnimeGenres.CREATOR);
@@ -240,6 +245,14 @@ public class AnimeMovie implements Parcelable {
         this.synopsis = synopsis;
     }
 
+    public AnimeTrailer getTrailer() {
+        return trailer;
+    }
+
+    public void setTrailer(AnimeTrailer trailer) {
+        this.trailer = trailer;
+    }
+
     public List<AnimeProducers> getProducers() {
         return producers;
     }
@@ -273,6 +286,32 @@ public class AnimeMovie implements Parcelable {
     }
 
     @Override
+    public String toString() {
+        return "AnimeMovie{" +
+                "id=" + id +
+                ", url='" + url + '\'' +
+                ", approved=" + approved +
+                ", title='" + title + '\'' +
+                ", type='" + type + '\'' +
+                ", source='" + source + '\'' +
+                ", numEpisodes=" + numEpisodes +
+                ", status='" + status + '\'' +
+                ", duration='" + duration + '\'' +
+                ", rating='" + rating + '\'' +
+                ", popularity=" + popularity +
+                ", year=" + year +
+                ", isFavorite=" + isFavorite +
+                ", isSynchronized=" + isSynchronized +
+                ", synopsis='" + synopsis + '\'' +
+                ", trailer=" + trailer +
+                ", producers=" + producers +
+                ", studios=" + studios +
+                ", genres=" + genres +
+                ", images=" + images +
+                '}';
+    }
+
+    @Override
     public int describeContents() {
         return 0;
     }
@@ -294,6 +333,7 @@ public class AnimeMovie implements Parcelable {
         dest.writeByte((byte) (isFavorite ? 1 : 0));
         dest.writeByte((byte) (isSynchronized ? 1 : 0));
         dest.writeString(synopsis);
+        dest.writeParcelable(trailer, flags);
         dest.writeTypedList(producers);
         dest.writeTypedList(studios);
         dest.writeTypedList(genres);

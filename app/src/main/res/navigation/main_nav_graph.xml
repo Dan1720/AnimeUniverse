@@ -27,14 +27,11 @@
             android:id="@+id/action_homeFragment_to_genresFragment"
             app:destination="@id/genresFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_serieTvFragment"
-            app:destination="@id/serieTvFragment"/>
-        <action
-            android:id="@+id/action_homeFragment_to_filmFragment"
-            app:destination="@id/filmFragment"/>
-        <action
             android:id="@+id/action_homeFragment_to_animeTvFragment"
             app:destination="@id/animeTvFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_animeMovieFragment"
+            app:destination="@id/animeMovieFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -146,43 +143,6 @@
         android:label="fragment_genres"
         tools:layout="@layout/fragment_genres" />
     <fragment
-        android:id="@+id/serieTvFragment"
-        android:name="com.progetto.animeuniverse.ui.main.SerieTvFragment"
-        android:label="fragment_serie_tv"
-        tools:layout="@layout/fragment_serie_tv">
-        <action
-            android:id="@+id/action_serieTvFragment_to_animeDetailsFragment"
-            app:destination="@id/animeDetailsFragment" />
-        <action
-            android:id="@+id/action_serieTvFragment_to_genresFragment"
-            app:destination="@id/genresFragment" />
-        <action
-            android:id="@+id/action_serieTvFragment_to_filmFragment"
-            app:destination="@id/filmFragment" />
-        <action
-            android:id="@+id/action_serieTvFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/filmFragment"
-        android:name="com.progetto.animeuniverse.ui.main.FilmFragment"
-        android:label="fragment_film"
-        tools:layout="@layout/fragment_film">
-        <action
-            android:id="@+id/action_filmFragment_to_animeDetailsFragment"
-            app:destination="@id/animeDetailsFragment"/>
-        <action
-            android:id="@+id/action_filmFragment_to_genresFragment"
-            app:destination="@id/genresFragment" />
-        <action
-            android:id="@+id/action_filmFragment_to_serieTvFragment"
-            app:destination="@id/serieTvFragment" />
-        <action
-            android:id="@+id/action_filmFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-
-    </fragment>
-    <fragment
         android:id="@+id/animeTvFragment"
         android:name="com.progetto.animeuniverse.ui.main.AnimeTvFragment"
         android:label="fragment_anime_tv"
@@ -201,6 +161,27 @@
             app:argType="com.progetto.animeuniverse.model.AnimeTv" />
         <action
             android:id="@+id/action_animeTvDetailsFragment_to_reviewDetailsFragment"
+            app:destination="@id/reviewDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/animeMovieFragment"
+        android:name="com.progetto.animeuniverse.ui.main.AnimeMovieFragment"
+        android:label="fragment_anime_movie"
+        tools:layout="@layout/fragment_anime_movie" >
+        <action
+            android:id="@+id/action_animeMovieFragment_to_animeMovieDetailsFragment"
+            app:destination="@id/animeMovieDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/animeMovieDetailsFragment"
+        android:name="com.progetto.animeuniverse.ui.main.AnimeMovieDetailsFragment"
+        android:label="fragment_anime_movie_details"
+        tools:layout="@layout/fragment_anime_movie_details" >
+        <argument
+            android:name="animeMovie"
+            app:argType="com.progetto.animeuniverse.model.AnimeMovie" />
+        <action
+            android:id="@+id/action_animeMovieDetailsFragment_to_reviewDetailsFragment"
             app:destination="@id/reviewDetailsFragment" />
     </fragment>
 
