@@ -50,7 +50,6 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
     }
 
 
-
     @Override
     public MutableLiveData<Result> fetchAnimeTop(long lastUpdate) {
         long currentTime = System.currentTimeMillis();

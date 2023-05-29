@@ -1,5 +1,6 @@
 package com.progetto.animeuniverse.model;
 
+
 public abstract class Result {
     private Result(){}
 
@@ -143,4 +144,5 @@ public abstract class Result {
 
         public AnimeSpecificGenresResponse getData(){ return animeSpecificGenresResponse; }
     }
+
 }

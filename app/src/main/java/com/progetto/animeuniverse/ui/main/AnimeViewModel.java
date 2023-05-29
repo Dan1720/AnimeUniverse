@@ -38,7 +38,6 @@ public class AnimeViewModel extends ViewModel {
         return animeListLiveData;
     }
 
-
     public void fetchAnimeTop(){
         animeRepositoryWithLiveData.fetchAnimeTop();
     }

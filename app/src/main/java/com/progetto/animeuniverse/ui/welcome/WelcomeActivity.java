@@ -9,6 +9,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.progetto.animeuniverse.R;
@@ -24,6 +25,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.top_appbar);
         setSupportActionBar(toolbar);
+        ImageView toolbarLogo = findViewById(R.id.toolbar_logo);
+        //toolbar.setLogo(R.drawable.logo_intero);
+        //toolbar.setDisplayUseLogoEnabled(true);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();

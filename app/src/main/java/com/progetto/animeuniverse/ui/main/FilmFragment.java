@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,35 +23,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.adapter.ChildItemAdapter;
 import com.progetto.animeuniverse.adapter.ParentItemAdapter;
-import com.progetto.animeuniverse.databinding.FragmentHomeBinding;
+import com.progetto.animeuniverse.databinding.FragmentFilmBinding;
 import com.progetto.animeuniverse.model.Anime;
 
-import com.progetto.animeuniverse.model.AnimeEpisodes;
-import com.progetto.animeuniverse.model.AnimeEpisodesImages;
 import com.progetto.animeuniverse.model.AnimeGenres;
-import com.progetto.animeuniverse.model.AnimeMovie;
-import com.progetto.animeuniverse.model.AnimeNew;
-import com.progetto.animeuniverse.model.AnimeRecommendations;
 import com.progetto.animeuniverse.model.AnimeResponse;
-import com.progetto.animeuniverse.model.AnimeSpecificGenres;
-import com.progetto.animeuniverse.model.AnimeTv;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.anime.AnimeResponseCallback;
 import com.progetto.animeuniverse.repository.anime.IAnimeRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_episodes_images.IAnimeEpisodesImagesRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_movie.IAnimeMovieRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_new.IAnimeNewRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_recommendations.IAnimeRecommendationsRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_specific_genres.IAnimeSpecificGenresRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_tv.IAnimeTvRepositoryWithLiveData;
 import com.progetto.animeuniverse.util.ErrorMessagesUtil;
 import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
@@ -61,37 +50,22 @@ import java.util.List;
 import java.util.Random;
 
 
-public class HomeFragment extends Fragment implements AnimeResponseCallback {
+public class FilmFragment extends Fragment implements AnimeResponseCallback {
 
     private List<Anime> animeList;
-    private List<AnimeRecommendations> animeRecommendationsList;
-    private List<AnimeNew> animeNewList;
-    private List<AnimeEpisodes> animeEpisodesList;
-    private List<AnimeEpisodesImages> animeEpisodesImagesList;
-    private List<AnimeTv> animeTvList;
-    private List<AnimeMovie> animeMovieList;
-    private List<AnimeSpecificGenres> animeSpecificGenresList;
     private SharedPreferencesUtil sharedPreferencesUtil;
     private AnimeViewModel animeViewModel;
-    private AnimeRecommendationsViewModel animeRecommendationsViewModel;
-    private AnimeByNameViewModel animeByNameViewModel;
-    private AnimeNewViewModel animeNewViewModel;
-    private AnimeEpisodesViewModel animeEpisodesViewModel;
-    private AnimeEpisodesImagesViewModel animeEpisodesImagesViewModel;
-    private AnimeTvViewModel animeTvViewModel;
-    private AnimeMovieViewModel animeMovieViewModel;
-    private AnimeSpecificGenresViewModel animeSpecificGenresViewModel;
 
-    private FragmentHomeBinding fragmentHomeBinding;
+    private FragmentFilmBinding fragmentFilmBinding;
 
     private final String q = TOP_HEADLINES_ENDPOINT;
     private final int threshold = 1;
-    public HomeFragment() {
+    public FilmFragment() {
         // Required empty public constructor
     }
 
-    public static HomeFragment newInstance(){
-        return new HomeFragment();
+    public static FilmFragment newInstance(){
+        return new FilmFragment();
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -112,34 +86,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         }
         animeList = new ArrayList<>();
 
-        IAnimeRecommendationsRepositoryWithLiveData animeRecommendationsRepositoryWithLiveData =
-                ServiceLocator.getInstance().getAnimeRecommendationsRepository(
-                        requireActivity().getApplication()
-                );
 
-        if(animeRecommendationsRepositoryWithLiveData != null){
-            animeRecommendationsViewModel = new ViewModelProvider(requireActivity(),
-                    new AnimeRecommendationsViewModelFactory(animeRecommendationsRepositoryWithLiveData)).get(AnimeRecommendationsViewModel.class);
-        }else {
-            Snackbar.make(requireActivity().findViewById(android.R.id.content),
-                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
-        }
-
-        animeRecommendationsList = new ArrayList<>();
-
-        IAnimeNewRepositoryWithLiveData animeNewRepositoryWithLiveData =
-                ServiceLocator.getInstance().getAnimeNewRepository(
-                        requireActivity().getApplication()
-                );
-        if(animeNewRepositoryWithLiveData != null){
-            animeNewViewModel = new ViewModelProvider(requireActivity(),
-                    new AnimeNewViewModelFactory(animeNewRepositoryWithLiveData)).get(AnimeNewViewModel.class);
-        }else {
-            Snackbar.make(requireActivity().findViewById(android.R.id.content),
-                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
-        }
-
-        animeNewList = new ArrayList<>();
 
     }
 
@@ -147,8 +94,8 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false);
-        return fragmentHomeBinding.getRoot();
+        fragmentFilmBinding = FragmentFilmBinding.inflate(inflater, container, false);
+        return fragmentFilmBinding.getRoot();
     }
 
 
@@ -163,8 +110,8 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         ParentItemAdapter parentItemAdapter = new ParentItemAdapter(ParentItemList(animeList), requireActivity().getApplication(),new ChildItemAdapter.OnItemClickListener(){
             @Override
             public void onAnimeItemClick(Anime anime){
-                com.progetto.animeuniverse.ui.main.HomeFragmentDirections.ActionHomeFragmentToAnimeDetailsFragment action =
-                        com.progetto.animeuniverse.ui.main.HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(anime);
+                FilmFragmentDirections.ActionFilmFragmentToAnimeDetailsFragment action =
+                       FilmFragmentDirections.actionFilmFragmentToAnimeDetailsFragment(anime);
                 Navigation.findNavController(view).navigate(action);
             }
         });
@@ -191,14 +138,14 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             }
         });
 
-        fragmentHomeBinding.txtCategorie.setOnClickListener(v -> {
-            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_genresFragment);
+        fragmentFilmBinding.txtCategorie.setOnClickListener(v -> {
+            Navigation.findNavController(requireView()).navigate(R.id.action_filmFragment_to_genresFragment);
         });
-        fragmentHomeBinding.txtSerieTv.setOnClickListener(v -> {
-            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_serieTvFragment);
+        fragmentFilmBinding.txtSerieTv.setOnClickListener(v -> {
+            Navigation.findNavController(requireView()).navigate(R.id.action_filmFragment_to_serieTvFragment);
         });
-        fragmentHomeBinding.txtFilm.setOnClickListener(v -> {
-            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_filmFragment);
+        fragmentFilmBinding.txtHome.setOnClickListener(v -> {
+            Navigation.findNavController(requireView()).navigate(R.id.action_filmFragment_to_homeFragment);
         });
 
 
@@ -245,7 +192,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
     @Override
     public void onDestroyView(){
         super.onDestroyView();
-        fragmentHomeBinding = null;
+        fragmentFilmBinding = null;
     }
 
     private List<ParentItem> ParentItemList(List<Anime> animeList)
@@ -256,7 +203,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         ParentItem item
                 = new ParentItem(
                 "Anime del momento", animeList
-                );
+        );
         itemList.add(item);
 
         return itemList;
@@ -264,7 +211,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
 
     @SuppressLint("SetTextI18n")
     public void setImageHomeCover(List<Anime>animeList) {
-        ImageView homeCover = getView().findViewById(R.id.homeCover);
+        ImageView homeCover = getView().findViewById(R.id.filmCover);
         TextView categories = getView().findViewById(R.id.txt_btn_categorie);
         Random random = new Random();
         int number = random.nextInt(animeList.size());
@@ -278,15 +225,15 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         }else{
             categories.setText(genres.get(0).getNameGenre());
         }
-        fragmentHomeBinding.imageViewInfo.setOnClickListener(v ->{
-            com.progetto.animeuniverse.ui.main.HomeFragmentDirections.ActionHomeFragmentToAnimeDetailsFragment action =
-                    com.progetto.animeuniverse.ui.main.HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(animeHomeCover);
+        fragmentFilmBinding.imageViewInfo.setOnClickListener(v ->{
+            FilmFragmentDirections.ActionFilmFragmentToAnimeDetailsFragment action =
+                    FilmFragmentDirections.actionFilmFragmentToAnimeDetailsFragment(animeHomeCover);
             Navigation.findNavController(requireView()).navigate(action);
         });
 
-        fragmentHomeBinding.homeCover.setOnClickListener(v ->{
-            com.progetto.animeuniverse.ui.main.HomeFragmentDirections.ActionHomeFragmentToAnimeDetailsFragment action =
-                    HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(animeHomeCover);
+        fragmentFilmBinding.filmCover.setOnClickListener(v ->{
+            FilmFragmentDirections.ActionFilmFragmentToAnimeDetailsFragment action =
+                    FilmFragmentDirections.actionFilmFragmentToAnimeDetailsFragment(animeHomeCover);
             Navigation.findNavController(requireView()).navigate(action);
         });
 
