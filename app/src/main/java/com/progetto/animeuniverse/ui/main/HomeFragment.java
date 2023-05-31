@@ -167,6 +167,12 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
                         com.progetto.animeuniverse.ui.main.HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(anime);
                 Navigation.findNavController(view).navigate(action);
             }
+
+            @Override
+            public void onFavoriteButtonPressed(int position) {
+                animeList.get(position).setFavorite(!animeList.get(position).isFavorite());
+                animeViewModel.updateAnime(animeList.get(position));
+            }
         });
         ParentRecyclerViewItem.setAdapter(parentItemAdapter);
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
@@ -256,7 +262,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         ParentItem item
                 = new ParentItem(
                 "Anime del momento", animeList
-                );
+        );
         itemList.add(item);
 
         return itemList;

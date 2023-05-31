@@ -88,13 +88,5 @@ public class AnimeByNameViewModel extends ViewModel {
     public void setCurrentResults(int currentResults) {
         this.currentResults = currentResults;
     }
-    public void deleteAll() {
 
-        if(mRepository != null){
-            Log.d("ViewModel", "Dentro il delete");
-            mRepository.deleteAll();
-        } else{
-            Log.d("AnimeByNameViewModel", "fuori il delete");
-        }
-    }
 }

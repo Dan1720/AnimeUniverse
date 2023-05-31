@@ -42,7 +42,7 @@ public class FavoriteAnimeDataSource extends BaseFavoriteAnimeDataSource{
                         List<Anime> animeList = new ArrayList<>();
                         for(DataSnapshot ds : task.getResult().getChildren()){
                             Anime anime = ds.getValue(Anime.class);
-                         //   anime.setSynchronized(true);
+                            anime.setSynchronized(true);
                             animeList.add(anime);
                         }
                         animeCallback.onSuccessFromCloudReading(animeList);
@@ -57,7 +57,7 @@ public class FavoriteAnimeDataSource extends BaseFavoriteAnimeDataSource{
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                    //    anime.setSynchronized(true);
+                        anime.setSynchronized(true);
                         animeCallback.onSuccessFromCloudWriting(anime);
                     }
                 })
@@ -74,23 +74,23 @@ public class FavoriteAnimeDataSource extends BaseFavoriteAnimeDataSource{
         databaseReference.child(FIREBASE_USERS_COLLECTION).child(idToken).
                 child(FIREBASE_FAVORITE_ANIME_COLLECTION).get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        List<Anime> newsList = new ArrayList<>();
+                        List<Anime> animeList = new ArrayList<>();
                         for (DataSnapshot ds : task.getResult().getChildren()) {
-                            Anime news = ds.getValue(Anime.class);
-                         //   news.setSynchronized(true);
-                            newsList.add(news);
+                            Anime anime = ds.getValue(Anime.class);
+                            anime.setSynchronized(true);
+                            animeList.add(anime);
                         }
 
-                        newsList.addAll(notSynchronizedAnimeList);
+                        animeList.addAll(notSynchronizedAnimeList);
 
-                        for (Anime news : newsList) {
+                        for (Anime anime : animeList) {
                             databaseReference.child(FIREBASE_USERS_COLLECTION).child(idToken).
                                     child(FIREBASE_FAVORITE_ANIME_COLLECTION).
-                                    child(String.valueOf(news.hashCode())).setValue(news).addOnSuccessListener(
+                                    child(String.valueOf(anime.hashCode())).setValue(anime).addOnSuccessListener(
                                             new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
-                                                    //      news.setSynchronized(true);
+                                                    anime.setSynchronized(true);
                                                 }
                                             }
                                     );
@@ -104,7 +104,7 @@ public class FavoriteAnimeDataSource extends BaseFavoriteAnimeDataSource{
         databaseReference.child(FIREBASE_USERS_COLLECTION).child(idToken).
                 child(FIREBASE_FAVORITE_ANIME_COLLECTION).child(String.valueOf(anime.hashCode())).
                 removeValue().addOnSuccessListener(aVoid -> {
-                    //           anime.setSynchronized(false);
+                    anime.setSynchronized(false);
                     animeCallback.onSuccessFromCloudWriting(anime);
                 }).addOnFailureListener(e -> {
                     animeCallback.onFailureFromCloud(e);

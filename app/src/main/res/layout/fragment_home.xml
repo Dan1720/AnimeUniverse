@@ -77,7 +77,7 @@
                             app:layout_constraintStart_toStartOf="parent">
 
                             <ImageView
-                                android:id="@+id/imageView_favorite"
+                                android:id="@+id/imageView_favorite_home"
                                 android:layout_width="match_parent"
                                 android:layout_height="28dp"
                                 android:background="@android:drawable/screen_background_dark_transparent"
