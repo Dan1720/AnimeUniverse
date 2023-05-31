@@ -1,5 +1,6 @@
 package com.progetto.animeuniverse.ui.preferences;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ import com.progetto.animeuniverse.adapter.AnimeFavoriteRecyclerViewAdapter;
 import com.progetto.animeuniverse.adapter.AnimeTvRecyclerViewAdapter;
 import com.progetto.animeuniverse.adapter.ChildItemAdapter;
 import com.progetto.animeuniverse.model.Anime;
+import com.progetto.animeuniverse.model.AnimeResponse;
 import com.progetto.animeuniverse.model.AnimeTv;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.ui.main.AnimeViewModel;
@@ -62,6 +64,7 @@ public class ListFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_list, container, false);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -91,16 +94,13 @@ public class ListFragment extends Fragment {
         animeViewModel.getFavoriteAnimeLiveData(isFirstLoading).observe(getViewLifecycleOwner(), result -> {
             if(result.isSuccess()){
                 animeList.clear();
-                animeList.addAll(((Result.AnimeResponseSuccess)result).getData().getAnimeList());
+                AnimeResponse animeResponse = ((Result.AnimeResponseSuccess) result).getData();
+                List<Anime> fetchedAnime = animeResponse.getAnimeList();
+                this.animeList.addAll(fetchedAnime);
                 animeFavoriteRecyclerViewAdapter.notifyDataSetChanged();
                 if(isFirstLoading){
-
-                }else {
-                    ErrorMessagesUtil errorMessagesUtil =
-                            new ErrorMessagesUtil(requireActivity().getApplication());
-                    Snackbar.make(view, errorMessagesUtil.
-                                    getErrorMessage(((Result.Error) result).getMessage()),
-                            Snackbar.LENGTH_SHORT).show();
+                    sharedPreferencesUtil.writeBooleanData(Constants.SHARED_PREFERENCES_FILE_NAME,
+                            Constants.SHARED_PREFERENCES_FIRST_LOADING, false);
                 }
             }
         });

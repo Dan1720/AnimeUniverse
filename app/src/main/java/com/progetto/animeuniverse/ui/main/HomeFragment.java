@@ -227,13 +227,13 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
 
     @Override
     public void onAnimeFavoriteStatusChanged(Anime anime) {
-        /*if(anime.isFavorite()){
+        if(anime.isFavorite()){
             Snackbar.make(requireActivity().findViewById(android.R.id.content),
                     R.string.add_anime_favorite, Snackbar.LENGTH_LONG).show();
         }else{
             Snackbar.make(requireActivity().findViewById(android.R.id.content),
                     R.string.remove_anime_favorite, Snackbar.LENGTH_LONG).show();
-        }*/
+        }
     }
 
     private boolean isConnected(){

@@ -18,6 +18,9 @@ public class AnimeImages implements Parcelable {
     @SerializedName("webp")
     private AnimeImageUrls webpImages;
 
+    public AnimeImages() {
+    }
+
     public AnimeImages(AnimeImageUrls jpgImages, AnimeImageUrls webpImages) {
         this.jpgImages = jpgImages;
         this.webpImages = webpImages;
