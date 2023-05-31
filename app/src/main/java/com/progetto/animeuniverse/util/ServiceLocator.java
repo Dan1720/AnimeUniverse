@@ -58,6 +58,7 @@ import com.progetto.animeuniverse.data.source.users.UserDataRemoteDataSource;
 import com.progetto.animeuniverse.database.AnimeRoomDatabase;
 import com.progetto.animeuniverse.repository.anime.AnimeRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime.IAnimeRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_by_name.AnimeByNameRepository;
 import com.progetto.animeuniverse.repository.anime_by_name.AnimeByNameRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_by_name.IAnimeByNameRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_episodes.AnimeEpisodesRepositoryWithLiveData;
@@ -234,6 +235,7 @@ public class ServiceLocator {
     public IAnimeByNameRepositoryWithLiveData getAnimeByNameRepository(Application application){
         BaseAnimeByNameRemoteDataSource animeByNameRemoteDataSource;
         BaseAnimeByNameLocalDataSource animeByNameLocalDataSource;
+        AnimeByNameRepository animeByNameRepository = null;
         SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(application);
         DataEncryptionUtil dataEncryptionUtil = new DataEncryptionUtil(application);
 

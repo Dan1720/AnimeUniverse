@@ -1,9 +1,13 @@
 package com.progetto.animeuniverse.ui.main;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.progetto.animeuniverse.model.Result;
+import com.progetto.animeuniverse.repository.anime_by_name.AnimeByNameRepository;
+import com.progetto.animeuniverse.repository.anime_by_name.AnimeByNameRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_by_name.IAnimeByNameRepositoryWithLiveData;
 
 public class AnimeByNameViewModel extends ViewModel {
@@ -16,6 +20,7 @@ public class AnimeByNameViewModel extends ViewModel {
     private int count;
     private MutableLiveData<Result> animeByNameListLiveData;
     private int currentResults;
+    private AnimeByNameRepositoryWithLiveData mRepository;
 
 
     public AnimeByNameViewModel(IAnimeByNameRepositoryWithLiveData animeByNameRepositoryWithLiveData) {
@@ -82,5 +87,14 @@ public class AnimeByNameViewModel extends ViewModel {
 
     public void setCurrentResults(int currentResults) {
         this.currentResults = currentResults;
+    }
+    public void deleteAll() {
+
+        if(mRepository != null){
+            Log.d("ViewModel", "Dentro il delete");
+            mRepository.deleteAll();
+        } else{
+            Log.d("AnimeByNameViewModel", "fuori il delete");
+        }
     }
 }

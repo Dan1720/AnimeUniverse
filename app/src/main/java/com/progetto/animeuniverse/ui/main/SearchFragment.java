@@ -191,46 +191,17 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
             @Override
             public boolean onQueryTextSubmit(String query) {
                 SearchFragment.this.query= query;
-                /*ExecutorService executor = Executors.newSingleThreadExecutor();
-                executor.execute(() -> {
-                    animeByNameDao.deleteAll();
-                    requireActivity().runOnUiThread(() -> {
+                animeViewModel.deleteAll();
+                animeViewModel.getAnimeByName(query, Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
+                    count++;
+                    if (result.isSuccess()) {
+                        AnimeByNameResponse animeByNameResponse = ((Result.AnimeByNameSuccess) result).getData();
+                        onSuccess(animeByNameResponse.getAnimeByNameList(), Long.parseLong(lastUpdate));
 
-                        animeViewModel.getAnimeByName(query, Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
-                            if (result.isSuccess()) {
-                                AnimeByNameResponse animeByNameResponse = ((Result.AnimeByNameSuccess) result).getData();
-                                onSuccess(animeByNameResponse.getAnimeByNameList(), Long.parseLong(lastUpdate));
-
-                            } else {
-                                onFailure(((Result.Error) result).getMessage());
-                            }
-                        });
-                    });
+                    } else {
+                        onFailure(((Result.Error) result).getMessage());
+                    }
                 });
-
-                executor.shutdown();*/
-                new AsyncTask<Void, Void, Void>(){
-
-                    @Override
-                    protected Void doInBackground(Void... voids) {
-                        animeByNameDao.deleteAll();
-                        return null;
-                    }
-                    @Override
-                    protected void onPostExecute(Void aVoid){
-                        animeViewModel.getAnimeByName(query, Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
-                            count++;
-                            if (result.isSuccess()) {
-                                AnimeByNameResponse animeByNameResponse = ((Result.AnimeByNameSuccess) result).getData();
-                                onSuccess(animeByNameResponse.getAnimeByNameList(), Long.parseLong(lastUpdate));
-
-                            } else {
-                                onFailure(((Result.Error) result).getMessage());
-                            }
-                        });
-                    }
-                }.execute();
-
                 return true;
             }
 
@@ -249,67 +220,9 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
     @Override
     public void onSuccess(List<AnimeByName> animeList, long lastUpdate) {
         if (animeList != null) {
-           /*ExecutorService executor = Executors.newSingleThreadExecutor();
-            executor.execute(() -> {
-                animeByNameDao.deleteAll();
-                animeByNameDao.insertAnimeByNameList(animeList);
-
-                requireActivity().runOnUiThread(() -> {
-                    Log.d("SearchFragment", "Numero di elementi prima della cancellazione: " + animeList.size());
-                    this.animeList.clear();
-                    Log.d("SearchFragment", "Numero di elementi dopo la cancellazione: " + animeList.size());
-                    this.animeList.addAll(animeList);
-                    Log.d("SearchFragment", "Numero di elementi dopo l'aggiunta: " + animeList.size());
-                    sharedPreferencesUtil.writeStringData(SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE, String.valueOf(lastUpdate));
-                    searchListAdapter.notifyDataSetChanged();
-               });
-            });
-            executor.shutdown();*/
-            new AsyncTask<Void, Void, Void>() {
-                @Override
-                protected Void doInBackground(Void... voids) {
-                    animeByNameDao.deleteAll();
-                    animeByNameDao.insertAnimeByNameList(animeList);
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(Void aVoid) {
-                    /*System.out.println("Dentro postExecute onSuccess");
-                    Log.d("SearchFragment", "Numero di elementi prima della cancellazione: " + SearchFragment.this.animeList.size());
-                    SearchFragment.this.animeList.clear();
-                    Log.d("SearchFragment", "Numero di elementi dopo la cancellazione: " + SearchFragment.this.animeList.size());
-                    SearchFragment.this.animeList.addAll(animeList);
-                    Log.d("SearchFragment", "Numero di elementi dopo l'aggiunta: " + SearchFragment.this.animeList.size());*/
-                    /*List<AnimeByName> updatedAnimeList = new ArrayList<>(animeList);
-                    SearchFragment.this.animeList = updatedAnimeList;*/
-                    //sharedPreferencesUtil.writeStringData(SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE, String.valueOf(lastUpdate));
-                    //searchListAdapter.notifyDataSetChanged();
-                    /*long newLastUpdate = calculateNewLastUpdate(animeList);
-                    fetchMoreAnime(newLastUpdate);*/
-
-                    if(SearchFragment.this.animeByNameList == null){
-                        SearchFragment.this.animeByNameList.addAll(animeList);
-                        searchListAdapter.notifyDataSetChanged();
-                    } else if(count > 1) {
-                        System.out.println(SearchFragment.this.animeByNameList);
-                        SearchFragment.this.animeByNameList.clear();
-                        System.out.println(SearchFragment.this.animeByNameList);
-                        List<AnimeByName> newList = fetchMoreAnime(lastUpdate);
-                        SearchFragment.this.animeByNameList.addAll(newList);
-                        System.out.println(SearchFragment.this.animeByNameList);
-                        searchListAdapter.notifyDataSetChanged();
-                        //long newLastUpdate = calculateNewLastUpdate(animeList);
-                        //fetchMoreAnime(newLastUpdate);
-                    } else{
-                        SearchFragment.this.animeByNameList.clear();
-                        SearchFragment.this.animeByNameList.addAll(animeList);
-                        searchListAdapter.notifyDataSetChanged();
-
-                    }
-
-                }
-            }.execute();
+            this.animeByNameList.clear();
+            this.animeByNameList.addAll(animeList);
+            searchListAdapter.notifyDataSetChanged();
         }
     }
 

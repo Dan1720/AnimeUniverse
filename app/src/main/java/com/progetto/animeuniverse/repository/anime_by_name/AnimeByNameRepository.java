@@ -27,6 +27,7 @@ public class AnimeByNameRepository implements IAnimeByNameRepository{
     private final AnimeByNameDao animeByNameDao;
     private final AnimeByNameResponseCallback animeByNameResponseCallback;
 
+
     public AnimeByNameRepository(Application application, AnimeByNameResponseCallback animeByNameResponseCallback) {
         this.application = application;
         this.animeApiService = ServiceLocator.getInstance().getAnimeApiService();
@@ -34,6 +35,9 @@ public class AnimeByNameRepository implements IAnimeByNameRepository{
         this.animeByNameDao = animeRoomDatabase.animeByNameDao();
         this.animeByNameResponseCallback = animeByNameResponseCallback;
     }
+
+
+
 
     @Override
     public void fetchAnimeByName(String nameAnime, long lastUpdate) {
@@ -83,5 +87,8 @@ public class AnimeByNameRepository implements IAnimeByNameRepository{
         AnimeRoomDatabase.databaseWriteExecutor.execute(()->{
             animeByNameResponseCallback.onSuccess(animeByNameDao.getAll(), lastUpdate);
         });
+    }
+    public AnimeByNameDao getAnimeByNameDao() {
+        return animeByNameDao;
     }
 }
