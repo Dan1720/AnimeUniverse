@@ -1,6 +1,6 @@
 package com.progetto.animeuniverse.ui.main;
 
-import android.util.Log;
+import android.app.Application;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -8,7 +8,9 @@ import androidx.lifecycle.ViewModel;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.anime_by_name.AnimeByNameRepository;
 import com.progetto.animeuniverse.repository.anime_by_name.AnimeByNameRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_by_name.AnimeByNameResponseCallback;
 import com.progetto.animeuniverse.repository.anime_by_name.IAnimeByNameRepositoryWithLiveData;
+import com.progetto.animeuniverse.util.ServiceLocator;
 
 public class AnimeByNameViewModel extends ViewModel {
     private static final String TAG = AnimeByNameViewModel.class.getSimpleName();
@@ -20,7 +22,6 @@ public class AnimeByNameViewModel extends ViewModel {
     private int count;
     private MutableLiveData<Result> animeByNameListLiveData;
     private int currentResults;
-    private AnimeByNameRepositoryWithLiveData mRepository;
 
 
     public AnimeByNameViewModel(IAnimeByNameRepositoryWithLiveData animeByNameRepositoryWithLiveData) {
@@ -88,13 +89,8 @@ public class AnimeByNameViewModel extends ViewModel {
     public void setCurrentResults(int currentResults) {
         this.currentResults = currentResults;
     }
-    public void deleteAll() {
-
-        if(mRepository != null){
-            Log.d("ViewModel", "Dentro il delete");
-            mRepository.deleteAll();
-        } else{
-            Log.d("AnimeByNameViewModel", "fuori il delete");
-        }
+    public void deleteAllAnime(){
+        AnimeByNameRepositoryWithLiveData repositoryWithLiveData = ServiceLocator.getInstance().getAnimeByNameRepositoryWithLiveDataForSearchFragment();
+        repositoryWithLiveData.deleteAll();
     }
 }

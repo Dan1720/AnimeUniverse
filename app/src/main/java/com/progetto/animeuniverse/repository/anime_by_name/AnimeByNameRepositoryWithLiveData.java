@@ -24,15 +24,21 @@ public class AnimeByNameRepositoryWithLiveData implements IAnimeByNameRepository
     private final MutableLiveData<Result> allAnimeByNameMutableLiveData;
     private final BaseAnimeByNameRemoteDataSource animeByNameRemoteDataSource;
     private final BaseAnimeByNameLocalDataSource animeByNameLocalDataSource;
-    private final AnimeByNameDao animeByNameDao;
+    private AnimeByNameDao animeByNameDao;
 
-    public AnimeByNameRepositoryWithLiveData(BaseAnimeByNameRemoteDataSource animeByNameRemoteDataSource, BaseAnimeByNameLocalDataSource animeByNameLocalDataSource,) {
+
+    public AnimeByNameRepositoryWithLiveData(BaseAnimeByNameRemoteDataSource animeByNameRemoteDataSource, BaseAnimeByNameLocalDataSource animeByNameLocalDataSource) {
         allAnimeByNameMutableLiveData = new MutableLiveData<>();
         this.animeByNameRemoteDataSource = animeByNameRemoteDataSource;
         this.animeByNameLocalDataSource = animeByNameLocalDataSource;
         this.animeByNameLocalDataSource.setAnimeByNameCallback(this);
         this.animeByNameRemoteDataSource.setAnimeByNameCallback(this);
     }
+    public AnimeByNameRepositoryWithLiveData(AnimeByNameDao animeByNameDao){
+        this.animeByNameDao = animeByNameDao;
+
+    }
+
 
     @Override
     public MutableLiveData<Result> fetchAnimeByName(String nameAnime,long lastUpdate) {
@@ -124,6 +130,7 @@ public class AnimeByNameRepositoryWithLiveData implements IAnimeByNameRepository
     public void deleteAll()  {
         new deleteAllWordsAsyncTask(animeByNameDao).execute();
     }
+
 
 
 }

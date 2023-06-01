@@ -3,6 +3,7 @@ package com.progetto.animeuniverse.repository.anime_by_name;
 import static com.progetto.animeuniverse.util.Constants.FRESH_TIMEOUT;
 
 import android.app.Application;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.progetto.animeuniverse.R;
@@ -34,6 +35,7 @@ public class AnimeByNameRepository implements IAnimeByNameRepository{
         AnimeRoomDatabase animeRoomDatabase = ServiceLocator.getInstance().getAnimeByNameDao(application);
         this.animeByNameDao = animeRoomDatabase.animeByNameDao();
         this.animeByNameResponseCallback = animeByNameResponseCallback;
+        ServiceLocator.getInstance().initialize(application, animeByNameResponseCallback);
     }
 
 
@@ -91,4 +93,5 @@ public class AnimeByNameRepository implements IAnimeByNameRepository{
     public AnimeByNameDao getAnimeByNameDao() {
         return animeByNameDao;
     }
+
 }
