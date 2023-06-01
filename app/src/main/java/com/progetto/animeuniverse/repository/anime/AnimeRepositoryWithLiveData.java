@@ -63,6 +63,7 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
 
     @Override
     public MutableLiveData<Result> getFavoriteAnime(boolean firstLoading) {
+        favoriteAnimeDataSource.deleteAllFavoriteAnime();
         if(firstLoading){
             favoriteAnimeDataSource.getFavoriteAnime();
         }else {

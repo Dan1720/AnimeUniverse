@@ -85,8 +85,7 @@ public class ListFragment extends Fragment {
 
 
 
-        SharedPreferencesUtil sharedPreferencesUtil =
-                new SharedPreferencesUtil(requireActivity().getApplication());
+        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(requireActivity().getApplication());
 
         boolean isFirstLoading = sharedPreferencesUtil.readBooleanData(Constants.SHARED_PREFERENCES_FILE_NAME,
                 Constants.SHARED_PREFERENCES_FIRST_LOADING);
@@ -102,6 +101,12 @@ public class ListFragment extends Fragment {
                     sharedPreferencesUtil.writeBooleanData(Constants.SHARED_PREFERENCES_FILE_NAME,
                             Constants.SHARED_PREFERENCES_FIRST_LOADING, false);
                 }
+            }else{
+                ErrorMessagesUtil errorMessagesUtil =
+                        new ErrorMessagesUtil(requireActivity().getApplication());
+                Snackbar.make(view, errorMessagesUtil.
+                                getErrorMessage(((Result.Error) result).getMessage()),
+                        Snackbar.LENGTH_SHORT).show();
             }
         });
 

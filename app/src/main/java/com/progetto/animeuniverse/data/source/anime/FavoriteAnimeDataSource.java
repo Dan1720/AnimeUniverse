@@ -120,5 +120,6 @@ public class FavoriteAnimeDataSource extends BaseFavoriteAnimeDataSource{
                     animeCallback.onFailureFromCloud(e);
                 });
     }
+
 }
 

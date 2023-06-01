@@ -119,7 +119,11 @@ public class ServiceLocator {
 
         DataEncryptionUtil dataEncryptionUtil = new DataEncryptionUtil(application);
 
-        return new UserRepository(userAuthenticationRemoteDataSource, userDataRemoteDataSource);
+        BaseAnimeLocalDataSource animeLocalDataSource =
+                new AnimeLocalDataSource(getAnimeDao(application), sharedPreferencesUtil,
+                        dataEncryptionUtil);
+
+        return new UserRepository(userAuthenticationRemoteDataSource, userDataRemoteDataSource, animeLocalDataSource);
     }
 
     public AnimeApiService getAnimeApiService() {

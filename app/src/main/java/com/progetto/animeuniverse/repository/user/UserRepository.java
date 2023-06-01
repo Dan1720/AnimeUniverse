@@ -2,23 +2,34 @@ package com.progetto.animeuniverse.repository.user;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.progetto.animeuniverse.data.source.anime.AnimeCallback;
+import com.progetto.animeuniverse.data.source.anime.BaseAnimeLocalDataSource;
+import com.progetto.animeuniverse.model.Anime;
+import com.progetto.animeuniverse.model.AnimeApiResponse;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.model.User;
 import com.progetto.animeuniverse.data.source.users.BaseUserAuthenticationRemoteDataSource;
 import com.progetto.animeuniverse.data.source.users.BaseUserDataRemoteDataSource;
 
-public class UserRepository implements IUserRepository, UserResponseCallback{
+import java.util.List;
+
+public class UserRepository implements IUserRepository, UserResponseCallback, AnimeCallback {
     private final MutableLiveData<Result> userMutableLiveData;
     private final BaseUserAuthenticationRemoteDataSource userRemoteDataSource;
     private final BaseUserDataRemoteDataSource userDataRemoteDataSource;
+    private final BaseAnimeLocalDataSource animeLocalDataSource;
+    private final MutableLiveData<Result> userFavoriteAnimeMutableLiveData;
 
     public UserRepository(BaseUserAuthenticationRemoteDataSource userRemoteDataSource,
-                          BaseUserDataRemoteDataSource userDataRemoteDataSource) {
+                          BaseUserDataRemoteDataSource userDataRemoteDataSource, BaseAnimeLocalDataSource animeLocalDataSource) {
         this.userRemoteDataSource = userRemoteDataSource;
         this.userDataRemoteDataSource = userDataRemoteDataSource;
+        this.animeLocalDataSource = animeLocalDataSource;
+        this.userFavoriteAnimeMutableLiveData = new MutableLiveData<>();
         this.userMutableLiveData = new MutableLiveData<>();
         this.userRemoteDataSource.setUserResponseCallback(this);
         this.userDataRemoteDataSource.setUserResponseCallback(this);
+        this.animeLocalDataSource.setAnimeCallback(this);
     }
 
     @Override
@@ -64,6 +75,12 @@ public class UserRepository implements IUserRepository, UserResponseCallback{
     }
 
     @Override
+    public MutableLiveData<Result> getUserFavoriteAnime(String idToken) {
+        userDataRemoteDataSource.getUserFavoriteAnime(idToken);
+        return userFavoriteAnimeMutableLiveData;
+    }
+
+    @Override
     public void onSuccessFromAuthentication(User user) {
         if(user != null){
             userDataRemoteDataSource.saveUserData(user);
@@ -83,6 +100,11 @@ public class UserRepository implements IUserRepository, UserResponseCallback{
     }
 
     @Override
+    public void onSuccessFromRemoteDatabase(List<Anime> animeList) {
+        animeLocalDataSource.insertAnime(animeList);
+    }
+
+    @Override
     public void onFailureFromRemoteDatabase(String message) {
         Result.Error result = new Result.Error(message);
         userMutableLiveData.postValue(result);
@@ -90,6 +112,68 @@ public class UserRepository implements IUserRepository, UserResponseCallback{
 
     @Override
     public void onSuccessLogout() {
-        //gestire preferiti
+        animeLocalDataSource.deleteAll();
+    }
+    @Override
+    public void onSuccessFromRemote(AnimeApiResponse animeApiResponse, long lastUpdate) {
+
+    }
+
+    @Override
+    public void onFailureFromRemote(Exception exception) {
+
+    }
+
+    @Override
+    public void onSuccessFromLocal(AnimeApiResponse animeApiResponse) {
+        Result.AnimeResponseSuccess result = new Result.AnimeResponseSuccess(animeApiResponse);
+        userFavoriteAnimeMutableLiveData.postValue(result);
+    }
+
+    @Override
+    public void onFailureFromLocal(Exception exception) {
+
+    }
+
+    @Override
+    public void onAnimeFavoriteStatusChanged(Anime anime, List<Anime> favoriteAnime) {
+
+    }
+
+    @Override
+    public void onAnimeFavoriteStatusChanged(List<Anime> anime) {
+
+    }
+
+    @Override
+    public void onDeleteFavoriteAnimeSuccess(List<Anime> favoriteAnime) {
+
+    }
+
+    @Override
+    public void onSuccessFromCloudReading(List<Anime> animeList) {
+
+    }
+
+    @Override
+    public void onSuccessFromCloudWriting(Anime anime) {
+
+    }
+
+    @Override
+    public void onFailureFromCloud(Exception exception) {
+
+    }
+
+    @Override
+    public void onSuccessSynchronization() {
+        userFavoriteAnimeMutableLiveData.postValue(new Result.AnimeResponseSuccess(null));
+
+    }
+
+    @Override
+    public void onSuccessDeletion() {
+        Result.UserResponseSuccess result = new Result.UserResponseSuccess(null);
+        userMutableLiveData.postValue(result);
     }
 }

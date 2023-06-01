@@ -10,4 +10,6 @@ public abstract class BaseUserDataRemoteDataSource {
         this.userResponseCallback = userResponseCallback;
     }
     public abstract void saveUserData(User user);
+
+    public abstract void getUserFavoriteAnime(String idToken);
 }
