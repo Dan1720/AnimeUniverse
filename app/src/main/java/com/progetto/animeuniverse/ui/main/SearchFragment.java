@@ -191,7 +191,6 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
             @Override
             public boolean onQueryTextSubmit(String query) {
                 SearchFragment.this.query= query;
-                animeViewModel.deleteAllAnime();
                 animeViewModel.getAnimeByName(query, Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
                     count++;
                     if (result.isSuccess()) {

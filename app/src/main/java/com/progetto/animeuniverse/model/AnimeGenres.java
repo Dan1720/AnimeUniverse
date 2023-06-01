@@ -15,6 +15,9 @@ public class AnimeGenres implements Parcelable {
     @SerializedName("url")
     private String urlGenre;
 
+    public AnimeGenres() {
+    }
+
     public AnimeGenres(int idGenre, String typeGenre, String nameGenre, String urlGenre) {
         this.idGenre = idGenre;
         this.typeGenre = typeGenre;

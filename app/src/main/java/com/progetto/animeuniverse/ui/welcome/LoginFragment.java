@@ -39,6 +39,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.progetto.animeuniverse.R;
+import com.progetto.animeuniverse.data.source.anime.FavoriteAnimeDataSource;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.model.User;
 import com.progetto.animeuniverse.repository.user.IUserRepository;
@@ -163,7 +164,6 @@ public class LoginFragment extends Fragment {
             SharedPreferencesUtil sharedPreferencesUtil =
                     new SharedPreferencesUtil(requireActivity().getApplication());
             startActivityBasedOnCondition(WelcomeActivity.class, R.id.action_loginFragment_to_welcomeActivity);
-            //da gestire la parte dei preferiti
         }
 
         provaAccesso.setOnClickListener(v -> {
@@ -262,9 +262,12 @@ public class LoginFragment extends Fragment {
 
     private void retrieveUserInformationAndStartActivity(User user, int destination) {
         progressBar.setVisibility(View.VISIBLE);
-        startActivityBasedOnCondition(WelcomeActivity.class, destination);
-        //gestire preferiti
-
+        userViewModel.getUserFavoriteAnimeMutableLiveData(user.getIdToken()).observe(
+                getViewLifecycleOwner(), userFavoriteAnimeRetrievalResult ->{
+                    progressBar.setVisibility(View.GONE);
+                    startActivityBasedOnCondition(WelcomeActivity.class, destination);
+                }
+        );
 
     }
 
@@ -281,8 +284,7 @@ public class LoginFragment extends Fragment {
         try{
             dataEncryptionUtil.writeSecretDataWithEncryptedSharedPreferences(ENCRYPTED_SHARED_PREFERENCES_FILE_NAME, EMAIL_ADDRESS, email);
             dataEncryptionUtil.writeSecretDataWithEncryptedSharedPreferences(ENCRYPTED_SHARED_PREFERENCES_FILE_NAME, PASSWORD, password);
-            dataEncryptionUtil.writeSecretDataWithEncryptedSharedPreferences(
-                    ENCRYPTED_SHARED_PREFERENCES_FILE_NAME, ID_TOKEN, idToken);
+            dataEncryptionUtil.writeSecretDataWithEncryptedSharedPreferences(ENCRYPTED_SHARED_PREFERENCES_FILE_NAME, ID_TOKEN, idToken);
             if(password != null){
                 dataEncryptionUtil.writeSecreteDataOnFile(ENCRYPTED_DATA_FILE_NAME,email.concat(":").concat(password));
             }

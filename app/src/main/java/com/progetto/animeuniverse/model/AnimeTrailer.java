@@ -18,6 +18,9 @@ public class AnimeTrailer implements Parcelable {
     @SerializedName("embed_url")
     private String embedUrl;
 
+    public AnimeTrailer() {
+    }
+
     public AnimeTrailer(String youtubeId, String urlTrailer, String embedUrl) {
         this.youtubeId = youtubeId;
         this.urlTrailer = urlTrailer;

@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
@@ -66,7 +67,10 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
 
     public AnimeDetailsFragment() {
         // Required empty public constructor
+
     }
+
+
 
     public static AnimeDetailsFragment newInstance() {
 
@@ -146,6 +150,7 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
 
         Anime anime = AnimeDetailsFragmentArgs.fromBundle(getArguments()).getAnime();
 
+
         Glide.with(fragmentAnimeDetailsBinding.imageViewDetails.getContext())
                 .load(anime.getImages().getJpgImages().getLargeImageUrl())
                 .placeholder(R.drawable.ic_home).into(fragmentAnimeDetailsBinding.imageViewDetails);
@@ -178,7 +183,6 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
         }else{
             fragmentAnimeDetailsBinding.textViewTrailerLinkIn.setText("not found");
         }
-
 
 
         NavBackStackEntry navBackStackEntry = Navigation.findNavController(view).getPreviousBackStackEntry();
@@ -284,4 +288,6 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
         super.onDestroyView();
         fragmentAnimeDetailsBinding = null;
     }
+
+
 }

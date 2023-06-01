@@ -3,6 +3,8 @@ package com.progetto.animeuniverse.ui.welcome;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.model.User;
 import com.progetto.animeuniverse.repository.user.IUserRepository;
@@ -12,6 +14,7 @@ public class UserViewModel extends ViewModel {
 
     private final IUserRepository userRepository;
     private MutableLiveData<Result> userMutableLiveData;
+    private MutableLiveData<Result> userFavoriteAnimeMutableLiveData;
     private boolean authenticationError;
 
     public UserViewModel(IUserRepository userRepository) {
@@ -61,6 +64,17 @@ public class UserViewModel extends ViewModel {
     }
     private void getUserData(String token) {
         userMutableLiveData = userRepository.getGoogleUser(token);
+    }
+
+    public MutableLiveData<Result> getUserFavoriteAnimeMutableLiveData(String idToken) {
+        if (userFavoriteAnimeMutableLiveData == null) {
+            getUserFavoriteAnime(idToken);
+        }
+        return userFavoriteAnimeMutableLiveData;
+    }
+
+    public void getUserFavoriteAnime(String idToken){
+        userFavoriteAnimeMutableLiveData = userRepository.getUserFavoriteAnime(idToken);
     }
 
 

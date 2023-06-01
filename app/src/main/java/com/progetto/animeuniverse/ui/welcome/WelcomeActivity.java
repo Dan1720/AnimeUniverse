@@ -1,5 +1,7 @@
 package com.progetto.animeuniverse.ui.welcome;
 
+import static com.progetto.animeuniverse.util.Constants.FIREBASE_REALTIME_DATABASE;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
@@ -12,7 +14,10 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.progetto.animeuniverse.R;
+import com.progetto.animeuniverse.data.source.anime.FavoriteAnimeDataSource;
 
 import java.util.Objects;
 
@@ -51,5 +56,11 @@ public class WelcomeActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 }

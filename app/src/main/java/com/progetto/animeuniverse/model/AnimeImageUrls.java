@@ -18,6 +18,9 @@ public class AnimeImageUrls implements Parcelable {
     @SerializedName("large_image_url")
     private String largeImageUrl;
 
+    public AnimeImageUrls() {
+    }
+
     public AnimeImageUrls(String imageUrl, String smallImageUrl, String largeImageUrl) {
         this.imageUrl = imageUrl;
         this.smallImageUrl = smallImageUrl;

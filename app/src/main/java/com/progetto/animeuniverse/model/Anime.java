@@ -70,6 +70,7 @@ public class Anime  implements Parcelable {
     @SerializedName("images")
     private AnimeImages images;
 
+
     public Anime(int id, String url, boolean approved, String title, String type, String source, int numEpisodes, String status, String duration, String rating, int popularity, int year, boolean isFavorite, boolean isSynchronized, String synopsis, AnimeTrailer trailer, List<AnimeProducers> producers, List<AnimeStudios> studios, List<AnimeGenres> genres, AnimeImages images) {
         this.id = id;
         this.url = url;

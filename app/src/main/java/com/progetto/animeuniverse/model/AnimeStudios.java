@@ -15,6 +15,10 @@ public class AnimeStudios implements Parcelable {
     @SerializedName("url")
     private String urlStudio;
 
+
+    public AnimeStudios() {
+    }
+
     public AnimeStudios(int idStudio, String typeStudio, String nameStudio, String urlStudio) {
         this.idStudio = idStudio;
         this.typeStudio = typeStudio;

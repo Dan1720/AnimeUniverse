@@ -1,5 +1,6 @@
 package com.progetto.animeuniverse.data.source.users;
 
+import static com.progetto.animeuniverse.util.Constants.FIREBASE_FAVORITE_ANIME_COLLECTION;
 import static com.progetto.animeuniverse.util.Constants.FIREBASE_REALTIME_DATABASE;
 import static com.progetto.animeuniverse.util.Constants.FIREBASE_USERS_COLLECTION;
 
@@ -14,8 +15,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.User;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDataRemoteDataSource extends BaseUserDataRemoteDataSource{
     private static final String TAG = UserDataRemoteDataSource.class.getSimpleName();
@@ -61,5 +66,27 @@ public class UserDataRemoteDataSource extends BaseUserDataRemoteDataSource{
                 userResponseCallback.onFailureFromRemoteDatabase(error.getMessage());
             }
         });
+    }
+
+    @Override
+    public void getUserFavoriteAnime(String idToken) {
+        databaseReference.child(FIREBASE_USERS_COLLECTION).child(idToken).
+                child(FIREBASE_FAVORITE_ANIME_COLLECTION).get().addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.d(TAG, "Error getting data", task.getException());
+                        userResponseCallback.onFailureFromRemoteDatabase(task.getException().getLocalizedMessage());
+                    }
+                    else {
+                        Log.d(TAG, "Successful read: " + task.getResult().getValue());
+
+                        List<Anime> animeList = new ArrayList<>();
+                        for(DataSnapshot ds : task.getResult().getChildren()) {
+                            Anime anime = ds.getValue(Anime.class);
+                            animeList.add(anime);
+                        }
+
+                        userResponseCallback.onSuccessFromRemoteDatabase(animeList);
+                    }
+                });
     }
 }

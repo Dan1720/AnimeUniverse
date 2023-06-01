@@ -89,8 +89,5 @@ public class AnimeByNameViewModel extends ViewModel {
     public void setCurrentResults(int currentResults) {
         this.currentResults = currentResults;
     }
-    public void deleteAllAnime(){
-        AnimeByNameRepositoryWithLiveData repositoryWithLiveData = ServiceLocator.getInstance().getAnimeByNameRepositoryWithLiveDataForSearchFragment();
-        repositoryWithLiveData.deleteAll();
-    }
+
 }
