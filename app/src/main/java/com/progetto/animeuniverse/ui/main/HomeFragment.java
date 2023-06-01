@@ -12,6 +12,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -178,7 +179,6 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         ParentRecyclerViewItem.setLayoutManager(layoutManager);
 
 
-
         String lastUpdate ="0";
         animeViewModel.getAnimeTop(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
             System.out.println("Result: "+ result.isSuccess());
@@ -189,8 +189,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
                 parentItemAdapter.notifyDataSetChanged();
                 setImageHomeCover(animeList);
             }else {
-                ErrorMessagesUtil errorMessagesUtil =
-                        new ErrorMessagesUtil(requireActivity().getApplication());
+                ErrorMessagesUtil errorMessagesUtil = new ErrorMessagesUtil(requireActivity().getApplication());
                 Snackbar.make(view, errorMessagesUtil.
                                 getErrorMessage(((Result.Error) result).getMessage()),
                         Snackbar.LENGTH_SHORT).show();
@@ -297,6 +296,22 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         });
 
 
+        fragmentHomeBinding.imageViewFavoriteHome.setOnClickListener(v ->{
+            animeList.get(number).setFavorite(!animeList.get(number).isFavorite());
+            animeViewModel.updateAnime(animeList.get(number));
+            setImageViewFavoriteAnime(animeList.get(number).isFavorite());
+        });
+
+
+
+    }
+
+    public void setImageViewFavoriteAnime(boolean isFavorite){
+        if(isFavorite){
+            fragmentHomeBinding.imageViewFavoriteHome.setImageDrawable(AppCompatResources.getDrawable( requireContext(), R.drawable.baseline_favorite_24));
+        }else{
+            fragmentHomeBinding.imageViewFavoriteHome.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.baseline_not_favorite_24));
+        }
     }
 
 
