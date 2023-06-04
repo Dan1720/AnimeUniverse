@@ -124,12 +124,16 @@ public class AnimeSpecificGenresFragment extends Fragment {
         AnimeSpecificGenresRecyclerViewItem.setLayoutManager(layoutManager);
 
         String lastUpdate = "0";
-        animeSpecificGenresViewModel.getAnimeSpecificGenres(genre.getId(), Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
+        animeSpecificGenresViewModel.getAnimeSpecificGenres(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
             System.out.println("Result anime SpecificGenres: " + result.isSuccess());
             if(result.isSuccess()){
                 AnimeSpecificGenresResponse animeSpecificGenresResponse = ((Result.AnimeSpecificGenresSuccess) result).getData();
                 List<AnimeSpecificGenres> fetchedAnimeSpecificGenres = animeSpecificGenresResponse.getAnimeSpecificGenresList();
-                this.animeSpecificGenresList.addAll(fetchedAnimeSpecificGenres);
+                for(AnimeSpecificGenres animeSpecificGenres : fetchedAnimeSpecificGenres){
+                    if(animeSpecificGenres.getGenres().get(0).getIdGenre() == genre.getId()){
+                        this.animeSpecificGenresList.add(animeSpecificGenres);
+                    }
+                }
                 animeSpecificGenresRecyclerViewAdapter.notifyDataSetChanged();
             }else{
                 ErrorMessagesUtil errorMessagesUtil =

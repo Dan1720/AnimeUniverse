@@ -34,9 +34,8 @@ public interface AnimeApiService {
     Call<AnimeByNameApiResponse> getAnimeByName(
             @Query(TOP_HEADLINES_Q_PARAMETER) String nameAnime);
 
-    @GET(TOP_HEADLINES_ENDPOINT)
-    Call<AnimeSpecificGenresApiResponse> getAnimeSpecificGenres(
-            @Query("genres") int idGenre);
+    @GET("anime?genres_exclude")
+    Call<AnimeSpecificGenresApiResponse> getAnimeSpecificGenres();
 
 
     @GET("anime/{id}/full")
