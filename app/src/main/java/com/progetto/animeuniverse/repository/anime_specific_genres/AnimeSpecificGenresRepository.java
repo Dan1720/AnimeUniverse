@@ -36,10 +36,10 @@ public class AnimeSpecificGenresRepository implements IAnimeSpecificGenresReposi
     }
 
     @Override
-    public void fetchAnimeSpecificGenres(long lastUpdate) {
+    public void fetchAnimeSpecificGenres(int idGenre, long lastUpdate) {
         long currentTime = System.currentTimeMillis();
         if(currentTime - lastUpdate > FRESH_TIMEOUT){
-            Call<AnimeSpecificGenresApiResponse> animeSpecificGenresResponseCall = animeApiService.getAnimeSpecificGenres();
+            Call<AnimeSpecificGenresApiResponse> animeSpecificGenresResponseCall = animeApiService.getAnimeSpecificGenres(idGenre);
 
             animeSpecificGenresResponseCall.enqueue(new Callback<AnimeSpecificGenresApiResponse>() {
                 @Override

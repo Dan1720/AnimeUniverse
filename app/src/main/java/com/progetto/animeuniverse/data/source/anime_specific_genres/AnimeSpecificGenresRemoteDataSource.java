@@ -18,8 +18,8 @@ public class AnimeSpecificGenresRemoteDataSource extends BaseAnimeSpecificGenres
     }
 
     @Override
-    public void getAnimeSpecificGenres() {
-        Call<AnimeSpecificGenresApiResponse> animeSpecificGenresApiResponseCall = animeApiService.getAnimeSpecificGenres();
+    public void getAnimeSpecificGenres(int idGenre) {
+        Call<AnimeSpecificGenresApiResponse> animeSpecificGenresApiResponseCall = animeApiService.getAnimeSpecificGenres(idGenre);
         animeSpecificGenresApiResponseCall.enqueue(new Callback<AnimeSpecificGenresApiResponse>() {
             @Override
             public void onResponse(Call<AnimeSpecificGenresApiResponse> call, Response<AnimeSpecificGenresApiResponse> response) {

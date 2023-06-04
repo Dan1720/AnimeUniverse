@@ -29,10 +29,10 @@ public class AnimeSpecificGenresRepositoryWithLiveData implements IAnimeSpecific
     }
 
     @Override
-    public MutableLiveData<Result> fetchAnimeSpecificGenres(long lastUpdate) {
+    public MutableLiveData<Result> fetchAnimeSpecificGenres(int idGenre, long lastUpdate) {
         long currentTime = System.currentTimeMillis();
         if(currentTime - lastUpdate > FRESH_TIMEOUT){
-            animeSpecificGenresRemoteDataSource.getAnimeSpecificGenres();
+            animeSpecificGenresRemoteDataSource.getAnimeSpecificGenres(idGenre);
         }else{
             animeSpecificGenresLocalDataSource.getAnimeSpecificGenres();
         }
@@ -40,8 +40,8 @@ public class AnimeSpecificGenresRepositoryWithLiveData implements IAnimeSpecific
     }
 
     @Override
-    public void fetchAnimeSpecificGenres() {
-        animeSpecificGenresRemoteDataSource.getAnimeSpecificGenres();
+    public void fetchAnimeSpecificGenres(int idGenre) {
+        animeSpecificGenresRemoteDataSource.getAnimeSpecificGenres(idGenre);
     }
     @Override
     public void onSuccessFromRemote(AnimeSpecificGenresApiResponse animeSpecificGenresApiResponse, long lastUpdate) {

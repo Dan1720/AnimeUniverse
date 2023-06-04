@@ -25,15 +25,15 @@ public class AnimeSpecificGenresViewModel extends ViewModel {
         this.count = 0;
     }
 
-    public MutableLiveData<Result> getAnimeSpecificGenres(long lastUpdate){
+    public MutableLiveData<Result> getAnimeSpecificGenres(int idGenre, long lastUpdate){
         if(animeSpecificGenresListLiveData == null){
-            fetchAnimeSpecificGenres(lastUpdate);
+            fetchAnimeSpecificGenres(idGenre, lastUpdate);
         }
         return animeSpecificGenresListLiveData;
     }
 
-    private void fetchAnimeSpecificGenres(long lastUpdate){
-        animeSpecificGenresListLiveData = animeSpecificGenresRepositoryWithLiveData.fetchAnimeSpecificGenres(lastUpdate);
+    public void fetchAnimeSpecificGenres(int idGenre, long lastUpdate){
+        animeSpecificGenresListLiveData = animeSpecificGenresRepositoryWithLiveData.fetchAnimeSpecificGenres(idGenre,lastUpdate);
     }
 
     public boolean isLoading() {

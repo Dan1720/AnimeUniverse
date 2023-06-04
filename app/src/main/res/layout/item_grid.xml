@@ -17,9 +17,10 @@
             android:id="@+id/item_grid"
             android:layout_width="111dp"
             android:layout_height="155dp"
-            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:background="@color/white"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_home" />
+            android:src="@drawable/ic_home"  />
 
     </LinearLayout>
 

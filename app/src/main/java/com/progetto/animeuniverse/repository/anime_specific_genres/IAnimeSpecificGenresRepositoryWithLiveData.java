@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.progetto.animeuniverse.model.Result;
 
 public interface IAnimeSpecificGenresRepositoryWithLiveData {
-    MutableLiveData<Result> fetchAnimeSpecificGenres(long lastUpdate);
-    void fetchAnimeSpecificGenres();
+    MutableLiveData<Result> fetchAnimeSpecificGenres(int idGenre, long lastUpdate);
+    void fetchAnimeSpecificGenres(int idGenre);
 
 }

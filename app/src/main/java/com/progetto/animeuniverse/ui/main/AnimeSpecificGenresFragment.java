@@ -1,5 +1,8 @@
 package com.progetto.animeuniverse.ui.main;
 
+import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_PAGE_SIZE_VALUE;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -79,6 +82,7 @@ public class AnimeSpecificGenresFragment extends Fragment {
         return fragmentAnimeSpecificGenresBinding.getRoot();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -108,6 +112,7 @@ public class AnimeSpecificGenresFragment extends Fragment {
                     getMenu().findItem(R.id.listFragment).setChecked(true);
         }
 
+        assert getArguments() != null;
         Genre genre = AnimeSpecificGenresFragmentArgs.fromBundle(getArguments()).getGenres();
 
         RecyclerView AnimeSpecificGenresRecyclerViewItem = view.findViewById(R.id.recyclerView_gridSpecificGenres);
@@ -124,17 +129,40 @@ public class AnimeSpecificGenresFragment extends Fragment {
         AnimeSpecificGenresRecyclerViewItem.setLayoutManager(layoutManager);
 
         String lastUpdate = "0";
-        animeSpecificGenresViewModel.getAnimeSpecificGenres(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
+        animeSpecificGenresViewModel.getAnimeSpecificGenres(genre.getId(),Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
             System.out.println("Result anime SpecificGenres: " + result.isSuccess());
             if(result.isSuccess()){
                 AnimeSpecificGenresResponse animeSpecificGenresResponse = ((Result.AnimeSpecificGenresSuccess) result).getData();
                 List<AnimeSpecificGenres> fetchedAnimeSpecificGenres = animeSpecificGenresResponse.getAnimeSpecificGenresList();
-                for(AnimeSpecificGenres animeSpecificGenres : fetchedAnimeSpecificGenres){
-                    if(animeSpecificGenres.getGenres().get(0).getIdGenre() == genre.getId()){
-                        this.animeSpecificGenresList.add(animeSpecificGenres);
+                if (!animeSpecificGenresViewModel.isLoading()) {
+                    if (animeSpecificGenresViewModel.isFirstLoading()) {
+                        animeSpecificGenresViewModel.setFirstLoading(false);
+                        this.animeSpecificGenresList.addAll(fetchedAnimeSpecificGenres);
+                        animeSpecificGenresRecyclerViewAdapter.notifyItemRangeInserted(0,
+                                this.animeSpecificGenresList.size());
+                    } else {
+                        animeSpecificGenresList.clear();
+                        animeSpecificGenresList.addAll(fetchedAnimeSpecificGenres);
+                        animeSpecificGenresRecyclerViewAdapter.notifyItemChanged(0, fetchedAnimeSpecificGenres.size());
                     }
+                } else {
+                    animeSpecificGenresViewModel.setLoading(false);
+                    animeSpecificGenresViewModel.setCurrentResults(animeSpecificGenresList.size());
+
+                    int initialSize = animeSpecificGenresList.size();
+
+                    for (int i = 0; i < animeSpecificGenresList.size(); i++) {
+                        if (animeSpecificGenresList.get(i) == null) {
+                            animeSpecificGenresList.remove(animeSpecificGenresList.get(i));
+                        }
+                    }
+                    int startIndex = (animeSpecificGenresViewModel.getCurrent_page()*TOP_HEADLINES_PAGE_SIZE_VALUE) -
+                            TOP_HEADLINES_PAGE_SIZE_VALUE;
+                    for (int i = startIndex; i < fetchedAnimeSpecificGenres.size(); i++) {
+                        animeSpecificGenresList.add(fetchedAnimeSpecificGenres.get(i));
+                    }
+                    animeSpecificGenresRecyclerViewAdapter.notifyItemRangeInserted(initialSize, animeSpecificGenresList.size());
                 }
-                animeSpecificGenresRecyclerViewAdapter.notifyDataSetChanged();
             }else{
                 ErrorMessagesUtil errorMessagesUtil =
                         new ErrorMessagesUtil(requireActivity().getApplication());

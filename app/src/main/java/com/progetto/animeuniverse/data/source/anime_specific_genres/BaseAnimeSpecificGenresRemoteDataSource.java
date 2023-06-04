@@ -8,5 +8,5 @@ public abstract class BaseAnimeSpecificGenresRemoteDataSource {
         this.animeSpecificGenresCallback = animeSpecificGenresCallback;
     }
 
-    public abstract void getAnimeSpecificGenres();
+    public abstract void getAnimeSpecificGenres(int idGenre);
 }

@@ -20,7 +20,7 @@ public class AnimeSpecificGenresMockRemoteDataSource extends BaseAnimeSpecificGe
     }
 
     @Override
-    public void getAnimeSpecificGenres() {
+    public void getAnimeSpecificGenres(int idGenre) {
         AnimeSpecificGenresApiResponse animeSpecificGenresApiResponse = null;
         switch (jsonParserType) {
             case GSON:
