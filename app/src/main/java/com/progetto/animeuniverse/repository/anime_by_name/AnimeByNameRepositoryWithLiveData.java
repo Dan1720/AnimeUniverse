@@ -26,7 +26,7 @@ public class AnimeByNameRepositoryWithLiveData implements IAnimeByNameRepository
     private final MutableLiveData<Result> allAnimeByNameMutableLiveData;
     private final BaseAnimeByNameRemoteDataSource animeByNameRemoteDataSource;
     private final BaseAnimeByNameLocalDataSource animeByNameLocalDataSource;
-    private AnimeByNameDao animeByNameDao;
+    //private AnimeByNameDao animeByNameDao;
 
     public AnimeByNameRepositoryWithLiveData(BaseAnimeByNameRemoteDataSource animeByNameRemoteDataSource, BaseAnimeByNameLocalDataSource animeByNameLocalDataSource) {
         allAnimeByNameMutableLiveData = new MutableLiveData<>();
@@ -35,14 +35,18 @@ public class AnimeByNameRepositoryWithLiveData implements IAnimeByNameRepository
         this.animeByNameLocalDataSource.setAnimeByNameCallback(this);
         this.animeByNameRemoteDataSource.setAnimeByNameCallback(this);
     }
+    //Questo metodo da rivedere
     @Override
     public MutableLiveData<Result> fetchAnimeByName(String nameAnime,long lastUpdate) {
         long currentTime = System.currentTimeMillis();
-        if(currentTime - lastUpdate > FRESH_TIMEOUT){
+        /*if(currentTime - lastUpdate > FRESH_TIMEOUT){
+            Log.d("LiveData", "Ramo if");
             animeByNameRemoteDataSource.getAnimeByName(nameAnime);
         }else{
+            Log.d("LiveData", "Ramo else");
             animeByNameLocalDataSource.getAnimeByName();
-        }
+        }*/
+        animeByNameRemoteDataSource.getAnimeByName(nameAnime);
         return allAnimeByNameMutableLiveData;
     }
 
@@ -121,9 +125,6 @@ public class AnimeByNameRepositoryWithLiveData implements IAnimeByNameRepository
             mAsyncTaskDao.deleteAll();
             return null;
         }
-    }
-    public void deleteAll()  {
-        new deleteAllWordsAsyncTask(animeByNameDao).execute();
     }
 
     public BaseAnimeByNameRemoteDataSource getAnimeByNameRemoteDataSource() {

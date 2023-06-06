@@ -40,14 +40,17 @@ import com.progetto.animeuniverse.adapter.SearchListAdapter;
 import com.progetto.animeuniverse.database.AnimeByNameDao;
 import com.progetto.animeuniverse.database.AnimeRoomDatabase;
 import com.progetto.animeuniverse.databinding.FragmentSearchBinding;
+import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeByName;
 import com.progetto.animeuniverse.model.AnimeByNameResponse;
+import com.progetto.animeuniverse.model.AnimeResponse;
 import com.progetto.animeuniverse.model.Result;
 
 import com.progetto.animeuniverse.repository.anime_by_name.AnimeByNameResponseCallback;
 import com.progetto.animeuniverse.repository.anime_by_name.IAnimeByNameRepositoryWithLiveData;
 import com.progetto.animeuniverse.service.AnimeApiService;
 import com.progetto.animeuniverse.util.Constants;
+import com.progetto.animeuniverse.util.ErrorMessagesUtil;
 import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
@@ -84,7 +87,6 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
     private MutableLiveData<Result.AnimeByNameSuccess> animeSearchResult = new MutableLiveData<>();
     private String query;
     //private String finalLastUpdate;
-    private String lastUpdate = "0";
     private SearchListAdapter searchListAdapter;
     private int count = 0;
 
@@ -164,6 +166,7 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
                     }
 
         });
+        String lastUpdate = "0";
         NavBackStackEntry navBackStackEntry = Navigation.findNavController(view).getPreviousBackStackEntry();
         if(navBackStackEntry != null && navBackStackEntry.getDestination().getId() == R.id.searchFragment){
             ((BottomNavigationView) requireActivity().findViewById(R.id.bottom_navigation)).
@@ -175,7 +178,6 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
         }
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(searchListAdapter);
-        //String lastUpdate = "0";
         if(sharedPreferencesUtil.readStringData(SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE) != null){
             lastUpdate = sharedPreferencesUtil.readStringData(
                     SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE);
@@ -183,23 +185,26 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
 
         SearchView searchView = view.findViewById(R.id.search_view);
         searchView.clearFocus();
-        //this.finalLastUpdate = lastUpdate;
 
 
+        String finalLastUpdate = lastUpdate;
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                SearchFragment.this.query= query;
-                animeViewModel.deleteAll();
-                animeViewModel.getAnimeByName(query, Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
-                    count++;
+                animeViewModel.getAnimeByName(query, Long.parseLong(finalLastUpdate)).observe(getViewLifecycleOwner(), result -> {
+                    System.out.println("Result: "+ result);
                     if (result.isSuccess()) {
-                        AnimeByNameResponse animeByNameResponse = ((Result.AnimeByNameSuccess) result).getData();
-                        onSuccess(animeByNameResponse.getAnimeByNameList(), Long.parseLong(lastUpdate));
+                        AnimeByNameResponse animeResponse = ((Result.AnimeByNameSuccess) result).getData();
+                        List<AnimeByName> fetchedAnime = animeResponse.getAnimeByNameList();
+                        SearchFragment.this.animeByNameList.addAll(fetchedAnime);
+                        searchListAdapter.notifyDataSetChanged();
 
                     } else {
-                        onFailure(((Result.Error) result).getMessage());
+                        ErrorMessagesUtil errorMessagesUtil = new ErrorMessagesUtil(requireActivity().getApplication());
+                        Snackbar.make(view, errorMessagesUtil.
+                                        getErrorMessage(((Result.Error) result).getMessage()),
+                                Snackbar.LENGTH_SHORT).show();
                     }
                 });
                 return true;

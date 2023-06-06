@@ -97,21 +97,4 @@ public class AnimeByNameRepository implements IAnimeByNameRepository{
         return animeByNameResponseCallback;
     }
 
-    private static class deleteAllWordsAsyncTask extends AsyncTask<Void, Void, Void> {
-        private AnimeByNameDao mAsyncTaskDao;
-
-        deleteAllWordsAsyncTask(AnimeByNameDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            mAsyncTaskDao.deleteAll();
-            return null;
-        }
-    }
-    public void deleteAll()  {
-        new deleteAllWordsAsyncTask(animeByNameDao).execute();
-    }
-
 }

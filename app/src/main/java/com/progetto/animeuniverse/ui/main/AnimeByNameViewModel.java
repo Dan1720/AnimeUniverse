@@ -1,6 +1,7 @@
 package com.progetto.animeuniverse.ui.main;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -22,24 +23,24 @@ public class AnimeByNameViewModel extends ViewModel {
     private int count;
     private MutableLiveData<Result> animeByNameListLiveData;
     private int currentResults;
-    private AnimeByNameRepository animeByNameRepository;
-    private Application application = animeByNameRepository.getApplication();
-    private AnimeByNameResponseCallback animeByNameResponseCallback = animeByNameRepository.getAnimeByNameResponseCallback();
 
 
 
     public AnimeByNameViewModel(IAnimeByNameRepositoryWithLiveData animeByNameRepositoryWithLiveData) {
         this.animeByNameRepositoryWithLiveData = animeByNameRepositoryWithLiveData;
-        this.animeByNameRepository = new AnimeByNameRepository(application, animeByNameResponseCallback);
         this.firstLoading = true;
         this.current_page = 1;
         this.count = 0;
     }
 
+    //Questo metodo da rivedere
     public MutableLiveData<Result> getAnimeByName(String nameAnime, long lastUpdate){
-        if(animeByNameListLiveData == null){
+        System.out.println("Cosa è arrivato: " + nameAnime + " " + lastUpdate);
+        /*if(animeByNameListLiveData == null){
+            System.out.println("Dentro if");
             fetchAnimeByName(nameAnime, lastUpdate);
-        }
+        }*/
+        fetchAnimeByName(nameAnime, lastUpdate);
         return animeByNameListLiveData;
     }
 
@@ -94,7 +95,5 @@ public class AnimeByNameViewModel extends ViewModel {
     public void setCurrentResults(int currentResults) {
         this.currentResults = currentResults;
     }
-
-    public void deleteAll() {animeByNameRepository.deleteAll();}
 
 }
