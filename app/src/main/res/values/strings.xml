@@ -95,4 +95,6 @@
     <string name="read_more">Leggi tutto</string>
     <string name="txt_episode">Episodio</string>
     <string name="duration">Durata:</string>
+    <string name="txt_anime_reccomendations">Anime consigliati</string>
+    <string name="txt_anime_new">Novità</string>
 </resources>

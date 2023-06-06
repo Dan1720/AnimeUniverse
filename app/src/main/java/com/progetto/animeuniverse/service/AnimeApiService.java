@@ -3,26 +3,20 @@ package com.progetto.animeuniverse.service;
 
 
 import static com.progetto.animeuniverse.util.Constants.ANIME_API_ENDPOINTS;
-import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_ANIME_NEW_PARAMETER;
 import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_ENDPOINT;
 import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_Q_PARAMETER;
-import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_TOP_PARAMETER;
 
-import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeApiResponse;
 import com.progetto.animeuniverse.model.AnimeByNameApiResponse;
 import com.progetto.animeuniverse.model.AnimeEpisodesApiResponse;
 import com.progetto.animeuniverse.model.AnimeEpisodesImagesApiResponse;
 import com.progetto.animeuniverse.model.AnimeMovieApiResponse;
 import com.progetto.animeuniverse.model.AnimeNewApiResponse;
-import com.progetto.animeuniverse.model.AnimeRecommendations;
 import com.progetto.animeuniverse.model.AnimeRecommendationsApiResponse;
 import com.progetto.animeuniverse.model.AnimeSpecificGenresApiResponse;
 import com.progetto.animeuniverse.model.AnimeTvApiResponse;
 import com.progetto.animeuniverse.model.GenresApiResponse;
 import com.progetto.animeuniverse.model.ReviewsApiResponse;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

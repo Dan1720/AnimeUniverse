@@ -29,7 +29,7 @@ public class AnimeSpecificGenresRepositoryWithLiveData implements IAnimeSpecific
     }
 
     @Override
-    public MutableLiveData<Result> fetchAnimeSpecificGenres(int idGenre,long lastUpdate) {
+    public MutableLiveData<Result> fetchAnimeSpecificGenres(int idGenre, long lastUpdate) {
         long currentTime = System.currentTimeMillis();
         if(currentTime - lastUpdate > FRESH_TIMEOUT){
             animeSpecificGenresRemoteDataSource.getAnimeSpecificGenres(idGenre);

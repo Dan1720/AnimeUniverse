@@ -28,6 +28,9 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 
 import com.progetto.animeuniverse.R;
+import com.progetto.animeuniverse.adapter.AnimeNewRecyclerViewAdapter;
+import com.progetto.animeuniverse.adapter.AnimeRecommendationsRecyclerViewAdapter;
+import com.progetto.animeuniverse.adapter.AnimeTopRecyclerViewAdapter;
 import com.progetto.animeuniverse.adapter.ChildItemAdapter;
 import com.progetto.animeuniverse.adapter.ParentItemAdapter;
 import com.progetto.animeuniverse.databinding.FragmentHomeBinding;
@@ -38,7 +41,9 @@ import com.progetto.animeuniverse.model.AnimeEpisodesImages;
 import com.progetto.animeuniverse.model.AnimeGenres;
 import com.progetto.animeuniverse.model.AnimeMovie;
 import com.progetto.animeuniverse.model.AnimeNew;
+import com.progetto.animeuniverse.model.AnimeNewResponse;
 import com.progetto.animeuniverse.model.AnimeRecommendations;
+import com.progetto.animeuniverse.model.AnimeRecommendationsResponse;
 import com.progetto.animeuniverse.model.AnimeResponse;
 import com.progetto.animeuniverse.model.AnimeSpecificGenres;
 import com.progetto.animeuniverse.model.AnimeTv;
@@ -67,11 +72,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
     private List<Anime> animeList;
     private List<AnimeRecommendations> animeRecommendationsList;
     private List<AnimeNew> animeNewList;
-    private List<AnimeEpisodes> animeEpisodesList;
-    private List<AnimeEpisodesImages> animeEpisodesImagesList;
-    private List<AnimeTv> animeTvList;
-    private List<AnimeMovie> animeMovieList;
-    private List<AnimeSpecificGenres> animeSpecificGenresList;
+
     private SharedPreferencesUtil sharedPreferencesUtil;
     private AnimeViewModel animeViewModel;
     private AnimeRecommendationsViewModel animeRecommendationsViewModel;
@@ -158,25 +159,24 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerView ParentRecyclerViewItem = view.findViewById(R.id.parent_recyclerview);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
-        ParentItemAdapter parentItemAdapter = new ParentItemAdapter(ParentItemList(animeList), requireActivity().getApplication(),new ChildItemAdapter.OnItemClickListener(){
+        RecyclerView animeTopRecyclerViewItem = view.findViewById(R.id.animeTop_recyclerview);
+        AnimeTopRecyclerViewAdapter animeTopRecyclerViewAdapter= new AnimeTopRecyclerViewAdapter(animeList, requireActivity().getApplication(),new AnimeTopRecyclerViewAdapter.OnItemClickListener(){
             @Override
-            public void onAnimeItemClick(Anime anime){
+            public void onAnimeClick(Anime anime) {
                 com.progetto.animeuniverse.ui.main.HomeFragmentDirections.ActionHomeFragmentToAnimeDetailsFragment action =
                         com.progetto.animeuniverse.ui.main.HomeFragmentDirections.actionHomeFragmentToAnimeDetailsFragment(anime);
                 Navigation.findNavController(view).navigate(action);
             }
-
             @Override
             public void onFavoriteButtonPressed(int position) {
                 animeList.get(position).setFavorite(!animeList.get(position).isFavorite());
                 animeViewModel.updateAnime(animeList.get(position));
             }
         });
-        ParentRecyclerViewItem.setAdapter(parentItemAdapter);
-        ParentRecyclerViewItem.setLayoutManager(layoutManager);
+        animeTopRecyclerViewItem.setAdapter(animeTopRecyclerViewAdapter);
+        animeTopRecyclerViewItem.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+
+
 
 
         String lastUpdate ="0";
@@ -186,7 +186,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
                 AnimeResponse animeResponse = ((Result.AnimeResponseSuccess) result).getData();
                 List<Anime> fetchedAnime = animeResponse.getAnimeList();
                 this.animeList.addAll(fetchedAnime);
-                parentItemAdapter.notifyDataSetChanged();
+                animeTopRecyclerViewAdapter.notifyDataSetChanged();
                 setImageHomeCover(animeList);
             }else {
                 ErrorMessagesUtil errorMessagesUtil = new ErrorMessagesUtil(requireActivity().getApplication());
@@ -195,6 +195,60 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
                         Snackbar.LENGTH_SHORT).show();
             }
         });
+
+        RecyclerView animeRecommendationsRecyclerViewItem = view.findViewById(R.id.animeReccomendations_recyclerview);
+        AnimeRecommendationsRecyclerViewAdapter animeRecommendationsRecyclerViewAdapter = new AnimeRecommendationsRecyclerViewAdapter(animeRecommendationsList, requireActivity().getApplication(), new AnimeRecommendationsRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onAnimeRecommendationsClick(AnimeRecommendations animeRecommendations) {
+                com.progetto.animeuniverse.ui.main.HomeFragmentDirections.ActionHomeFragmentToAnimeRecommendationsDetailsFragment action =
+                        HomeFragmentDirections.actionHomeFragmentToAnimeRecommendationsDetailsFragment(animeRecommendations);
+                Navigation.findNavController(view).navigate(action);
+            }
+        });
+        animeRecommendationsRecyclerViewItem.setAdapter(animeRecommendationsRecyclerViewAdapter);
+        animeRecommendationsRecyclerViewItem.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+
+        animeRecommendationsViewModel.getAnimeRecommendations(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
+            System.out.println("Result reccomend: "+ result.isSuccess());
+            if(result.isSuccess()){
+                AnimeRecommendationsResponse animeRecommendationsResponse = ((Result.AnimeRecommendationsSuccess) result).getData();
+                List<AnimeRecommendations> fetchedAnimeRecommendations = animeRecommendationsResponse.getAnimeRecommendationsList();
+                this.animeRecommendationsList.addAll(fetchedAnimeRecommendations);
+                animeRecommendationsRecyclerViewAdapter.notifyDataSetChanged();
+            }else {
+                ErrorMessagesUtil errorMessagesUtil = new ErrorMessagesUtil(requireActivity().getApplication());
+                Snackbar.make(view, errorMessagesUtil.
+                                getErrorMessage(((Result.Error) result).getMessage()),
+                        Snackbar.LENGTH_SHORT).show();
+            }
+        });
+
+
+        RecyclerView animeNewRecyclerViewItem = view.findViewById(R.id.animeNew_recyclerview);
+        AnimeNewRecyclerViewAdapter animeNewRecyclerViewAdapter = new AnimeNewRecyclerViewAdapter(animeNewList, requireActivity().getApplication(), new AnimeNewRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onAnimeNewClick(AnimeNew animeNew) {
+
+            }
+        });
+        animeNewRecyclerViewItem.setAdapter(animeNewRecyclerViewAdapter);
+        animeNewRecyclerViewItem.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+
+        animeNewViewModel.getAnimeNew(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
+            System.out.println("Result new: "+ result.isSuccess());
+            if(result.isSuccess()){
+                AnimeNewResponse animeNewResponse = ((Result.AnimeNewSuccess) result).getData();
+                List<AnimeNew> fetchedAnimeNew = animeNewResponse.getAnimeNewList();
+                this.animeNewList.addAll(fetchedAnimeNew);
+                animeNewRecyclerViewAdapter.notifyDataSetChanged();
+            }else {
+                ErrorMessagesUtil errorMessagesUtil = new ErrorMessagesUtil(requireActivity().getApplication());
+                Snackbar.make(view, errorMessagesUtil.
+                                getErrorMessage(((Result.Error) result).getMessage()),
+                        Snackbar.LENGTH_SHORT).show();
+            }
+        });
+
 
         fragmentHomeBinding.txtCategorie.setOnClickListener(v -> {
             Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_genresFragment);

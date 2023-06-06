@@ -32,8 +32,8 @@ public class AnimeSpecificGenresViewModel extends ViewModel {
         return animeSpecificGenresListLiveData;
     }
 
-    private void fetchAnimeSpecificGenres(int idGenre, long lastUpdate){
-        animeSpecificGenresListLiveData = animeSpecificGenresRepositoryWithLiveData.fetchAnimeSpecificGenres(idGenre, lastUpdate);
+    public void fetchAnimeSpecificGenres(int idGenre, long lastUpdate){
+        animeSpecificGenresListLiveData = animeSpecificGenresRepositoryWithLiveData.fetchAnimeSpecificGenres(idGenre,lastUpdate);
     }
 
     public boolean isLoading() {
