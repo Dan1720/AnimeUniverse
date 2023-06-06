@@ -96,10 +96,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceLocator {
     private static volatile ServiceLocator INSTANCE = null;
-    private AnimeByNameRepositoryWithLiveData animeByNameRepositoryWithLiveData;
-    private AnimeByNameRepository animeByNameRepository;
-    private Application application;
-    private AnimeByNameResponseCallback animeByNameResponseCallback;
+
 
     private ServiceLocator() {}
 
@@ -112,10 +109,6 @@ public class ServiceLocator {
             }
         }
         return INSTANCE;
-    }
-    public void initialize(Application application, AnimeByNameResponseCallback animeByNameResponseCallback) {
-        this.application = application;
-        this.animeByNameResponseCallback = animeByNameResponseCallback;
     }
 
     public IUserRepository getUserRepository(Application application) {
@@ -255,20 +248,6 @@ public class ServiceLocator {
         animeByNameRemoteDataSource = new AnimeByNameRemoteDataSource();
         animeByNameLocalDataSource = new AnimeByNameLocalDataSource(getAnimeByNameDao(application), sharedPreferencesUtil, dataEncryptionUtil);
         return new AnimeByNameRepositoryWithLiveData(animeByNameRemoteDataSource, animeByNameLocalDataSource);
-    }
-    public AnimeByNameRepository getAnimeByNameRepositoryForSearchFragment(){
-        if (animeByNameRepository == null) {
-            animeByNameRepository = new AnimeByNameRepository(application, animeByNameResponseCallback);
-        }
-        return animeByNameRepository;
-    }
-    public AnimeByNameRepositoryWithLiveData getAnimeByNameRepositoryWithLiveDataForSearchFragment(){
-        AnimeByNameRepository animeByNameRepository = getAnimeByNameRepositoryForSearchFragment();
-        AnimeByNameDao animeByNameDao = animeByNameRepository.getAnimeByNameDao();
-        if (animeByNameRepositoryWithLiveData == null) {
-            animeByNameRepositoryWithLiveData = new AnimeByNameRepositoryWithLiveData(animeByNameDao);
-        }
-        return animeByNameRepositoryWithLiveData;
     }
 
     public IAnimeNewRepositoryWithLiveData getAnimeNewRepository(Application application){

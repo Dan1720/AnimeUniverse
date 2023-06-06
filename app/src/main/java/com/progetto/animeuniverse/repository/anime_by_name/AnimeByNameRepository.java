@@ -35,12 +35,7 @@ public class AnimeByNameRepository implements IAnimeByNameRepository{
         AnimeRoomDatabase animeRoomDatabase = ServiceLocator.getInstance().getAnimeByNameDao(application);
         this.animeByNameDao = animeRoomDatabase.animeByNameDao();
         this.animeByNameResponseCallback = animeByNameResponseCallback;
-        ServiceLocator.getInstance().initialize(application, animeByNameResponseCallback);
     }
-
-
-
-
     @Override
     public void fetchAnimeByName(String nameAnime, long lastUpdate) {
         long currentTime = System.currentTimeMillis();
@@ -92,6 +87,31 @@ public class AnimeByNameRepository implements IAnimeByNameRepository{
     }
     public AnimeByNameDao getAnimeByNameDao() {
         return animeByNameDao;
+    }
+
+    public Application getApplication() {
+        return application;
+    }
+
+    public AnimeByNameResponseCallback getAnimeByNameResponseCallback() {
+        return animeByNameResponseCallback;
+    }
+
+    private static class deleteAllWordsAsyncTask extends AsyncTask<Void, Void, Void> {
+        private AnimeByNameDao mAsyncTaskDao;
+
+        deleteAllWordsAsyncTask(AnimeByNameDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mAsyncTaskDao.deleteAll();
+            return null;
+        }
+    }
+    public void deleteAll()  {
+        new deleteAllWordsAsyncTask(animeByNameDao).execute();
     }
 
 }

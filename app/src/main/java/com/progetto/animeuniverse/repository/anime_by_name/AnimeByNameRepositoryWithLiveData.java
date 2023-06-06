@@ -11,10 +11,12 @@ import com.progetto.animeuniverse.data.source.anime_by_name.AnimeByNameCallback;
 import com.progetto.animeuniverse.data.source.anime_by_name.BaseAnimeByNameLocalDataSource;
 import com.progetto.animeuniverse.data.source.anime_by_name.BaseAnimeByNameRemoteDataSource;
 import com.progetto.animeuniverse.database.AnimeByNameDao;
+import com.progetto.animeuniverse.database.AnimeRoomDatabase;
 import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeByName;
 import com.progetto.animeuniverse.model.AnimeByNameApiResponse;
 import com.progetto.animeuniverse.model.Result;
+import com.progetto.animeuniverse.util.ServiceLocator;
 
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class AnimeByNameRepositoryWithLiveData implements IAnimeByNameRepository
     private final MutableLiveData<Result> allAnimeByNameMutableLiveData;
     private final BaseAnimeByNameRemoteDataSource animeByNameRemoteDataSource;
     private final BaseAnimeByNameLocalDataSource animeByNameLocalDataSource;
+    private AnimeByNameDao animeByNameDao;
 
     public AnimeByNameRepositoryWithLiveData(BaseAnimeByNameRemoteDataSource animeByNameRemoteDataSource, BaseAnimeByNameLocalDataSource animeByNameLocalDataSource) {
         allAnimeByNameMutableLiveData = new MutableLiveData<>();
@@ -32,12 +35,6 @@ public class AnimeByNameRepositoryWithLiveData implements IAnimeByNameRepository
         this.animeByNameLocalDataSource.setAnimeByNameCallback(this);
         this.animeByNameRemoteDataSource.setAnimeByNameCallback(this);
     }
-    public AnimeByNameRepositoryWithLiveData(AnimeByNameDao animeByNameDao){
-        this.animeByNameDao = animeByNameDao;
-
-    }
-
-
     @Override
     public MutableLiveData<Result> fetchAnimeByName(String nameAnime,long lastUpdate) {
         long currentTime = System.currentTimeMillis();
@@ -112,8 +109,28 @@ public class AnimeByNameRepositoryWithLiveData implements IAnimeByNameRepository
     public void onSuccessDeletion() {
 
     }
+    private static class deleteAllWordsAsyncTask extends AsyncTask<Void, Void, Void> {
+        private AnimeByNameDao mAsyncTaskDao;
 
+        deleteAllWordsAsyncTask(AnimeByNameDao dao) {
+            mAsyncTaskDao = dao;
+        }
 
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mAsyncTaskDao.deleteAll();
+            return null;
+        }
+    }
+    public void deleteAll()  {
+        new deleteAllWordsAsyncTask(animeByNameDao).execute();
+    }
 
+    public BaseAnimeByNameRemoteDataSource getAnimeByNameRemoteDataSource() {
+        return animeByNameRemoteDataSource;
+    }
 
+    public BaseAnimeByNameLocalDataSource getAnimeByNameLocalDataSource() {
+        return animeByNameLocalDataSource;
+    }
 }
