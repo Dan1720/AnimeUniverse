@@ -20,14 +20,13 @@ import com.progetto.animeuniverse.util.ServiceLocator;
 
 import java.util.List;
 
-public class AnimeByNameRepositoryWithLiveData implements IAnimeByNameRepositoryWithLiveData, AnimeByNameCallback {
+public class AnimeByNameRepositoryWithLiveData implements IAnimeByNameRepositoryWithLiveData, AnimeByNameCallback{
     private static final String TAG = AnimeByNameRepositoryWithLiveData.class.getSimpleName();
 
     private final MutableLiveData<Result> allAnimeByNameMutableLiveData;
     private final BaseAnimeByNameRemoteDataSource animeByNameRemoteDataSource;
     private final BaseAnimeByNameLocalDataSource animeByNameLocalDataSource;
     //private AnimeByNameDao animeByNameDao;
-
     public AnimeByNameRepositoryWithLiveData(BaseAnimeByNameRemoteDataSource animeByNameRemoteDataSource, BaseAnimeByNameLocalDataSource animeByNameLocalDataSource) {
         allAnimeByNameMutableLiveData = new MutableLiveData<>();
         this.animeByNameRemoteDataSource = animeByNameRemoteDataSource;
@@ -46,6 +45,7 @@ public class AnimeByNameRepositoryWithLiveData implements IAnimeByNameRepository
             Log.d("LiveData", "Ramo else");
             animeByNameLocalDataSource.getAnimeByName();
         }*/
+        animeByNameLocalDataSource.deleteAll();
         animeByNameRemoteDataSource.getAnimeByName(nameAnime);
         return allAnimeByNameMutableLiveData;
     }
@@ -113,7 +113,9 @@ public class AnimeByNameRepositoryWithLiveData implements IAnimeByNameRepository
     public void onSuccessDeletion() {
 
     }
-    private static class deleteAllWordsAsyncTask extends AsyncTask<Void, Void, Void> {
+
+
+    /*private static class deleteAllWordsAsyncTask extends AsyncTask<Void, Void, Void> {
         private AnimeByNameDao mAsyncTaskDao;
 
         deleteAllWordsAsyncTask(AnimeByNameDao dao) {
@@ -125,13 +127,5 @@ public class AnimeByNameRepositoryWithLiveData implements IAnimeByNameRepository
             mAsyncTaskDao.deleteAll();
             return null;
         }
-    }
-
-    public BaseAnimeByNameRemoteDataSource getAnimeByNameRemoteDataSource() {
-        return animeByNameRemoteDataSource;
-    }
-
-    public BaseAnimeByNameLocalDataSource getAnimeByNameLocalDataSource() {
-        return animeByNameLocalDataSource;
-    }
+    }*/
 }
