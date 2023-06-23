@@ -107,6 +107,11 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharedPreferencesUtil = new SharedPreferencesUtil(requireActivity().getApplication());
@@ -197,8 +202,17 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
                     if (result.isSuccess()) {
                         AnimeByNameResponse animeResponse = ((Result.AnimeByNameSuccess) result).getData();
                         List<AnimeByName> fetchedAnime = animeResponse.getAnimeByNameList();
+                        System.out.println("Dati chiamata: " + fetchedAnime);
                         SearchFragment.this.animeByNameList.addAll(fetchedAnime);
                         searchListAdapter.notifyDataSetChanged();
+                        //SearchFragment.this.animeByNameList.addAll(fetchedAnime);
+                        /*SearchFragment.this.animeByNameList.clear();
+                        searchListAdapter.notifyDataSetChanged();
+                        requireActivity().runOnUiThread(() -> {
+                            onSuccess(fetchedAnime, Long.parseLong(finalLastUpdate));
+                        });*/
+
+
 
                     } else {
                         ErrorMessagesUtil errorMessagesUtil = new ErrorMessagesUtil(requireActivity().getApplication());
@@ -217,17 +231,16 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
             }
         });
 
-
-
     }
 
     //@Override
     @Override
     public void onSuccess(List<AnimeByName> animeList, long lastUpdate) {
         if (animeList != null) {
+            System.out.println(animeList);
             this.animeByNameList.clear();
             this.animeByNameList.addAll(animeList);
-            searchListAdapter.notifyDataSetChanged();
+            sharedPreferencesUtil.writeStringData(SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE, String.valueOf(lastUpdate));
         }
     }
 

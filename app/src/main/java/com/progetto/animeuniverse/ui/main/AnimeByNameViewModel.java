@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import com.progetto.animeuniverse.model.Result;
@@ -26,8 +27,10 @@ public class AnimeByNameViewModel extends ViewModel {
 
 
 
+
     public AnimeByNameViewModel(IAnimeByNameRepositoryWithLiveData animeByNameRepositoryWithLiveData) {
         this.animeByNameRepositoryWithLiveData = animeByNameRepositoryWithLiveData;
+        this.animeByNameListLiveData = new MutableLiveData<>();
         this.firstLoading = true;
         this.current_page = 1;
         this.count = 0;
@@ -35,13 +38,23 @@ public class AnimeByNameViewModel extends ViewModel {
 
     //Questo metodo da rivedere
     public MutableLiveData<Result> getAnimeByName(String nameAnime, long lastUpdate){
-        System.out.println("Cosa è arrivato: " + nameAnime + " " + lastUpdate);
         /*if(animeByNameListLiveData == null){
             System.out.println("Dentro if");
             fetchAnimeByName(nameAnime, lastUpdate);
         }*/
-        fetchAnimeByName(nameAnime, lastUpdate);
+        /*fetchAnimeByName(nameAnime, lastUpdate);
+        return animeByNameListLiveData;*/
+        animeByNameRepositoryWithLiveData.fetchAnimeByName(nameAnime, lastUpdate)
+                .observeForever(new Observer<Result>() {
+                    @Override
+                    public void onChanged(Result result) {
+                        animeByNameListLiveData.setValue(result);
+
+                    }
+                });
+
         return animeByNameListLiveData;
+
     }
 
     private void fetchAnimeByName(String nameAnime, long lastUpdate){

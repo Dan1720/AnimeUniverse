@@ -14,6 +14,8 @@ import com.progetto.animeuniverse.model.AnimeByNameApiResponse;
 import com.progetto.animeuniverse.service.AnimeApiService;
 import com.progetto.animeuniverse.util.ServiceLocator;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -47,7 +49,7 @@ public class AnimeByNameRepository implements IAnimeByNameRepository{
                 public void onResponse(Call<AnimeByNameApiResponse> call, Response<AnimeByNameApiResponse> response) {
                     if(response.isSuccessful()){
                         List<AnimeByName> animeByNameList = response.body().getAnimeByNameList();
-                        saveDataInDatabase(animeByNameList);
+                        saveDataInDatabase(animeByNameList, lastUpdate);
                     }else{
                         animeByNameResponseCallback.onFailure(application.getString(R.string.error_retrieving_anime));
                     }
@@ -62,10 +64,11 @@ public class AnimeByNameRepository implements IAnimeByNameRepository{
         }else {
             Log.d(TAG, application.getString(R.string.data_read_from_local_database));
         }
+
     }
 
-    private void saveDataInDatabase(List<AnimeByName> animeByNameList){
-        AnimeRoomDatabase.databaseWriteExecutor.execute(()->{
+    private void saveDataInDatabase(List<AnimeByName> animeByNameList, long lastUpdate){
+        /*AnimeRoomDatabase.databaseWriteExecutor.execute(()->{
             List<AnimeByName> allAnimeByName = animeByNameDao.getAll();
             for (AnimeByName animeByName : allAnimeByName){
                 if(animeByNameList.contains(animeByName)){
@@ -77,7 +80,21 @@ public class AnimeByNameRepository implements IAnimeByNameRepository{
                 animeByNameList.get(i).setId(Math.toIntExact(insertedAnimeByNameIds.get(i)));
             }
             animeByNameResponseCallback.onSuccess(animeByNameList,System.currentTimeMillis());
+        });*/
+        AnimeRoomDatabase.databaseWriteExecutor.execute(() -> {
+
+            //deleteDataFromDatabase();
+
+            List<Long> insertedAnimeByNameIds = animeByNameDao.insertAnimeByNameList(animeByNameList);
+            for (int i = 0; i < animeByNameList.size(); i++) {
+                animeByNameList.get(i).setId(Math.toIntExact(insertedAnimeByNameIds.get(i)));
+            }
+
+            animeByNameResponseCallback.onSuccess(animeByNameList, System.currentTimeMillis());
         });
+
+
+
     }
 
     private void readDataFromDatabase(long lastUpdate){
@@ -85,16 +102,10 @@ public class AnimeByNameRepository implements IAnimeByNameRepository{
             animeByNameResponseCallback.onSuccess(animeByNameDao.getAll(), lastUpdate);
         });
     }
-    public AnimeByNameDao getAnimeByNameDao() {
-        return animeByNameDao;
-    }
-
-    public Application getApplication() {
-        return application;
-    }
-
-    public AnimeByNameResponseCallback getAnimeByNameResponseCallback() {
-        return animeByNameResponseCallback;
-    }
+    /*private void deleteDataFromDatabase(){
+        AnimeRoomDatabase.databaseWriteExecutor.execute(()->{
+            animeByNameDao.deleteAll();
+        } );
+    }*/
 
 }

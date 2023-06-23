@@ -97,4 +97,6 @@
     <string name="duration">Durata:</string>
     <string name="txt_anime_reccomendations">Anime consigliati</string>
     <string name="txt_anime_new">Novità</string>
+
+    <string name="error_empty_anime_list" translatable="false">Empty List</string>
 </resources>
