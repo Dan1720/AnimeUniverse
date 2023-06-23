@@ -12,6 +12,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
@@ -65,6 +66,9 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
     private AnimeEpisodesViewModel animeEpisodesViewModel;
     private AnimeEpisodesImagesViewModel animeEpisodesImagesViewModel;
 
+    private IAnimeEpisodesImagesRepositoryWithLiveData animeEpisodesImagesRepositoryWithLiveData;
+    private IAnimeEpisodesRepositoryWithLiveData animeEpisodesRepositoryWithLiveData;
+
     public AnimeDetailsFragment() {
         // Required empty public constructor
 
@@ -94,7 +98,7 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
 
         reviewsList = new ArrayList<>();
 
-        IAnimeEpisodesRepositoryWithLiveData animeEpisodesRepositoryWithLiveData =
+        animeEpisodesRepositoryWithLiveData =
                 ServiceLocator.getInstance().getAnimeEpisodesRepository(requireActivity().getApplication());
         if(animeEpisodesRepositoryWithLiveData != null){
             animeEpisodesViewModel = new ViewModelProvider(requireActivity(), new AnimeEpisodesViewModelFactory(animeEpisodesRepositoryWithLiveData)).get(AnimeEpisodesViewModel.class);
@@ -105,16 +109,6 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
 
         animeEpisodesList = new ArrayList<>();
 
-        IAnimeEpisodesImagesRepositoryWithLiveData animeEpisodesImagesRepositoryWithLiveData =
-                ServiceLocator.getInstance().getAnimeEpisodesImagesRepository(requireActivity().getApplication());
-        if(animeEpisodesImagesRepositoryWithLiveData != null){
-            animeEpisodesImagesViewModel = new ViewModelProvider(requireActivity(), new AnimeEpisodesImagesViewModelFactory(animeEpisodesImagesRepositoryWithLiveData)).get(AnimeEpisodesImagesViewModel.class);
-        }else{
-            Snackbar.make(requireActivity().findViewById(android.R.id.content),
-                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
-        }
-
-        animeEpisodesImagesList = new ArrayList<>();
 
     }
 
@@ -210,6 +204,12 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
         ReviewsRecyclerViewItem.setLayoutManager(layoutManager);
 
         String lastUpdate = "0";
+        if (sharedPreferencesUtil.readStringData(
+                SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE) != null) {
+            lastUpdate = sharedPreferencesUtil.readStringData(
+                    SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE);
+        }
+
         reviewsViewModel.getReviewsByIdAnime(anime.getId(), Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
             System.out.println("Result reviews: "+ result.isSuccess());
             if(result.isSuccess()){
@@ -241,14 +241,32 @@ public class AnimeDetailsFragment extends Fragment implements ReviewsResponseCal
         EpisodesRecyclerViewItem.setLayoutManager(layoutManagerEp);
 
 
-        lastUpdate = "0";
+        animeEpisodesViewModel.onCleared();
         animeEpisodesViewModel.getAnimeEpisodes(anime.getId(), Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
             System.out.println("Result episodes: "+ result.isSuccess());
+            System.out.println(animeEpisodesViewModel.toString());
+
             if(result.isSuccess()){
                 AnimeEpisodesResponse animeEpisodesResponse = ((Result.AnimeEpisodesSuccess) result).getData();
                 List<AnimeEpisodes> fetchedAnimeEpisodes = animeEpisodesResponse.getAnimeEpisodesList();
-                this.animeEpisodesList.addAll(fetchedAnimeEpisodes);
-                episodesRecyclerViewAdapter.notifyDataSetChanged();
+                if(!animeEpisodesViewModel.isLoading()){
+                    if(animeEpisodesViewModel.isFirstLoading()){
+                        animeEpisodesViewModel.setFirstLoading(false);
+                        this.animeEpisodesList.addAll(fetchedAnimeEpisodes);
+                        episodesRecyclerViewAdapter.notifyDataSetChanged();
+                    }else{
+                        animeEpisodesList.clear();
+                        animeEpisodesList.addAll(fetchedAnimeEpisodes);
+                        episodesRecyclerViewAdapter.notifyDataSetChanged();
+                    }
+                }else{
+                    animeEpisodesViewModel.setLoading(false);
+                }
+
+                for(AnimeEpisodes e : animeEpisodesList ){
+                    System.out.println(e.toString());
+                }
+
             }else{
                 ErrorMessagesUtil errorMessagesUtil =
                         new ErrorMessagesUtil(requireActivity().getApplication());

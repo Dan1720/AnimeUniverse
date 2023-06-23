@@ -3,6 +3,7 @@ package com.progetto.animeuniverse.ui.main;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.progetto.animeuniverse.model.AnimeEpisodes;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepositoryWithLiveData;
 
@@ -25,14 +26,17 @@ public class AnimeEpisodesViewModel extends ViewModel {
     }
 
     public MutableLiveData<Result> getAnimeEpisodes(int idAnime, long lastUpdate){
-        if(animeEpisodesListLiveData == null){
+        /*if(animeEpisodesListLiveData == null){
             fetchAnimeEpisodes(idAnime, lastUpdate);
-        }
+        }*/
+        fetchAnimeEpisodes(idAnime, lastUpdate);
         return animeEpisodesListLiveData;
     }
 
     private void fetchAnimeEpisodes(int idAnime, long lastUpdate){
         animeEpisodesListLiveData = animeEpisodesRepositoryWithLiveData.fetchAnimeEpisodes(idAnime, lastUpdate);
+        System.out.println("animeEpisodesListLiveData: " + animeEpisodesListLiveData.toString());
+
     }
 
     public boolean isLoading() {
@@ -81,5 +85,9 @@ public class AnimeEpisodesViewModel extends ViewModel {
 
     public void setCurrentResults(int currentResults) {
         this.currentResults = currentResults;
+    }
+
+    public void onCleared(){
+        animeEpisodesListLiveData = null;
     }
 }

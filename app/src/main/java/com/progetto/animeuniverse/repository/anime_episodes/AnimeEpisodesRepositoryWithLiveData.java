@@ -35,11 +35,14 @@ public class AnimeEpisodesRepositoryWithLiveData implements IAnimeEpisodesReposi
     @Override
     public MutableLiveData<Result> fetchAnimeEpisodes(int idAnime, long lastUpdate) {
         long currentTime = System.currentTimeMillis();
-        if(currentTime - lastUpdate > FRESH_TIMEOUT){
+        /*if(currentTime - lastUpdate > FRESH_TIMEOUT){
             animeEpisodesRemoteDataSource.getAnimeEpisodes(idAnime);
         }else{
             animeEpisodesLocalDataSource.getAnimeEpisodes();
-        }
+        }*/
+        animeEpisodesRemoteDataSource.getAnimeEpisodes(idAnime);
+        System.out.print("animeEpisodesRemoteDataSource: " + allAnimeEpisodesMutableLiveData.toString());
+
         return allAnimeEpisodesMutableLiveData;
     }
 

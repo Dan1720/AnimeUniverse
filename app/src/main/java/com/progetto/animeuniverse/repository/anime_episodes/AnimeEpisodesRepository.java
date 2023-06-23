@@ -47,6 +47,7 @@ public class AnimeEpisodesRepository implements IAnimeEpisodesRepository{
                 @Override
                 public void onResponse(Call<AnimeEpisodesApiResponse> call, Response<AnimeEpisodesApiResponse> response) {
                     if(response.isSuccessful()){
+                        assert response.body() != null;
                         List<AnimeEpisodes> animeEpisodesList = response.body().getAnimeEpisodesList();
                         saveDataInDatabase(animeEpisodesList);
                     }else{
@@ -62,6 +63,7 @@ public class AnimeEpisodesRepository implements IAnimeEpisodesRepository{
 
         }else {
             Log.d(TAG, application.getString(R.string.data_read_from_local_database));
+            readDataFromDatabase(lastUpdate);
         }
     }
 

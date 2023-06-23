@@ -21,6 +21,7 @@ public class AnimeEpisodesRemoteDataSource extends BaseAnimeEpisodesRemoteDataSo
     @Override
     public void getAnimeEpisodes(int idAnime) {
         Call<AnimeEpisodesApiResponse> animeEpisodesApiResponseCall = animeApiService.getAnimeEpisodes(idAnime);
+        System.out.println("AnimeEpisodesApiResponseCall: "+ animeEpisodesApiResponseCall);
         animeEpisodesApiResponseCall.enqueue(new Callback<AnimeEpisodesApiResponse>(){
 
             @Override
@@ -28,6 +29,7 @@ public class AnimeEpisodesRemoteDataSource extends BaseAnimeEpisodesRemoteDataSo
                                    @NonNull Response<AnimeEpisodesApiResponse> response) {
                 if(response.isSuccessful() && response.body() != null){
                     animeEpisodesCallback.onSuccessFromRemote(response.body(), System.currentTimeMillis());
+                    System.out.println("Response body:" + response.body());
                 }else{
                     animeEpisodesCallback.onFailureFromRemote(new Exception());
                 }
