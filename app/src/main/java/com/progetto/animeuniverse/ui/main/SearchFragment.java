@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
@@ -127,7 +128,7 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
         }
         animeRoomDatabase = AnimeRoomDatabase.getDatabase(getContext());
         if (animeRoomDatabase != null) {
-            animeByNameDao = animeRoomDatabase.animeByNameDao();
+            this.animeByNameDao = animeRoomDatabase.animeByNameDao();
         }
 
         animeByNameList = new ArrayList<>();
@@ -197,21 +198,12 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                animeViewModel.getAnimeByName(query, Long.parseLong(finalLastUpdate)).observe(getViewLifecycleOwner(), result -> {
+                /*animeViewModel.getAnimeByName(query, Long.parseLong(finalLastUpdate)).observe(getViewLifecycleOwner(), result -> {
                     System.out.println("Result: "+ result);
                     if (result.isSuccess()) {
                         AnimeByNameResponse animeResponse = ((Result.AnimeByNameSuccess) result).getData();
                         List<AnimeByName> fetchedAnime = animeResponse.getAnimeByNameList();
-                        System.out.println("Dati chiamata: " + fetchedAnime);
-                        SearchFragment.this.animeByNameList.addAll(fetchedAnime);
-                        searchListAdapter.notifyDataSetChanged();
-                        //SearchFragment.this.animeByNameList.addAll(fetchedAnime);
-                        /*SearchFragment.this.animeByNameList.clear();
-                        searchListAdapter.notifyDataSetChanged();
-                        requireActivity().runOnUiThread(() -> {
-                            onSuccess(fetchedAnime, Long.parseLong(finalLastUpdate));
-                        });*/
-
+                        searchListAdapter.setData(fetchedAnime);
 
 
                     } else {
@@ -219,6 +211,23 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
                         Snackbar.make(view, errorMessagesUtil.
                                         getErrorMessage(((Result.Error) result).getMessage()),
                                 Snackbar.LENGTH_SHORT).show();
+                    }
+                });*/
+                animeViewModel.getAnimeByName(query, Long.parseLong(finalLastUpdate)).observe(getViewLifecycleOwner(), new Observer<Result>() {
+                    @Override
+                    public void onChanged(Result result) {
+                        if (result.isSuccess()) {
+                            AnimeByNameResponse animeResponse = ((Result.AnimeByNameSuccess) result).getData();
+                            List<AnimeByName> fetchedAnime = animeResponse.getAnimeByNameList();
+                            searchListAdapter.setData(fetchedAnime);
+
+
+                        } else {
+                            ErrorMessagesUtil errorMessagesUtil = new ErrorMessagesUtil(requireActivity().getApplication());
+                            Snackbar.make(view, errorMessagesUtil.
+                                            getErrorMessage(((Result.Error) result).getMessage()),
+                                    Snackbar.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 return true;

@@ -24,6 +24,7 @@ public class AnimeByNameViewModel extends ViewModel {
     private int count;
     private MutableLiveData<Result> animeByNameListLiveData;
     private int currentResults;
+    private AnimeByNameViewModel viewModel;
 
 
 
@@ -38,22 +39,16 @@ public class AnimeByNameViewModel extends ViewModel {
 
     //Questo metodo da rivedere
     public MutableLiveData<Result> getAnimeByName(String nameAnime, long lastUpdate){
-        /*if(animeByNameListLiveData == null){
-            System.out.println("Dentro if");
-            fetchAnimeByName(nameAnime, lastUpdate);
-        }*/
-        /*fetchAnimeByName(nameAnime, lastUpdate);
-        return animeByNameListLiveData;*/
-        animeByNameRepositoryWithLiveData.fetchAnimeByName(nameAnime, lastUpdate)
+        fetchAnimeByName(nameAnime, lastUpdate);
+        return animeByNameListLiveData;
+        /*animeByNameRepositoryWithLiveData.fetchAnimeByName(nameAnime, lastUpdate)
                 .observeForever(new Observer<Result>() {
                     @Override
                     public void onChanged(Result result) {
                         animeByNameListLiveData.setValue(result);
 
                     }
-                });
-
-        return animeByNameListLiveData;
+                });*/
 
     }
 

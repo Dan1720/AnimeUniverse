@@ -22,19 +22,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.AnimeByNameViewHolder> {
-
-
-
-
-
-
-   public interface OnItemClickListener{
-        void onAnimeClick(AnimeByName anime);
-    }
     private List<AnimeByName> animeList;
     private Application application;
 
     private OnItemClickListener onItemSelectedListener;
+
+   public interface OnItemClickListener{
+        void onAnimeClick(AnimeByName anime);
+    }
+    public void setData(List<AnimeByName> newData) {
+        this.animeList.clear();
+        animeList.addAll(newData);
+        notifyDataSetChanged();
+    }
     public SearchListAdapter(List<AnimeByName> animeList,Application application, OnItemClickListener onItemSelectedListener){
         this.animeList = animeList;
         this.application = application;
