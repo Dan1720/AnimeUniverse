@@ -4,6 +4,7 @@ import static com.progetto.animeuniverse.util.Constants.LAST_UPDATE;
 import static com.progetto.animeuniverse.util.Constants.SHARED_PREFERENCES_FILE_NAME;
 import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_ENDPOINT;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -47,7 +48,9 @@ import com.progetto.animeuniverse.model.AnimeByNameResponse;
 import com.progetto.animeuniverse.model.AnimeResponse;
 import com.progetto.animeuniverse.model.Result;
 
+import com.progetto.animeuniverse.repository.anime_by_name.AnimeByNameRepository;
 import com.progetto.animeuniverse.repository.anime_by_name.AnimeByNameResponseCallback;
+import com.progetto.animeuniverse.repository.anime_by_name.IAnimeByNameRepository;
 import com.progetto.animeuniverse.repository.anime_by_name.IAnimeByNameRepositoryWithLiveData;
 import com.progetto.animeuniverse.service.AnimeApiService;
 import com.progetto.animeuniverse.util.Constants;
@@ -71,9 +74,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class SearchFragment extends Fragment implements AnimeByNameResponseCallback {
 
     private List<AnimeByName> animeByNameList;
-    private IAnimeByNameRepositoryWithLiveData iAnimeRepository;
+    private IAnimeByNameRepository iAnimeByNameRepository;
     private SharedPreferencesUtil sharedPreferencesUtil;
-    private AnimeByNameViewModel animeViewModel;
+
 
     private FragmentSearchBinding fragmentSearchBinding;
     private ProgressBar progressBar;
@@ -116,16 +119,8 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharedPreferencesUtil = new SharedPreferencesUtil(requireActivity().getApplication());
+        iAnimeByNameRepository = new AnimeByNameRepository(requireActivity().getApplication(), this);
 
-        IAnimeByNameRepositoryWithLiveData animeRepositoryWithLiveData =
-                ServiceLocator.getInstance().getAnimeByNameRepository(requireActivity().getApplication());
-        if(animeRepositoryWithLiveData != null){
-            animeViewModel = new ViewModelProvider(requireActivity(),
-                    new AnimeByNameViewModelFactory(animeRepositoryWithLiveData)).get(AnimeByNameViewModel.class);
-        }else{
-            Snackbar.make(requireActivity().findViewById(android.R.id.content),
-                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
-        }
         animeRoomDatabase = AnimeRoomDatabase.getDatabase(getContext());
         if (animeRoomDatabase != null) {
             this.animeByNameDao = animeRoomDatabase.animeByNameDao();
@@ -198,22 +193,8 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                /*animeViewModel.getAnimeByName(query, Long.parseLong(finalLastUpdate)).observe(getViewLifecycleOwner(), result -> {
-                    System.out.println("Result: "+ result);
-                    if (result.isSuccess()) {
-                        AnimeByNameResponse animeResponse = ((Result.AnimeByNameSuccess) result).getData();
-                        List<AnimeByName> fetchedAnime = animeResponse.getAnimeByNameList();
-                        searchListAdapter.setData(fetchedAnime);
 
-
-                    } else {
-                        ErrorMessagesUtil errorMessagesUtil = new ErrorMessagesUtil(requireActivity().getApplication());
-                        Snackbar.make(view, errorMessagesUtil.
-                                        getErrorMessage(((Result.Error) result).getMessage()),
-                                Snackbar.LENGTH_SHORT).show();
-                    }
-                });*/
-                animeViewModel.getAnimeByName(query, Long.parseLong(finalLastUpdate)).observe(getViewLifecycleOwner(), new Observer<Result>() {
+                /*animeViewModel.getAnimeByName(query, Long.parseLong(finalLastUpdate)).observe(getViewLifecycleOwner(), new Observer<Result>() {
                     @Override
                     public void onChanged(Result result) {
                         if (result.isSuccess()) {
@@ -229,7 +210,8 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
                                     Snackbar.LENGTH_SHORT).show();
                         }
                     }
-                });
+                });*/
+                iAnimeByNameRepository.fetchAnimeByName(query,Long.parseLong(finalLastUpdate));
                 return true;
             }
 
@@ -250,6 +232,13 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
             this.animeByNameList.clear();
             this.animeByNameList.addAll(animeList);
             sharedPreferencesUtil.writeStringData(SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE, String.valueOf(lastUpdate));
+            requireActivity().runOnUiThread(new Runnable() {
+                @SuppressLint("NotifyDataSetChanged")
+                @Override
+                public void run() {
+                    searchListAdapter.notifyDataSetChanged();
+                }
+            });
         }
     }
 
@@ -263,6 +252,7 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
+    /*
     @Override
     public void onDestroy(){
         super.onDestroy();
@@ -274,60 +264,10 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
     public void onDestroyView(){
         super.onDestroyView();
         fragmentSearchBinding = null;
-    }
-    private long calculateNewLastUpdate(List<AnimeByName> animeList) {
-        // Trova l'identificatore univoco più grande nella lista di anime
-        long maxId = 0;
-        for (AnimeByName anime : animeList) {
-            long currentId = anime.getId();
-            if (currentId > maxId) {
-                maxId = currentId;
-            }
-        }
-
-        // Utilizza l'identificatore univoco come timestamp per lastUpdate
-        return maxId;
-    }
-    /*private void fetchMoreAnime(long newLastUpdate) {
-        animeViewModel.getAnimeByName(query, newLastUpdate).observe(getViewLifecycleOwner(), result -> {
-            if (result.isSuccess()) {
-                AnimeByNameResponse animeByNameResponse = ((Result.AnimeByNameSuccess) result).getData();
-                List<AnimeByName> fetchedAnime = animeByNameResponse.getAnimeByNameList();
-
-                for (AnimeByName anime : fetchedAnime) {
-                    if (!animeByNameList.contains(anime)) {
-                        animeByNameList.add(anime);
-                    }
-                }
-
-                searchListAdapter.notifyDataSetChanged();
-            } else {
-                onFailure(((Result.Error) result).getMessage());
-            }
-        });
-
-
     }*/
-    private List<AnimeByName> fetchMoreAnime(long newLastUpdate) {
-        animeViewModel.getAnimeByName(query, newLastUpdate).observe(getViewLifecycleOwner(), result -> {
-            if (result.isSuccess()) {
-                AnimeByNameResponse animeByNameResponse = ((Result.AnimeByNameSuccess) result).getData();
-                List<AnimeByName> fetchedAnime = animeByNameResponse.getAnimeByNameList();
 
-                for (AnimeByName anime : fetchedAnime) {
-                    if (!animeByNameList.contains(anime)) {
-                        animeByNameList.add(anime);
-                    }
-                }
 
-                searchListAdapter.notifyDataSetChanged();
-            } else {
-                onFailure(((Result.Error) result).getMessage());
-            }
-        });
-        return animeByNameList;
 
-    }
 
 
 
