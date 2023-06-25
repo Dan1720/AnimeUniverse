@@ -37,8 +37,6 @@ public class AnimeSpecificGenresRepository implements IAnimeSpecificGenresReposi
 
     @Override
     public void fetchAnimeSpecificGenres(int idGenre, long lastUpdate) {
-        long currentTime = System.currentTimeMillis();
-        if(currentTime - lastUpdate > FRESH_TIMEOUT){
             Call<AnimeSpecificGenresApiResponse> animeSpecificGenresResponseCall = animeApiService.getAnimeSpecificGenres(idGenre);
 
             animeSpecificGenresResponseCall.enqueue(new Callback<AnimeSpecificGenresApiResponse>() {
@@ -58,9 +56,6 @@ public class AnimeSpecificGenresRepository implements IAnimeSpecificGenresReposi
                 }
             });
 
-        }else {
-            Log.d(TAG, application.getString(R.string.data_read_from_local_database));
-        }
     }
 
     private void saveDataInDatabase(List<AnimeSpecificGenres> animeSpecificGenresList){

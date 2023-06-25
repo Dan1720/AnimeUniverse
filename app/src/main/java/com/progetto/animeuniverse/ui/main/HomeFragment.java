@@ -228,7 +228,9 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         AnimeNewRecyclerViewAdapter animeNewRecyclerViewAdapter = new AnimeNewRecyclerViewAdapter(animeNewList, requireActivity().getApplication(), new AnimeNewRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onAnimeNewClick(AnimeNew animeNew) {
-
+                com.progetto.animeuniverse.ui.main.HomeFragmentDirections.ActionHomeFragmentToAnimeNewDetailsFragment action =
+                        HomeFragmentDirections.actionHomeFragmentToAnimeNewDetailsFragment(animeNew);
+                Navigation.findNavController(view).navigate(action);
             }
         });
         animeNewRecyclerViewItem.setAdapter(animeNewRecyclerViewAdapter);
