@@ -42,8 +42,6 @@ public class ReviewsRepository implements IReviewsRepository{
 
     @Override
     public void fetchReviewsById(int id, long lastUpdate) {
-        long currentTime = System.currentTimeMillis();
-        if(currentTime - lastUpdate > FRESH_TIMEOUT){
             Call<ReviewsApiResponse> reviewResponseCall = animeApiService.getReviewByIdAnime(id);
 
             reviewResponseCall.enqueue(new Callback<ReviewsApiResponse>() {
@@ -62,9 +60,7 @@ public class ReviewsRepository implements IReviewsRepository{
                     reviewsResponseCallback.onFailure(t.getMessage());
                 }
             });
-        }else {
-            Log.d(TAG, application.getString(R.string.data_read_from_local_database));
-        }
+
     }
 
 

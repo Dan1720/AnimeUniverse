@@ -39,8 +39,6 @@ public class AnimeEpisodesRepository implements IAnimeEpisodesRepository{
 
     @Override
     public void fetchAnimeEpisodes(int idAnime, long lastUpdate) {
-        long currentTime = System.currentTimeMillis();
-        if(currentTime - lastUpdate > FRESH_TIMEOUT){
             Call<AnimeEpisodesApiResponse> animeEpisodesApiResponseCall = animeApiService.getAnimeEpisodes(idAnime);
 
             animeEpisodesApiResponseCall.enqueue(new Callback<AnimeEpisodesApiResponse>() {
@@ -61,10 +59,6 @@ public class AnimeEpisodesRepository implements IAnimeEpisodesRepository{
                 }
             });
 
-        }else {
-            Log.d(TAG, application.getString(R.string.data_read_from_local_database));
-            readDataFromDatabase(lastUpdate);
-        }
     }
 
     private void saveDataInDatabase(List<AnimeEpisodes> animeEpisodesList){
@@ -79,13 +73,13 @@ public class AnimeEpisodesRepository implements IAnimeEpisodesRepository{
             for(int i=0; i<animeEpisodesList.size(); i++){
                 animeEpisodesList.get(i).setId(Math.toIntExact(insertedAnimeEpisodesIds.get(i)));
             }
-            animeEpisodesResponseCallback.onSuccess(animeEpisodesList,System.currentTimeMillis());
+            animeEpisodesResponseCallback.onSuccessEpisodes(animeEpisodesList,System.currentTimeMillis());
         });
     }
 
     private void readDataFromDatabase(long lastUpdate){
         AnimeRoomDatabase.databaseWriteExecutor.execute(()->{
-            animeEpisodesResponseCallback.onSuccess(animeEpisodesDao.getAll(), lastUpdate);
+            animeEpisodesResponseCallback.onSuccessEpisodes(animeEpisodesDao.getAll(), lastUpdate);
         });
     }
 }

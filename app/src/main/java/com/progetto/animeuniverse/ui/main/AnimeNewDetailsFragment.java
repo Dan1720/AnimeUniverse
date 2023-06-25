@@ -11,13 +11,11 @@ import androidx.annotation.Nullable;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,41 +25,29 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.adapter.EpisodesRecyclerViewAdapter;
 import com.progetto.animeuniverse.adapter.ReviewsRecyclerViewAdapter;
-import com.progetto.animeuniverse.databinding.FragmentAnimeRecommendationsDetailsBinding;
+import com.progetto.animeuniverse.databinding.FragmentAnimeNewDetailsBinding;
 import com.progetto.animeuniverse.model.AnimeEpisodes;
-import com.progetto.animeuniverse.model.AnimeEpisodesResponse;
-import com.progetto.animeuniverse.model.AnimeGenres;
-import com.progetto.animeuniverse.model.AnimeProducers;
-import com.progetto.animeuniverse.model.AnimeRecommendations;
-import com.progetto.animeuniverse.model.AnimeStudios;
-import com.progetto.animeuniverse.model.Result;
+import com.progetto.animeuniverse.model.AnimeNew;
 import com.progetto.animeuniverse.model.Review;
-import com.progetto.animeuniverse.model.ReviewsResponse;
 import com.progetto.animeuniverse.repository.anime_episodes.AnimeEpisodesRepository;
 import com.progetto.animeuniverse.repository.anime_episodes.AnimeEpisodesResponseCallback;
 import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepository;
-import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.reviews.IReviewsRepository;
-import com.progetto.animeuniverse.repository.reviews.IReviewsRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.reviews.ReviewsRepository;
 import com.progetto.animeuniverse.repository.reviews.ReviewsResponseCallback;
-import com.progetto.animeuniverse.ui.main.AnimeRecommendationsDetailsFragmentDirections;
-import com.progetto.animeuniverse.util.ErrorMessagesUtil;
-import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnimeRecommendationsDetailsFragment extends Fragment implements AnimeEpisodesResponseCallback, ReviewsResponseCallback {
+public class AnimeNewDetailsFragment extends Fragment implements ReviewsResponseCallback, AnimeEpisodesResponseCallback {
 
-    private static final String TAG = AnimeRecommendationsDetailsFragment.class.getSimpleName();
+    private static final String TAG = AnimeNewDetailsFragment.class.getSimpleName();
+    private FragmentAnimeNewDetailsBinding fragmentAnimeNewDetailsBinding;
 
-    private FragmentAnimeRecommendationsDetailsBinding fragmentAnimeRecommendationsDetailsBinding;
     private List<Review> reviewsList;
     private List<AnimeEpisodes> animeEpisodesList;
     private SharedPreferencesUtil sharedPreferencesUtil;
@@ -74,9 +60,10 @@ public class AnimeRecommendationsDetailsFragment extends Fragment implements Ani
 
     private ReviewsRecyclerViewAdapter reviewsRecyclerViewAdapter;
 
-    public AnimeRecommendationsDetailsFragment() {
+    public AnimeNewDetailsFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,20 +78,18 @@ public class AnimeRecommendationsDetailsFragment extends Fragment implements Ani
         animeEpisodesRepository = new AnimeEpisodesRepository(requireActivity().getApplication(), this);
 
         animeEpisodesList = new ArrayList<>();
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        fragmentAnimeRecommendationsDetailsBinding = FragmentAnimeRecommendationsDetailsBinding.inflate(inflater, container, false);
-        return fragmentAnimeRecommendationsDetailsBinding.getRoot();
+        fragmentAnimeNewDetailsBinding = FragmentAnimeNewDetailsBinding.inflate(inflater, container, false);
+        return fragmentAnimeNewDetailsBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         requireActivity().addMenuProvider(new MenuProvider() {
             @Override
             public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
@@ -120,15 +105,15 @@ public class AnimeRecommendationsDetailsFragment extends Fragment implements Ani
             }
         }, getViewLifecycleOwner(), Lifecycle.State.RESUMED);
 
-        AnimeRecommendations animeRecommendations = AnimeRecommendationsDetailsFragmentArgs.fromBundle(getArguments()).getAnimeRecommendations();
-        Glide.with(fragmentAnimeRecommendationsDetailsBinding.imageViewDetails.getContext())
-                .load(animeRecommendations.getEntry().get(0).getImages().getJpgImages().getLargeImageUrl())
-                .placeholder(R.drawable.ic_home).into(fragmentAnimeRecommendationsDetailsBinding.imageViewDetails);
+        AnimeNew animeNew = AnimeNewDetailsFragmentArgs.fromBundle(getArguments()).getAnimeNew();
+        Glide.with(fragmentAnimeNewDetailsBinding.imageViewDetails.getContext())
+                .load(animeNew.getEntry().getImages().getJpgImages().getImageUrl())
+                .placeholder(R.drawable.ic_home).into(fragmentAnimeNewDetailsBinding.imageViewDetails);
 
-        fragmentAnimeRecommendationsDetailsBinding.textViewDetailsTitleIn.setText(animeRecommendations.getEntry().get(0).getTitle());
+        fragmentAnimeNewDetailsBinding.textViewDetailsTitleIn.setText(animeNew.getEntry().getTitle());
 
         NavBackStackEntry navBackStackEntry = Navigation.findNavController(view).getPreviousBackStackEntry();
-        if(navBackStackEntry != null && navBackStackEntry.getDestination().getId() == R.id.animeRecommendationsDetailsFragment){
+        if(navBackStackEntry != null && navBackStackEntry.getDestination().getId() == R.id.animeMovieFragment){
             ((BottomNavigationView) requireActivity().findViewById(R.id.bottom_navigation)).
                     getMenu().findItem(R.id.homeFragment).setChecked(true);
 
@@ -149,16 +134,15 @@ public class AnimeRecommendationsDetailsFragment extends Fragment implements Ani
         reviewsRecyclerViewAdapter = new ReviewsRecyclerViewAdapter(reviewsList, requireActivity().getApplication(), new ReviewsRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onReviewItemClick(Review review) {
-                com.progetto.animeuniverse.ui.main.AnimeRecommendationsDetailsFragmentDirections.ActionAnimeRecommendationsDetailsFragmentToReviewDetailsFragment action =
-                        AnimeRecommendationsDetailsFragmentDirections.actionAnimeRecommendationsDetailsFragmentToReviewDetailsFragment(review);
-                Navigation.findNavController(view).navigate(action);
+                AnimeNewDetailsFragmentDirections.ActionAnimeNewDetailsFragmentToReviewDetailsFragment action =
+                        AnimeNewDetailsFragmentDirections.actionAnimeNewDetailsFragmentToReviewDetailsFragment(review);
             }
         });
 
         ReviewsRecyclerViewItem.setAdapter(reviewsRecyclerViewAdapter);
         ReviewsRecyclerViewItem.setLayoutManager(layoutManager);
 
-        reviewsRepository.fetchReviewsById(animeRecommendations.getEntry().get(0).getIdAnime(), Long.parseLong(lastUpdate));
+        reviewsRepository.fetchReviewsById(animeNew.getEntry().getIdAnime(), Long.parseLong(lastUpdate));
 
         RecyclerView EpisodesRecyclerViewItem = view.findViewById(R.id.recyclerView_episodesIn);
         LinearLayoutManager layoutManagerEp = new LinearLayoutManager(requireContext());
@@ -173,7 +157,7 @@ public class AnimeRecommendationsDetailsFragment extends Fragment implements Ani
         EpisodesRecyclerViewItem.setAdapter(episodesRecyclerViewAdapter);
         EpisodesRecyclerViewItem.setLayoutManager(layoutManagerEp);
 
-        animeEpisodesRepository.fetchAnimeEpisodes(animeRecommendations.getEntry().get(0).getIdAnime(), Long.parseLong(lastUpdate));
+        animeEpisodesRepository.fetchAnimeEpisodes(animeNew.getEntry().getIdAnime(), Long.parseLong(lastUpdate));
     }
 
     @Override

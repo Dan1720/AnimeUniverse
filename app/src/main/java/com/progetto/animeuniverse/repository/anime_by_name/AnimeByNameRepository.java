@@ -40,8 +40,6 @@ public class AnimeByNameRepository implements IAnimeByNameRepository{
     }
     @Override
     public void fetchAnimeByName(String nameAnime, long lastUpdate) {
-        long currentTime = System.currentTimeMillis();
-        if(currentTime - lastUpdate > FRESH_TIMEOUT){
             Call<AnimeByNameApiResponse> animeByNameResponseCall = animeApiService.getAnimeByName(nameAnime);
 
             animeByNameResponseCall.enqueue(new Callback<AnimeByNameApiResponse>() {
@@ -61,9 +59,6 @@ public class AnimeByNameRepository implements IAnimeByNameRepository{
                 }
             });
 
-        }else {
-            Log.d(TAG, application.getString(R.string.data_read_from_local_database));
-        }
 
     }
 

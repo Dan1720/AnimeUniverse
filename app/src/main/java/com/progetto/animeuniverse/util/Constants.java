@@ -27,6 +27,7 @@ public class Constants {
     public static final String FIREBASE_REALTIME_DATABASE = "https://animeuniverse-f9823-default-rtdb.europe-west1.firebasedatabase.app/";
     public static final String FIREBASE_USERS_COLLECTION = "users";
     public static final String FIREBASE_FAVORITE_ANIME_COLLECTION = "favorite_anime";
+    public static final String FIREBASE_FAVORITE_ANIME_RECOMMENDATIONS_COLLECTION = "favorite_anime";
 
     public static final int SELECT_PICTURE = 200;
 
