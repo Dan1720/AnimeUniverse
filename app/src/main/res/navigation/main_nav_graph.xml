@@ -49,8 +49,8 @@
         android:label="@string/app_name"
         tools:layout="@layout/fragment_search" >
         <action
-            android:id="@+id/action_searchFragment_to_animeDetailsFragment"
-            app:destination="@id/animeDetailsFragment" />
+            android:id="@+id/action_searchFragment_to_animeByNameDetailsFragment"
+            app:destination="@id/animeByNameDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -250,5 +250,18 @@
             android:id="@+id/action_animeNewDetailsFragment_to_reviewDetailsFragment"
             app:destination="@id/reviewDetailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/animeByNameDetailsFragment"
+        android:name="com.progetto.animeuniverse.ui.main.AnimeByNameDetailsFragment"
+        android:label="fragment_anime_by_name_details"
+        tools:layout="@layout/fragment_anime_by_name_details" >
+        <argument
+            android:name="anime"
+            app:argType="com.progetto.animeuniverse.model.AnimeByName" />
+        <action
+            android:id="@+id/action_animeByNameDetailsFragment_to_reviewDetailsFragment"
+            app:destination="@id/reviewDetailsFragment" />
+    </fragment>
+
 
 </navigation>

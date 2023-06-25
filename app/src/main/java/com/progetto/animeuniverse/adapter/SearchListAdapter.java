@@ -29,12 +29,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.An
 
    public interface OnItemClickListener{
         void onAnimeClick(AnimeByName anime);
-    }
-    public void setData(List<AnimeByName> newData) {
-        this.animeList.clear();
-        animeList.addAll(newData);
-        notifyDataSetChanged();
-    }
+   }
     public SearchListAdapter(List<AnimeByName> animeList,Application application, OnItemClickListener onItemSelectedListener){
         this.animeList = animeList;
         this.application = application;

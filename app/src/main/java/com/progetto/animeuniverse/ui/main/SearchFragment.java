@@ -8,8 +8,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.http.HttpResponseCache;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,14 +15,11 @@ import androidx.annotation.Nullable;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,40 +30,23 @@ import android.widget.ProgressBar;
 import android.widget.SearchView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.adapter.SearchListAdapter;
 
 import com.progetto.animeuniverse.database.AnimeByNameDao;
 import com.progetto.animeuniverse.database.AnimeRoomDatabase;
 import com.progetto.animeuniverse.databinding.FragmentSearchBinding;
-import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeByName;
-import com.progetto.animeuniverse.model.AnimeByNameResponse;
-import com.progetto.animeuniverse.model.AnimeResponse;
 import com.progetto.animeuniverse.model.Result;
 
 import com.progetto.animeuniverse.repository.anime_by_name.AnimeByNameRepository;
 import com.progetto.animeuniverse.repository.anime_by_name.AnimeByNameResponseCallback;
 import com.progetto.animeuniverse.repository.anime_by_name.IAnimeByNameRepository;
-import com.progetto.animeuniverse.repository.anime_by_name.IAnimeByNameRepositoryWithLiveData;
-import com.progetto.animeuniverse.service.AnimeApiService;
-import com.progetto.animeuniverse.util.Constants;
-import com.progetto.animeuniverse.util.ErrorMessagesUtil;
 import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class SearchFragment extends Fragment implements AnimeByNameResponseCallback {
@@ -152,21 +130,21 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
                 return false;
             }
         });
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView_search_anime);
         int numberOfColumns = 3;
         GridLayoutManager layoutManager = new GridLayoutManager(this.getContext(), numberOfColumns);
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView_search_anime);
         searchListAdapter = new SearchListAdapter(animeByNameList,
-                requireActivity().getApplication(),
-                new SearchListAdapter.OnItemClickListener() {
+                requireActivity().getApplication(), new SearchListAdapter.OnItemClickListener() {
 
-                    @Override
-                    public void onAnimeClick(AnimeByName anime) {
-                        /*SearchFragmentDirections.ActionSearchFragmentToAnimeDetailsFragment action =
-                                SearchFragmentDirections.actionSearchFragmentToAnimeDetailsFragment(anime);
-                        Navigation.findNavController(view).navigate(action);*/
-                    }
-
+            @Override
+            public void onAnimeClick(AnimeByName anime) {
+                SearchFragmentDirections.ActionSearchFragmentToAnimeByNameDetailsFragment action =
+                        SearchFragmentDirections.actionSearchFragmentToAnimeByNameDetailsFragment(anime);
+                Navigation.findNavController(view).navigate(action);
+            }
         });
+
+
         String lastUpdate = "0";
         NavBackStackEntry navBackStackEntry = Navigation.findNavController(view).getPreviousBackStackEntry();
         if(navBackStackEntry != null && navBackStackEntry.getDestination().getId() == R.id.searchFragment){
@@ -193,24 +171,6 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-
-                /*animeViewModel.getAnimeByName(query, Long.parseLong(finalLastUpdate)).observe(getViewLifecycleOwner(), new Observer<Result>() {
-                    @Override
-                    public void onChanged(Result result) {
-                        if (result.isSuccess()) {
-                            AnimeByNameResponse animeResponse = ((Result.AnimeByNameSuccess) result).getData();
-                            List<AnimeByName> fetchedAnime = animeResponse.getAnimeByNameList();
-                            searchListAdapter.setData(fetchedAnime);
-
-
-                        } else {
-                            ErrorMessagesUtil errorMessagesUtil = new ErrorMessagesUtil(requireActivity().getApplication());
-                            Snackbar.make(view, errorMessagesUtil.
-                                            getErrorMessage(((Result.Error) result).getMessage()),
-                                    Snackbar.LENGTH_SHORT).show();
-                        }
-                    }
-                });*/
                 iAnimeByNameRepository.fetchAnimeByName(query,Long.parseLong(finalLastUpdate));
                 return true;
             }
