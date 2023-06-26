@@ -65,127 +65,6 @@
         app:strokeColor="@color/secondaryColor"
         app:strokeWidth="2dp" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="346dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="22dp"
-        app:cardBackgroundColor="@color/primaryColor"
-        app:cardCornerRadius="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nomeutente">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/primaryColor">
-
-            <TextView
-                android:id="@+id/txt_tempo_visione"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|center_horizontal"
-                android:layout_marginTop="5dp"
-                android:background="@android:color/transparent"
-                android:text="@string/tempo_visione"
-                android:textColor="@color/secondaryColor"
-                android:textSize="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/giorni"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="4dp"
-                android:background="@android:color/transparent"
-                android:foregroundGravity="center_vertical|center_horizontal"
-                android:text="00"
-                android:textColor="@color/secondaryColor"
-                android:textSize="32dp"
-                app:layout_constraintStart_toEndOf="@+id/mesi"
-                app:layout_constraintTop_toBottomOf="@+id/txt_tempo_visione" />
-
-            <TextView
-                android:id="@+id/ore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|center_horizontal|center_vertical"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="4dp"
-                android:background="@android:color/transparent"
-                android:foregroundGravity="center_vertical|center_horizontal"
-                android:text="00"
-                android:textColor="@color/secondaryColor"
-                android:textSize="32dp"
-                app:layout_constraintStart_toEndOf="@+id/giorni"
-                app:layout_constraintTop_toBottomOf="@+id/txt_tempo_visione" />
-
-            <TextView
-                android:id="@+id/mesi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center_vertical"
-                android:layout_marginStart="88dp"
-                android:layout_marginTop="4dp"
-                android:background="@android:color/transparent"
-                android:text="00"
-                android:textColor="@color/secondaryColor"
-                android:textSize="32dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_tempo_visione" />
-
-            <TextView
-                android:id="@+id/txt_mesi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|left|center_vertical"
-                android:layout_marginStart="88dp"
-                android:background="@android:color/transparent"
-                android:text="@string/mesi"
-                android:textColor="@color/secondaryColor"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mesi"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/txt_ore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginEnd="90dp"
-                android:background="@android:color/transparent"
-                android:text="@string/ore"
-                android:textColor="@color/secondaryColor"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/txt_giorni"
-                app:layout_constraintTop_toBottomOf="@+id/ore" />
-
-            <TextView
-                android:id="@+id/txt_giorni"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:background="@android:color/transparent"
-                android:text="@string/giorni"
-                android:textColor="@color/secondaryColor"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/txt_mesi"
-                app:layout_constraintTop_toBottomOf="@+id/giorni" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
     <Button
         android:id="@+id/btn_impostazioni"
         android:layout_width="0dp"
@@ -200,7 +79,7 @@
         app:backgroundTint="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/nomeutente"
         app:strokeColor="@color/secondaryColor"
         app:strokeWidth="2dp" />
 
