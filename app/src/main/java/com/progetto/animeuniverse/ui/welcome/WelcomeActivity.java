@@ -1,7 +1,5 @@
 package com.progetto.animeuniverse.ui.welcome;
 
-import static com.progetto.animeuniverse.util.Constants.FIREBASE_REALTIME_DATABASE;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
@@ -9,17 +7,11 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.progetto.animeuniverse.R;
-import com.progetto.animeuniverse.data.source.anime.FavoriteAnimeDataSource;
-
-import java.util.Objects;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -39,7 +31,7 @@ public class WelcomeActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.listFragment, R.id.notificationsFragment, R.id.homeFragment,
+                R.id.listFragment, R.id.homeFragment,
                 R.id.searchFragment, R.id.accountFragment
         ).build();
 
@@ -48,6 +40,18 @@ public class WelcomeActivity extends AppCompatActivity {
 
         // For the BottomNavigationView
         NavigationUI.setupWithNavController(bottomNav, navController);
+
+        /*Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            Notification notification = bundle.getParcelable("notification");
+            if(notification != null){
+                NotificationsFragment notificationsFragment = NotificationsFragment.newInstance(notification);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.nav_host_fragment, notificationsFragment)
+                        .commit();
+
+            }
+        }*/
 
 
     }
