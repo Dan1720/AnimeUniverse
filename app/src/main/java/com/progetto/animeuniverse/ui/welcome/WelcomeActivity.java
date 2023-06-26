@@ -41,17 +41,6 @@ public class WelcomeActivity extends AppCompatActivity {
         // For the BottomNavigationView
         NavigationUI.setupWithNavController(bottomNav, navController);
 
-        /*Bundle bundle = getIntent().getExtras();
-        if(bundle != null){
-            Notification notification = bundle.getParcelable("notification");
-            if(notification != null){
-                NotificationsFragment notificationsFragment = NotificationsFragment.newInstance(notification);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment, notificationsFragment)
-                        .commit();
-
-            }
-        }*/
 
 
     }
