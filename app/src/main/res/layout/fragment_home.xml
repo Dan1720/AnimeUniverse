@@ -268,11 +268,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:background="@android:drawable/screen_background_dark_transparent"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/home_view_bg"
                 android:gravity="center_horizontal"
                 android:text="@string/txt_serie_tv"
-                android:textColor="#EBFFFFFF"
-                android:textSize="16dp"
+                android:textColor="@color/secondaryColor"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -280,18 +281,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@android:drawable/screen_background_dark_transparent"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/home_view_bg"
                 android:gravity="center"
                 android:text="@string/txt_film"
-                android:textColor="#EBFFFFFF"
-                android:textSize="16sp"
+                android:textColor="@color/secondaryColor"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@android:drawable/screen_background_dark_transparent"
+
+                android:background="@drawable/home_view_bg"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -301,8 +304,8 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:text="@string/txt_categorie"
-                    android:textColor="#EBFFFFFF"
-                    android:textSize="16sp"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <ImageView
