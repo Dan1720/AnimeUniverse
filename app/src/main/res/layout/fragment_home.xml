@@ -50,6 +50,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="67dp"
                         android:background="@android:drawable/screen_background_dark_transparent"
+                        android:fontFamily="@font/alata"
                         android:gravity="bottom|center_horizontal"
                         android:text="@string/txt_categorie"
                         android:textColor="#EBFFFFFF"

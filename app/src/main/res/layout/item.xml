@@ -65,7 +65,7 @@
                     android:layout_marginTop="16dp"
                     android:backgroundTint="@color/white">
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="111dp"
+                            android:layout_width="110dp"
                             android:layout_height="match_parent">
 
                                 <ImageView
@@ -75,7 +75,8 @@
                                     android:layout_gravity="right"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.5"
                                     app:srcCompat="@drawable/baseline_not_favorite_24" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
