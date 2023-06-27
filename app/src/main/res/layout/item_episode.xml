@@ -5,6 +5,7 @@
     android:id="@+id/cardView_episodes"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,12 +14,13 @@
 
         <ImageView
             android:id="@+id/imageView_episodeImageIn"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/imageepisode" />
+            app:srcCompat="@drawable/playepisode" />
 
         <TextView
             android:id="@+id/textView_episodeTitleIn"
@@ -26,7 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
-            android:text="Titolo"
+            android:fontFamily="@font/alata"
+            android:text="@string/title"
+            android:textSize="18dp"
             app:layout_constraintStart_toEndOf="@+id/imageView_episodeImageIn"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,7 +41,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="50dp"
+            android:fontFamily="@font/alata"
             android:text="@string/txt_episode"
+            android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView_episodeImageIn"
             app:layout_constraintTop_toBottomOf="@+id/textView_episodeTitleIn"
@@ -50,7 +56,9 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="50dp"
+            android:fontFamily="@font/alata"
             android:text="n"
+            android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView_episode"
             app:layout_constraintTop_toBottomOf="@+id/textView_episodeTitleIn" />
@@ -62,7 +70,9 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="50dp"
+            android:fontFamily="@font/alata"
             android:text="|"
+            android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView_episodeNumberIn"
@@ -75,22 +85,13 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="50dp"
+            android:fontFamily="@font/alata"
             android:text="Filler"
+            android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView_episodeDivider"
             app:layout_constraintTop_toBottomOf="@+id/textView_episodeTitleIn" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:clickable="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView_episodeFiller"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/baseline_check_circle_24" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.model.AnimeEpisodes;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -72,6 +73,7 @@ public class EpisodesRecyclerViewAdapter extends RecyclerView.Adapter<EpisodesRe
             }else{
                 textViewEpisodeFiller.setText("Story");
             }
+
 
         }
         
