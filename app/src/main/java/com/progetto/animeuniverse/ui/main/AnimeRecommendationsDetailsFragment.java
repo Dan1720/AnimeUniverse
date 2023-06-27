@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
@@ -56,6 +57,8 @@ import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class AnimeRecommendationsDetailsFragment extends Fragment implements AnimeEpisodesResponseCallback, ReviewsResponseCallback {
 
@@ -121,6 +124,12 @@ public class AnimeRecommendationsDetailsFragment extends Fragment implements Ani
         }, getViewLifecycleOwner(), Lifecycle.State.RESUMED);
 
         AnimeRecommendations animeRecommendations = AnimeRecommendationsDetailsFragmentArgs.fromBundle(getArguments()).getAnimeRecommendations();
+
+        Glide.with(fragmentAnimeRecommendationsDetailsBinding.imageViewDetailsBlurry.getContext())
+                .load(animeRecommendations.getEntry().get(0).getImages().getJpgImages().getLargeImageUrl())
+                .placeholder(R.drawable.ic_home).apply(RequestOptions.bitmapTransform(new BlurTransformation(25, 3))).into(fragmentAnimeRecommendationsDetailsBinding.imageViewDetailsBlurry);
+
+
         Glide.with(fragmentAnimeRecommendationsDetailsBinding.imageViewDetails.getContext())
                 .load(animeRecommendations.getEntry().get(0).getImages().getJpgImages().getLargeImageUrl())
                 .placeholder(R.drawable.ic_home).into(fragmentAnimeRecommendationsDetailsBinding.imageViewDetails);

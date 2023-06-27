@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
@@ -52,6 +53,8 @@ import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class AnimeMovieDetailsFragment extends Fragment implements ReviewsResponseCallback {
 
@@ -116,6 +119,11 @@ public class AnimeMovieDetailsFragment extends Fragment implements ReviewsRespon
         }, getViewLifecycleOwner(), Lifecycle.State.RESUMED);
 
         AnimeMovie animeMovie = AnimeMovieDetailsFragmentArgs.fromBundle(getArguments()).getAnimeMovie();
+        Glide.with(fragmentAnimeMovieDetailsBinding.imageViewDetailsBlurry.getContext())
+                .load(animeMovie.getImages().getJpgImages().getLargeImageUrl())
+                .placeholder(R.drawable.ic_home).apply(RequestOptions.bitmapTransform(new BlurTransformation(25, 3))).into(fragmentAnimeMovieDetailsBinding.imageViewDetailsBlurry);
+
+
         Glide.with(fragmentAnimeMovieDetailsBinding.imageViewDetails.getContext())
                 .load(animeMovie.getImages().getJpgImages().getLargeImageUrl())
                 .placeholder(R.drawable.ic_home).into(fragmentAnimeMovieDetailsBinding.imageViewDetails);
@@ -164,7 +172,6 @@ public class AnimeMovieDetailsFragment extends Fragment implements ReviewsRespon
         }
 
         RecyclerView ReviewsRecyclerViewItem = view.findViewById(R.id.recyclerView_reviews);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
         ReviewsRecyclerViewAdapter reviewsRecyclerViewAdapter = new ReviewsRecyclerViewAdapter(reviewsList, requireActivity().getApplication(), new ReviewsRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onReviewItemClick(Review review) {
@@ -175,7 +182,7 @@ public class AnimeMovieDetailsFragment extends Fragment implements ReviewsRespon
         });
 
         ReviewsRecyclerViewItem.setAdapter(reviewsRecyclerViewAdapter);
-        ReviewsRecyclerViewItem.setLayoutManager(layoutManager);
+        ReviewsRecyclerViewItem.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
 
         String lastUpdate = "0";
         reviewsViewModel.getReviewsByIdAnime(animeMovie.getId(), Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {

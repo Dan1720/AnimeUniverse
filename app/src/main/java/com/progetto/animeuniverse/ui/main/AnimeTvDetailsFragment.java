@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
@@ -54,6 +55,8 @@ import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class AnimeTvDetailsFragment extends Fragment implements ReviewsResponseCallback {
 
@@ -129,6 +132,12 @@ public class AnimeTvDetailsFragment extends Fragment implements ReviewsResponseC
         }, getViewLifecycleOwner(), Lifecycle.State.RESUMED);
 
         AnimeTv animeTv = AnimeTvDetailsFragmentArgs.fromBundle(getArguments()).getAnimeTv();
+
+        Glide.with(fragmentAnimeTvDetailsBinding.imageViewDetailsBlurry.getContext())
+                .load(animeTv.getImages().getJpgImages().getLargeImageUrl())
+                .placeholder(R.drawable.ic_home).apply(RequestOptions.bitmapTransform(new BlurTransformation(25, 3))).into(fragmentAnimeTvDetailsBinding.imageViewDetailsBlurry);
+
+
         Glide.with(fragmentAnimeTvDetailsBinding.imageViewDetails.getContext())
                 .load(animeTv.getImages().getJpgImages().getLargeImageUrl())
                 .placeholder(R.drawable.ic_home).into(fragmentAnimeTvDetailsBinding.imageViewDetails);

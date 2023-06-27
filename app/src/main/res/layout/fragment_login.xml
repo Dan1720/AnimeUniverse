@@ -36,6 +36,7 @@
                 android:id="@+id/txt_forgot_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/alata"
                 android:text="@string/login"
                 android:textColor="@color/secondaryColor"
                 android:textSize="28dp"
@@ -72,6 +73,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/alata"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/secondaryColor" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -98,6 +100,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/alata"
                     android:inputType="textPassword"
                     android:textColor="@color/secondaryColor" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -121,6 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:fontFamily="@font/alata"
                 android:text="@string/nessun_account"
                 android:textColor="@color/secondaryColor"
                 android:textSize="16dp"
@@ -136,6 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
+                android:fontFamily="@font/alata"
                 android:text="@string/registrati_button"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
@@ -152,6 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="22dp"
+                android:fontFamily="@font/alata"
                 android:text="@string/btn_accedi"
                 android:textColor="@color/secondaryColor"
                 android:textSize="20dp"
@@ -187,6 +193,7 @@
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:fontFamily="@font/alata"
                     android:text="@string/txt_or" />
 
                 <View

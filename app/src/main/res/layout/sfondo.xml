@@ -47,6 +47,7 @@
         android:layout_height="56dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:fontFamily="@font/alata"
         android:text="@string/btn_accedi"
         android:textColor="@color/secondaryColor"
         android:textSize="20dp"

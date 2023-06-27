@@ -1,31 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".ui.main.AnimeMovieDetailsFragment">
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="90dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageView_details"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="251dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/ic_home" />
+                android:layout_height="367dp">
+
+                <ImageView
+                    android:id="@+id/imageView_details_blurry"
+                    android:layout_width="413dp"
+                    android:layout_height="362dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_home"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView_details"
+                    android:layout_width="143dp"
+                    android:layout_height="199dp"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_home"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.257" />
+
+                <ImageView
+                    android:id="@+id/imageView_backgroundVanish"
+                    android:layout_width="411dp"
+                    android:layout_height="167dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/backgroundvanish"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView_details_blurry"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.529"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/backgroundvanish" />
+
+                <TextView
+                    android:id="@+id/textView_details_titleIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/alata"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="26dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView_details_blurry"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_details"
+                    app:layout_constraintVertical_bias="0.59" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -34,53 +92,40 @@
                 android:layout_marginRight="15dp">
 
                 <TextView
-                    android:id="@+id/textView_details_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="1dp"
-                    android:text="@string/title"
-                    android:textColor="@color/secondaryColor"
-                    android:textSize="18dp"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView_details_titleIn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:textColor="@color/secondaryColor"
-                    android:textSize="18dp"
-                    app:layout_constraintStart_toEndOf="@+id/textView_details_title" />
-
-                <TextView
                     android:id="@+id/textView_details_year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/alata"
                     android:text="@string/year"
-                    android:textColor="@color/secondaryColor"
+                    android:textColor="@color/white"
                     android:textSize="18dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_details_title" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView_details_yearIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:textColor="@color/secondaryColor"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/alata"
+                    android:textColor="@color/white"
                     android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView_details_year"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_details_titleIn" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
+                    android:fontFamily="@font/alata"
                     android:text="@string/duration"
-                    android:textColor="@color/secondaryColor"
+                    android:textColor="@color/white"
                     android:textSize="18dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/textView_details_yearIn"
                     app:layout_constraintTop_toTopOf="@+id/textView_details_yearIn" />
 
@@ -89,7 +134,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:textColor="@color/secondaryColor"
+                    android:fontFamily="@font/alata"
+                    android:textColor="@color/white"
                     android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView_duration"
                     app:layout_constraintTop_toTopOf="@+id/textView_details_yearIn" />
@@ -98,21 +144,25 @@
                     android:id="@+id/textView_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/alata"
                     android:text="@string/description"
-                    android:textColor="@color/secondaryColor"
+                    android:textColor="@color/white"
                     android:textSize="18dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_details_year" />
+                    app:layout_constraintTop_toBottomOf="@+id/divider12" />
 
                 <TextView
                     android:id="@+id/textView_descriptionIn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:fontFamily="@font/alata"
                     android:gravity="start|top"
                     android:inputType="textMultiLine"
                     android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-                    android:textColor="@color/secondaryColor"
+                    android:textColor="@color/white"
                     android:textSize="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -122,99 +172,178 @@
                     android:id="@+id/textView_genres"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/alata"
                     android:text="@string/genres"
-                    android:textColor="@color/secondaryColor"
+                    android:textColor="@color/white"
                     android:textSize="18dp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_descriptionIn" />
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@+id/divider11"
+                    tools:layout_editor_absoluteX="0dp" />
 
                 <TextView
                     android:id="@+id/textView_genresIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:textColor="@color/secondaryColor"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/alata"
+                    android:textColor="@color/white"
                     android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView_genres"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_descriptionIn" />
+                    app:layout_constraintTop_toBottomOf="@+id/divider11" />
 
                 <TextView
                     android:id="@+id/textView_studios"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/alata"
                     android:text="@string/studios"
-                    android:textColor="@color/secondaryColor"
+                    android:textColor="@color/white"
                     android:textSize="18dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_genres" />
+                    app:layout_constraintTop_toBottomOf="@+id/divider10" />
 
                 <TextView
                     android:id="@+id/textView_studiosIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:textColor="@color/secondaryColor"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/alata"
+                    android:textColor="@color/white"
                     android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView_studios"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_genresIn" />
+                    app:layout_constraintTop_toBottomOf="@+id/divider10" />
 
                 <TextView
                     android:id="@+id/textView_producers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/alata"
                     android:text="@string/producers"
-                    android:textColor="@color/secondaryColor"
+                    android:textColor="@color/white"
                     android:textSize="18dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_studios" />
+                    app:layout_constraintTop_toBottomOf="@+id/divider9" />
 
                 <TextView
                     android:id="@+id/textView_producersIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:textColor="@color/secondaryColor"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/alata"
+                    android:textColor="@color/white"
                     android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView_producers"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_studiosIn" />
+                    app:layout_constraintTop_toBottomOf="@+id/divider9" />
 
                 <TextView
                     android:id="@+id/textView_trailerLink"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/alata"
                     android:text="@string/trailer_link"
-                    android:textColor="@color/secondaryColor"
+                    android:textColor="@color/white"
                     android:textSize="18dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_producersIn" />
+                    app:layout_constraintTop_toBottomOf="@+id/divider8" />
 
                 <TextView
                     android:id="@+id/textView_trailerLinkIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
                     android:autoLink="web"
+                    android:fontFamily="@font/alata"
                     android:linksClickable="true"
-                    android:textColor="@color/secondaryColor"
                     android:textColorLink="@color/white"
                     android:textSize="18dp"
                     app:layout_constraintStart_toEndOf="@+id/textView_trailerLink"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_producersIn" />
+                    app:layout_constraintTop_toBottomOf="@+id/divider8" />
+
 
                 <TextView
                     android:id="@+id/textView_reviews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/alata"
                     android:text="@string/reviews"
-                    android:textColor="@color/secondaryColor"
+                    android:textColor="@color/white"
                     android:textSize="18dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_trailerLinkIn" />
+                    app:layout_constraintTop_toBottomOf="@+id/divider7" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView_reviews"
                     android:layout_width="wrap_content"
                     android:layout_height="250dp"
+                    android:layout_marginTop="10dp"
                     app:layout_constraintTop_toBottomOf="@+id/textView_reviews"
+                    tools:layout_editor_absoluteX="1dp" />
+
+                <View
+                    android:id="@+id/divider7"
+                    android:layout_width="396dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/grey"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_trailerLinkIn"
+                    tools:layout_editor_absoluteX="1dp" />
+
+                <View
+                    android:id="@+id/divider8"
+                    android:layout_width="396dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/grey"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_producersIn"
+                    tools:layout_editor_absoluteX="1dp" />
+
+                <View
+                    android:id="@+id/divider9"
+                    android:layout_width="396dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/grey"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_studiosIn"
+                    tools:layout_editor_absoluteX="1dp" />
+
+                <View
+                    android:id="@+id/divider10"
+                    android:layout_width="396dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/grey"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_genresIn"
+                    tools:layout_editor_absoluteX="1dp" />
+
+                <View
+                    android:id="@+id/divider11"
+                    android:layout_width="396dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/grey"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_descriptionIn"
+                    tools:layout_editor_absoluteX="1dp" />
+
+                <View
+                    android:id="@+id/divider12"
+                    android:layout_width="396dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/grey"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_durationIn"
                     tools:layout_editor_absoluteX="1dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

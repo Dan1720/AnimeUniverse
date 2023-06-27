@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
@@ -62,6 +63,8 @@ import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class AnimeByNameDetailsFragment extends Fragment implements AnimeEpisodesResponseCallback, ReviewsResponseCallback{
     private static final String TAG = AnimeDetailsFragment.class.getSimpleName();
@@ -142,6 +145,10 @@ public class AnimeByNameDetailsFragment extends Fragment implements AnimeEpisode
 
         AnimeByName anime = AnimeByNameDetailsFragmentArgs.fromBundle(getArguments()).getAnime();
 
+        Glide.with(fragmentAnimeDetailsBinding.imageViewDetailsBlurry.getContext())
+                .load(anime.getImages().getJpgImages().getLargeImageUrl())
+                .placeholder(R.drawable.ic_home).apply(RequestOptions.bitmapTransform(new BlurTransformation(25, 3))).into(fragmentAnimeDetailsBinding.imageViewDetailsBlurry);
+
 
         Glide.with(fragmentAnimeDetailsBinding.imageViewDetails.getContext())
                 .load(anime.getImages().getJpgImages().getLargeImageUrl())
@@ -195,7 +202,6 @@ public class AnimeByNameDetailsFragment extends Fragment implements AnimeEpisode
         }
 
         RecyclerView ReviewsRecyclerViewItem = view.findViewById(R.id.recyclerView_reviews);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
         reviewsRecyclerViewAdapter = new ReviewsRecyclerViewAdapter(reviewsList, requireActivity().getApplication(), new ReviewsRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onReviewItemClick(Review review) {
@@ -206,7 +212,7 @@ public class AnimeByNameDetailsFragment extends Fragment implements AnimeEpisode
         });
 
         ReviewsRecyclerViewItem.setAdapter(reviewsRecyclerViewAdapter);
-        ReviewsRecyclerViewItem.setLayoutManager(layoutManager);
+        ReviewsRecyclerViewItem.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
 
         reviewsRepository.fetchReviewsById(anime.getId(), Long.parseLong(lastUpdate));
 

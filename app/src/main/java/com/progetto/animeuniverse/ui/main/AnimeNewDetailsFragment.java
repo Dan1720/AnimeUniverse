@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.adapter.EpisodesRecyclerViewAdapter;
@@ -42,6 +43,8 @@ import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class AnimeNewDetailsFragment extends Fragment implements ReviewsResponseCallback, AnimeEpisodesResponseCallback {
 
@@ -106,6 +109,11 @@ public class AnimeNewDetailsFragment extends Fragment implements ReviewsResponse
         }, getViewLifecycleOwner(), Lifecycle.State.RESUMED);
 
         AnimeNew animeNew = AnimeNewDetailsFragmentArgs.fromBundle(getArguments()).getAnimeNew();
+
+        Glide.with(fragmentAnimeNewDetailsBinding.imageViewDetailsBlurry.getContext())
+                .load(animeNew.getEntry().getImages().getJpgImages().getLargeImageUrl())
+                .placeholder(R.drawable.ic_home).apply(RequestOptions.bitmapTransform(new BlurTransformation(25, 3))).into(fragmentAnimeNewDetailsBinding.imageViewDetailsBlurry);
+
         Glide.with(fragmentAnimeNewDetailsBinding.imageViewDetails.getContext())
                 .load(animeNew.getEntry().getImages().getJpgImages().getImageUrl())
                 .placeholder(R.drawable.ic_home).into(fragmentAnimeNewDetailsBinding.imageViewDetails);
@@ -130,7 +138,6 @@ public class AnimeNewDetailsFragment extends Fragment implements ReviewsResponse
         }
 
         RecyclerView ReviewsRecyclerViewItem = view.findViewById(R.id.recyclerView_reviews);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
         reviewsRecyclerViewAdapter = new ReviewsRecyclerViewAdapter(reviewsList, requireActivity().getApplication(), new ReviewsRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onReviewItemClick(Review review) {
@@ -140,7 +147,7 @@ public class AnimeNewDetailsFragment extends Fragment implements ReviewsResponse
         });
 
         ReviewsRecyclerViewItem.setAdapter(reviewsRecyclerViewAdapter);
-        ReviewsRecyclerViewItem.setLayoutManager(layoutManager);
+        ReviewsRecyclerViewItem.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
 
         reviewsRepository.fetchReviewsById(animeNew.getEntry().getIdAnime(), Long.parseLong(lastUpdate));
 

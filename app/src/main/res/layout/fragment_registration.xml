@@ -27,6 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/alata"
         android:text="@string/txt_there_is_account"
         android:textColor="@color/secondaryColor"
         android:textSize="16dp"
@@ -54,6 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/alata"
         android:text="@string/crea_account"
         android:textColor="@color/secondaryColor"
         android:textSize="28dp"
@@ -88,6 +90,7 @@
             android:id="@+id/emailTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
             android:inputType="textEmailAddress"
             android:textColor="@color/secondaryColor" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -112,6 +115,7 @@
             android:id="@+id/passwordTextInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
             android:inputType="textPassword"
             android:textColor="@color/secondaryColor" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -122,6 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:layout_marginEnd="22dp"
+        android:fontFamily="@font/alata"
         android:text="@string/crea_account"
         android:textColor="@color/secondaryColor"
         android:textSize="20dp"

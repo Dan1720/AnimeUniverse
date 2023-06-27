@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
@@ -52,6 +53,8 @@ import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class AnimeSpecificGenresDetailsFragment extends Fragment implements ReviewsResponseCallback {
 
@@ -116,6 +119,12 @@ public class AnimeSpecificGenresDetailsFragment extends Fragment implements Revi
         }, getViewLifecycleOwner(), Lifecycle.State.RESUMED);
 
         AnimeSpecificGenres animeSpecificGenres = AnimeSpecificGenresDetailsFragmentArgs.fromBundle(getArguments()).getAnimeSpecificGenres();
+
+        Glide.with(fragmentAnimeSpecificGenresDetailsBinding.imageViewDetailsBlurry.getContext())
+                .load(animeSpecificGenres.getImages().getJpgImages().getLargeImageUrl())
+                .placeholder(R.drawable.ic_home).apply(RequestOptions.bitmapTransform(new BlurTransformation(25, 3))).into(fragmentAnimeSpecificGenresDetailsBinding.imageViewDetailsBlurry);
+
+
         Glide.with(fragmentAnimeSpecificGenresDetailsBinding.imageViewDetails.getContext())
                 .load(animeSpecificGenres.getImages().getJpgImages().getLargeImageUrl())
                 .placeholder(R.drawable.ic_home).into(fragmentAnimeSpecificGenresDetailsBinding.imageViewDetails);
