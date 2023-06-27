@@ -104,6 +104,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
     private final String q = TOP_HEADLINES_ENDPOINT;
     private final int threshold = 1;
     private int countId = 0;
+    private static boolean flag = false;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -191,7 +192,10 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             public void onFavoriteButtonPressed(int position) {
                 animeList.get(position).setFavorite(!animeList.get(position).isFavorite());
                 animeViewModel.updateAnime(animeList.get(position));
-                inviaNotifica(animeList.get(position).getTitle());
+                if(flag == true){
+                    inviaNotifica(animeList.get(position).getTitle());
+                }
+
             }
         });
         animeTopRecyclerViewItem.setAdapter(animeTopRecyclerViewAdapter);
@@ -374,6 +378,10 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             animeList.get(number).setFavorite(!animeList.get(number).isFavorite());
             animeViewModel.updateAnime(animeList.get(number));
             setImageViewFavoriteAnime(animeList.get(number).isFavorite());
+            if(flag == true){
+                inviaNotifica(animeList.get(number).getTitle());
+            }
+
         });
 
 
@@ -382,8 +390,10 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
     public void setImageViewFavoriteAnime(boolean isFavorite) {
         if (isFavorite) {
             fragmentHomeBinding.imageViewFavoriteHome.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.baseline_favorite_24));
+            isChecked(true);
         } else {
             fragmentHomeBinding.imageViewFavoriteHome.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.baseline_not_favorite_24));
+            isChecked(false);
         }
     }
 
@@ -411,6 +421,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             return;
         }
         countId++;
+        flag = false;
         notificationManager.notify(countId, builder.build());
 
 
@@ -426,6 +437,19 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             channel.setDescription(description);
             NotificationManager notificationManager = requireContext().getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
+        }
+    }
+    public static void isChecked(boolean check){
+        if(check == true){
+            if(flag != true){
+                flag = true;
+
+            }
+
+        } else {
+            if(flag == true){
+                flag = false;
+            }
         }
     }
 

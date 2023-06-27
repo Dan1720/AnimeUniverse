@@ -112,8 +112,10 @@ public class AnimeTopRecyclerViewAdapter extends RecyclerView.Adapter<AnimeTopRe
         public void setImageViewFavoriteAnime(boolean isFavorite){
             if(isFavorite){
                 imageViewFavoriteAnime.setImageDrawable(AppCompatResources.getDrawable(application, R.drawable.baseline_favorite_24));
+                HomeFragment.isChecked(true);
             }else{
                 imageViewFavoriteAnime.setImageDrawable(AppCompatResources.getDrawable(application, R.drawable.baseline_not_favorite_24));
+                HomeFragment.isChecked(false);
             }
         }
 
