@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,7 +39,7 @@ public class AnimeRecommendationsRecyclerViewAdapter extends RecyclerView.Adapte
     @NonNull
     @Override
     public AnimeRecommendationsRecyclerViewAdapter.AnimeRecommendationsRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_c_n, viewGroup, false);
         return new AnimeRecommendationsRecyclerViewAdapter.AnimeRecommendationsRecyclerViewHolder(view);
     }
 
@@ -62,9 +63,11 @@ public class AnimeRecommendationsRecyclerViewAdapter extends RecyclerView.Adapte
     public class AnimeRecommendationsRecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private final ImageView imageViewItem;
+        private final TextView textViewTitle;
         public AnimeRecommendationsRecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             this.imageViewItem = itemView.findViewById(R.id.img_child_item);
+            textViewTitle = itemView.findViewById(R.id.textView_title);
             itemView.setOnClickListener(this);
         }
 
@@ -72,6 +75,7 @@ public class AnimeRecommendationsRecyclerViewAdapter extends RecyclerView.Adapte
             Picasso.get()
                     .load(animeRecommendations.getEntry().get(0).getImages().getJpgImages().getImageUrl())
                     .into(imageViewItem);
+            textViewTitle.setText(animeRecommendationsList.get(getAdapterPosition()).getEntry().get(0).getTitle());
 
         }
 

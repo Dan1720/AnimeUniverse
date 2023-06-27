@@ -6,42 +6,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-        <!--<androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="207dp"
-            android:layout_margin="12dp">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:id="@+id/img_child_item"
-                            android:layout_width="111dp"
-                            android:layout_height="155dp"
-                            android:adjustViewBounds="true"
-                            android:background="@color/white"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_home"
-                            app:srcCompat="@drawable/ic_home" />
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="111dp"
-                            android:layout_height="match_parent">
-
-                                <ImageView
-                                    android:id="@+id/imageView_favorite"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:srcCompat="@drawable/baseline_not_favorite_24"/>
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </RelativeLayout>
-
-        </androidx.cardview.widget.CardView> -->
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,11 +27,23 @@
                     android:layout_height="50dp"
                     android:layout_below="@id/img_child_item"
                     android:layout_marginTop="16dp"
-                    android:backgroundTint="@color/white">
+                    android:backgroundTint="#1F2226">
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="110dp"
                             android:layout_height="match_parent">
-
+                                <TextView
+                                    android:id="@+id/textView_title"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:maxLines="2"
+                                    android:ellipsize="end"
+                                    android:textColor="@color/white"
+                                    android:layout_marginLeft="2dp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@id/imageView_favorite"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="@id/imageView_favorite"
+                                    android:gravity="start"/>
                                 <ImageView
                                     android:id="@+id/imageView_favorite"
                                     android:layout_width="30dp"

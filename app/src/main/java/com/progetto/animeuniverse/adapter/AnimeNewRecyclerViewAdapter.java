@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,7 +39,7 @@ public class AnimeNewRecyclerViewAdapter extends RecyclerView.Adapter<AnimeNewRe
     @NonNull
     @Override
     public AnimeNewRecyclerViewAdapter.AnimeNewRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_c_n, viewGroup, false);
         return new AnimeNewRecyclerViewAdapter.AnimeNewRecyclerViewHolder(view);
     }
 
@@ -62,9 +63,11 @@ public class AnimeNewRecyclerViewAdapter extends RecyclerView.Adapter<AnimeNewRe
     public class AnimeNewRecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private final ImageView imageViewItem;
+        private final TextView textViewTitle;
         public AnimeNewRecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             this.imageViewItem = itemView.findViewById(R.id.img_child_item);
+            textViewTitle = itemView.findViewById(R.id.textView_title);
             itemView.setOnClickListener(this);
         }
 
@@ -72,6 +75,7 @@ public class AnimeNewRecyclerViewAdapter extends RecyclerView.Adapter<AnimeNewRe
             Picasso.get()
                     .load(animeNew.getEntry().getImages().getJpgImages().getImageUrl())
                     .into(imageViewItem);
+            textViewTitle.setText(animeNewList.get(getAdapterPosition()).getEntry().getTitle());
 
         }
 
