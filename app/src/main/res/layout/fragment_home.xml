@@ -43,13 +43,23 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
+                    <ImageView
+                        android:id="@+id/imageView_backgroundVanish"
+                        android:layout_width="411dp"
+                        android:layout_height="230dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/backgroundvanish"
+                        app:layout_constraintBottom_toBottomOf="@+id/homeCover"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.529"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:srcCompat="@drawable/backgroundvanish" />
 
                     <TextView
                         android:id="@+id/txt_btn_categorie"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="67dp"
-                        android:background="@android:drawable/screen_background_dark_transparent"
+                        android:layout_marginBottom="55dp"
                         android:fontFamily="@font/alata"
                         android:gravity="bottom|center_horizontal"
                         android:text="@string/txt_categorie"
@@ -62,8 +72,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom|center_horizontal|center_vertical"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="10dp"
                         app:layout_constraintBottom_toBottomOf="@+id/homeCover"
                         app:layout_constraintTop_toBottomOf="@+id/txt_btn_categorie"
                         app:layout_constraintVertical_bias="1.0"
@@ -81,14 +91,12 @@
                                 android:id="@+id/imageView_favorite_home"
                                 android:layout_width="match_parent"
                                 android:layout_height="28dp"
-                                android:background="@android:drawable/screen_background_dark_transparent"
                                 app:srcCompat="@drawable/baseline_not_favorite_24" />
 
                             <TextView
                                 android:id="@+id/txt_la_mia_lista"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@android:drawable/screen_background_dark_transparent"
                                 android:gravity="center"
                                 android:text="@string/txt_la_mia_lista"
                                 android:textColor="#EBFFFFFF"
@@ -111,14 +119,12 @@
                                 android:id="@+id/imageView_info"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@android:drawable/screen_background_dark_transparent"
                                 app:srcCompat="@drawable/baseline_info_24" />
 
                             <TextView
                                 android:id="@+id/txt_info"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@android:drawable/screen_background_dark_transparent"
                                 android:gravity="center"
                                 android:text="@string/txt_info"
                                 android:textColor="#EBFFFFFF"
@@ -243,8 +249,6 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
         android:layout_width="match_parent"
@@ -329,4 +333,7 @@
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 </androidx.constraintlayout.motion.widget.MotionLayout>

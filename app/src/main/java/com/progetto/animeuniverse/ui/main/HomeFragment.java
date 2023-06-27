@@ -357,7 +357,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
                 .into(homeCover);
         List<AnimeGenres> genres = animeHomeCover.getGenres();
         if (genres.size() >= 3) {
-            categories.setText(genres.get(0).getNameGenre() + " - " + genres.get(1).getNameGenre() + " - " + genres.get(2).getNameGenre());
+            categories.setText(" ҉ " + " " +genres.get(0).getNameGenre() + " " +  " " + " " + " ҉ " + " " + genres.get(1).getNameGenre() + " " +  " " + " " + " ҉ " + " " + genres.get(2).getNameGenre()+ " " + " " + " " +" ҉ " );
         } else {
             categories.setText(genres.get(0).getNameGenre());
         }
