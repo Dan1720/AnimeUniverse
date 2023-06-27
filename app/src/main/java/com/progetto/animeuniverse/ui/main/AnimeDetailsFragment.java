@@ -188,7 +188,6 @@ public class AnimeDetailsFragment extends Fragment implements AnimeEpisodesRespo
         }
 
         RecyclerView ReviewsRecyclerViewItem = view.findViewById(R.id.recyclerView_reviews);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
         reviewsRecyclerViewAdapter = new ReviewsRecyclerViewAdapter(reviewsList, requireActivity().getApplication(), new ReviewsRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onReviewItemClick(Review review) {
@@ -199,7 +198,7 @@ public class AnimeDetailsFragment extends Fragment implements AnimeEpisodesRespo
         });
 
         ReviewsRecyclerViewItem.setAdapter(reviewsRecyclerViewAdapter);
-        ReviewsRecyclerViewItem.setLayoutManager(layoutManager);
+        ReviewsRecyclerViewItem.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
 
         reviewsRepository.fetchReviewsById(anime.getId(), Long.parseLong(lastUpdate));
 

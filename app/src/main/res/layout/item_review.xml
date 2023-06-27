@@ -16,7 +16,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/white">
 
                 <ImageView
                     android:id="@+id/imageView2"
@@ -24,14 +25,17 @@
                     android:layout_height="110dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/iconareview" />
+                    app:srcCompat="@drawable/stareviews" />
 
                 <TextView
                     android:id="@+id/textView_scoreIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/alata"
                     android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                     app:layout_constraintEnd_toEndOf="@+id/imageView2"
                     app:layout_constraintStart_toStartOf="@+id/imageView2" />
@@ -42,6 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="15dp"
+                    android:fontFamily="@font/alata"
                     android:textColor="@color/black"
                     app:layout_constraintStart_toEndOf="@+id/imageView2"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -51,7 +56,12 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:maxLines="5"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/alata"
                     android:textColor="@color/black"
                     android:textSize="16dp"
                     app:layout_constraintBottom_toTopOf="@+id/btnReadMore"
@@ -66,6 +76,7 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:background="@android:drawable/screen_background_dark_transparent"
+                    android:fontFamily="@font/alata"
                     android:text="@string/read_more"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
