@@ -1,17 +1,21 @@
 package com.progetto.animeuniverse.ui.main;
 
+import static com.progetto.animeuniverse.util.Constants.CHANNEL_ID;
 import static com.progetto.animeuniverse.util.Constants.LAST_UPDATE;
 import static com.progetto.animeuniverse.util.Constants.SHARED_PREFERENCES_FILE_NAME;
 import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_ENDPOINT;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -156,6 +160,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         }
 
         animeNewList = new ArrayList<>();
+        createNotificationChannel();
 
     }
 
@@ -276,7 +281,6 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_animeMovieFragment);
         });
 
-
     }
 
 
@@ -383,11 +387,13 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         }
     }
 
-    private void inviaNotifica(String animeTitle) {
+    public void inviaNotifica(String animeTitle) {
         String animeText = "L'elemento è stato aggiunto ai preferiti.";
         //Intent intent = new Intent(getActivity(), WelcomeActivity.class);
+        Intent intent = new Intent(requireContext(), WelcomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, new Intent(), PendingIntent.FLAG_CANCEL_CURRENT);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), Constants.CHANNEL_ID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), CHANNEL_ID)
                 .setSmallIcon(R.drawable.logo)
                 .setContentTitle("Elemento " + animeTitle + " aggiunto ai preferiti")
                 .setContentText("L'elemento è stato aggiunto ai preferiti.")
@@ -412,6 +418,18 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
 
 
     }
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Anime Universe Channel";
+            String description = "Canale di notifica per Anime Universe";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = requireContext().getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
 
 
 }
