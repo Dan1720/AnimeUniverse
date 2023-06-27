@@ -399,9 +399,10 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
 
     public void inviaNotifica(String animeTitle) {
         String animeText = "L'elemento è stato aggiunto ai preferiti.";
+        
         Intent intent = new Intent(requireContext(), WelcomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, new Intent(), PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, new Intent(), PendingIntent.FLAG_IMMUTABLE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), CHANNEL_ID)
                 .setSmallIcon(R.drawable.logo)
                 .setContentTitle("Elemento " + animeTitle + " aggiunto ai preferiti")
