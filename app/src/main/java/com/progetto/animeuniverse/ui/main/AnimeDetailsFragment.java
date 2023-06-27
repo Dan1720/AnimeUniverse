@@ -5,20 +5,6 @@ import static com.progetto.animeuniverse.util.Constants.SHARED_PREFERENCES_FILE_
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.view.MenuProvider;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavBackStackEntry;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,38 +13,41 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.view.MenuProvider;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
+import androidx.navigation.NavBackStackEntry;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.adapter.EpisodesRecyclerViewAdapter;
 import com.progetto.animeuniverse.adapter.ReviewsRecyclerViewAdapter;
 import com.progetto.animeuniverse.databinding.FragmentAnimeDetailsBinding;
 import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeEpisodes;
-import com.progetto.animeuniverse.model.AnimeEpisodesImages;
-import com.progetto.animeuniverse.model.AnimeEpisodesResponse;
 import com.progetto.animeuniverse.model.AnimeGenres;
 import com.progetto.animeuniverse.model.AnimeProducers;
 import com.progetto.animeuniverse.model.AnimeStudios;
-import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.model.Review;
-import com.progetto.animeuniverse.model.ReviewsResponse;
 import com.progetto.animeuniverse.repository.anime_episodes.AnimeEpisodesRepository;
 import com.progetto.animeuniverse.repository.anime_episodes.AnimeEpisodesResponseCallback;
 import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepository;
-import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_episodes_images.IAnimeEpisodesImagesRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.reviews.IReviewsRepository;
-import com.progetto.animeuniverse.repository.reviews.IReviewsRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.reviews.ReviewsRepository;
 import com.progetto.animeuniverse.repository.reviews.ReviewsResponseCallback;
-import com.progetto.animeuniverse.util.ErrorMessagesUtil;
-import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class AnimeDetailsFragment extends Fragment implements AnimeEpisodesResponseCallback, ReviewsResponseCallback{
     private static final String TAG = AnimeDetailsFragment.class.getSimpleName();
@@ -140,9 +129,16 @@ public class AnimeDetailsFragment extends Fragment implements AnimeEpisodesRespo
         Anime anime = AnimeDetailsFragmentArgs.fromBundle(getArguments()).getAnime();
 
 
+        Glide.with(fragmentAnimeDetailsBinding.imageViewDetailsBlurry.getContext())
+                .load(anime.getImages().getJpgImages().getLargeImageUrl())
+                .placeholder(R.drawable.ic_home).apply(RequestOptions.bitmapTransform(new BlurTransformation(25, 3))).into(fragmentAnimeDetailsBinding.imageViewDetailsBlurry);
+
+
         Glide.with(fragmentAnimeDetailsBinding.imageViewDetails.getContext())
                 .load(anime.getImages().getJpgImages().getLargeImageUrl())
                 .placeholder(R.drawable.ic_home).into(fragmentAnimeDetailsBinding.imageViewDetails);
+
+
 
         fragmentAnimeDetailsBinding.textViewDetailsTitleIn.setText(anime.getTitle());
         fragmentAnimeDetailsBinding.textViewNEpisodesIn.setText(String.valueOf(anime.getNumEpisodes()));

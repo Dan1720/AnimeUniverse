@@ -12,11 +12,14 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-
+        <item name="android:fontFamily">@font/alata</item>
     </style>
     <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/secondaryColor</item>
         <item name="android:textSize">25dp</item>
     </style>
+
+
+
 
 </resources>
