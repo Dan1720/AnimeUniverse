@@ -33,6 +33,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.adapter.EpisodesRecyclerViewAdapter;
 import com.progetto.animeuniverse.adapter.ReviewsRecyclerViewAdapter;
+import com.progetto.animeuniverse.databinding.FragmentAnimeByNameDetailsBinding;
 import com.progetto.animeuniverse.databinding.FragmentAnimeDetailsBinding;
 import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeByName;
@@ -64,7 +65,7 @@ import java.util.List;
 
 public class AnimeByNameDetailsFragment extends Fragment implements AnimeEpisodesResponseCallback, ReviewsResponseCallback{
     private static final String TAG = AnimeDetailsFragment.class.getSimpleName();
-    private FragmentAnimeDetailsBinding fragmentAnimeDetailsBinding;
+    private FragmentAnimeByNameDetailsBinding fragmentAnimeDetailsBinding;
     private List<Review> reviewsList;
     private List<AnimeEpisodes> animeEpisodesList;
     private SharedPreferencesUtil sharedPreferencesUtil;
@@ -113,7 +114,7 @@ public class AnimeByNameDetailsFragment extends Fragment implements AnimeEpisode
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        fragmentAnimeDetailsBinding = FragmentAnimeDetailsBinding.inflate(inflater, container, false);
+        fragmentAnimeDetailsBinding = FragmentAnimeByNameDetailsBinding.inflate(inflater, container, false);
         return fragmentAnimeDetailsBinding.getRoot();
     }
 
