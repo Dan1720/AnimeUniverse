@@ -69,8 +69,22 @@ public class AnimeTopRecyclerViewAdapter extends RecyclerView.Adapter<AnimeTopRe
             super(itemView);
             this.imageViewItem = itemView.findViewById(R.id.img_child_item);
             imageViewFavoriteAnime = itemView.findViewById(R.id.imageView_favorite);
-            itemView.setOnClickListener(this);
-            imageViewFavoriteAnime.setOnClickListener(this);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    
+                    onItemClickListener.onAnimeClick(animeList.get(getAdapterPosition()));
+                }
+            });
+            imageViewFavoriteAnime.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    setImageViewFavoriteAnime(!animeList.get(getAdapterPosition()).isFavorite());
+                    onItemClickListener.onFavoriteButtonPressed(getAdapterPosition());
+
+                }
+            });
 
         }
 
