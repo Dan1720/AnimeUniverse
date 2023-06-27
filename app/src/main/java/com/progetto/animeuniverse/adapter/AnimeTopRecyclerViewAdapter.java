@@ -3,6 +3,7 @@ package com.progetto.animeuniverse.adapter;
 import static com.progetto.animeuniverse.util.Constants.LIMIT_ITEM_RV;
 
 import android.app.Application;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +71,7 @@ public class AnimeTopRecyclerViewAdapter extends RecyclerView.Adapter<AnimeTopRe
             imageViewFavoriteAnime = itemView.findViewById(R.id.imageView_favorite);
             itemView.setOnClickListener(this);
             imageViewFavoriteAnime.setOnClickListener(this);
+
         }
 
         public void bind(Anime anime){
@@ -80,7 +82,7 @@ public class AnimeTopRecyclerViewAdapter extends RecyclerView.Adapter<AnimeTopRe
             setImageViewFavoriteAnime(animeList.get(getAdapterPosition()).isFavorite());
 
         }
-
+        private long mLastClickTime = 0;
         @Override
         public void onClick(View v) {
             if(v.getId() == R.id.imageView_favorite){

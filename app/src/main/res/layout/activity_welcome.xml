@@ -51,6 +51,7 @@
         app:labelVisibilityMode="labeled"
         app:itemBackground="@color/primaryColor"
         app:itemTextColor="@color/secondaryColor"
-        app:itemIconTint="@color/secondaryColor"/>
+        app:itemIconTint="@color/secondaryColor"
+        app:itemRippleColor="@color/activeIndicator"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -269,6 +269,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:layout_marginRight="8dp"
+                android:paddingRight="10sp"
+                android:paddingLeft="10sp"
+                android:paddingTop="3sp"
+                android:paddingBottom="3sp"
                 android:background="@drawable/home_view_bg"
                 android:gravity="center_horizontal"
                 android:text="@string/txt_serie_tv"
@@ -282,6 +286,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="8dp"
+                android:paddingRight="10sp"
+                android:paddingLeft="10sp"
+                android:paddingTop="3sp"
+                android:paddingBottom="3sp"
                 android:background="@drawable/home_view_bg"
                 android:gravity="center"
                 android:text="@string/txt_film"
@@ -306,7 +314,9 @@
                     android:text="@string/txt_categorie"
                     android:textColor="@color/secondaryColor"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:paddingTop="3sp"
+                    android:paddingBottom="3sp"/>
 
                 <ImageView
                     android:id="@+id/imageView"
