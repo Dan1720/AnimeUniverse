@@ -62,20 +62,21 @@
                     android:layout_width="111dp"
                     android:layout_height="50dp"
                     android:layout_below="@id/img_child_item"
-                    android:layout_marginTop="16dp">
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/white">
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="111dp"
                             android:layout_height="match_parent">
 
                                 <ImageView
                                     android:id="@+id/imageView_favorite"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:srcCompat="@drawable/baseline_not_favorite_24"
-                                    android:duplicateParentState="false"/>
+                                    app:srcCompat="@drawable/baseline_not_favorite_24" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
         </RelativeLayout>
