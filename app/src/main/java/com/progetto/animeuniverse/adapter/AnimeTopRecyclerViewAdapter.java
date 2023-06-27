@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.model.Anime;
+import com.progetto.animeuniverse.ui.main.HomeFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -115,5 +116,6 @@ public class AnimeTopRecyclerViewAdapter extends RecyclerView.Adapter<AnimeTopRe
                 imageViewFavoriteAnime.setImageDrawable(AppCompatResources.getDrawable(application, R.drawable.baseline_not_favorite_24));
             }
         }
+
     }
 }
