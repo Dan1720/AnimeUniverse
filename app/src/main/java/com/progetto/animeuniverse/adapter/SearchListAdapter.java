@@ -68,10 +68,12 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.An
     public class AnimeByNameViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private final TextView textViewTitle;
         private final ImageView imageViewAnime;
+        private ImageView backgroundImageView;
         public AnimeByNameViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.textview_title);
             imageViewAnime = itemView.findViewById(R.id.imageview_anime_search);
+            backgroundImageView = itemView.findViewById(R.id.background);
             itemView.setOnClickListener(this);
             imageViewAnime.setOnClickListener(this);
         }
