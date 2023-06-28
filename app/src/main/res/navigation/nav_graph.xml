@@ -11,7 +11,8 @@
         android:label="Sfondo" >
         <action
             android:id="@+id/action_sfondo_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -20,13 +21,17 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
-            app:destination="@id/registrationFragment" />
+            app:destination="@id/registrationFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
         <action
             android:id="@+id/action_loginFragment_to_welcomeActivity"
-            app:destination="@id/welcomeActivity" />
+            app:destination="@id/welcomeActivity"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
-            app:destination="@id/forgotPasswordFragment" />
+            app:destination="@id/forgotPasswordFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -34,10 +39,12 @@
         android:label="RegistrationFragment" >
         <action
             android:id="@+id/action_registrationFragment_to_welcomeActivity"
-            app:destination="@id/welcomeActivity" />
+            app:destination="@id/welcomeActivity"
+            app:enterAnim="@android:anim/fade_in" />
         <action
             android:id="@+id/action_registrationFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@android:anim/slide_out_right" />
     </fragment>
     <activity
         android:id="@+id/welcomeActivity"
@@ -51,7 +58,8 @@
         tools:layout="@layout/fragment_forgot_password" >
         <action
             android:id="@+id/action_forgotPasswordFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@android:anim/slide_out_right" />
     </fragment>
 
 </navigation>
