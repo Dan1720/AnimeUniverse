@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_change_name"
-                android:textColor="#CB94A9"
+                android:textColor="@color/secondaryColor"
                 android:textSize="28dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
