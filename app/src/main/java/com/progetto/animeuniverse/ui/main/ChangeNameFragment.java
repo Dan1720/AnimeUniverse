@@ -54,9 +54,9 @@ public class ChangeNameFragment extends Fragment {
             String code = user.getUid();
             String newName = binding.nameInputChangeNameEditText.getText().toString().trim();
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users").child(code);
-            ref.child("nomeUtente").setValue(newName.toString());
+            ref.child("nomeUtente").setValue(newName);
             Toast.makeText(requireContext(), CHANGE_NAME_OK + newName, Toast.LENGTH_LONG).show();
-            Navigation.findNavController(requireView()).navigate(R.id.action_changeNameFragment_to_settingsAccountFragment);
+            Navigation.findNavController(requireView()).navigate(R.id.action_changeNameFragment_to_accountFragment);
         });
 
 

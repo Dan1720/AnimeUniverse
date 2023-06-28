@@ -38,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StreamDownloadTask;
 import com.google.firebase.storage.UploadTask;
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.ui.welcome.UserViewModel;
@@ -48,6 +49,7 @@ import com.progetto.animeuniverse.util.ServiceLocator;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 
@@ -62,8 +64,9 @@ public class AccountFragment extends Fragment {
     private Uri filePath;
     private DatabaseReference databaseReference;
     private StorageReference ref;
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    String code = user.getUid();
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private String code = user.getUid();
+    private String isNomeUtente = null;
 
 
 
@@ -231,12 +234,30 @@ public class AccountFragment extends Fragment {
     }
 
     public void setProfileName(){
-        String isNomeUtente = userViewModel.getLoggedUser().getNomeUtente();
-        if( isNomeUtente != null){
-            fragmentAccountBinding.nomeutente.setText(userViewModel.getLoggedUser().getNomeUtente().toString());
-        }else{
-            fragmentAccountBinding.nomeutente.setText(userViewModel.getLoggedUser().getEmail().toString());
-        }
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("users").child(code).child("nomeUtente");
+
+        database.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                isNomeUtente = dataSnapshot.getValue(String.class);
+                if (isNomeUtente != null) {
+                    System.out.println("nome: " + isNomeUtente );
+                    if( isNomeUtente != null){
+                        fragmentAccountBinding.nomeutente.setText(isNomeUtente);
+                    }else{
+                        fragmentAccountBinding.nomeutente.setText(userViewModel.getLoggedUser().getEmail().toString());
+                    }
+                } else {
+                    // La stringa è null o non esiste nel percorso specificato
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Si è verificato un errore durante il recupero dei dati
+            }
+        });
+
     }
 
 
