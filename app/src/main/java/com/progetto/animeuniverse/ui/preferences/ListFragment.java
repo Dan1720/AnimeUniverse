@@ -5,30 +5,20 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.adapter.AnimeFavoriteRecyclerViewAdapter;
-import com.progetto.animeuniverse.adapter.AnimeTvRecyclerViewAdapter;
-import com.progetto.animeuniverse.adapter.ChildItemAdapter;
 import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeResponse;
-import com.progetto.animeuniverse.model.AnimeTv;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.ui.main.AnimeViewModel;
 import com.progetto.animeuniverse.util.Constants;
@@ -41,7 +31,6 @@ import java.util.List;
 public class ListFragment extends Fragment {
     private static final String TAG = ListFragment.class.getSimpleName();
     private List<Anime> animeList;
-    private ChildItemAdapter childItemAdapter;
     private AnimeViewModel animeViewModel;
 
     public ListFragment() {

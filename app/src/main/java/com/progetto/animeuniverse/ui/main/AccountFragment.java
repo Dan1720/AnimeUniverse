@@ -130,7 +130,7 @@ public class AccountFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(requireActivity(), "url non preso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireActivity(), "logout done", Toast.LENGTH_SHORT).show();
             }
         });
 

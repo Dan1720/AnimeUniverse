@@ -43,35 +43,22 @@ import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.adapter.AnimeNewRecyclerViewAdapter;
 import com.progetto.animeuniverse.adapter.AnimeRecommendationsRecyclerViewAdapter;
 import com.progetto.animeuniverse.adapter.AnimeTopRecyclerViewAdapter;
-import com.progetto.animeuniverse.adapter.ChildItemAdapter;
-import com.progetto.animeuniverse.adapter.ParentItemAdapter;
 import com.progetto.animeuniverse.databinding.FragmentHomeBinding;
 import com.progetto.animeuniverse.model.Anime;
 
-import com.progetto.animeuniverse.model.AnimeEpisodes;
-import com.progetto.animeuniverse.model.AnimeEpisodesImages;
+
 import com.progetto.animeuniverse.model.AnimeGenres;
-import com.progetto.animeuniverse.model.AnimeMovie;
 import com.progetto.animeuniverse.model.AnimeNew;
 import com.progetto.animeuniverse.model.AnimeNewResponse;
 import com.progetto.animeuniverse.model.AnimeRecommendations;
 import com.progetto.animeuniverse.model.AnimeRecommendationsResponse;
 import com.progetto.animeuniverse.model.AnimeResponse;
-import com.progetto.animeuniverse.model.AnimeSpecificGenres;
-import com.progetto.animeuniverse.model.AnimeTv;
-import com.progetto.animeuniverse.model.Notification;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.anime.AnimeResponseCallback;
 import com.progetto.animeuniverse.repository.anime.IAnimeRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_episodes_images.IAnimeEpisodesImagesRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_movie.IAnimeMovieRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_new.IAnimeNewRepositoryWithLiveData;
 import com.progetto.animeuniverse.repository.anime_recommendations.IAnimeRecommendationsRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_specific_genres.IAnimeSpecificGenresRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_tv.IAnimeTvRepositoryWithLiveData;
 import com.progetto.animeuniverse.ui.welcome.WelcomeActivity;
-import com.progetto.animeuniverse.util.Constants;
 import com.progetto.animeuniverse.util.ErrorMessagesUtil;
 import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
@@ -91,18 +78,9 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
     private SharedPreferencesUtil sharedPreferencesUtil;
     private AnimeViewModel animeViewModel;
     private AnimeRecommendationsViewModel animeRecommendationsViewModel;
-    private AnimeByNameViewModel animeByNameViewModel;
     private AnimeNewViewModel animeNewViewModel;
-    private AnimeEpisodesViewModel animeEpisodesViewModel;
-    private AnimeEpisodesImagesViewModel animeEpisodesImagesViewModel;
-    private AnimeTvViewModel animeTvViewModel;
-    private AnimeMovieViewModel animeMovieViewModel;
-    private AnimeSpecificGenresViewModel animeSpecificGenresViewModel;
 
     private FragmentHomeBinding fragmentHomeBinding;
-
-    private final String q = TOP_HEADLINES_ENDPOINT;
-    private final int threshold = 1;
     private int countId = 0;
     private static boolean flag = false;
 
