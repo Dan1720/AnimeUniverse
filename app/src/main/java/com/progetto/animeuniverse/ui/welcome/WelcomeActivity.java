@@ -7,7 +7,11 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -41,6 +45,11 @@ public class WelcomeActivity extends AppCompatActivity {
         // For the BottomNavigationView
         NavigationUI.setupWithNavController(bottomNav, navController);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.parseColor("#0A0B0D"));
+        }
 
 
     }
