@@ -26,6 +26,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
@@ -71,6 +72,7 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
     //private String finalLastUpdate;
     private SearchListAdapter searchListAdapter;
     private int count = 0;
+    private ImageView backgroundImageView;
 
 
 
@@ -130,6 +132,7 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
                 return false;
             }
         });
+        backgroundImageView = view.findViewById(R.id.background);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_search_anime);
         int numberOfColumns = 3;
         GridLayoutManager layoutManager = new GridLayoutManager(this.getContext(), numberOfColumns);
@@ -197,6 +200,17 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
                 @Override
                 public void run() {
                     searchListAdapter.notifyDataSetChanged();
+                }
+            });
+            requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    searchListAdapter.notifyDataSetChanged();
+                    if (animeByNameList.size() > 0) {
+                        backgroundImageView.setVisibility(View.GONE);
+                    } else {
+                        backgroundImageView.setVisibility(View.VISIBLE);
+                    }
                 }
             });
         }
