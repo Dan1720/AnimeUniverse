@@ -21,22 +21,34 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_animeDetailsFragment"
-            app:destination="@id/animeDetailsFragment" />
+            app:destination="@id/animeDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_homeFragment_to_genresFragment"
-            app:destination="@id/genresFragment" />
+            app:destination="@id/genresFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_homeFragment_to_animeTvFragment"
-            app:destination="@id/animeTvFragment" />
+            app:destination="@id/animeTvFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_homeFragment_to_animeMovieFragment"
-            app:destination="@id/animeMovieFragment" />
+            app:destination="@id/animeMovieFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_homeFragment_to_animeRecommendationsDetailsFragment"
-            app:destination="@id/animeRecommendationsDetailsFragment" />
+            app:destination="@id/animeRecommendationsDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_homeFragment_to_animeNewDetailsFragment"
-            app:destination="@id/animeNewDetailsFragment" />
+            app:destination="@id/animeNewDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -45,7 +57,9 @@
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_animeByNameDetailsFragment"
-            app:destination="@id/animeByNameDetailsFragment" />
+            app:destination="@id/animeByNameDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -54,10 +68,14 @@
         tools:layout="@layout/fragment_account" >
         <action
             android:id="@+id/action_accountFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_accountFragment_to_settingsAccountFragment"
-            app:destination="@id/settingsAccountFragment" />
+            app:destination="@id/settingsAccountFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_accountFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
@@ -68,13 +86,19 @@
         android:label="SettingsFragment" >
         <action
             android:id="@+id/action_settingsFragment_to_privacyFragment"
-            app:destination="@id/privacyFragment" />
+            app:destination="@id/privacyFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_settingsFragment_to_cookiePreferenceFragment"
-            app:destination="@id/cookiePreferenceFragment" />
+            app:destination="@id/cookiePreferenceFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_settingsFragment_to_condizioniUtilizzoFragment"
-            app:destination="@id/condizioniUtilizzoFragment" />
+            app:destination="@id/condizioniUtilizzoFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/settingsAccountFragment"
@@ -82,10 +106,14 @@
         android:label="SettingsAccountFragment" >
         <action
             android:id="@+id/action_settingsAccountFragment_to_forgotPasswordFragment"
-            app:destination="@id/forgotPasswordFragment" />
+            app:destination="@id/forgotPasswordFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_settingsAccountFragment_to_changeNameFragment"
-            app:destination="@id/changeNameFragment" />
+            app:destination="@id/changeNameFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -123,7 +151,9 @@
         tools:layout="@layout/fragment_change_name" >
         <action
             android:id="@+id/action_changeNameFragment_to_settingsAccountFragment"
-            app:destination="@id/settingsAccountFragment" />
+            app:destination="@id/settingsAccountFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/animeDetailsFragment"
@@ -135,7 +165,9 @@
             app:argType="com.progetto.animeuniverse.model.Anime" />
         <action
             android:id="@+id/action_animeDetailsFragment_to_reviewDetailsFragment"
-            app:destination="@id/reviewDetailsFragment" />
+            app:destination="@id/reviewDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/reviewDetailsFragment"
@@ -153,7 +185,9 @@
         tools:layout="@layout/fragment_genres" >
         <action
             android:id="@+id/action_genresFragment_to_animeSpecificGenresFragment"
-            app:destination="@id/animeSpecificGenresFragment" />
+            app:destination="@id/animeSpecificGenresFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/animeTvFragment"
@@ -162,7 +196,9 @@
         tools:layout="@layout/fragment_anime_tv" >
         <action
             android:id="@+id/action_animeTvFragment_to_animeTvDetailsFragment"
-            app:destination="@id/animeTvDetailsFragment" />
+            app:destination="@id/animeTvDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/animeTvDetailsFragment"
@@ -174,7 +210,9 @@
             app:argType="com.progetto.animeuniverse.model.AnimeTv" />
         <action
             android:id="@+id/action_animeTvDetailsFragment_to_reviewDetailsFragment"
-            app:destination="@id/reviewDetailsFragment" />
+            app:destination="@id/reviewDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/animeMovieFragment"
@@ -183,7 +221,9 @@
         tools:layout="@layout/fragment_anime_movie" >
         <action
             android:id="@+id/action_animeMovieFragment_to_animeMovieDetailsFragment"
-            app:destination="@id/animeMovieDetailsFragment" />
+            app:destination="@id/animeMovieDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/animeMovieDetailsFragment"
@@ -195,7 +235,9 @@
             app:argType="com.progetto.animeuniverse.model.AnimeMovie" />
         <action
             android:id="@+id/action_animeMovieDetailsFragment_to_reviewDetailsFragment"
-            app:destination="@id/reviewDetailsFragment" />
+            app:destination="@id/reviewDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/animeSpecificGenresFragment"
@@ -207,7 +249,9 @@
             app:argType="com.progetto.animeuniverse.model.Genre" />
         <action
             android:id="@+id/action_animeSpecificGenresFragment_to_animeSpecificGenresDetailsFragment"
-            app:destination="@id/animeSpecificGenresDetailsFragment" />
+            app:destination="@id/animeSpecificGenresDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/animeSpecificGenresDetailsFragment"
@@ -219,7 +263,9 @@
             app:argType="com.progetto.animeuniverse.model.AnimeSpecificGenres" />
         <action
             android:id="@+id/action_animeSpecificGenresDetailsFragment_to_reviewDetailsFragment"
-            app:destination="@id/reviewDetailsFragment" />
+            app:destination="@id/reviewDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/animeRecommendationsDetailsFragment"
@@ -231,7 +277,9 @@
             app:argType="com.progetto.animeuniverse.model.AnimeRecommendations" />
         <action
             android:id="@+id/action_animeRecommendationsDetailsFragment_to_reviewDetailsFragment"
-            app:destination="@id/reviewDetailsFragment" />
+            app:destination="@id/reviewDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/animeNewDetailsFragment"
@@ -243,7 +291,9 @@
             app:argType="com.progetto.animeuniverse.model.AnimeNew" />
         <action
             android:id="@+id/action_animeNewDetailsFragment_to_reviewDetailsFragment"
-            app:destination="@id/reviewDetailsFragment" />
+            app:destination="@id/reviewDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/animeByNameDetailsFragment"
@@ -255,7 +305,9 @@
             app:argType="com.progetto.animeuniverse.model.AnimeByName" />
         <action
             android:id="@+id/action_animeByNameDetailsFragment_to_reviewDetailsFragment"
-            app:destination="@id/reviewDetailsFragment" />
+            app:destination="@id/reviewDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
 
 
