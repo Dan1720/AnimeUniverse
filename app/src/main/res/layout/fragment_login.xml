@@ -87,13 +87,13 @@
                 android:hint="@string/password"
                 android:textColorHint="@color/secondaryColor"
                 app:boxBackgroundColor="@android:color/transparent"
-                app:endIconMode="none"
                 app:hintAnimationEnabled="false"
+                app:hintTextColor="@color/secondaryColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/emailInput_forgotPassword"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/secondaryColor"
+                app:passwordToggleTint="@color/activeIndicator"
                 app:startIconDrawable="@drawable/baseline_lock_24"
                 app:startIconTint="@color/secondaryColor">
 
