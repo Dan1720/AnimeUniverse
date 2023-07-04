@@ -310,18 +310,6 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         fragmentHomeBinding = null;
     }
 
-    private List<ParentItem> ParentItemList(List<Anime> animeList) {
-        List<ParentItem> itemList
-                = new ArrayList<>();
-
-        ParentItem item
-                = new ParentItem(
-                "Anime del momento", animeList
-        );
-        itemList.add(item);
-
-        return itemList;
-    }
 
     @SuppressLint("SetTextI18n")
     public void setImageHomeCover(List<Anime> animeList) {

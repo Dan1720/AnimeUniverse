@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,29 +27,22 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.adapter.EpisodesRecyclerViewAdapter;
 import com.progetto.animeuniverse.adapter.ReviewsRecyclerViewAdapter;
-import com.progetto.animeuniverse.databinding.FragmentAnimeTvBinding;
 import com.progetto.animeuniverse.databinding.FragmentAnimeTvDetailsBinding;
 import com.progetto.animeuniverse.model.AnimeEpisodes;
-import com.progetto.animeuniverse.model.AnimeEpisodesImages;
-import com.progetto.animeuniverse.model.AnimeEpisodesResponse;
 import com.progetto.animeuniverse.model.AnimeGenres;
 import com.progetto.animeuniverse.model.AnimeProducers;
 import com.progetto.animeuniverse.model.AnimeStudios;
 import com.progetto.animeuniverse.model.AnimeTv;
-import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.model.Review;
-import com.progetto.animeuniverse.model.ReviewsResponse;
-import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_episodes_images.IAnimeEpisodesImagesRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_tv.AnimeTvResponseCallback;
-import com.progetto.animeuniverse.repository.reviews.IReviewsRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.anime_episodes.AnimeEpisodesRepository;
+import com.progetto.animeuniverse.repository.anime_episodes.AnimeEpisodesResponseCallback;
+import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepository;
+import com.progetto.animeuniverse.repository.reviews.IReviewsRepository;
+import com.progetto.animeuniverse.repository.reviews.ReviewsRepository;
 import com.progetto.animeuniverse.repository.reviews.ReviewsResponseCallback;
-import com.progetto.animeuniverse.util.ErrorMessagesUtil;
-import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
@@ -58,7 +50,7 @@ import java.util.List;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
-public class AnimeTvDetailsFragment extends Fragment implements ReviewsResponseCallback {
+public class AnimeTvDetailsFragment extends Fragment implements ReviewsResponseCallback, AnimeEpisodesResponseCallback {
 
     private static final String TAG = AnimeTvDetailsFragment.class.getSimpleName();
 
@@ -66,8 +58,10 @@ public class AnimeTvDetailsFragment extends Fragment implements ReviewsResponseC
     private List<Review> reviewsList;
     private List<AnimeEpisodes> animeEpisodesList;
     private SharedPreferencesUtil sharedPreferencesUtil;
-    private ReviewsViewModel reviewsViewModel;
-    private AnimeEpisodesViewModel animeEpisodesViewModel;
+    private IAnimeEpisodesRepository animeEpisodesRepository;
+    private IReviewsRepository reviewsRepository;
+    private ReviewsRecyclerViewAdapter reviewsRecyclerViewAdapter;
+    private EpisodesRecyclerViewAdapter episodesRecyclerViewAdapter;
 
     public AnimeTvDetailsFragment() {
         // Required empty public constructor
@@ -79,25 +73,12 @@ public class AnimeTvDetailsFragment extends Fragment implements ReviewsResponseC
 
         sharedPreferencesUtil = new SharedPreferencesUtil(requireActivity().getApplication());
 
-        IReviewsRepositoryWithLiveData reviewsRepositoryWithLiveData =
-                ServiceLocator.getInstance().getReviewsRepository(requireActivity().getApplication());
-        if(reviewsRepositoryWithLiveData != null){
-            reviewsViewModel = new ViewModelProvider(requireActivity(), new ReviewsViewModelFactory(reviewsRepositoryWithLiveData)).get(ReviewsViewModel.class);
-        }else {
-            Snackbar.make(requireActivity().findViewById(android.R.id.content),
-                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
-        }
+        reviewsRepository = new ReviewsRepository(requireActivity().getApplication(), this);
 
         reviewsList = new ArrayList<>();
 
-        IAnimeEpisodesRepositoryWithLiveData animeEpisodesRepositoryWithLiveData =
-                ServiceLocator.getInstance().getAnimeEpisodesRepository(requireActivity().getApplication());
-        if(animeEpisodesRepositoryWithLiveData != null){
-            animeEpisodesViewModel = new ViewModelProvider(requireActivity(), new AnimeEpisodesViewModelFactory(animeEpisodesRepositoryWithLiveData)).get(AnimeEpisodesViewModel.class);
-        }else {
-            Snackbar.make(requireActivity().findViewById(android.R.id.content),
-                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
-        }
+
+        animeEpisodesRepository = new AnimeEpisodesRepository(requireActivity().getApplication(), this);
 
         animeEpisodesList = new ArrayList<>();
 
@@ -184,10 +165,16 @@ public class AnimeTvDetailsFragment extends Fragment implements ReviewsResponseC
             ((BottomNavigationView) requireActivity().findViewById(R.id.bottom_navigation)).
                     getMenu().findItem(R.id.listFragment).setChecked(true);
         }
+        String lastUpdate = "0";
+        if (sharedPreferencesUtil.readStringData(
+                SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE) != null) {
+            lastUpdate = sharedPreferencesUtil.readStringData(
+                    SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE);
+        }
 
         RecyclerView ReviewsRecyclerViewItem = view.findViewById(R.id.recyclerView_reviews);
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
-        ReviewsRecyclerViewAdapter reviewsRecyclerViewAdapter = new ReviewsRecyclerViewAdapter(reviewsList, requireActivity().getApplication(), new ReviewsRecyclerViewAdapter.OnItemClickListener() {
+        reviewsRecyclerViewAdapter = new ReviewsRecyclerViewAdapter(reviewsList, requireActivity().getApplication(), new ReviewsRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onReviewItemClick(Review review) {
                 AnimeTvDetailsFragmentDirections.ActionAnimeTvDetailsFragmentToReviewDetailsFragment action =
@@ -199,27 +186,11 @@ public class AnimeTvDetailsFragment extends Fragment implements ReviewsResponseC
         ReviewsRecyclerViewItem.setAdapter(reviewsRecyclerViewAdapter);
         ReviewsRecyclerViewItem.setLayoutManager(layoutManager);
 
-        String lastUpdate = "0";
-        reviewsViewModel.getReviewsByIdAnime(animeTv.getId(), Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
-            System.out.println("Result reviews: "+ result.isSuccess());
-            if(result.isSuccess()){
-                ReviewsResponse reviewsResponse = ((Result.ReviewsResponseSuccess) result).getData();
-                List<Review> fetchedReviews = reviewsResponse.getReviewList();
-                this.reviewsList.addAll(fetchedReviews);
-                reviewsRecyclerViewAdapter.notifyDataSetChanged();
-
-            }else{
-                ErrorMessagesUtil errorMessagesUtil =
-                        new ErrorMessagesUtil(requireActivity().getApplication());
-                Snackbar.make(view, errorMessagesUtil.
-                                getErrorMessage(((Result.Error) result).getMessage()),
-                        Snackbar.LENGTH_SHORT).show();
-            }
-        });
+        reviewsRepository.fetchReviewsById(animeTv.getId(), Long.parseLong(lastUpdate));
 
         RecyclerView EpisodesRecyclerViewItem = view.findViewById(R.id.recyclerView_episodesIn);
         LinearLayoutManager layoutManagerEp = new LinearLayoutManager(requireContext());
-        EpisodesRecyclerViewAdapter episodesRecyclerViewAdapter = new EpisodesRecyclerViewAdapter(animeEpisodesList, requireActivity().getApplication(), new EpisodesRecyclerViewAdapter.OnItemClickListener() {
+        episodesRecyclerViewAdapter = new EpisodesRecyclerViewAdapter(animeEpisodesList, requireActivity().getApplication(), new EpisodesRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onEpisodeItemClick(AnimeEpisodes animeEpisodes) {
 
@@ -231,22 +202,7 @@ public class AnimeTvDetailsFragment extends Fragment implements ReviewsResponseC
         EpisodesRecyclerViewItem.setLayoutManager(layoutManagerEp);
 
 
-        lastUpdate = "0";
-        animeEpisodesViewModel.getAnimeEpisodes(animeTv.getId(), Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
-            System.out.println("Result episodes: "+ result.isSuccess());
-            if(result.isSuccess()){
-                AnimeEpisodesResponse animeEpisodesResponse = ((Result.AnimeEpisodesSuccess) result).getData();
-                List<AnimeEpisodes> fetchedAnimeEpisodes = animeEpisodesResponse.getAnimeEpisodesList();
-                this.animeEpisodesList.addAll(fetchedAnimeEpisodes);
-                episodesRecyclerViewAdapter.notifyDataSetChanged();
-            }else{
-                ErrorMessagesUtil errorMessagesUtil =
-                        new ErrorMessagesUtil(requireActivity().getApplication());
-                Snackbar.make(view, errorMessagesUtil.
-                                getErrorMessage(((Result.Error) result).getMessage()),
-                        Snackbar.LENGTH_SHORT).show();
-            }
-        });
+        animeEpisodesRepository.fetchAnimeEpisodes(animeTv.getId(), Long.parseLong(lastUpdate));
 
 
 
@@ -259,6 +215,31 @@ public class AnimeTvDetailsFragment extends Fragment implements ReviewsResponseC
             this.reviewsList.addAll(reviewList);
             sharedPreferencesUtil.writeStringData(SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE, String.valueOf(lastUpdate));
         }
+        requireActivity().runOnUiThread(new Runnable() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void run() {
+                reviewsRecyclerViewAdapter.notifyDataSetChanged();
+            }
+        });
+
+    }
+
+    @Override
+    public void onSuccessEpisodes(List<AnimeEpisodes> animeEpisodesList, long lastUpdate) {
+        if(animeEpisodesList != null){
+            this.animeEpisodesList.clear();
+            this.animeEpisodesList.addAll(animeEpisodesList);
+            sharedPreferencesUtil.writeStringData(SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE, String.valueOf(lastUpdate));
+        }
+
+        requireActivity().runOnUiThread(new Runnable() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void run() {
+                episodesRecyclerViewAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -269,8 +250,6 @@ public class AnimeTvDetailsFragment extends Fragment implements ReviewsResponseC
     @Override
     public void onDestroy() {
         super.onDestroy();
-        reviewsViewModel.setFirstLoading(true);
-        reviewsViewModel.setLoading(false);
     }
 
     @Override

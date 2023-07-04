@@ -12,7 +12,6 @@ import androidx.room.RoomDatabase;
 import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeByName;
 import com.progetto.animeuniverse.model.AnimeEpisodes;
-import com.progetto.animeuniverse.model.AnimeEpisodesImages;
 import com.progetto.animeuniverse.model.AnimeMovie;
 import com.progetto.animeuniverse.model.AnimeNew;
 import com.progetto.animeuniverse.model.AnimeRecommendations;
@@ -25,7 +24,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {Anime.class, Review.class, Genre.class, AnimeRecommendations.class,
-        AnimeByName.class, AnimeNew.class, AnimeEpisodes.class, AnimeEpisodesImages.class,
+        AnimeByName.class, AnimeNew.class, AnimeEpisodes.class,
         AnimeTv.class, AnimeMovie.class, AnimeSpecificGenres.class}, version = DATABASE_VERSION)
 public abstract class AnimeRoomDatabase extends RoomDatabase {
     public abstract AnimeDao animeDao();
@@ -35,7 +34,6 @@ public abstract class AnimeRoomDatabase extends RoomDatabase {
     public abstract AnimeByNameDao animeByNameDao();
     public abstract AnimeNewDao animeNewDao();
     public abstract AnimeEpisodesDao animeEpisodesDao();
-    public abstract AnimeEpisodesImagesDao animeEpisodesImagesDao();
     public abstract AnimeTvDao animeTvDao();
     public abstract AnimeMovieDao animeMovieDao();
     public abstract AnimeSpecificGenresDao animeSpecificGenresDao();
