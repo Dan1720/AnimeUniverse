@@ -53,4 +53,9 @@
     <string name="reviews">Reviews:</string>
     <string name="episodes_number">Episodes number:</string>
     <string name="episodes">Episodes:</string>
+    <string name="read_more">Read all</string>
+    <string name="txt_episode">Episode</string>
+    <string name="duration">Duration:</string>
+    <string name="txt_anime_reccomendations">Anime reccomendations</string>
+    <string name="txt_anime_new">News</string>
 </resources>
