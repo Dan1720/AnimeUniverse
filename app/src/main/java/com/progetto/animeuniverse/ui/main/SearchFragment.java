@@ -2,7 +2,6 @@ package com.progetto.animeuniverse.ui.main;
 
 import static com.progetto.animeuniverse.util.Constants.LAST_UPDATE;
 import static com.progetto.animeuniverse.util.Constants.SHARED_PREFERENCES_FILE_NAME;
-import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_ENDPOINT;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -66,6 +65,7 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
     private SearchListAdapter searchListAdapter;
     private int count = 0;
     private ImageView backgroundImageView;
+    private boolean flag = true;
 
 
 
@@ -106,8 +106,6 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
         fragmentSearchBinding = FragmentSearchBinding.inflate(inflater, container, false);
         return fragmentSearchBinding.getRoot();
     }
@@ -126,6 +124,11 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
             }
         });
         backgroundImageView = view.findViewById(R.id.background);
+        if(flag == true){
+            backgroundImageView.setVisibility(View.VISIBLE);
+        } else {
+            backgroundImageView.setVisibility(View.GONE);
+        }
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_search_anime);
         int numberOfColumns = 3;
         GridLayoutManager layoutManager = new GridLayoutManager(this.getContext(), numberOfColumns);
@@ -134,6 +137,7 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
 
             @Override
             public void onAnimeClick(AnimeByName anime) {
+                backgroundImageView.setVisibility(View.GONE);
                 SearchFragmentDirections.ActionSearchFragmentToAnimeByNameDetailsFragment action =
                         SearchFragmentDirections.actionSearchFragmentToAnimeByNameDetailsFragment(anime);
                 Navigation.findNavController(view).navigate(action);
@@ -144,10 +148,12 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
         String lastUpdate = "0";
         NavBackStackEntry navBackStackEntry = Navigation.findNavController(view).getPreviousBackStackEntry();
         if(navBackStackEntry != null && navBackStackEntry.getDestination().getId() == R.id.searchFragment){
+            flag = false;
             ((BottomNavigationView) requireActivity().findViewById(R.id.bottom_navigation)).
                     getMenu().findItem(R.id.searchFragment).setChecked(true);
 
         }else if(navBackStackEntry != null && navBackStackEntry.getDestination().getId() == R.id.listFragment){
+            flag = false;
             ((BottomNavigationView) requireActivity().findViewById(R.id.bottom_navigation)).
                     getMenu().findItem(R.id.listFragment).setChecked(true);
         }
@@ -200,8 +206,10 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
                 public void run() {
                     searchListAdapter.notifyDataSetChanged();
                     if (animeByNameList.size() > 0) {
+                        flag = false;
                         backgroundImageView.setVisibility(View.GONE);
                     } else {
+                        flag = true;
                         backgroundImageView.setVisibility(View.VISIBLE);
                     }
                 }
@@ -219,27 +227,4 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
-    /*
-    @Override
-    public void onDestroy(){
-        super.onDestroy();
-        animeViewModel.setFirstLoading(true);
-        animeViewModel.setLoading(false);
-    }
-
-    @Override
-    public void onDestroyView(){
-        super.onDestroyView();
-        fragmentSearchBinding = null;
-    }*/
-
-
-
-
-
-
-
-
-
-
 }
