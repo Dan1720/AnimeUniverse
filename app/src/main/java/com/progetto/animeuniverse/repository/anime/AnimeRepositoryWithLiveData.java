@@ -3,8 +3,6 @@ package com.progetto.animeuniverse.repository.anime;
 import static com.progetto.animeuniverse.util.Constants.FRESH_TIMEOUT;
 
 import android.util.Log;
-
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 
 import com.progetto.animeuniverse.data.source.anime.AnimeCallback;
@@ -191,17 +189,13 @@ public class AnimeRepositoryWithLiveData implements IAnimeRepositoryWithLiveData
 
     @Override
     public void onSuccessSynchronization() {
-        Log.d(TAG, "News synchronized from remote");
+        Log.d(TAG, "Anime synchronized from remote");
     }
 
     @Override
     public void onSuccessDeletion() {
 
     }
-
-
-
-
 
     @Override
     public void deleteFavoriteAnime() {
