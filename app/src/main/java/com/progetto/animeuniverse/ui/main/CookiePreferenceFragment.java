@@ -13,15 +13,9 @@ import android.webkit.WebView;
 import com.progetto.animeuniverse.R;
 
 public class CookiePreferenceFragment extends Fragment {
-
-
-
     public CookiePreferenceFragment() {
 
     }
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

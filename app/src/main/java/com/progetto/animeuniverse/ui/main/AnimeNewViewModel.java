@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.anime_new.IAnimeNewRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_recommendations.IAnimeRecommendationsRepositoryWithLiveData;
 
 public class AnimeNewViewModel extends ViewModel {
 

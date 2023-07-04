@@ -38,7 +38,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.StreamDownloadTask;
 import com.google.firebase.storage.UploadTask;
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.ui.welcome.UserViewModel;
@@ -49,7 +48,6 @@ import com.progetto.animeuniverse.util.ServiceLocator;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 
@@ -67,8 +65,6 @@ public class AccountFragment extends Fragment {
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private String code = user.getUid();
     private String isNomeUtente = null;
-
-
 
     private StorageReference ImagesRef;
     public AccountFragment() {
@@ -145,10 +141,7 @@ public class AccountFragment extends Fragment {
             }
         });
 
-
         setProfileName();
-
-
 
     }
 

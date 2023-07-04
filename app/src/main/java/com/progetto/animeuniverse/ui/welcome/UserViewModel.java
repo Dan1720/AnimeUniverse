@@ -3,8 +3,6 @@ package com.progetto.animeuniverse.ui.welcome;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.model.User;
 import com.progetto.animeuniverse.repository.user.IUserRepository;
