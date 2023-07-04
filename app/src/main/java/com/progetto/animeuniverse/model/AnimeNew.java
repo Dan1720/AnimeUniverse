@@ -8,12 +8,10 @@ import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
+
 
 import com.google.gson.annotations.SerializedName;
-import com.progetto.animeuniverse.util.Converter;
 
-import java.util.List;
 
 @Entity(tableName = "anime_new")
 public class AnimeNew implements Parcelable {

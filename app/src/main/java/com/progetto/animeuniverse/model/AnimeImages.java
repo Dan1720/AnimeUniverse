@@ -5,10 +5,9 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.room.Embedded;
-import androidx.room.TypeConverters;
 
 import com.google.gson.annotations.SerializedName;
-import com.progetto.animeuniverse.util.Converter;
+
 
 public class AnimeImages implements Parcelable {
     @Embedded(prefix = "jpg_")
