@@ -7,12 +7,9 @@ import androidx.lifecycle.MutableLiveData;
 import com.progetto.animeuniverse.data.source.anime_movie.AnimeMovieCallback;
 import com.progetto.animeuniverse.data.source.anime_movie.BaseAnimeMovieLocalDataSource;
 import com.progetto.animeuniverse.data.source.anime_movie.BaseAnimeMovieRemoteDataSource;
-import com.progetto.animeuniverse.data.source.anime_movie.AnimeMovieCallback;
 import com.progetto.animeuniverse.model.AnimeMovie;
 import com.progetto.animeuniverse.model.AnimeMovieApiResponse;
 import com.progetto.animeuniverse.model.Result;
-import com.progetto.animeuniverse.repository.anime_movie.AnimeMovieRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.anime_movie.IAnimeMovieRepositoryWithLiveData;
 
 import java.util.List;
 

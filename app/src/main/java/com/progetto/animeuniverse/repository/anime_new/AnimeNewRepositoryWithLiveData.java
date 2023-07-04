@@ -9,9 +9,7 @@ import com.progetto.animeuniverse.data.source.anime_new.BaseAnimeNewLocalDataSou
 import com.progetto.animeuniverse.data.source.anime_new.BaseAnimeNewRemoteDataSource;
 import com.progetto.animeuniverse.model.AnimeNew;
 import com.progetto.animeuniverse.model.AnimeNewApiResponse;
-import com.progetto.animeuniverse.model.AnimeRecommendations;
 import com.progetto.animeuniverse.model.Result;
-import com.progetto.animeuniverse.repository.anime_recommendations.AnimeRecommendationsRepositoryWithLiveData;
 
 import java.util.List;
 

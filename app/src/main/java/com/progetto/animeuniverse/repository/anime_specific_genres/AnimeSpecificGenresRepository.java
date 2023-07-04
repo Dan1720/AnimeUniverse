@@ -1,9 +1,6 @@
 package com.progetto.animeuniverse.repository.anime_specific_genres;
 
-import static com.progetto.animeuniverse.util.Constants.FRESH_TIMEOUT;
-
 import android.app.Application;
-import android.util.Log;
 
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.database.AnimeSpecificGenresDao;

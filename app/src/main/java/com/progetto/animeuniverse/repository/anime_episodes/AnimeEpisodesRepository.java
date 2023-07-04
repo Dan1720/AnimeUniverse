@@ -1,15 +1,10 @@
 package com.progetto.animeuniverse.repository.anime_episodes;
 
-import static com.progetto.animeuniverse.util.Constants.FRESH_TIMEOUT;
-
 import android.app.Application;
-import android.util.Log;
 
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.database.AnimeEpisodesDao;
 import com.progetto.animeuniverse.database.AnimeRoomDatabase;
-import com.progetto.animeuniverse.model.AnimeByName;
-import com.progetto.animeuniverse.model.AnimeByNameApiResponse;
 import com.progetto.animeuniverse.model.AnimeEpisodes;
 import com.progetto.animeuniverse.model.AnimeEpisodesApiResponse;
 import com.progetto.animeuniverse.service.AnimeApiService;

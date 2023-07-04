@@ -1,17 +1,12 @@
 package com.progetto.animeuniverse.repository.reviews;
 
-import static com.progetto.animeuniverse.util.Constants.FRESH_TIMEOUT;
-
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.database.AnimeRoomDatabase;
 import com.progetto.animeuniverse.database.ReviewDao;
-import com.progetto.animeuniverse.model.Anime;
-import com.progetto.animeuniverse.model.AnimeApiResponse;
 import com.progetto.animeuniverse.model.Review;
 import com.progetto.animeuniverse.model.ReviewsApiResponse;
 import com.progetto.animeuniverse.service.AnimeApiService;
