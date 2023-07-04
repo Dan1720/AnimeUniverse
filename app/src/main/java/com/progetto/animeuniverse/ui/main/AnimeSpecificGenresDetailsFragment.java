@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,27 +27,17 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
-import com.progetto.animeuniverse.adapter.EpisodesRecyclerViewAdapter;
 import com.progetto.animeuniverse.adapter.ReviewsRecyclerViewAdapter;
-import com.progetto.animeuniverse.databinding.FragmentAnimeSpecificGenresBinding;
 import com.progetto.animeuniverse.databinding.FragmentAnimeSpecificGenresDetailsBinding;
-import com.progetto.animeuniverse.model.AnimeEpisodes;
-import com.progetto.animeuniverse.model.AnimeEpisodesImages;
-import com.progetto.animeuniverse.model.AnimeEpisodesResponse;
 import com.progetto.animeuniverse.model.AnimeGenres;
 import com.progetto.animeuniverse.model.AnimeProducers;
 import com.progetto.animeuniverse.model.AnimeStudios;
 import com.progetto.animeuniverse.model.AnimeSpecificGenres;
-import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.model.Review;
-import com.progetto.animeuniverse.model.ReviewsResponse;
-import com.progetto.animeuniverse.repository.anime_episodes.IAnimeEpisodesRepositoryWithLiveData;
-import com.progetto.animeuniverse.repository.reviews.IReviewsRepositoryWithLiveData;
+import com.progetto.animeuniverse.repository.reviews.IReviewsRepository;
+import com.progetto.animeuniverse.repository.reviews.ReviewsRepository;
 import com.progetto.animeuniverse.repository.reviews.ReviewsResponseCallback;
-import com.progetto.animeuniverse.util.ErrorMessagesUtil;
-import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
@@ -63,7 +52,8 @@ public class AnimeSpecificGenresDetailsFragment extends Fragment implements Revi
     private FragmentAnimeSpecificGenresDetailsBinding fragmentAnimeSpecificGenresDetailsBinding;
     private List<Review> reviewsList;
     private SharedPreferencesUtil sharedPreferencesUtil;
-    private ReviewsViewModel reviewsViewModel;
+    private IReviewsRepository reviewsRepository;
+    private ReviewsRecyclerViewAdapter reviewsRecyclerViewAdapter;
 
 
     public AnimeSpecificGenresDetailsFragment() {
@@ -76,14 +66,8 @@ public class AnimeSpecificGenresDetailsFragment extends Fragment implements Revi
 
         sharedPreferencesUtil = new SharedPreferencesUtil(requireActivity().getApplication());
 
-        IReviewsRepositoryWithLiveData reviewsRepositoryWithLiveData =
-                ServiceLocator.getInstance().getReviewsRepository(requireActivity().getApplication());
-        if(reviewsRepositoryWithLiveData != null){
-            reviewsViewModel = new ViewModelProvider(requireActivity(), new ReviewsViewModelFactory(reviewsRepositoryWithLiveData)).get(ReviewsViewModel.class);
-        }else {
-            Snackbar.make(requireActivity().findViewById(android.R.id.content),
-                    getString(R.string.unexpected_error), Snackbar.LENGTH_SHORT).show();
-        }
+        reviewsRepository = new ReviewsRepository(requireActivity().getApplication(), this);
+
 
         reviewsList = new ArrayList<>();
 
@@ -172,9 +156,16 @@ public class AnimeSpecificGenresDetailsFragment extends Fragment implements Revi
                     getMenu().findItem(R.id.listFragment).setChecked(true);
         }
 
+        String lastUpdate = "0";
+        if (sharedPreferencesUtil.readStringData(
+                SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE) != null) {
+            lastUpdate = sharedPreferencesUtil.readStringData(
+                    SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE);
+        }
+
         RecyclerView ReviewsRecyclerViewItem = view.findViewById(R.id.recyclerView_reviews);
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
-        ReviewsRecyclerViewAdapter reviewsRecyclerViewAdapter = new ReviewsRecyclerViewAdapter(reviewsList, requireActivity().getApplication(), new ReviewsRecyclerViewAdapter.OnItemClickListener() {
+        reviewsRecyclerViewAdapter = new ReviewsRecyclerViewAdapter(reviewsList, requireActivity().getApplication(), new ReviewsRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onReviewItemClick(Review review) {
                 AnimeSpecificGenresDetailsFragmentDirections.ActionAnimeSpecificGenresDetailsFragmentToReviewDetailsFragment action =
@@ -186,24 +177,8 @@ public class AnimeSpecificGenresDetailsFragment extends Fragment implements Revi
         ReviewsRecyclerViewItem.setAdapter(reviewsRecyclerViewAdapter);
         ReviewsRecyclerViewItem.setLayoutManager(layoutManager);
 
-        String lastUpdate = "0";
-        reviewsViewModel.getReviewsByIdAnime(animeSpecificGenres.getId(), Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
-            System.out.println("Result reviews: "+ result.isSuccess());
-            if(result.isSuccess()){
-                ReviewsResponse reviewsResponse = ((Result.ReviewsResponseSuccess) result).getData();
-                List<Review> fetchedReviews = reviewsResponse.getReviewList();
-                this.reviewsList.addAll(fetchedReviews);
-                reviewsRecyclerViewAdapter.notifyDataSetChanged();
 
-            }else{
-                ErrorMessagesUtil errorMessagesUtil =
-                        new ErrorMessagesUtil(requireActivity().getApplication());
-                Snackbar.make(view, errorMessagesUtil.
-                                getErrorMessage(((Result.Error) result).getMessage()),
-                        Snackbar.LENGTH_SHORT).show();
-            }
-        });
-
+        reviewsRepository.fetchReviewsById(animeSpecificGenres.getId(), Long.parseLong(lastUpdate));
 
 
     }
@@ -215,6 +190,14 @@ public class AnimeSpecificGenresDetailsFragment extends Fragment implements Revi
             this.reviewsList.addAll(reviewList);
             sharedPreferencesUtil.writeStringData(SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE, String.valueOf(lastUpdate));
         }
+
+        requireActivity().runOnUiThread(new Runnable() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void run() {
+                reviewsRecyclerViewAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -225,8 +208,6 @@ public class AnimeSpecificGenresDetailsFragment extends Fragment implements Revi
     @Override
     public void onDestroy() {
         super.onDestroy();
-        reviewsViewModel.setFirstLoading(true);
-        reviewsViewModel.setLoading(false);
     }
 
     @Override

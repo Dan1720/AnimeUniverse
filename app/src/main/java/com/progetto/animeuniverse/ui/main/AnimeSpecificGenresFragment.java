@@ -2,7 +2,6 @@ package com.progetto.animeuniverse.ui.main;
 
 import static com.progetto.animeuniverse.util.Constants.LAST_UPDATE;
 import static com.progetto.animeuniverse.util.Constants.SHARED_PREFERENCES_FILE_NAME;
-import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_PAGE_SIZE_VALUE;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -26,21 +24,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.adapter.AnimeSpecificGenresRecyclerViewAdapter;
 import com.progetto.animeuniverse.databinding.FragmentAnimeSpecificGenresBinding;
-import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.AnimeSpecificGenres;
-import com.progetto.animeuniverse.model.AnimeSpecificGenresResponse;
 import com.progetto.animeuniverse.model.Genre;
-import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.anime_specific_genres.AnimeSpecificGenresRepository;
 import com.progetto.animeuniverse.repository.anime_specific_genres.AnimeSpecificGenresResponseCallback;
 import com.progetto.animeuniverse.repository.anime_specific_genres.IAnimeSpecificGenresRepository;
-import com.progetto.animeuniverse.repository.anime_specific_genres.IAnimeSpecificGenresRepositoryWithLiveData;
-import com.progetto.animeuniverse.util.ErrorMessagesUtil;
-import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;

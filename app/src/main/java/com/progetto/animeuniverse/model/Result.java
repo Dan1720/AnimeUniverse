@@ -9,8 +9,7 @@ public abstract class Result {
                 this instanceof ReviewsResponseSuccess || this instanceof GenresResponseSuccess ||
                 this instanceof AnimeRecommendationsSuccess || this instanceof AnimeByNameSuccess ||
                 this instanceof AnimeNewSuccess || this instanceof AnimeEpisodesSuccess ||
-                this instanceof AnimeEpisodesImagesSuccess || this instanceof AnimeTvSuccess ||
-                this instanceof AnimeMovieSuccess || this instanceof AnimeSpecificGenresSuccess){
+                this instanceof AnimeTvSuccess || this instanceof AnimeMovieSuccess || this instanceof AnimeSpecificGenresSuccess){
             return true;
         }else{
             return false;
@@ -103,16 +102,6 @@ public abstract class Result {
         }
 
         public AnimeEpisodesResponse getData(){ return animeEpisodesResponse; }
-    }
-
-    public static final class AnimeEpisodesImagesSuccess extends Result{
-        private final AnimeEpisodesImagesResponse animeEpisodesImagesResponse;
-
-        public AnimeEpisodesImagesSuccess(AnimeEpisodesImagesResponse animeEpisodesImagesResponse) {
-            this.animeEpisodesImagesResponse = animeEpisodesImagesResponse;
-        }
-
-        public AnimeEpisodesImagesResponse getData(){ return animeEpisodesImagesResponse; }
     }
 
     public static final class AnimeTvSuccess extends Result{
