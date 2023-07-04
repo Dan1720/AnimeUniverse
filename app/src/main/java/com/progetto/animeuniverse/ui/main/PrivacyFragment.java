@@ -24,15 +24,9 @@ import com.progetto.animeuniverse.R;
 
 
 public class PrivacyFragment extends Fragment {
-
-
-
     public PrivacyFragment() {
 
     }
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

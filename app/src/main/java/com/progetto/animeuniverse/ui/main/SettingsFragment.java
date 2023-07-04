@@ -1,6 +1,5 @@
 package com.progetto.animeuniverse.ui.main;
 
-import static com.progetto.animeuniverse.util.Constants.KEY_CAMBIO_PW;
 import static com.progetto.animeuniverse.util.Constants.KEY_CONDIZIONI_UTILIZZO;
 import static com.progetto.animeuniverse.util.Constants.KEY_PREFERENZE_COOKIE;
 import static com.progetto.animeuniverse.util.Constants.KEY_PRIVACY;

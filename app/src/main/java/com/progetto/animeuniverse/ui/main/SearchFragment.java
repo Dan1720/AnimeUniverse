@@ -58,16 +58,11 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
 
 
     private FragmentSearchBinding fragmentSearchBinding;
-    private ProgressBar progressBar;
 
-    private final String q = TOP_HEADLINES_ENDPOINT;
-    private final int threshold = 1;
-    
-    private ServiceLocator serviceLocator;
     private AnimeRoomDatabase animeRoomDatabase;
     private AnimeByNameDao animeByNameDao;
     private MutableLiveData<Result.AnimeByNameSuccess> animeSearchResult = new MutableLiveData<>();
-    private String query;
+
     private SearchListAdapter searchListAdapter;
     private int count = 0;
     private ImageView backgroundImageView;
@@ -80,7 +75,7 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
 
 
     public SearchFragment() {
-
+        // Required empty public constructor
     }
 
 
@@ -111,6 +106,8 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
         fragmentSearchBinding = FragmentSearchBinding.inflate(inflater, container, false);
         return fragmentSearchBinding.getRoot();
     }
@@ -222,4 +219,27 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
+    /*
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        animeViewModel.setFirstLoading(true);
+        animeViewModel.setLoading(false);
+    }
+
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        fragmentSearchBinding = null;
+    }*/
+
+
+
+
+
+
+
+
+
+
 }

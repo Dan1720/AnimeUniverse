@@ -28,7 +28,6 @@ public class WelcomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ImageView toolbarLogo = findViewById(R.id.toolbar_logo);
 
-
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
@@ -38,8 +37,10 @@ public class WelcomeActivity extends AppCompatActivity {
                 R.id.searchFragment, R.id.accountFragment
         ).build();
 
+        // For the Toolbar
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
+        // For the BottomNavigationView
         NavigationUI.setupWithNavController(bottomNav, navController);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

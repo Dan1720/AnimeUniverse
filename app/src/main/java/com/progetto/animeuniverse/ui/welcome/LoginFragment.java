@@ -39,7 +39,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.progetto.animeuniverse.R;
-import com.progetto.animeuniverse.data.source.anime.FavoriteAnimeDataSource;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.model.User;
 import com.progetto.animeuniverse.repository.user.IUserRepository;
@@ -204,9 +203,6 @@ public class LoginFragment extends Fragment {
                         R.string.check_login_data_message, Snackbar.LENGTH_SHORT).show();
             }
         });
-
-
-
 
 
         buttonGoogleLogin.setOnClickListener(v -> oneTapClient.beginSignIn(signInRequest)
