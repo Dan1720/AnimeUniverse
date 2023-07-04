@@ -1,7 +1,5 @@
 package com.progetto.animeuniverse.data.source.anime_episodes;
 
-import com.progetto.animeuniverse.model.AnimeByName;
-import com.progetto.animeuniverse.model.AnimeByNameApiResponse;
 import com.progetto.animeuniverse.model.AnimeEpisodes;
 import com.progetto.animeuniverse.model.AnimeEpisodesApiResponse;
 

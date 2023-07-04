@@ -3,7 +3,6 @@ package com.progetto.animeuniverse.adapter;
 import static com.progetto.animeuniverse.util.Constants.LIMIT_ITEM_RV;
 
 import android.app.Application;
-import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

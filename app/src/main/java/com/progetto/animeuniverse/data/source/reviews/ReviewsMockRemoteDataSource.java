@@ -1,6 +1,5 @@
 package com.progetto.animeuniverse.data.source.reviews;
 
-import static com.progetto.animeuniverse.util.Constants.ANIME_API_TEST_JSON_FILE;
 import static com.progetto.animeuniverse.util.Constants.API_KEY_ERROR;
 import static com.progetto.animeuniverse.util.Constants.REVIEWS_API_TEST_JSON_FILE;
 import static com.progetto.animeuniverse.util.Constants.UNEXPECTED_ERROR;

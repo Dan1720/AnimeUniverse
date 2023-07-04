@@ -1,11 +1,9 @@
 package com.progetto.animeuniverse.data.source.anime_episodes_images;
 
 import static com.progetto.animeuniverse.util.Constants.ANIMEEPISODESIMAGES_API_TEST_JSON_FILE;
-import static com.progetto.animeuniverse.util.Constants.ANIMEEPISODES_API_TEST_JSON_FILE;
 import static com.progetto.animeuniverse.util.Constants.API_KEY_ERROR;
 import static com.progetto.animeuniverse.util.Constants.UNEXPECTED_ERROR;
 
-import com.progetto.animeuniverse.model.AnimeEpisodesApiResponse;
 import com.progetto.animeuniverse.model.AnimeEpisodesImagesApiResponse;
 import com.progetto.animeuniverse.util.JSONParserUtil;
 

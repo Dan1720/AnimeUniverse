@@ -1,6 +1,6 @@
 package com.progetto.animeuniverse.data.source.anime;
 
-import static com.progetto.animeuniverse.util.Constants.API_KEY_ERROR;
+
 import static com.progetto.animeuniverse.util.Constants.RETROFIT_ERROR;
 
 

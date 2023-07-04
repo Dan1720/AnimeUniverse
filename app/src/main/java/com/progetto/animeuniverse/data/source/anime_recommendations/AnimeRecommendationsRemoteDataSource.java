@@ -5,7 +5,6 @@ import static com.progetto.animeuniverse.util.Constants.RETROFIT_ERROR;
 import androidx.annotation.NonNull;
 
 import com.progetto.animeuniverse.model.AnimeRecommendationsApiResponse;
-import com.progetto.animeuniverse.model.GenresApiResponse;
 import com.progetto.animeuniverse.service.AnimeApiService;
 import com.progetto.animeuniverse.util.ServiceLocator;
 

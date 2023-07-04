@@ -1,12 +1,10 @@
 package com.progetto.animeuniverse.data.source.anime_new;
 
 import static com.progetto.animeuniverse.util.Constants.ANIMENEW_API_TEST_JSON_FILE;
-import static com.progetto.animeuniverse.util.Constants.ANIMERECOMMENDATIONS_API_TEST_JSON_FILE;
 import static com.progetto.animeuniverse.util.Constants.API_KEY_ERROR;
 import static com.progetto.animeuniverse.util.Constants.UNEXPECTED_ERROR;
 
 import com.progetto.animeuniverse.model.AnimeNewApiResponse;
-import com.progetto.animeuniverse.model.AnimeRecommendationsApiResponse;
 import com.progetto.animeuniverse.util.JSONParserUtil;
 
 import java.io.IOException;

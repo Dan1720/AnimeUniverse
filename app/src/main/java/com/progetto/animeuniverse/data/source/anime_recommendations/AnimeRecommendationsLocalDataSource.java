@@ -28,11 +28,11 @@ public class AnimeRecommendationsLocalDataSource extends BaseAnimeRecommendation
 
     @Override
     public void getAnimeRecommendations() {
-       AnimeRoomDatabase.databaseWriteExecutor.execute(()->{
-           AnimeRecommendationsApiResponse animeRecommendationsApiResponse = new AnimeRecommendationsApiResponse();
-           animeRecommendationsApiResponse.setAnimeRecommendationsList(animeRecommendationsDao.getAllAnimeRecommendations());
-           animeRecommendationsCallback.onSuccessFromLocal(animeRecommendationsApiResponse);
-       });
+        AnimeRoomDatabase.databaseWriteExecutor.execute(()->{
+            AnimeRecommendationsApiResponse animeRecommendationsApiResponse = new AnimeRecommendationsApiResponse();
+            animeRecommendationsApiResponse.setAnimeRecommendationsList(animeRecommendationsDao.getAllAnimeRecommendations());
+            animeRecommendationsCallback.onSuccessFromLocal(animeRecommendationsApiResponse);
+        });
     }
 
     @Override
@@ -82,22 +82,22 @@ public class AnimeRecommendationsLocalDataSource extends BaseAnimeRecommendation
                     animeRecommendationsList.get(i).setId(Math.toIntExact(insertedAnimeRecommendationsIds.get(i)));
                 }
             }
-                AnimeRecommendationsApiResponse animeRecommendationsApiResponse = new AnimeRecommendationsApiResponse();
-                animeRecommendationsApiResponse.setAnimeRecommendationsList(animeRecommendationsList);
+            AnimeRecommendationsApiResponse animeRecommendationsApiResponse = new AnimeRecommendationsApiResponse();
+            animeRecommendationsApiResponse.setAnimeRecommendationsList(animeRecommendationsList);
         });
     }
 
 
     @Override
     public void deleteAll() {
-       AnimeRoomDatabase.databaseWriteExecutor.execute(()->{
-           int animeRecommendationsCounter = animeRecommendationsDao.getAllAnimeRecommendations().size();
-           int animeRecommendationsDeleteAnimeRecommendations = animeRecommendationsDao.deleteAll();
-           if(animeRecommendationsCounter == animeRecommendationsDeleteAnimeRecommendations){
-               sharedPreferencesUtil.deleteAll(SHARED_PREFERENCES_FILE_NAME);
-               dataEncryptionUtil.deleteAll(ENCRYPTED_SHARED_PREFERENCES_FILE_NAME, ENCRYPTED_DATA_FILE_NAME);
-               animeRecommendationsCallback.onSuccessDeletion();
-           }
-       });
+        AnimeRoomDatabase.databaseWriteExecutor.execute(()->{
+            int animeRecommendationsCounter = animeRecommendationsDao.getAllAnimeRecommendations().size();
+            int animeRecommendationsDeleteAnimeRecommendations = animeRecommendationsDao.deleteAll();
+            if(animeRecommendationsCounter == animeRecommendationsDeleteAnimeRecommendations){
+                sharedPreferencesUtil.deleteAll(SHARED_PREFERENCES_FILE_NAME);
+                dataEncryptionUtil.deleteAll(ENCRYPTED_SHARED_PREFERENCES_FILE_NAME, ENCRYPTED_DATA_FILE_NAME);
+                animeRecommendationsCallback.onSuccessDeletion();
+            }
+        });
     }
 }

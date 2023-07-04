@@ -5,7 +5,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.progetto.animeuniverse.model.AnimeByName;
+
 import com.progetto.animeuniverse.model.AnimeSpecificGenres;
 
 import java.util.List;

@@ -7,7 +7,6 @@ import static com.progetto.animeuniverse.util.Constants.SHARED_PREFERENCES_FILE_
 
 import com.progetto.animeuniverse.database.AnimeByNameDao;
 import com.progetto.animeuniverse.database.AnimeRoomDatabase;
-import com.progetto.animeuniverse.model.AnimeApiResponse;
 import com.progetto.animeuniverse.model.AnimeByName;
 import com.progetto.animeuniverse.model.AnimeByNameApiResponse;
 import com.progetto.animeuniverse.util.DataEncryptionUtil;

@@ -5,7 +5,6 @@ import static com.progetto.animeuniverse.util.Constants.ENCRYPTED_SHARED_PREFERE
 import static com.progetto.animeuniverse.util.Constants.LAST_UPDATE;
 import static com.progetto.animeuniverse.util.Constants.SHARED_PREFERENCES_FILE_NAME;
 
-import com.progetto.animeuniverse.data.source.anime_movie.BaseAnimeMovieLocalDataSource;
 import com.progetto.animeuniverse.database.AnimeRoomDatabase;
 import com.progetto.animeuniverse.database.AnimeMovieDao;
 import com.progetto.animeuniverse.model.AnimeMovie;

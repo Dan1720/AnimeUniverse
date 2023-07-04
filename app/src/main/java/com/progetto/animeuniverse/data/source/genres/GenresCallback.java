@@ -2,8 +2,6 @@ package com.progetto.animeuniverse.data.source.genres;
 
 import com.progetto.animeuniverse.model.Genre;
 import com.progetto.animeuniverse.model.GenresApiResponse;
-import com.progetto.animeuniverse.model.Review;
-import com.progetto.animeuniverse.model.ReviewsApiResponse;
 
 import java.util.List;
 

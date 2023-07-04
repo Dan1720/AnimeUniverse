@@ -4,7 +4,6 @@ import android.app.Application;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,16 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.model.AnimeEpisodes;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class EpisodesRecyclerViewAdapter extends RecyclerView.Adapter<EpisodesRecyclerViewAdapter.EpisodesRecyclerViewHolder> {
-    
+
     public interface OnItemClickListener{
         void onEpisodeItemClick(AnimeEpisodes animeEpisodes);
     }
-    
+
     private final List<AnimeEpisodes> animeEpisodesList;
     private final Application application;
     private final OnItemClickListener onItemClickListener;
@@ -53,7 +51,7 @@ public class EpisodesRecyclerViewAdapter extends RecyclerView.Adapter<EpisodesRe
     }
 
     public class EpisodesRecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        
+
         private final TextView textViewTitleIn;
         private final TextView textViewEpisodeNumberIn;
         private final TextView textViewEpisodeFiller;
@@ -76,7 +74,7 @@ public class EpisodesRecyclerViewAdapter extends RecyclerView.Adapter<EpisodesRe
 
 
         }
-        
+
         @Override
         public void onClick(View v) {
             onItemClickListener.onEpisodeItemClick(animeEpisodesList.get(getAdapterPosition()));

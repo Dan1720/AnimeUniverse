@@ -2,8 +2,7 @@ package com.progetto.animeuniverse.data.source.anime_new;
 
 import com.progetto.animeuniverse.model.AnimeNew;
 import com.progetto.animeuniverse.model.AnimeNewApiResponse;
-import com.progetto.animeuniverse.model.AnimeRecommendations;
-import com.progetto.animeuniverse.model.AnimeRecommendationsApiResponse;
+
 
 import java.util.List;
 
