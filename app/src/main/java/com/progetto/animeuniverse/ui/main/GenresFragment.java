@@ -27,15 +27,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.adapter.GenresRecyclerViewAdapter;
-import com.progetto.animeuniverse.database.AnimeSpecificGenresDao;
 import com.progetto.animeuniverse.databinding.FragmentGenresBinding;
 import com.progetto.animeuniverse.model.Genre;
 import com.progetto.animeuniverse.model.GenresResponse;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.genres.GenresResponseCallback;
 import com.progetto.animeuniverse.repository.genres.IGenresRepositoryWithLiveData;
-import com.progetto.animeuniverse.ui.main.GenresViewModel;
-import com.progetto.animeuniverse.ui.main.GenresViewModelFactory;
 import com.progetto.animeuniverse.util.ErrorMessagesUtil;
 import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
@@ -45,7 +42,6 @@ import java.util.List;
 
 public class GenresFragment extends Fragment implements GenresResponseCallback {
     private List<Genre> genresList;
-    private AnimeSpecificGenresDao animeSpecificGenresDao;
     private FragmentGenresBinding genresFragmentBinding;
     private SharedPreferencesUtil sharedPreferencesUtil;
     private GenresViewModel genresViewModel;

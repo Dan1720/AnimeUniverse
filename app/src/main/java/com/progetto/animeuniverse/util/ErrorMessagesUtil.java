@@ -1,6 +1,5 @@
 package com.progetto.animeuniverse.util;
 
-import static com.progetto.animeuniverse.util.Constants.API_KEY_ERROR;
 import static com.progetto.animeuniverse.util.Constants.RETROFIT_ERROR;
 
 import android.app.Application;

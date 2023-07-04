@@ -3,7 +3,6 @@ package com.progetto.animeuniverse.ui.main;
 import static com.progetto.animeuniverse.util.Constants.CHANNEL_ID;
 import static com.progetto.animeuniverse.util.Constants.LAST_UPDATE;
 import static com.progetto.animeuniverse.util.Constants.SHARED_PREFERENCES_FILE_NAME;
-import static com.progetto.animeuniverse.util.Constants.TOP_HEADLINES_ENDPOINT;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -25,7 +24,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;

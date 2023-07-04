@@ -58,18 +58,11 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
 
 
     private FragmentSearchBinding fragmentSearchBinding;
-    private ProgressBar progressBar;
 
-    private final String q = TOP_HEADLINES_ENDPOINT;
-    private final int threshold = 1;
-    //String finalLastUpdate = "0";
-    
-    private ServiceLocator serviceLocator;
     private AnimeRoomDatabase animeRoomDatabase;
     private AnimeByNameDao animeByNameDao;
     private MutableLiveData<Result.AnimeByNameSuccess> animeSearchResult = new MutableLiveData<>();
-    private String query;
-    //private String finalLastUpdate;
+
     private SearchListAdapter searchListAdapter;
     private int count = 0;
     private ImageView backgroundImageView;

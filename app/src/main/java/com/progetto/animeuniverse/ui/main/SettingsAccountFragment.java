@@ -5,7 +5,6 @@ import static com.progetto.animeuniverse.util.Constants.KEY_CAMBIO_PW;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;

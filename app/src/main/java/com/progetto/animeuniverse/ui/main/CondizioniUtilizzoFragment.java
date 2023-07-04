@@ -14,15 +14,9 @@ import com.progetto.animeuniverse.R;
 
 
 public class CondizioniUtilizzoFragment extends Fragment {
-
-
-
     public CondizioniUtilizzoFragment() {
         // Required empty public constructor
     }
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

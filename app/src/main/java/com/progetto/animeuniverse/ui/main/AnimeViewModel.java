@@ -3,7 +3,6 @@ package com.progetto.animeuniverse.ui.main;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.progetto.animeuniverse.R;
 import com.progetto.animeuniverse.model.Anime;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.anime.IAnimeRepositoryWithLiveData;

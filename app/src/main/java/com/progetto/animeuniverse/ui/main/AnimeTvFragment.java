@@ -29,7 +29,6 @@ import com.progetto.animeuniverse.model.AnimeTv;
 import com.progetto.animeuniverse.model.AnimeTvResponse;
 import com.progetto.animeuniverse.model.Result;
 import com.progetto.animeuniverse.repository.anime_tv.IAnimeTvRepositoryWithLiveData;
-import com.progetto.animeuniverse.ui.main.AnimeTvFragmentDirections;
 import com.progetto.animeuniverse.util.ErrorMessagesUtil;
 import com.progetto.animeuniverse.util.ServiceLocator;
 import com.progetto.animeuniverse.util.SharedPreferencesUtil;
