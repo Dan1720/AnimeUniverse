@@ -28,7 +28,7 @@ public class ReviewDetailsFragment extends Fragment {
     private FragmentReviewDetailsBinding fragmentReviewDetailsBinding;
 
     public ReviewDetailsFragment() {
-        // Required empty public constructor
+
     }
 
 

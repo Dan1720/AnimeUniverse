@@ -49,7 +49,7 @@ public class AnimeSpecificGenresFragment extends Fragment implements AnimeSpecif
 
     private AnimeSpecificGenresRecyclerViewAdapter animeSpecificGenresRecyclerViewAdapter;
     public AnimeSpecificGenresFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -68,7 +68,6 @@ public class AnimeSpecificGenresFragment extends Fragment implements AnimeSpecif
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         fragmentAnimeSpecificGenresBinding = FragmentAnimeSpecificGenresBinding.inflate(inflater, container, false);
         return fragmentAnimeSpecificGenresBinding.getRoot();
     }

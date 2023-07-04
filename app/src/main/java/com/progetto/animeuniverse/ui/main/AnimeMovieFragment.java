@@ -71,7 +71,6 @@ public class AnimeMovieFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         fragmentAnimeMovieBinding = FragmentAnimeMovieBinding.inflate(inflater, container, false);
         return fragmentAnimeMovieBinding.getRoot();
     }

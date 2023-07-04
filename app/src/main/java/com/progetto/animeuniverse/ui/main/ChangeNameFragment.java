@@ -29,7 +29,7 @@ public class ChangeNameFragment extends Fragment {
     private UserViewModel userViewModel;
 
     public ChangeNameFragment() {
-        // Required empty public constructor
+
     }
 
     @Override

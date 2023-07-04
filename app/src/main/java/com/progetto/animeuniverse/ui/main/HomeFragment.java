@@ -146,7 +146,6 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false);
         return fragmentHomeBinding.getRoot();
     }

@@ -43,7 +43,7 @@ public class RegistrationFragment extends Fragment {
 
 
     public RegistrationFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -58,8 +58,6 @@ public class RegistrationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_registration, container, false);
         binding = FragmentRegistrationBinding.inflate(inflater,container, false);
         return binding.getRoot();
     }

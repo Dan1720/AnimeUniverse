@@ -58,7 +58,7 @@ public class AnimeMovieDetailsFragment extends Fragment implements ReviewsRespon
 
 
     public AnimeMovieDetailsFragment() {
-        // Required empty public constructor
+
     }
 
     public static AnimeMovieDetailsFragment newInstance(){
@@ -81,7 +81,6 @@ public class AnimeMovieDetailsFragment extends Fragment implements ReviewsRespon
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         fragmentAnimeMovieDetailsBinding = FragmentAnimeMovieDetailsBinding.inflate(inflater, container, false);
         return fragmentAnimeMovieDetailsBinding.getRoot();
     }

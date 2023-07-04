@@ -17,7 +17,7 @@ public class CookiePreferenceFragment extends Fragment {
 
 
     public CookiePreferenceFragment() {
-        // Required empty public constructor
+
     }
 
 

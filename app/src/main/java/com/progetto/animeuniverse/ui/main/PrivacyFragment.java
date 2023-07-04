@@ -28,7 +28,7 @@ public class PrivacyFragment extends Fragment {
 
 
     public PrivacyFragment() {
-        // Required empty public constructor
+
     }
 
 

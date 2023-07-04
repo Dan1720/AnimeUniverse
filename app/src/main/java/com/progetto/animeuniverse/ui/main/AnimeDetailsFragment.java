@@ -99,7 +99,6 @@ public class AnimeDetailsFragment extends Fragment implements AnimeEpisodesRespo
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         fragmentAnimeDetailsBinding = FragmentAnimeDetailsBinding.inflate(inflater, container, false);
         return fragmentAnimeDetailsBinding.getRoot();
     }

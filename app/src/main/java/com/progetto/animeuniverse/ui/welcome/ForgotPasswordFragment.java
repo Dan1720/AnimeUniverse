@@ -31,7 +31,6 @@ public class ForgotPasswordFragment extends Fragment {
     private String text = EMAIL_SEND_FORGOT_PASSWORD;
 
     public ForgotPasswordFragment() {
-        // Required empty public constructor
     }
 
 
@@ -45,7 +44,6 @@ public class ForgotPasswordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         binding = FragmentForgotPasswordBinding.inflate(inflater,container, false);
         return binding.getRoot();
     }

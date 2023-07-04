@@ -8,7 +8,6 @@
     android:background="@color/thirdColor"
     tools:context=".ui.main.AccountFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <TextView
         android:id="@+id/nome_cognome"

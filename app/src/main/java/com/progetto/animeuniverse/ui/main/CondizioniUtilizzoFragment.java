@@ -18,7 +18,7 @@ public class CondizioniUtilizzoFragment extends Fragment {
 
 
     public CondizioniUtilizzoFragment() {
-        // Required empty public constructor
+
     }
 
 

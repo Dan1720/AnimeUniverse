@@ -57,7 +57,7 @@ public class AnimeSpecificGenresDetailsFragment extends Fragment implements Revi
 
 
     public AnimeSpecificGenresDetailsFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -77,7 +77,6 @@ public class AnimeSpecificGenresDetailsFragment extends Fragment implements Revi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         fragmentAnimeSpecificGenresDetailsBinding = FragmentAnimeSpecificGenresDetailsBinding.inflate(inflater, container, false);
         return fragmentAnimeSpecificGenresDetailsBinding.getRoot();
     }

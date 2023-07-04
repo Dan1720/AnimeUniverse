@@ -51,7 +51,7 @@ public class GenresFragment extends Fragment implements GenresResponseCallback {
     private GenresViewModel genresViewModel;
 
     public GenresFragment() {
-        // Required empty public constructor
+
     }
 
 

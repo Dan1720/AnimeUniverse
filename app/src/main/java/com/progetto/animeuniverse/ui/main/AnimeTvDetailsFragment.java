@@ -64,7 +64,7 @@ public class AnimeTvDetailsFragment extends Fragment implements ReviewsResponseC
     private EpisodesRecyclerViewAdapter episodesRecyclerViewAdapter;
 
     public AnimeTvDetailsFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -87,7 +87,6 @@ public class AnimeTvDetailsFragment extends Fragment implements ReviewsResponseC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         fragmentAnimeTvDetailsBinding = FragmentAnimeTvDetailsBinding.inflate(inflater, container, false);
         return fragmentAnimeTvDetailsBinding.getRoot();
     }

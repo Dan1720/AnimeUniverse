@@ -66,7 +66,6 @@ public class AnimeByNameDetailsFragment extends Fragment implements AnimeEpisode
 
 
     public AnimeByNameDetailsFragment() {
-        // Required empty public constructor
 
     }
 

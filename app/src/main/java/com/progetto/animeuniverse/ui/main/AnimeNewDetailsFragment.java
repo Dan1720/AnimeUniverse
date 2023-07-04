@@ -64,7 +64,7 @@ public class AnimeNewDetailsFragment extends Fragment implements ReviewsResponse
     private ReviewsRecyclerViewAdapter reviewsRecyclerViewAdapter;
 
     public AnimeNewDetailsFragment() {
-        // Required empty public constructor
+
     }
 
 

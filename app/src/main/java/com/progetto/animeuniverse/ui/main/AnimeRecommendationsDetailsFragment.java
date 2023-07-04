@@ -64,7 +64,7 @@ public class AnimeRecommendationsDetailsFragment extends Fragment implements Ani
     private ReviewsRecyclerViewAdapter reviewsRecyclerViewAdapter;
 
     public AnimeRecommendationsDetailsFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
