@@ -13,6 +13,7 @@
         android:queryHint="Search Here..."
         android:background="@drawable/search_view_bg"
         android:iconifiedByDefault="false"
+        android:textCursorDrawable = "@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView_search_anime"
         app:layout_constraintEnd_toEndOf="parent"
