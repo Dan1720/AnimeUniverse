@@ -123,7 +123,6 @@ public class GenresFragment extends Fragment implements GenresResponseCallback {
 
         String lastUpdate = "0";
         genresViewModel.getGenres(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
-            System.out.println("Result genre: "+ result.isSuccess());
             if(result.isSuccess()){
                 GenresResponse genresResponse = ((Result.GenresResponseSuccess) result).getData();
                 List<Genre> fetchedGenres = genresResponse.getGernesList();

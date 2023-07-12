@@ -119,7 +119,6 @@ public class AnimeMovieFragment extends Fragment {
 
         String lastUpdate = "0";
         animeMovieViewModel.getAnimeMovie(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
-            System.out.println("Result anime Movie: " + result.isSuccess());
             if(result.isSuccess()){
                 AnimeMovieResponse animeMovieResponse = ((Result.AnimeMovieSuccess) result).getData();
                 List<AnimeMovie> fetchedAnimeMovie = animeMovieResponse.getAnimeMovieList();

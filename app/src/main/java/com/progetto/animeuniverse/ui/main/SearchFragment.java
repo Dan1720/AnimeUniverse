@@ -190,7 +190,6 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
     @Override
     public void onSuccess(List<AnimeByName> animeList, long lastUpdate) {
         if (animeList != null) {
-            System.out.println(animeList);
             this.animeByNameList.clear();
             this.animeByNameList.addAll(animeList);
             sharedPreferencesUtil.writeStringData(SHARED_PREFERENCES_FILE_NAME, LAST_UPDATE, String.valueOf(lastUpdate));
@@ -222,9 +221,4 @@ public class SearchFragment extends Fragment implements AnimeByNameResponseCallb
 
     }
 
-    private boolean isConnected(){
-        ConnectivityManager cm = (ConnectivityManager) requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-    }
 }

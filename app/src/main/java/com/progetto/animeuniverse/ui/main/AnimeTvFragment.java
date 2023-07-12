@@ -118,7 +118,6 @@ public class AnimeTvFragment extends Fragment {
 
         String lastUpdate = "0";
         animeTvViewModel.getAnimeTv(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result ->{
-            System.out.println("Result anime tv: " + result.isSuccess());
             if(result.isSuccess()){
                 AnimeTvResponse animeTvResponse = ((Result.AnimeTvSuccess) result).getData();
                 List<AnimeTv> fetchedAnimeTv = animeTvResponse.getAnimeTvList();

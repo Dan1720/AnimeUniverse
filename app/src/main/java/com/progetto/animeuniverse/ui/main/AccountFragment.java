@@ -120,7 +120,6 @@ public class AccountFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String urlImage = snapshot.getValue(String.class);
                 if(urlImage != null){
-                    System.out.println("immagine url: "+ urlImage);
                     Picasso.get().load(urlImage).into(iVPreviewImage);
 
                 }

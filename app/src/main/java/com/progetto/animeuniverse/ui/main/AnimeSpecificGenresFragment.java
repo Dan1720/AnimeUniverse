@@ -38,9 +38,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AnimeSpecificGenresFragment extends Fragment implements AnimeSpecificGenresResponseCallback {
-
-
-
     private FragmentAnimeSpecificGenresBinding fragmentAnimeSpecificGenresBinding;
     private List<AnimeSpecificGenres> animeSpecificGenresList;
     private SharedPreferencesUtil sharedPreferencesUtil;

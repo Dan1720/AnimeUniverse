@@ -179,7 +179,6 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
 
         String lastUpdate = "0";
         animeViewModel.getAnimeTop(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
-            System.out.println("Result: " + result.isSuccess());
             if (result.isSuccess()) {
                 AnimeResponse animeResponse = ((Result.AnimeResponseSuccess) result).getData();
                 List<Anime> fetchedAnime = animeResponse.getAnimeList();
@@ -207,7 +206,6 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         animeRecommendationsRecyclerViewItem.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
 
         animeRecommendationsViewModel.getAnimeRecommendations(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
-            System.out.println("Result reccomend: " + result.isSuccess());
             if (result.isSuccess()) {
                 AnimeRecommendationsResponse animeRecommendationsResponse = ((Result.AnimeRecommendationsSuccess) result).getData();
                 List<AnimeRecommendations> fetchedAnimeRecommendations = animeRecommendationsResponse.getAnimeRecommendationsList();
@@ -235,7 +233,6 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
         animeNewRecyclerViewItem.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
 
         animeNewViewModel.getAnimeNew(Long.parseLong(lastUpdate)).observe(getViewLifecycleOwner(), result -> {
-            System.out.println("Result new: " + result.isSuccess());
             if (result.isSuccess()) {
                 AnimeNewResponse animeNewResponse = ((Result.AnimeNewSuccess) result).getData();
                 List<AnimeNew> fetchedAnimeNew = animeNewResponse.getAnimeNewList();
@@ -286,12 +283,6 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
             Snackbar.make(requireActivity().findViewById(android.R.id.content),
                     R.string.remove_anime_favorite, Snackbar.LENGTH_LONG).show();
         }
-    }
-
-    private boolean isConnected() {
-        ConnectivityManager cm = (ConnectivityManager) requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 
     @Override
@@ -361,8 +352,7 @@ public class HomeFragment extends Fragment implements AnimeResponseCallback {
     }
 
     public void inviaNotifica(String animeTitle) {
-        String animeText = "L'elemento è stato aggiunto ai preferiti.";
-        
+
         Intent intent = new Intent(requireContext(), WelcomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, new Intent(), PendingIntent.FLAG_IMMUTABLE);
